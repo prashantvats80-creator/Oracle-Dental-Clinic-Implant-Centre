@@ -37,8 +37,9 @@ export default function App() {
 
   // Booking Form State
   const [bookingData, setBookingData] = useState({
-    name: '',
-    phone: '',
+    name: 'Prashant Vats',
+    email: 'prashantvats80@gmail.com',
+    phone: '7011961515',
     date: '',
     time: '',
     problem: ''
@@ -642,16 +643,29 @@ export default function App() {
                             placeholder="John Doe" 
                           />
                         </div>
-                        <div>
-                          <label className="block text-sm font-medium text-slate-700 mb-1">Phone Number *</label>
-                          <input 
-                            type="tel" 
-                            required 
-                            value={bookingData.phone}
-                            onChange={(e) => setBookingData({...bookingData, phone: e.target.value})}
-                            className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all shadow-sm" 
-                            placeholder="+91 XXXXX XXXXX" 
-                          />
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-sm font-medium text-slate-700 mb-1">Phone Number *</label>
+                            <input 
+                              type="tel" 
+                              required 
+                              value={bookingData.phone}
+                              onChange={(e) => setBookingData({...bookingData, phone: e.target.value})}
+                              className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all shadow-sm" 
+                              placeholder="+91 XXXXX XXXXX" 
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-slate-700 mb-1">Email Address *</label>
+                            <input 
+                              type="email" 
+                              required 
+                              value={bookingData.email}
+                              onChange={(e) => setBookingData({...bookingData, email: e.target.value})}
+                              className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all shadow-sm" 
+                              placeholder="you@example.com" 
+                            />
+                          </div>
                         </div>
                         
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -745,7 +759,7 @@ export default function App() {
                       <button 
                         onClick={() => {
                           setIsBookingConfirmed(false);
-                          setBookingData({ name: '', phone: '', date: '', time: '', problem: '' });
+                          setBookingData({ name: 'Prashant Vats', email: 'prashantvats80@gmail.com', phone: '7011961515', date: '', time: '', problem: '' });
                         }}
                         className="text-blue-600 font-semibold hover:text-blue-800 transition-colors"
                       >
