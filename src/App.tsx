@@ -19,7 +19,8 @@ import {
   ChevronRight,
   Menu,
   X,
-  Bot
+  Bot,
+  Download
 } from 'lucide-react';
 import { motion } from 'motion/react';
 
@@ -66,11 +67,18 @@ export default function App() {
             </div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex space-x-8">
+            <nav className="hidden md:flex space-x-8 items-center">
               <a href="#services" className="text-slate-600 hover:text-blue-600 font-medium">Services</a>
               <a href="#why-us" className="text-slate-600 hover:text-blue-600 font-medium">Why Us</a>
               <a href="#testimonials" className="text-slate-600 hover:text-blue-600 font-medium">Reviews</a>
               <a href="#contact" className="text-slate-600 hover:text-blue-600 font-medium">Contact</a>
+              <a 
+                href="/OracleDentalClinic.html" 
+                download="OracleDentalClinic.html" 
+                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-bold shadow-md shadow-green-600/20 transition-all hover:-translate-y-0.5 flex items-center gap-2"
+              >
+                <Download className="w-4 h-4" /> Download HTML
+              </a>
             </nav>
 
             {/* Mobile menu button */}
@@ -93,6 +101,13 @@ export default function App() {
               <a href="#why-us" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50 rounded-md">Why Choose Us</a>
               <a href="#testimonials" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50 rounded-md">Patient Reviews</a>
               <a href="#contact" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50 rounded-md">Contact Us</a>
+              <a 
+                href="/OracleDentalClinic.html" 
+                download="OracleDentalClinic.html" 
+                className="flex items-center gap-2 px-3 py-3 text-base font-bold text-white bg-green-600 hover:bg-green-700 rounded-md mt-2"
+              >
+                <Download className="w-5 h-5" /> Download Single HTML File
+              </a>
             </div>
           </div>
         )}
