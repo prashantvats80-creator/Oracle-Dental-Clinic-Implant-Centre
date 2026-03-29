@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   PhoneCall,
   MessageCircle,
@@ -17,16 +17,171 @@ import {
   HeartPulse,
   Activity,
   ChevronRight,
+  ChevronDown,
   Menu,
   X,
   Bot,
-  Download
+  ArrowUp,
+  Send,
+  Loader2
 } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
+import { GoogleGenAI } from '@google/genai';
+import Markdown from 'react-markdown';
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAiPopupOpen, setIsAiPopupOpen] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
+
+  // Booking Form State
+  const [bookingData, setBookingData] = useState({
+    name: '',
+    phone: '',
+    date: '',
+    time: '',
+    problem: ''
+  });
+  const [isBookingConfirmed, setIsBookingConfirmed] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+
+  // AI Chat State
+  const [chatMessages, setChatMessages] = useState<{role: 'user' | 'model', text: string}[]>([
+    { role: 'model', text: 'Hello! I am the Oracle AI Assistant. How can I help you with your dental needs today?' }
+  ]);
+  const [chatInput, setChatInput] = useState('');
+  const [isChatLoading, setIsChatLoading] = useState(false);
+  const chatRef = useRef<any>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    try {
+      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+      chatRef.current = ai.chats.create({
+        model: "gemini-3-flash-preview",
+        config: {
+          systemInstruction: "You are a helpful, professional, and friendly AI assistant for Oracle Dental Clinic. You can answer general dental questions, explain procedures like RCT, implants, and extractions, and help users understand the importance of oral hygiene. Do not provide medical diagnoses. Encourage users to book an appointment for specific issues. Keep your answers concise and easy to read.",
+        },
+      });
+    } catch (e) {
+      console.error("Failed to initialize AI:", e);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [chatMessages]);
+
+  const handleSendMessage = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!chatInput.trim() || isChatLoading || !chatRef.current) return;
+
+    const userMessage = chatInput.trim();
+    setChatInput('');
+    setChatMessages(prev => [...prev, { role: 'user', text: userMessage }]);
+    setIsChatLoading(true);
+
+    try {
+      const response = await chatRef.current.sendMessage({ message: userMessage });
+      setChatMessages(prev => [...prev, { role: 'model', text: response.text }]);
+    } catch (error) {
+      console.error("Chat error:", error);
+      setChatMessages(prev => [...prev, { role: 'model', text: "I'm sorry, I encountered an error. Please try again later or call the clinic directly." }]);
+    } finally {
+      setIsChatLoading(false);
+    }
+  };
+
+  const faqs = [
+    {
+      question: "Is a root canal treatment (RCT) painful?",
+      answer: "A root canal is designed to relieve pain, not cause it. Thanks to advanced local anesthetics and modern techniques, the procedure itself is virtually painless, similar to getting a routine filling. You might experience slight tenderness for a few days afterward as the area heals."
+    },
+    {
+      question: "Is tooth extraction painful?",
+      answer: "With modern anesthesia, tooth extraction is typically painless during the procedure. You may feel some pressure, but no sharp pain. Mild discomfort during recovery is normal and can be easily managed with prescribed or over-the-counter pain relievers."
+    },
+    {
+      question: "Is the dental implant procedure painful?",
+      answer: "Your comfort is our top priority. Dental implant surgery is performed under local anesthesia, ensuring you feel no pain during the procedure. Most patients report that the post-operative discomfort is less than that of a tooth extraction and subsides quickly."
+    },
+    {
+      question: "How often should I get a dental check-up?",
+      answer: "We recommend visiting us for a routine check-up and professional cleaning every six months. However, depending on your specific oral health needs, we might suggest more frequent visits to maintain optimal dental hygiene."
+    },
+    {
+      question: "How can I safely whiten my teeth?",
+      answer: "Professional teeth whitening is the safest and most effective method. We offer both in-office treatments for immediate results and custom take-home kits. Over-the-counter products can sometimes cause sensitivity or damage enamel if used incorrectly."
+    },
+    {
+      question: "Are dental X-rays safe?",
+      answer: "Yes, dental X-rays are highly safe. Modern digital X-rays emit extremely low levels of radiation—much less than traditional film X-rays and even less than the natural background radiation you are exposed to daily. We also use lead aprons for added protection."
+    },
+    {
+      question: "At what age should my child first visit the dentist?",
+      answer: "The American Dental Association recommends that a child's first dental visit should occur within six months after their first tooth appears, but no later than their first birthday. Early visits help establish a dental home and prevent early childhood cavities."
+    },
+    {
+      question: "Do you offer emergency dental services?",
+      answer: "Yes, we provide emergency dental care. If you are experiencing severe pain, a knocked-out tooth, or swelling, please call our clinic immediately. We will do our best to accommodate you on the same day."
+    },
+    {
+      question: "Do you accept dental insurance?",
+      answer: "Yes, we accept most major dental insurance plans. Please contact our front desk with your insurance details before your appointment, and we will be happy to verify your coverage and explain your benefits."
+    },
+    {
+      question: "What is your cancellation policy?",
+      answer: "We kindly request at least 24 hours' notice if you need to cancel or reschedule your appointment. This allows us to offer the time slot to another patient in need of care."
+    }
+  ];
+
+  const handleBookingSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    // Simulate API call
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsBookingConfirmed(true);
+    }, 1500);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 400) {
+        setShowBackToTop(true);
+      } else {
+        setShowBackToTop(false);
+      }
+
+      const sections = ['services', 'why-us', 'testimonials', 'faq', 'contact'];
+      let current = '';
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= window.innerHeight / 3 && rect.bottom >= 100) {
+            current = section;
+          }
+        }
+      }
+      setActiveSection(current);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial check
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
 
   const phoneNumber = "7011961515";
   const whatsappNumber = "917011961515"; // Assuming India country code
@@ -68,17 +223,29 @@ export default function App() {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex space-x-8 items-center">
-              <a href="#services" className="text-slate-600 hover:text-blue-600 font-medium">Services</a>
-              <a href="#why-us" className="text-slate-600 hover:text-blue-600 font-medium">Why Us</a>
-              <a href="#testimonials" className="text-slate-600 hover:text-blue-600 font-medium">Reviews</a>
-              <a href="#contact" className="text-slate-600 hover:text-blue-600 font-medium">Contact</a>
-              <a 
-                href="/OracleDentalClinic.html" 
-                download="OracleDentalClinic.html" 
-                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-bold shadow-md shadow-green-600/20 transition-all hover:-translate-y-0.5 flex items-center gap-2"
-              >
-                <Download className="w-4 h-4" /> Download HTML
-              </a>
+              {[
+                { id: 'services', label: 'Services' },
+                { id: 'why-us', label: 'Why Us' },
+                { id: 'testimonials', label: 'Reviews' },
+                { id: 'faq', label: 'FAQ' },
+                { id: 'contact', label: 'Contact' }
+              ].map((item) => (
+                <a 
+                  key={item.id}
+                  href={`#${item.id}`} 
+                  className={`font-medium transition-colors relative py-2 ${
+                    activeSection === item.id ? 'text-blue-600' : 'text-slate-600 hover:text-blue-600'
+                  }`}
+                >
+                  {item.label}
+                  {activeSection === item.id && (
+                    <motion.div 
+                      layoutId="activeNav"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full"
+                    />
+                  )}
+                </a>
+              ))}
             </nav>
 
             {/* Mobile menu button */}
@@ -94,23 +261,40 @@ export default function App() {
         </div>
 
         {/* Mobile menu */}
-        {isMenuOpen && (
-          <div className="md:hidden bg-white border-t border-slate-100 absolute w-full shadow-lg">
-            <div className="px-4 pt-2 pb-4 space-y-1">
-              <a href="#services" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50 rounded-md">Services</a>
-              <a href="#why-us" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50 rounded-md">Why Choose Us</a>
-              <a href="#testimonials" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50 rounded-md">Patient Reviews</a>
-              <a href="#contact" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50 rounded-md">Contact Us</a>
-              <a 
-                href="/OracleDentalClinic.html" 
-                download="OracleDentalClinic.html" 
-                className="flex items-center gap-2 px-3 py-3 text-base font-bold text-white bg-green-600 hover:bg-green-700 rounded-md mt-2"
-              >
-                <Download className="w-5 h-5" /> Download Single HTML File
-              </a>
-            </div>
-          </div>
-        )}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div 
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="md:hidden bg-white border-t border-slate-100 absolute w-full shadow-xl overflow-hidden"
+            >
+              <div className="px-4 pt-2 pb-4 space-y-1">
+                {[
+                  { id: 'services', label: 'Services' },
+                  { id: 'why-us', label: 'Why Choose Us' },
+                  { id: 'testimonials', label: 'Patient Reviews' },
+                  { id: 'faq', label: 'FAQ' },
+                  { id: 'contact', label: 'Contact Us' }
+                ].map((item) => (
+                  <a 
+                    key={item.id}
+                    href={`#${item.id}`} 
+                    onClick={() => setIsMenuOpen(false)} 
+                    className={`block px-4 py-3 text-base font-medium rounded-xl transition-all ${
+                      activeSection === item.id 
+                        ? 'bg-blue-50 text-blue-700 border-l-4 border-blue-600' 
+                        : 'text-slate-700 hover:bg-slate-50 hover:text-blue-600 border-l-4 border-transparent'
+                    }`}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       <main>
@@ -136,19 +320,42 @@ export default function App() {
               <div className="inline-block bg-amber-500 text-blue-950 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4 shadow-lg shadow-amber-500/20">
                 Top Rated Dentist in Ghaziabad
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4 leading-tight">
-                Tooth Pain? <br className="hidden md:block" />
-                <span className="text-amber-400 drop-shadow-md">Get Relief in 30 Minutes</span>
-              </h1>
-              <p className="text-lg md:text-xl text-blue-100 mb-8 max-w-2xl mx-auto md:mx-0 font-light">
-                Expert dental care, painless treatments, and advanced implants at affordable prices.
-              </p>
+              <motion.h1 
+                className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4 leading-tight flex flex-wrap justify-center md:justify-start"
+                initial="hidden"
+                animate="visible"
+                variants={{
+                  visible: { transition: { staggerChildren: 0.1 } },
+                  hidden: {}
+                }}
+              >
+                {["Tooth", "Pain?"].map((word, i) => (
+                  <motion.span key={i} className="mr-3 inline-block" variants={{ hidden: { opacity: 0, y: 20, filter: 'blur(8px)' }, visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { type: "spring", damping: 12, stiffness: 100 } } }}>{word}</motion.span>
+                ))}
+                <div className="w-full hidden md:block"></div>
+                {["Get", "Relief", "in", "30", "Minutes"].map((word, i) => (
+                  <motion.span key={i + 10} className="text-amber-400 drop-shadow-md mr-3 inline-block" variants={{ hidden: { opacity: 0, y: 20, filter: 'blur(8px)' }, visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { type: "spring", damping: 12, stiffness: 100 } } }}>{word}</motion.span>
+                ))}
+              </motion.h1>
+              <motion.p 
+                className="text-lg md:text-xl text-blue-100 mb-8 max-w-2xl mx-auto md:mx-0 font-light flex flex-wrap justify-center md:justify-start"
+                initial="hidden"
+                animate="visible"
+                variants={{
+                  visible: { transition: { staggerChildren: 0.04, delayChildren: 0.4 } },
+                  hidden: {}
+                }}
+              >
+                {"Expert dental care, painless treatments, and advanced implants at affordable prices.".split(" ").map((word, i) => (
+                  <motion.span key={i} className="mr-2 inline-block" variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}>{word}</motion.span>
+                ))}
+              </motion.p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                <button onClick={handleCall} className="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-blue-950 font-bold text-lg py-4 px-8 rounded-xl shadow-xl shadow-amber-500/30 transition-all flex items-center justify-center gap-2 active:scale-95 hover:-translate-y-1">
+                <button onClick={handleCall} className="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-blue-950 font-bold text-lg py-4 px-8 rounded-xl shadow-xl shadow-amber-500/30 transition-all flex items-center justify-center gap-2 active:scale-95 hover:scale-105 hover:-translate-y-1">
                   <PhoneCall className="w-5 h-5" /> Call Now
                 </button>
-                <a href="#contact" className="w-full sm:w-auto bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white font-bold text-lg py-4 px-8 rounded-xl transition-all flex items-center justify-center gap-2 active:scale-95 hover:-translate-y-1">
+                <a href="#contact" className="w-full sm:w-auto bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white font-bold text-lg py-4 px-8 rounded-xl transition-all flex items-center justify-center gap-2 active:scale-95 hover:scale-105 hover:-translate-y-1">
                   <Calendar className="w-5 h-5" /> Book Appointment
                 </a>
               </div>
@@ -221,11 +428,17 @@ export default function App() {
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1 }}
                   key={idx} 
-                  className="bg-slate-50 rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group"
+                  className="bg-slate-50 rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 group cursor-pointer"
                 >
-                  <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                  <motion.div 
+                    initial={{ scale: 0, rotate: -45 }}
+                    whileInView={{ scale: 1, rotate: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.1 + 0.2, type: "spring", stiffness: 200, damping: 10 }}
+                    className="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 group-hover:rotate-12 group-hover:scale-110 shadow-sm"
+                  >
                     <service.icon className="w-6 h-6" />
-                  </div>
+                  </motion.div>
                   <h3 className="text-xl font-bold text-slate-900 mb-2">{service.title}</h3>
                   <p className="text-slate-600 mb-4">{service.desc}</p>
                   <a href="#contact" className="text-blue-600 font-semibold flex items-center gap-1 group-hover:text-blue-800">
@@ -262,11 +475,17 @@ export default function App() {
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.05 }}
                   key={idx} 
-                  className="bg-white p-6 rounded-2xl text-center shadow-sm border border-slate-100 hover:shadow-md transition-shadow hover:border-blue-100"
+                  className="bg-white p-6 rounded-2xl text-center shadow-sm border border-slate-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 hover:border-blue-200 group cursor-pointer"
                 >
-                  <div className="w-14 h-14 mx-auto bg-amber-50 text-amber-600 rounded-full flex items-center justify-center mb-4">
+                  <motion.div 
+                    initial={{ scale: 0, rotate: 45 }}
+                    whileInView={{ scale: 1, rotate: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.05 + 0.2, type: "spring", stiffness: 200, damping: 10 }}
+                    className="w-14 h-14 mx-auto bg-amber-50 text-amber-600 rounded-full flex items-center justify-center mb-4 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 shadow-sm"
+                  >
                     <feature.icon className="w-7 h-7" />
-                  </div>
+                  </motion.div>
                   <h3 className="font-bold text-slate-800">{feature.title}</h3>
                 </motion.div>
               ))}
@@ -282,11 +501,17 @@ export default function App() {
               <div className="flex justify-center items-center gap-2 mb-2">
                 <span className="text-2xl font-bold text-slate-800">4.9</span>
                 <div className="flex text-amber-500">
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
+                  {[1, 2, 3, 4, 5].map((star, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ scale: 0, opacity: 0 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1, type: "spring", stiffness: 200, damping: 10 }}
+                    >
+                      <Star className="w-5 h-5 fill-current" />
+                    </motion.div>
+                  ))}
                 </div>
               </div>
               <p className="text-slate-600">Based on Google Reviews</p>
@@ -304,14 +529,20 @@ export default function App() {
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1 }}
                   key={idx} 
-                  className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow"
+                  className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer group"
                 >
                   <div className="flex text-amber-400 mb-3">
-                    <Star className="w-4 h-4 fill-current" />
-                    <Star className="w-4 h-4 fill-current" />
-                    <Star className="w-4 h-4 fill-current" />
-                    <Star className="w-4 h-4 fill-current" />
-                    <Star className="w-4 h-4 fill-current" />
+                    {[1, 2, 3, 4, 5].map((star, i) => (
+                      <motion.div
+                        key={i}
+                        initial={{ scale: 0, rotate: -45 }}
+                        whileInView={{ scale: 1, rotate: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: idx * 0.1 + i * 0.05 + 0.2, type: "spring", stiffness: 200, damping: 10 }}
+                      >
+                        <Star className="w-4 h-4 fill-current" />
+                      </motion.div>
+                    ))}
                   </div>
                   <p className="text-slate-700 mb-4 italic">"{review.text}"</p>
                   <div className="flex items-center gap-3">
@@ -329,32 +560,200 @@ export default function App() {
           </div>
         </section>
 
+        {/* FAQ Section */}
+        <section id="faq" className="py-20 bg-slate-50">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4">Frequently Asked Questions</h2>
+              <p className="text-lg text-slate-600">Find answers to common questions about our services, policies, and more.</p>
+            </div>
+            
+            <div className="space-y-4">
+              {faqs.map((faq, index) => (
+                <motion.div 
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <button
+                    onClick={() => setOpenFaqIndex(openFaqIndex === index ? null : index)}
+                    className="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+                    aria-expanded={openFaqIndex === index}
+                  >
+                    <span className="font-semibold text-slate-900 text-lg pr-8">{faq.question}</span>
+                    <motion.div
+                      animate={{ rotate: openFaqIndex === index ? 180 : 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="flex-shrink-0 text-blue-600 bg-blue-50 p-2 rounded-full"
+                    >
+                      <ChevronDown className="w-5 h-5" />
+                    </motion.div>
+                  </button>
+                  <AnimatePresence>
+                    {openFaqIndex === index && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                      >
+                        <div className="px-6 pb-5 text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+                          {faq.answer}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Contact & Map Section */}
         <section id="contact" className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Form */}
-              <div className="bg-slate-50 p-6 md:p-8 rounded-3xl border border-slate-200 shadow-sm">
-                <h2 className="text-2xl font-bold text-blue-900 mb-2">Book an Appointment</h2>
-                <p className="text-slate-600 mb-6">Fill out the form below and we'll get back to you shortly.</p>
-                
-                <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); alert('Thank you! We will contact you shortly.'); }}>
-                  <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1">Full Name *</label>
-                    <input type="text" required className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all shadow-sm" placeholder="John Doe" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1">Phone Number *</label>
-                    <input type="tel" required className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all shadow-sm" placeholder="+91 XXXXX XXXXX" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1">Dental Problem (Optional)</label>
-                    <textarea rows={3} className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all shadow-sm" placeholder="Describe your issue..."></textarea>
-                  </div>
-                  <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-600/30 transition-all hover:-translate-y-1 text-lg">
-                    Submit Request
-                  </button>
-                </form>
+              <div className="bg-slate-50 p-6 md:p-8 rounded-3xl border border-slate-200 shadow-sm relative overflow-hidden">
+                <AnimatePresence mode="wait">
+                  {!isBookingConfirmed ? (
+                    <motion.div
+                      key="booking-form"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 20 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <h2 className="text-2xl font-bold text-blue-900 mb-2">Book an Appointment</h2>
+                      <p className="text-slate-600 mb-6">Select your preferred date and time, and we'll confirm your visit.</p>
+                      
+                      <form className="space-y-4" onSubmit={handleBookingSubmit}>
+                        <div>
+                          <label className="block text-sm font-medium text-slate-700 mb-1">Full Name *</label>
+                          <input 
+                            type="text" 
+                            required 
+                            value={bookingData.name}
+                            onChange={(e) => setBookingData({...bookingData, name: e.target.value})}
+                            className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all shadow-sm" 
+                            placeholder="John Doe" 
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-slate-700 mb-1">Phone Number *</label>
+                          <input 
+                            type="tel" 
+                            required 
+                            value={bookingData.phone}
+                            onChange={(e) => setBookingData({...bookingData, phone: e.target.value})}
+                            className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all shadow-sm" 
+                            placeholder="+91 XXXXX XXXXX" 
+                          />
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-sm font-medium text-slate-700 mb-1">Preferred Date *</label>
+                            <input 
+                              type="date" 
+                              required 
+                              min={new Date().toISOString().split('T')[0]}
+                              value={bookingData.date}
+                              onChange={(e) => setBookingData({...bookingData, date: e.target.value})}
+                              className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all shadow-sm" 
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-slate-700 mb-1">Preferred Time *</label>
+                            <select 
+                              required
+                              value={bookingData.time}
+                              onChange={(e) => setBookingData({...bookingData, time: e.target.value})}
+                              className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all shadow-sm"
+                            >
+                              <option value="" disabled>Select a time slot</option>
+                              <optgroup label="Morning (10 AM - 2 PM)">
+                                <option value="10:00 AM">10:00 AM</option>
+                                <option value="11:00 AM">11:00 AM</option>
+                                <option value="12:00 PM">12:00 PM</option>
+                                <option value="01:00 PM">01:00 PM</option>
+                              </optgroup>
+                              <optgroup label="Evening (5 PM - 9 PM)">
+                                <option value="05:00 PM">05:00 PM</option>
+                                <option value="06:00 PM">06:00 PM</option>
+                                <option value="07:00 PM">07:00 PM</option>
+                                <option value="08:00 PM">08:00 PM</option>
+                              </optgroup>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-slate-700 mb-1">Dental Problem (Optional)</label>
+                          <textarea 
+                            rows={3} 
+                            value={bookingData.problem}
+                            onChange={(e) => setBookingData({...bookingData, problem: e.target.value})}
+                            className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all shadow-sm" 
+                            placeholder="Describe your issue..."
+                          ></textarea>
+                        </div>
+                        <button 
+                          type="submit" 
+                          disabled={isSubmitting}
+                          className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-600/30 transition-all hover:-translate-y-1 text-lg flex items-center justify-center gap-2"
+                        >
+                          {isSubmitting ? (
+                            <>
+                              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                              Processing...
+                            </>
+                          ) : (
+                            'Confirm Appointment'
+                          )}
+                        </button>
+                      </form>
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="booking-success"
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.4, type: "spring" }}
+                      className="h-full flex flex-col items-center justify-center text-center py-12"
+                    >
+                      <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-6">
+                        <CheckCircle2 className="w-10 h-10" />
+                      </div>
+                      <h3 className="text-3xl font-bold text-slate-900 mb-2">Booking Confirmed!</h3>
+                      <p className="text-slate-600 mb-6 max-w-sm mx-auto">
+                        Thank you, <span className="font-semibold text-slate-900">{bookingData.name}</span>. Your appointment is scheduled for:
+                      </p>
+                      <div className="bg-white border border-slate-200 rounded-2xl p-6 w-full max-w-sm mb-8 shadow-sm">
+                        <div className="flex items-center gap-3 mb-3 text-slate-700">
+                          <Calendar className="w-5 h-5 text-blue-600" />
+                          <span className="font-medium">{new Date(bookingData.date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-slate-700">
+                          <Clock className="w-5 h-5 text-blue-600" />
+                          <span className="font-medium">{bookingData.time}</span>
+                        </div>
+                      </div>
+                      <button 
+                        onClick={() => {
+                          setIsBookingConfirmed(false);
+                          setBookingData({ name: '', phone: '', date: '', time: '', problem: '' });
+                        }}
+                        className="text-blue-600 font-semibold hover:text-blue-800 transition-colors"
+                      >
+                        Book another appointment
+                      </button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
               {/* Map & Info */}
@@ -495,6 +894,23 @@ export default function App() {
         </svg>
       </a>
 
+      {/* Back to Top Button */}
+      <AnimatePresence>
+        {showBackToTop && (
+          <motion.button
+            initial={{ opacity: 0, y: 20, scale: 0.8 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.8 }}
+            transition={{ type: "spring", stiffness: 200, damping: 20 }}
+            onClick={scrollToTop}
+            className="fixed bottom-40 md:bottom-24 right-4 md:right-8 bg-slate-800 text-white p-3 rounded-full shadow-2xl hover:bg-slate-700 transition-colors z-40 border-2 border-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+            aria-label="Back to top"
+          >
+            <ArrowUp className="w-6 h-6" />
+          </motion.button>
+        )}
+      </AnimatePresence>
+
       {/* AI Assistant Floating Button */}
       {!isAiPopupOpen && (
         <button
@@ -526,16 +942,50 @@ export default function App() {
               <X className="w-6 h-6" />
             </button>
           </div>
-          <div className="flex-1 w-full h-full bg-slate-50 relative">
-            <iframe
-              src="https://www.jotform.com/agent/019d3782be707a97aab7f8c3f25cd6abb621"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allow="microphone"
-              title="Oracle Dental AI Assistant"
-              className="absolute inset-0"
-            ></iframe>
+          <div className="flex-1 w-full h-full bg-slate-50 relative flex flex-col">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+              {chatMessages.map((msg, idx) => (
+                <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                  <div className={`max-w-[85%] rounded-2xl px-4 py-3 ${msg.role === 'user' ? 'bg-blue-600 text-white rounded-br-none' : 'bg-white border border-slate-200 text-slate-800 rounded-bl-none shadow-sm'}`}>
+                    {msg.role === 'model' ? (
+                      <div className="markdown-body text-sm prose prose-sm max-w-none">
+                        <Markdown>{msg.text}</Markdown>
+                      </div>
+                    ) : (
+                      <p className="text-sm">{msg.text}</p>
+                    )}
+                  </div>
+                </div>
+              ))}
+              {isChatLoading && (
+                <div className="flex justify-start">
+                  <div className="bg-white border border-slate-200 text-slate-800 rounded-2xl rounded-bl-none px-4 py-3 shadow-sm flex items-center gap-2">
+                    <Loader2 className="w-4 h-4 animate-spin text-blue-600" />
+                    <span className="text-sm text-slate-500">Thinking...</span>
+                  </div>
+                </div>
+              )}
+              <div ref={messagesEndRef} />
+            </div>
+            <div className="p-4 bg-white border-t border-slate-200">
+              <form onSubmit={handleSendMessage} className="flex gap-2">
+                <input
+                  type="text"
+                  value={chatInput}
+                  onChange={(e) => setChatInput(e.target.value)}
+                  placeholder="Ask a dental question..."
+                  className="flex-1 px-4 py-2 border border-slate-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent text-sm"
+                  disabled={isChatLoading}
+                />
+                <button
+                  type="submit"
+                  disabled={!chatInput.trim() || isChatLoading}
+                  className="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 disabled:bg-blue-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center flex-shrink-0 w-10 h-10"
+                >
+                  <Send className="w-4 h-4" />
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       )}
