@@ -35,17 +35,6 @@ export default function App() {
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [activeSection, setActiveSection] = useState('');
 
-  // Booking Form State
-  const [bookingData, setBookingData] = useState({
-    name: 'Prashant Vats',
-    email: 'prashantvats80@gmail.com',
-    phone: '7011961515',
-    date: '',
-    time: '',
-    problem: ''
-  });
-  const [isBookingConfirmed, setIsBookingConfirmed] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   // AI Chat State
@@ -140,16 +129,6 @@ export default function App() {
     }
   ];
 
-  const handleBookingSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsBookingConfirmed(true);
-    }, 1500);
-  };
-
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 400) {
@@ -186,7 +165,7 @@ export default function App() {
 
   const phoneNumber = "7011961515";
   const whatsappNumber = "917011961515"; // Assuming India country code
-  const whatsappMessage = "Hi, I would like to book an appointment.";
+  const whatsappMessage = "Hi, I would like to book an appointment.\n\nName: Prashant Vats\nEmail: prashantvats80@gmail.com\nPhone: 7011961515";
 
   const handleCall = () => window.open(`tel:${phoneNumber}`, '_self');
   const handleWhatsApp = () => window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
@@ -356,9 +335,9 @@ export default function App() {
                 <button onClick={handleCall} className="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-blue-950 font-bold text-lg py-4 px-8 rounded-xl shadow-xl shadow-amber-500/30 transition-all flex items-center justify-center gap-2 active:scale-95 hover:scale-105 hover:-translate-y-1">
                   <PhoneCall className="w-5 h-5" /> Call Now
                 </button>
-                <a href="#contact" className="w-full sm:w-auto bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white font-bold text-lg py-4 px-8 rounded-xl transition-all flex items-center justify-center gap-2 active:scale-95 hover:scale-105 hover:-translate-y-1">
-                  <Calendar className="w-5 h-5" /> Book Appointment
-                </a>
+                <button onClick={handleWhatsApp} className="w-full sm:w-auto bg-[#25D366] hover:bg-[#20b858] text-white font-bold text-lg py-4 px-8 rounded-xl shadow-xl shadow-[#25D366]/30 transition-all flex items-center justify-center gap-2 active:scale-95 hover:scale-105 hover:-translate-y-1">
+                  <MessageCircle className="w-5 h-5" /> Book via WhatsApp
+                </button>
               </div>
               <p className="mt-4 text-sm text-amber-300 font-medium flex items-center justify-center md:justify-start gap-1">
                 <Clock className="w-4 h-4" /> Limited slots available today!
@@ -442,9 +421,9 @@ export default function App() {
                   </motion.div>
                   <h3 className="text-xl font-bold text-slate-900 mb-2">{service.title}</h3>
                   <p className="text-slate-600 mb-4">{service.desc}</p>
-                  <a href="#contact" className="text-blue-600 font-semibold flex items-center gap-1 group-hover:text-blue-800">
+                  <button onClick={handleWhatsApp} className="text-blue-600 font-semibold flex items-center gap-1 group-hover:text-blue-800">
                     Know More <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </a>
+                  </button>
                 </motion.div>
               ))}
             </div>
@@ -617,157 +596,22 @@ export default function App() {
         <section id="contact" className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              {/* Form */}
-              <div className="bg-slate-50 p-6 md:p-8 rounded-3xl border border-slate-200 shadow-sm relative overflow-hidden">
-                <AnimatePresence mode="wait">
-                  {!isBookingConfirmed ? (
-                    <motion.div
-                      key="booking-form"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: 20 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <h2 className="text-2xl font-bold text-blue-900 mb-2">Book an Appointment</h2>
-                      <p className="text-slate-600 mb-6">Select your preferred date and time, and we'll confirm your visit.</p>
-                      
-                      <form className="space-y-4" onSubmit={handleBookingSubmit}>
-                        <div>
-                          <label className="block text-sm font-medium text-slate-700 mb-1">Full Name *</label>
-                          <input 
-                            type="text" 
-                            required 
-                            value={bookingData.name}
-                            onChange={(e) => setBookingData({...bookingData, name: e.target.value})}
-                            className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all shadow-sm" 
-                            placeholder="John Doe" 
-                          />
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <div>
-                            <label className="block text-sm font-medium text-slate-700 mb-1">Phone Number *</label>
-                            <input 
-                              type="tel" 
-                              required 
-                              value={bookingData.phone}
-                              onChange={(e) => setBookingData({...bookingData, phone: e.target.value})}
-                              className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all shadow-sm" 
-                              placeholder="+91 XXXXX XXXXX" 
-                            />
-                          </div>
-                          <div>
-                            <label className="block text-sm font-medium text-slate-700 mb-1">Email Address *</label>
-                            <input 
-                              type="email" 
-                              required 
-                              value={bookingData.email}
-                              onChange={(e) => setBookingData({...bookingData, email: e.target.value})}
-                              className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all shadow-sm" 
-                              placeholder="you@example.com" 
-                            />
-                          </div>
-                        </div>
-                        
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <div>
-                            <label className="block text-sm font-medium text-slate-700 mb-1">Preferred Date *</label>
-                            <input 
-                              type="date" 
-                              required 
-                              min={new Date().toISOString().split('T')[0]}
-                              value={bookingData.date}
-                              onChange={(e) => setBookingData({...bookingData, date: e.target.value})}
-                              className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all shadow-sm" 
-                            />
-                          </div>
-                          <div>
-                            <label className="block text-sm font-medium text-slate-700 mb-1">Preferred Time *</label>
-                            <select 
-                              required
-                              value={bookingData.time}
-                              onChange={(e) => setBookingData({...bookingData, time: e.target.value})}
-                              className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all shadow-sm"
-                            >
-                              <option value="" disabled>Select a time slot</option>
-                              <optgroup label="Morning (10 AM - 2 PM)">
-                                <option value="10:00 AM">10:00 AM</option>
-                                <option value="11:00 AM">11:00 AM</option>
-                                <option value="12:00 PM">12:00 PM</option>
-                                <option value="01:00 PM">01:00 PM</option>
-                              </optgroup>
-                              <optgroup label="Evening (5 PM - 9 PM)">
-                                <option value="05:00 PM">05:00 PM</option>
-                                <option value="06:00 PM">06:00 PM</option>
-                                <option value="07:00 PM">07:00 PM</option>
-                                <option value="08:00 PM">08:00 PM</option>
-                              </optgroup>
-                            </select>
-                          </div>
-                        </div>
-
-                        <div>
-                          <label className="block text-sm font-medium text-slate-700 mb-1">Dental Problem (Optional)</label>
-                          <textarea 
-                            rows={3} 
-                            value={bookingData.problem}
-                            onChange={(e) => setBookingData({...bookingData, problem: e.target.value})}
-                            className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all shadow-sm" 
-                            placeholder="Describe your issue..."
-                          ></textarea>
-                        </div>
-                        <button 
-                          type="submit" 
-                          disabled={isSubmitting}
-                          className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-600/30 transition-all hover:-translate-y-1 text-lg flex items-center justify-center gap-2"
-                        >
-                          {isSubmitting ? (
-                            <>
-                              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                              Processing...
-                            </>
-                          ) : (
-                            'Confirm Appointment'
-                          )}
-                        </button>
-                      </form>
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="booking-success"
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.4, type: "spring" }}
-                      className="h-full flex flex-col items-center justify-center text-center py-12"
-                    >
-                      <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-6">
-                        <CheckCircle2 className="w-10 h-10" />
-                      </div>
-                      <h3 className="text-3xl font-bold text-slate-900 mb-2">Booking Confirmed!</h3>
-                      <p className="text-slate-600 mb-6 max-w-sm mx-auto">
-                        Thank you, <span className="font-semibold text-slate-900">{bookingData.name}</span>. Your appointment is scheduled for:
-                      </p>
-                      <div className="bg-white border border-slate-200 rounded-2xl p-6 w-full max-w-sm mb-8 shadow-sm">
-                        <div className="flex items-center gap-3 mb-3 text-slate-700">
-                          <Calendar className="w-5 h-5 text-blue-600" />
-                          <span className="font-medium">{new Date(bookingData.date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
-                        </div>
-                        <div className="flex items-center gap-3 text-slate-700">
-                          <Clock className="w-5 h-5 text-blue-600" />
-                          <span className="font-medium">{bookingData.time}</span>
-                        </div>
-                      </div>
-                      <button 
-                        onClick={() => {
-                          setIsBookingConfirmed(false);
-                          setBookingData({ name: 'Prashant Vats', email: 'prashantvats80@gmail.com', phone: '7011961515', date: '', time: '', problem: '' });
-                        }}
-                        className="text-blue-600 font-semibold hover:text-blue-800 transition-colors"
-                      >
-                        Book another appointment
-                      </button>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+              {/* Form Replacement */}
+              <div className="bg-slate-50 p-6 md:p-8 rounded-3xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-center items-center text-center">
+                <div className="w-20 h-20 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-6">
+                  <Calendar className="w-10 h-10" />
+                </div>
+                <h2 className="text-3xl font-bold text-blue-900 mb-4">Ready to Smile Brighter?</h2>
+                <p className="text-slate-600 mb-8 max-w-md">
+                  Book your appointment easily through WhatsApp. Our team will respond quickly to confirm your preferred date and time.
+                </p>
+                <button 
+                  onClick={handleWhatsApp}
+                  className="w-full sm:w-auto bg-[#25D366] hover:bg-[#20b858] text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-[#25D366]/30 transition-all hover:-translate-y-1 text-lg flex items-center justify-center gap-2"
+                >
+                  <MessageCircle className="w-6 h-6" />
+                  Book via WhatsApp
+                </button>
               </div>
 
               {/* Map & Info */}
@@ -843,7 +687,7 @@ export default function App() {
                 <li><a href="#services" className="hover:text-white transition-colors">Services</a></li>
                 <li><a href="#why-us" className="hover:text-white transition-colors">Why Choose Us</a></li>
                 <li><a href="#testimonials" className="hover:text-white transition-colors">Patient Reviews</a></li>
-                <li><a href="#contact" className="hover:text-white transition-colors">Book Appointment</a></li>
+                <li><button onClick={handleWhatsApp} className="hover:text-white transition-colors">Book via WhatsApp</button></li>
               </ul>
             </div>
             
@@ -875,7 +719,7 @@ export default function App() {
           className="flex-1 bg-[#25D366] text-white font-bold py-3 rounded-xl flex flex-col items-center justify-center gap-1 active:scale-95 transition-transform"
         >
           <MessageCircle className="w-5 h-5" />
-          <span className="text-[10px] uppercase tracking-wider">WhatsApp</span>
+          <span className="text-[10px] uppercase tracking-wider">Book via WhatsApp</span>
         </button>
         
         <button 
@@ -885,14 +729,6 @@ export default function App() {
           <PhoneCall className="w-5 h-5" />
           <span className="text-[10px] uppercase tracking-wider">Call Now</span>
         </button>
-        
-        <a 
-          href="#contact"
-          className="flex-1 bg-amber-500 text-blue-950 font-bold py-3 rounded-xl flex flex-col items-center justify-center gap-1 active:scale-95 transition-transform"
-        >
-          <Calendar className="w-5 h-5" />
-          <span className="text-[10px] uppercase tracking-wider">Book</span>
-        </a>
       </div>
 
       {/* WhatsApp Floating Button */}
