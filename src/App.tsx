@@ -21,11 +21,42 @@ import {
   Menu,
   X,
   Bot,
-  ArrowUp
+  ArrowUp,
+  Facebook,
+  Instagram,
+  Youtube,
+  Volume2,
+  VolumeX
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { SoundProvider, useSound } from './components/SoundManager';
+import { InteractiveButton } from './components/InteractiveButton';
+import { Hero } from './components/Hero';
+import { Services } from './components/Services';
+import { WhyUs } from './components/WhyUs';
+import { Testimonials } from './components/Testimonials';
+import { FAQ } from './components/FAQ';
+import { Contact } from './components/Contact';
+import { Footer } from './components/Footer';
+
+const MusicToggle = () => {
+  const { isPlaying, toggleMusic } = useSound();
+  return (
+    <button onClick={toggleMusic} className="text-white hover:text-amber-400 transition-colors">
+      {isPlaying ? <Volume2 className="w-5 h-5" /> : <VolumeX className="w-5 h-5" />}
+    </button>
+  );
+};
 
 export default function App() {
+  return (
+    <SoundProvider>
+      <AppContent />
+    </SoundProvider>
+  );
+}
+
+function AppContent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAiPopupOpen, setIsAiPopupOpen] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -130,6 +161,7 @@ export default function App() {
           <a href={`tel:${phoneNumber}`} className="flex items-center gap-1 hover:text-amber-400 transition-colors">
             <PhoneCall className="w-4 h-4" /> +91 {phoneNumber}
           </a>
+          <MusicToggle />
         </div>
       </div>
 
@@ -177,12 +209,12 @@ export default function App() {
 
             {/* Mobile menu button */}
             <div className="flex items-center md:hidden">
-              <button
+              <InteractiveButton
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="text-slate-600 hover:text-blue-600 focus:outline-none p-2"
               >
                 {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-              </button>
+              </InteractiveButton>
             </div>
           </div>
         </div>
@@ -218,6 +250,18 @@ export default function App() {
                     {item.label}
                   </a>
                 ))}
+                <div className="flex items-center gap-6 px-4 pt-4 border-t border-slate-100">
+                  <a href="https://www.facebook.com/profile.php?id=100083436112014" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-blue-600 transition-colors">
+                    <Facebook className="w-6 h-6" />
+                  </a>
+                  <a href="https://www.instagram.com/oracledentalclinic0/" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-pink-600 transition-colors">
+                    <Instagram className="w-6 h-6" />
+                  </a>
+                  <a href="https://www.youtube.com/@OracleDentalClinic0" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-red-600 transition-colors">
+                    <Youtube className="w-6 h-6" />
+                  </a>
+                  <MusicToggle />
+                </div>
               </div>
             </motion.div>
           )}
@@ -225,89 +269,7 @@ export default function App() {
       </header>
 
       <main>
-        {/* Hero Section (Above the Fold) */}
-        <section className="relative bg-blue-900 text-white overflow-hidden">
-          <div className="absolute inset-0 opacity-20">
-            <img 
-              src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1200&q=80" 
-              alt="Happy Indian Patient" 
-              className="w-full h-full object-cover"
-              referrerPolicy="no-referrer"
-            />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-t from-blue-950 via-blue-900/80 to-transparent"></div>
-          
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24 lg:py-32 flex flex-col md:flex-row items-center">
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="w-full md:w-1/2 z-10 text-center md:text-left"
-            >
-              <div className="inline-block bg-amber-500 text-blue-950 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4 shadow-lg shadow-amber-500/20">
-                Top Rated Dentist in Ghaziabad
-              </div>
-              <motion.h1 
-                className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4 leading-tight flex flex-wrap justify-center md:justify-start"
-                initial="hidden"
-                animate="visible"
-                variants={{
-                  visible: { transition: { staggerChildren: 0.1 } },
-                  hidden: {}
-                }}
-              >
-                {["Tooth", "Pain?"].map((word, i) => (
-                  <motion.span key={i} className="mr-3 inline-block" variants={{ hidden: { opacity: 0, y: 20, filter: 'blur(8px)' }, visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { type: "spring", damping: 12, stiffness: 100 } } }}>{word}</motion.span>
-                ))}
-                <div className="w-full hidden md:block"></div>
-                {["Get", "Relief", "in", "30", "Minutes"].map((word, i) => (
-                  <motion.span key={i + 10} className="text-amber-400 drop-shadow-md mr-3 inline-block" variants={{ hidden: { opacity: 0, y: 20, filter: 'blur(8px)' }, visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { type: "spring", damping: 12, stiffness: 100 } } }}>{word}</motion.span>
-                ))}
-              </motion.h1>
-              <motion.p 
-                className="text-lg md:text-xl text-blue-100 mb-8 max-w-2xl mx-auto md:mx-0 font-light flex flex-wrap justify-center md:justify-start"
-                initial="hidden"
-                animate="visible"
-                variants={{
-                  visible: { transition: { staggerChildren: 0.04, delayChildren: 0.4 } },
-                  hidden: {}
-                }}
-              >
-                {"Expert dental care, painless treatments, and advanced implants at affordable prices.".split(" ").map((word, i) => (
-                  <motion.span key={i} className="mr-2 inline-block" variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}>{word}</motion.span>
-                ))}
-              </motion.p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                <button onClick={handleCall} className="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-blue-950 font-bold text-lg py-4 px-8 rounded-xl shadow-xl shadow-amber-500/30 transition-all flex items-center justify-center gap-2 active:scale-95 hover:scale-105 hover:-translate-y-1">
-                  <PhoneCall className="w-5 h-5" /> Call Now
-                </button>
-                <button onClick={handleWhatsApp} className="w-full sm:w-auto bg-[#25D366] hover:bg-[#20b858] text-white font-bold text-lg py-4 px-8 rounded-xl shadow-xl shadow-[#25D366]/30 transition-all flex items-center justify-center gap-2 active:scale-95 hover:scale-105 hover:-translate-y-1">
-                  <MessageCircle className="w-5 h-5" /> Book via WhatsApp
-                </button>
-              </div>
-              <p className="mt-4 text-sm text-amber-300 font-medium flex items-center justify-center md:justify-start gap-1">
-                <Clock className="w-4 h-4" /> Limited slots available today!
-              </p>
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="w-full md:w-1/2 mt-12 md:mt-0 z-10 flex justify-center md:justify-end"
-            >
-              <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full border-4 border-white/20 overflow-hidden shadow-2xl ring-4 ring-amber-500/30">
-                <img 
-                  src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80" 
-                  alt="Expert Indian Dentist" 
-                  className="w-full h-full object-cover"
-                  referrerPolicy="no-referrer"
-                />
-              </div>
-            </motion.div>
-          </div>
-        </section>
+        <Hero handleCall={handleCall} handleWhatsApp={handleWhatsApp} />
 
         {/* Emergency Banner */}
         <motion.section 
@@ -326,356 +288,42 @@ export default function App() {
                 <p className="text-red-100 text-sm">Don't wait. We provide immediate relief.</p>
               </div>
             </div>
-            <button onClick={handleCall} className="w-full sm:w-auto bg-white text-red-600 font-bold py-3 px-6 rounded-lg shadow-md hover:bg-red-50 transition-colors flex items-center justify-center gap-2 active:scale-95">
+            <InteractiveButton onClick={handleCall} className="w-full sm:w-auto bg-white text-red-600 font-bold py-3 px-6 rounded-lg shadow-md hover:bg-red-50 transition-colors flex items-center justify-center gap-2 active:scale-95">
               <PhoneCall className="w-5 h-5" /> Call Emergency
-            </button>
+            </InteractiveButton>
           </div>
         </motion.section>
 
-        {/* Services Section */}
-        <section id="services" className="py-16 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-blue-900 mb-4">Our Premium Services</h2>
-              <p className="text-slate-600 max-w-2xl mx-auto">Comprehensive dental care tailored to your needs using the latest technology.</p>
-            </div>
+        <Services handleWhatsApp={handleWhatsApp} />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                { title: 'Dental Implants', desc: 'Permanent solution for missing teeth. Look and feel natural.', icon: ShieldCheck },
-                { title: 'Root Canal (RCT)', desc: 'Painless single-sitting RCT to save your natural tooth.', icon: HeartPulse },
-                { title: 'Teeth Whitening', desc: 'Get a brighter, confident smile in just one session.', icon: Star },
-                { title: 'Braces / Smile Design', desc: 'Straighten teeth and design your perfect smile.', icon: Activity },
-                { title: 'Tooth Extraction', desc: 'Safe and painless removal of damaged or wisdom teeth.', icon: Stethoscope },
-                { title: 'General Dentistry', desc: 'Routine checkups, cleaning, and fillings for oral health.', icon: CheckCircle2 },
-              ].map((service, idx) => (
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  key={idx} 
-                  className="bg-slate-50 rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 group cursor-pointer"
-                >
-                  <motion.div 
-                    initial={{ scale: 0, rotate: -45 }}
-                    whileInView={{ scale: 1, rotate: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: idx * 0.1 + 0.2, type: "spring", stiffness: 200, damping: 10 }}
-                    className="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 group-hover:rotate-12 group-hover:scale-110 shadow-sm"
-                  >
-                    <service.icon className="w-6 h-6" />
-                  </motion.div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-2">{service.title}</h3>
-                  <p className="text-slate-600 mb-4">{service.desc}</p>
-                  <button onClick={handleWhatsApp} className="text-blue-600 font-semibold flex items-center gap-1 group-hover:text-blue-800">
-                    Know More <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </button>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <WhyUs />
 
-        {/* Why Choose Us */}
-        <section id="why-us" className="py-16 bg-slate-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-blue-900 mb-4">Why Choose Oracle Dental?</h2>
-              <p className="text-slate-600 max-w-2xl mx-auto">We combine expertise with compassion to deliver the best dental experience.</p>
-            </div>
+        <Testimonials />
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-              {[
-                { title: 'Painless Treatment', icon: HeartPulse },
-                { title: 'Experienced Dentist', icon: Stethoscope },
-                { title: 'Advanced Technology', icon: Activity },
-                { title: 'Affordable Pricing', icon: ShieldCheck },
-                { title: 'Fully Sanitized', icon: ShieldCheck },
-                { title: 'Emergency Care', icon: Activity },
-                { title: 'Free Parking', icon: MapPin },
-                { title: 'Modern Equipment', icon: Activity },
-              ].map((feature, idx) => (
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.05 }}
-                  key={idx} 
-                  className="bg-white p-6 rounded-2xl text-center shadow-sm border border-slate-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 hover:border-blue-200 group cursor-pointer"
-                >
-                  <motion.div 
-                    initial={{ scale: 0, rotate: 45 }}
-                    whileInView={{ scale: 1, rotate: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: idx * 0.05 + 0.2, type: "spring", stiffness: 200, damping: 10 }}
-                    className="w-14 h-14 mx-auto bg-amber-50 text-amber-600 rounded-full flex items-center justify-center mb-4 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 shadow-sm"
-                  >
-                    <feature.icon className="w-7 h-7" />
-                  </motion.div>
-                  <h3 className="font-bold text-slate-800">{feature.title}</h3>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <FAQ faqs={faqs} openFaqIndex={openFaqIndex} setOpenFaqIndex={setOpenFaqIndex} />
 
-        {/* Testimonials */}
-        <section id="testimonials" className="py-16 bg-blue-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-blue-900 mb-4">Patient Reviews</h2>
-              <div className="flex justify-center items-center gap-2 mb-2">
-                <span className="text-2xl font-bold text-slate-800">4.9</span>
-                <div className="flex text-amber-500">
-                  {[1, 2, 3, 4, 5].map((star, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ scale: 0, opacity: 0 }}
-                      whileInView={{ scale: 1, opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.1, type: "spring", stiffness: 200, damping: 10 }}
-                    >
-                      <Star className="w-5 h-5 fill-current" />
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-              <p className="text-slate-600">Based on Google Reviews</p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[
-                { name: 'Rahul Sharma', text: 'Best dental clinic in Ghaziabad. Got my RCT done painlessly. Highly recommend!' },
-                { name: 'Priya Singh', text: 'Very clean clinic and professional doctor. The implant procedure was smooth and affordable.' },
-                { name: 'Amit Kumar', text: 'Visited for severe toothache. The doctor was very patient and provided immediate relief. Excellent service.' }
-              ].map((review, idx) => (
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  key={idx} 
-                  className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer group"
-                >
-                  <div className="flex text-amber-400 mb-3">
-                    {[1, 2, 3, 4, 5].map((star, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ scale: 0, rotate: -45 }}
-                        whileInView={{ scale: 1, rotate: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: idx * 0.1 + i * 0.05 + 0.2, type: "spring", stiffness: 200, damping: 10 }}
-                      >
-                        <Star className="w-4 h-4 fill-current" />
-                      </motion.div>
-                    ))}
-                  </div>
-                  <p className="text-slate-700 mb-4 italic">"{review.text}"</p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-bold">
-                      {review.name.charAt(0)}
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-sm text-slate-900">{review.name}</h4>
-                      <span className="text-xs text-slate-500">Verified Patient</span>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section id="faq" className="py-20 bg-slate-50">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4">Frequently Asked Questions</h2>
-              <p className="text-lg text-slate-600">Find answers to common questions about our services, policies, and more.</p>
-            </div>
-            
-            <div className="space-y-4">
-              {faqs.map((faq, index) => (
-                <motion.div 
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
-                >
-                  <button
-                    onClick={() => setOpenFaqIndex(openFaqIndex === index ? null : index)}
-                    className="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
-                    aria-expanded={openFaqIndex === index}
-                  >
-                    <span className="font-semibold text-slate-900 text-lg pr-8">{faq.question}</span>
-                    <motion.div
-                      animate={{ rotate: openFaqIndex === index ? 180 : 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
-                      className="flex-shrink-0 text-blue-600 bg-blue-50 p-2 rounded-full"
-                    >
-                      <ChevronDown className="w-5 h-5" />
-                    </motion.div>
-                  </button>
-                  <AnimatePresence>
-                    {openFaqIndex === index && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                      >
-                        <div className="px-6 pb-5 text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
-                          {faq.answer}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Contact & Map Section */}
-        <section id="contact" className="py-16 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              {/* Form Replacement */}
-              <div className="bg-slate-50 p-6 md:p-8 rounded-3xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-center items-center text-center">
-                <div className="w-20 h-20 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-6">
-                  <Calendar className="w-10 h-10" />
-                </div>
-                <h2 className="text-3xl font-bold text-blue-900 mb-4">Ready to Smile Brighter?</h2>
-                <p className="text-slate-600 mb-8 max-w-md">
-                  Book your appointment easily through WhatsApp. Our team will respond quickly to confirm your preferred date and time.
-                </p>
-                <button 
-                  onClick={handleWhatsApp}
-                  className="w-full sm:w-auto bg-[#25D366] hover:bg-[#20b858] text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-[#25D366]/30 transition-all hover:-translate-y-1 text-lg flex items-center justify-center gap-2"
-                >
-                  <MessageCircle className="w-6 h-6" />
-                  Book via WhatsApp
-                </button>
-              </div>
-
-              {/* Map & Info */}
-              <div className="flex flex-col justify-center">
-                <h2 className="text-2xl font-bold text-blue-900 mb-6">Visit Our Clinic</h2>
-                
-                <div className="space-y-6 mb-8">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
-                      <MapPin className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-slate-900">Location</h4>
-                      <p className="text-slate-600 mt-1">Jaat Chowk, Chipiyana Buzurg,<br />near ABES Engineering College,<br />Ghaziabad, Uttar Pradesh</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
-                      <Clock className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-slate-900">Clinic Hours</h4>
-                      <p className="text-slate-600 mt-1">Monday - Sunday<br />10:00 AM - 2:00 PM<br />5:00 PM - 9:00 PM</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Map Integration */}
-                <div className="w-full h-64 md:h-80 bg-slate-200 rounded-2xl overflow-hidden relative border border-slate-300 shadow-inner">
-                  <iframe 
-                    src="https://maps.google.com/maps?q=Oracle+Dental+Clinic+and+Implant+Center,+Jaat+Chowk,+Chipiyana+Buzurg,+near+ABES+Engineering+College,+Ghaziabad&t=&z=15&ie=UTF8&iwloc=&output=embed" 
-                    width="100%" 
-                    height="100%" 
-                    style={{ border: 0 }} 
-                    allowFullScreen={true} 
-                    loading="lazy" 
-                    referrerPolicy="no-referrer-when-downgrade"
-                    title="Oracle Dental Clinic Location"
-                    className="absolute inset-0"
-                  ></iframe>
-                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
-                    <button onClick={handleDirections} className="bg-blue-600 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:bg-blue-700 transition-colors whitespace-nowrap flex items-center gap-2">
-                      <MapPin className="w-4 h-4" /> Open in Maps
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <Contact handleWhatsApp={handleWhatsApp} handleDirections={handleDirections} />
       </main>
 
-      {/* Footer */}
-      <footer className="bg-slate-900 text-slate-300 py-12 border-t border-slate-800 pb-32 md:pb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">
-                  O
-                </div>
-                <span className="font-bold text-xl text-white">Oracle Dental</span>
-              </div>
-              <p className="text-sm text-slate-400 mb-4">
-                Premium dental care and implant center in Ghaziabad. We bring smiles to life with advanced technology and expert care.
-              </p>
-            </div>
-            
-            <div>
-              <h4 className="text-white font-bold mb-4 uppercase tracking-wider text-sm">Quick Links</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="#services" className="hover:text-white transition-colors">Services</a></li>
-                <li><a href="#why-us" className="hover:text-white transition-colors">Why Choose Us</a></li>
-                <li><a href="#testimonials" className="hover:text-white transition-colors">Patient Reviews</a></li>
-                <li><button onClick={handleWhatsApp} className="hover:text-white transition-colors">Book via WhatsApp</button></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="text-white font-bold mb-4 uppercase tracking-wider text-sm">Contact</h4>
-              <ul className="space-y-3 text-sm">
-                <li className="flex items-start gap-2">
-                  <MapPin className="w-4 h-4 mt-1 flex-shrink-0 text-amber-500" />
-                  <span>Jaat Chowk, Chipiyana Buzurg, near ABES Engineering College, Ghaziabad</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <PhoneCall className="w-4 h-4 text-amber-500" />
-                  <a href={`tel:${phoneNumber}`} className="hover:text-white transition-colors">+91 {phoneNumber}</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="border-t border-slate-800 mt-8 pt-8 text-center text-xs text-slate-500">
-            &copy; {new Date().getFullYear()} Oracle Dental Clinic and Implant Center. All rights reserved.
-          </div>
-        </div>
-      </footer>
+      <Footer phoneNumber={phoneNumber} handleWhatsApp={handleWhatsApp} />
 
       {/* Sticky Bottom Bar (Mobile Only) */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-50 p-2 flex gap-2 pb-safe">
-        <button 
+        <InteractiveButton 
           onClick={handleWhatsApp}
           className="flex-1 bg-[#25D366] text-white font-bold py-3 rounded-xl flex flex-col items-center justify-center gap-1 active:scale-95 transition-transform"
         >
           <MessageCircle className="w-5 h-5" />
           <span className="text-[10px] uppercase tracking-wider">Book via WhatsApp</span>
-        </button>
+        </InteractiveButton>
         
-        <button 
+        <InteractiveButton 
           onClick={handleCall}
           className="flex-1 bg-blue-600 text-white font-bold py-3 rounded-xl flex flex-col items-center justify-center gap-1 active:scale-95 transition-transform"
         >
           <PhoneCall className="w-5 h-5" />
           <span className="text-[10px] uppercase tracking-wider">Call Now</span>
-        </button>
+        </InteractiveButton>
       </div>
 
       {/* WhatsApp Floating Button */}
@@ -694,7 +342,7 @@ export default function App() {
       {/* Back to Top Button */}
       <AnimatePresence>
         {showBackToTop && (
-          <motion.button
+          <InteractiveButton
             initial={{ opacity: 0, y: 20, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.8 }}
@@ -704,19 +352,19 @@ export default function App() {
             aria-label="Back to top"
           >
             <ArrowUp className="w-6 h-6" />
-          </motion.button>
+          </InteractiveButton>
         )}
       </AnimatePresence>
 
       {/* AI Assistant Floating Button */}
       {!isAiPopupOpen && (
-        <button
+        <InteractiveButton
           onClick={() => setIsAiPopupOpen(true)}
           className="fixed bottom-24 md:bottom-8 right-4 md:right-8 bg-blue-600 text-white p-4 rounded-full shadow-2xl hover:bg-blue-700 transition-all z-40 flex items-center justify-center animate-bounce border-4 border-white"
           aria-label="Chat with AI Assistant"
         >
           <Bot className="w-7 h-7" />
-        </button>
+        </InteractiveButton>
       )}
 
       {/* AI Assistant Popup Modal */}
@@ -732,12 +380,12 @@ export default function App() {
                 <p className="text-[10px] text-blue-100 uppercase tracking-wider">Online 24/7</p>
               </div>
             </div>
-            <button 
+            <InteractiveButton 
               onClick={() => setIsAiPopupOpen(false)} 
               className="text-white hover:bg-white/20 p-2 rounded-full transition-colors"
             >
               <X className="w-6 h-6" />
-            </button>
+            </InteractiveButton>
           </div>
           <div className="flex-1 w-full h-full bg-slate-50 relative flex flex-col">
             <iframe
