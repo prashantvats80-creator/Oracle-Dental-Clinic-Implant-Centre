@@ -40,10 +40,10 @@ const FAQ = lazy(() => import('./components/FAQ'));
 const Contact = lazy(() => import('./components/Contact'));
 const Footer = lazy(() => import('./components/Footer'));
 
-const MusicToggle = () => {
+const MusicToggle = ({ className = "text-white" }: { className?: string }) => {
   const { isPlaying, toggleMusic } = useSound();
   return (
-    <button onClick={toggleMusic} className="text-white hover:text-amber-400 transition-colors">
+    <button onClick={toggleMusic} className={`${className} hover:text-amber-400 transition-colors`}>
       {isPlaying ? <Volume2 className="w-5 h-5" /> : <VolumeX className="w-5 h-5" />}
     </button>
   );
@@ -216,7 +216,8 @@ function AppContent() {
             </nav>
 
             {/* Mobile menu button */}
-            <div className="flex items-center md:hidden">
+            <div className="flex items-center md:hidden gap-4">
+              <MusicToggle className="text-slate-600" />
               <InteractiveButton
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="text-slate-600 hover:text-blue-600 focus:outline-none p-2"
@@ -269,7 +270,7 @@ function AppContent() {
                   <a href="https://www.youtube.com/@OracleDentalClinic0" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-red-600 transition-colors">
                     <Youtube className="w-6 h-6" />
                   </a>
-                  <MusicToggle />
+                  <MusicToggle className="text-slate-600" />
                 </div>
               </div>
             </motion.div>
