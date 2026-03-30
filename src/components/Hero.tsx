@@ -8,7 +8,7 @@ interface HeroProps {
   handleWhatsApp: () => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ handleCall, handleWhatsApp }) => {
+const Hero: React.FC<HeroProps> = ({ handleCall, handleWhatsApp }) => {
   return (
     <section className="relative bg-blue-900 text-white overflow-hidden">
       <div className="absolute inset-0 opacity-20">
@@ -94,3 +94,5 @@ export const Hero: React.FC<HeroProps> = ({ handleCall, handleWhatsApp }) => {
     </section>
   );
 };
+
+export default Hero;

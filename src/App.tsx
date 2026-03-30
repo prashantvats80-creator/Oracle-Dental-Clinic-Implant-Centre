@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import {
   PhoneCall,
   MessageCircle,
@@ -31,13 +31,14 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import { SoundProvider, useSound } from './components/SoundManager';
 import { InteractiveButton } from './components/InteractiveButton';
-import { Hero } from './components/Hero';
-import { Services } from './components/Services';
-import { WhyUs } from './components/WhyUs';
-import { Testimonials } from './components/Testimonials';
-import { FAQ } from './components/FAQ';
-import { Contact } from './components/Contact';
-import { Footer } from './components/Footer';
+
+const Hero = lazy(() => import('./components/Hero'));
+const Services = lazy(() => import('./components/Services'));
+const WhyUs = lazy(() => import('./components/WhyUs'));
+const Testimonials = lazy(() => import('./components/Testimonials'));
+const FAQ = lazy(() => import('./components/FAQ'));
+const Contact = lazy(() => import('./components/Contact'));
+const Footer = lazy(() => import('./components/Footer'));
 
 const MusicToggle = () => {
   const { isPlaying, toggleMusic } = useSound();
@@ -108,25 +109,32 @@ function AppContent() {
   ];
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      if (window.scrollY > 400) {
-        setShowBackToTop(true);
-      } else {
-        setShowBackToTop(false);
-      }
-
-      const sections = ['services', 'why-us', 'testimonials', 'faq', 'contact'];
-      let current = '';
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= window.innerHeight / 3 && rect.bottom >= 100) {
-            current = section;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (window.scrollY > 400) {
+            setShowBackToTop(true);
+          } else {
+            setShowBackToTop(false);
           }
-        }
+
+          const sections = ['services', 'why-us', 'testimonials', 'faq', 'contact'];
+          let current = '';
+          for (const section of sections) {
+            const element = document.getElementById(section);
+            if (element) {
+              const rect = element.getBoundingClientRect();
+              if (rect.top <= window.innerHeight / 3 && rect.bottom >= 100) {
+                current = section;
+              }
+            }
+          }
+          setActiveSection(current);
+          ticking = false;
+        });
+        ticking = true;
       }
-      setActiveSection(current);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -143,7 +151,7 @@ function AppContent() {
 
   const phoneNumber = "7011961515";
   const whatsappNumber = "917011961515"; // Assuming India country code
-  const whatsappMessage = "Hi, I would like to book an appointment.\n\nName: Prashant Vats\nEmail: prashantvats80@gmail.com\nPhone: 7011961515";
+  const whatsappMessage = "I want to book an appointment.";
 
   const handleCall = () => window.open(`tel:${phoneNumber}`, '_self');
   const handleWhatsApp = () => window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
@@ -269,40 +277,42 @@ function AppContent() {
       </header>
 
       <main>
-        <Hero handleCall={handleCall} handleWhatsApp={handleWhatsApp} />
+        <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
+          <Hero handleCall={handleCall} handleWhatsApp={handleWhatsApp} />
 
-        {/* Emergency Banner */}
-        <motion.section 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="bg-red-600 text-white py-4 px-4 shadow-inner relative z-30"
-        >
-          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="bg-white/20 p-2 rounded-full animate-pulse">
-                <Activity className="w-6 h-6" />
+          {/* Emergency Banner */}
+          <motion.section 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="bg-red-600 text-white py-4 px-4 shadow-inner relative z-30"
+          >
+            <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="bg-white/20 p-2 rounded-full animate-pulse">
+                  <Activity className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-lg">Severe Tooth Pain or Emergency?</h3>
+                  <p className="text-red-100 text-sm">Don't wait. We provide immediate relief.</p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-bold text-lg">Severe Tooth Pain or Emergency?</h3>
-                <p className="text-red-100 text-sm">Don't wait. We provide immediate relief.</p>
-              </div>
+              <InteractiveButton onClick={handleCall} className="w-full sm:w-auto bg-white text-red-600 font-bold py-3 px-6 rounded-lg shadow-md hover:bg-red-50 transition-colors flex items-center justify-center gap-2 active:scale-95">
+                <PhoneCall className="w-5 h-5" /> Call Emergency
+              </InteractiveButton>
             </div>
-            <InteractiveButton onClick={handleCall} className="w-full sm:w-auto bg-white text-red-600 font-bold py-3 px-6 rounded-lg shadow-md hover:bg-red-50 transition-colors flex items-center justify-center gap-2 active:scale-95">
-              <PhoneCall className="w-5 h-5" /> Call Emergency
-            </InteractiveButton>
-          </div>
-        </motion.section>
+          </motion.section>
 
-        <Services handleWhatsApp={handleWhatsApp} />
+          <Services handleWhatsApp={handleWhatsApp} />
 
-        <WhyUs />
+          <WhyUs />
 
-        <Testimonials />
+          <Testimonials />
 
-        <FAQ faqs={faqs} openFaqIndex={openFaqIndex} setOpenFaqIndex={setOpenFaqIndex} />
+          <FAQ faqs={faqs} openFaqIndex={openFaqIndex} setOpenFaqIndex={setOpenFaqIndex} />
 
-        <Contact handleWhatsApp={handleWhatsApp} handleDirections={handleDirections} />
+          <Contact handleWhatsApp={handleWhatsApp} handleDirections={handleDirections} />
+        </Suspense>
       </main>
 
       <Footer phoneNumber={phoneNumber} handleWhatsApp={handleWhatsApp} />

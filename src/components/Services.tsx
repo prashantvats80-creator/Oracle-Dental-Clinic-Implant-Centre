@@ -7,7 +7,7 @@ interface ServicesProps {
   handleWhatsApp: () => void;
 }
 
-export const Services: React.FC<ServicesProps> = ({ handleWhatsApp }) => {
+const Services: React.FC<ServicesProps> = ({ handleWhatsApp }) => {
   const services = [
     { title: 'Dental Implants', desc: 'Permanent solution for missing teeth. Look and feel natural.', icon: ShieldCheck },
     { title: 'Full Mouth Implants', desc: 'Complete restoration for a full set of teeth.', icon: ShieldCheck },
@@ -77,3 +77,5 @@ export const Services: React.FC<ServicesProps> = ({ handleWhatsApp }) => {
     </section>
   );
 };
+
+export default Services;

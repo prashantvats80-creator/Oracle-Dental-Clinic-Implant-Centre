@@ -9,7 +9,7 @@ interface FAQProps {
   setOpenFaqIndex: (index: number | null) => void;
 }
 
-export const FAQ: React.FC<FAQProps> = ({ faqs, openFaqIndex, setOpenFaqIndex }) => {
+const FAQ: React.FC<FAQProps> = ({ faqs, openFaqIndex, setOpenFaqIndex }) => {
   return (
     <section id="faq" className="py-20 bg-slate-50">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -63,3 +63,5 @@ export const FAQ: React.FC<FAQProps> = ({ faqs, openFaqIndex, setOpenFaqIndex })
     </section>
   );
 };
+
+export default FAQ;

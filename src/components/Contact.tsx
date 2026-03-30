@@ -7,7 +7,7 @@ interface ContactProps {
   handleDirections: () => void;
 }
 
-export const Contact: React.FC<ContactProps> = ({ handleWhatsApp, handleDirections }) => {
+const Contact: React.FC<ContactProps> = ({ handleWhatsApp, handleDirections }) => {
   return (
     <section id="contact" className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -81,3 +81,5 @@ export const Contact: React.FC<ContactProps> = ({ handleWhatsApp, handleDirectio
     </section>
   );
 };
+
+export default Contact;

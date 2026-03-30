@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { HeartPulse, Stethoscope, Activity, ShieldCheck, MapPin } from 'lucide-react';
 
-export const WhyUs: React.FC = () => {
+const WhyUs: React.FC = () => {
   const features = [
     { title: 'Painless Treatment', icon: HeartPulse },
     { title: 'Experienced Dentist', icon: Stethoscope },
@@ -49,3 +49,5 @@ export const WhyUs: React.FC = () => {
     </section>
   );
 };
+
+export default WhyUs;

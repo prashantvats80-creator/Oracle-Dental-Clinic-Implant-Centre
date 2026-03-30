@@ -7,7 +7,7 @@ interface FooterProps {
   handleWhatsApp: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ phoneNumber, handleWhatsApp }) => {
+const Footer: React.FC<FooterProps> = ({ phoneNumber, handleWhatsApp }) => {
   return (
     <footer className="bg-slate-900 text-slate-300 py-12 border-t border-slate-800 pb-32 md:pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -67,3 +67,5 @@ export const Footer: React.FC<FooterProps> = ({ phoneNumber, handleWhatsApp }) =
     </footer>
   );
 };
+
+export default Footer;

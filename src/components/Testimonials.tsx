@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Star } from 'lucide-react';
 
-export const Testimonials: React.FC = () => {
+const Testimonials: React.FC = () => {
   const reviews = [
     { name: 'Rahul Sharma', text: 'Best dental clinic in Ghaziabad. Got my RCT done painlessly. Highly recommend!' },
     { name: 'Priya Singh', text: 'Very clean clinic and professional doctor. The implant procedure was smooth and affordable.' },
@@ -73,3 +73,5 @@ export const Testimonials: React.FC = () => {
     </section>
   );
 };
+
+export default Testimonials;
