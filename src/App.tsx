@@ -249,6 +249,7 @@ function AppContent() {
                     key={item.id}
                     href={`#${item.id}`} 
                     onClick={() => setIsMenuOpen(false)} 
+                    onTouchStart={() => setIsMenuOpen(false)}
                     className={`block px-4 py-3 text-base font-medium rounded-xl transition-all ${
                       activeSection === item.id 
                         ? 'bg-blue-50 text-blue-700 border-l-4 border-blue-600' 

@@ -3,7 +3,7 @@ import { Volume2, VolumeX } from 'lucide-react';
 
 // Using a reliable public URL for a soothing ambient track
 const MUSIC_URL = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
-const CLICK_SOUND_URL = 'https://actions.google.com/sounds/v1/ui/click.ogg';
+const CLICK_SOUND_URL = 'https://www.soundjay.com/buttons/button-1.mp3';
 
 interface SoundContextType {
   isPlaying: boolean;
@@ -29,6 +29,7 @@ export const SoundProvider = ({ children }: { children: React.ReactNode }) => {
 
     clickSoundRef.current = new Audio(CLICK_SOUND_URL);
     clickSoundRef.current.volume = 0.5;
+    clickSoundRef.current.onerror = (e) => console.error("Click sound error:", e);
 
     return () => {
       musicRef.current?.pause();

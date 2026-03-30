@@ -9,10 +9,11 @@ interface InteractiveButtonProps extends HTMLMotionProps<"button"> {
 export const InteractiveButton = ({ children, onClick, ...props }: InteractiveButtonProps) => {
   const { playClick } = useSound();
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement> | React.TouchEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     playClick();
     if (onClick) {
-      onClick(e);
+      onClick(e as any);
     }
   };
 
