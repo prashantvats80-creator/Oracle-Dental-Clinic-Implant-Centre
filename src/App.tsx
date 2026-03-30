@@ -21,13 +21,9 @@ import {
   Menu,
   X,
   Bot,
-  ArrowUp,
-  Send,
-  Loader2
+  ArrowUp
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { GoogleGenAI } from '@google/genai';
-import Markdown from 'react-markdown';
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,55 +32,6 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('');
 
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
-
-  // AI Chat State
-  const [chatMessages, setChatMessages] = useState<{role: 'user' | 'model', text: string}[]>([
-    { role: 'model', text: 'Hello! I am the Oracle AI Assistant. How can I help you with your dental needs today?' }
-  ]);
-  const [chatInput, setChatInput] = useState('');
-  const [isChatLoading, setIsChatLoading] = useState(false);
-  const chatRef = useRef<any>(null);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    try {
-      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-      chatRef.current = ai.chats.create({
-        model: "gemini-3-flash-preview",
-        config: {
-          systemInstruction: "You are a helpful, professional, and friendly AI assistant for Oracle Dental Clinic. You can answer general dental questions, explain procedures like RCT, implants, and extractions, and help users understand the importance of oral hygiene. Do not provide medical diagnoses. Encourage users to book an appointment for specific issues. Keep your answers concise and easy to read.",
-        },
-      });
-    } catch (e) {
-      console.error("Failed to initialize AI:", e);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [chatMessages]);
-
-  const handleSendMessage = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!chatInput.trim() || isChatLoading || !chatRef.current) return;
-
-    const userMessage = chatInput.trim();
-    setChatInput('');
-    setChatMessages(prev => [...prev, { role: 'user', text: userMessage }]);
-    setIsChatLoading(true);
-
-    try {
-      const response = await chatRef.current.sendMessage({ message: userMessage });
-      setChatMessages(prev => [...prev, { role: 'model', text: response.text }]);
-    } catch (error) {
-      console.error("Chat error:", error);
-      setChatMessages(prev => [...prev, { role: 'model', text: "I'm sorry, I encountered an error. Please try again later or call the clinic directly." }]);
-    } finally {
-      setIsChatLoading(false);
-    }
-  };
 
   const faqs = [
     {
@@ -793,49 +740,11 @@ export default function App() {
             </button>
           </div>
           <div className="flex-1 w-full h-full bg-slate-50 relative flex flex-col">
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
-              {chatMessages.map((msg, idx) => (
-                <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[85%] rounded-2xl px-4 py-3 ${msg.role === 'user' ? 'bg-blue-600 text-white rounded-br-none' : 'bg-white border border-slate-200 text-slate-800 rounded-bl-none shadow-sm'}`}>
-                    {msg.role === 'model' ? (
-                      <div className="markdown-body text-sm prose prose-sm max-w-none">
-                        <Markdown>{msg.text}</Markdown>
-                      </div>
-                    ) : (
-                      <p className="text-sm">{msg.text}</p>
-                    )}
-                  </div>
-                </div>
-              ))}
-              {isChatLoading && (
-                <div className="flex justify-start">
-                  <div className="bg-white border border-slate-200 text-slate-800 rounded-2xl rounded-bl-none px-4 py-3 shadow-sm flex items-center gap-2">
-                    <Loader2 className="w-4 h-4 animate-spin text-blue-600" />
-                    <span className="text-sm text-slate-500">Thinking...</span>
-                  </div>
-                </div>
-              )}
-              <div ref={messagesEndRef} />
-            </div>
-            <div className="p-4 bg-white border-t border-slate-200">
-              <form onSubmit={handleSendMessage} className="flex gap-2">
-                <input
-                  type="text"
-                  value={chatInput}
-                  onChange={(e) => setChatInput(e.target.value)}
-                  placeholder="Ask a dental question..."
-                  className="flex-1 px-4 py-2 border border-slate-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent text-sm"
-                  disabled={isChatLoading}
-                />
-                <button
-                  type="submit"
-                  disabled={!chatInput.trim() || isChatLoading}
-                  className="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 disabled:bg-blue-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center flex-shrink-0 w-10 h-10"
-                >
-                  <Send className="w-4 h-4" />
-                </button>
-              </form>
-            </div>
+            <iframe
+              src="https://www.jotform.com/agent/019d3782be707a97aab7f8c3f25cd6abb621"
+              className="w-full h-full border-none"
+              title="Oracle Dental AI Assistant"
+            />
           </div>
         </div>
       )}
