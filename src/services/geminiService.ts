@@ -1,12 +1,33 @@
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+// Lazy initialize to prevent startup crashes if key is missing
+let aiInstance: GoogleGenAI | null = null;
 
-export async function chatWithOracle(message: string, history: { role: string; parts: { text: string }[] }[]) {
-  const chat = ai.chats.create({
-    model: "gemini-3.1-flash-lite-preview",
-    config: {
-      systemInstruction: `You are the ultimate expert AI Dental Concierge for Oracle Dental Clinic & Implant Center. Your goal is to provide exceptional, premium guidance and convert conversations into booked appointments.
+const getAi = () => {
+  if (!aiInstance) {
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      console.warn("GEMINI_API_KEY is missing. Chat functionality will be limited.");
+      return null;
+    }
+    aiInstance = new GoogleGenAI({ apiKey });
+  }
+  return aiInstance;
+};
+
+export async function chatWithOracle(message: string, history: { role: 'user' | 'assistant'; parts: { text: string }[] }[]) {
+  const ai = getAi();
+  if (!ai) return "I'm sorry, I'm having trouble connecting right now. Please try again later or contact us directly via WhatsApp.";
+
+  try {
+    const response = await ai.models.generateContent({
+      model: "gemini-3.1-flash-lite-preview",
+      contents: [
+        ...history,
+        { role: "user", parts: [{ text: message }] }
+      ],
+      config: {
+        systemInstruction: `You are the ultimate expert AI Dental Concierge for Oracle Dental Clinic & Implant Center. Your goal is to provide exceptional, premium guidance and convert conversations into booked appointments.
 
       [Clinic Information & Core Value]
       - Oracle Dental Clinic & Implant Center in Chipiyana Buzurg, Ghaziabad, led by the renowned Dr. Prashant Kumar Vats, provides a premium dental experience characterized by clinical excellence, unparalleled comfort, and long-term oral health mastery.
@@ -45,18 +66,12 @@ export async function chatWithOracle(message: string, history: { role: string; p
       - Myths/Clarifications: Be concise and factual (e.g., X-rays are safe, cleaning is preventative).
       - Medical Disclaimer: Always emphasize that a direct physical exam is the only way to diagnose.
       - Disallow: Absolutely no creative writing (stories, poems). Stay professional and focused.`
-    }
-  });
-  
-  // Apply history
-  for (const entry of history) {
-    await chat.sendMessage({ message: entry.parts[0].text });
-  }
+      }
+    });
 
-  const result = await chat.sendMessageStream({ message });
-  let responseText = "";
-  for await (const chunk of result) {
-    responseText += chunk.text;
+    return response.text ?? "I'm sorry, I couldn't generate a response. Please try again.";
+  } catch (error) {
+    console.error("Gemini Error:", error);
+    return "I'm having a bit of trouble right now. Please feel free to reach out to us via WhatsApp for a faster response.";
   }
-  return responseText;
 }

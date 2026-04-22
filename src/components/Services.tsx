@@ -38,22 +38,16 @@ const Services: React.FC<ServicesProps> = ({ handleWhatsApp }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, idx) => (
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: Math.min(idx * 0.05, 0.3) }}
               key={idx} 
               className="bg-slate-50 rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 group cursor-pointer"
             >
-              <motion.div 
-                initial={{ scale: 0, rotate: -45 }}
-                whileInView={{ scale: 1, rotate: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 + 0.2, type: "spring", stiffness: 200, damping: 10 }}
-                className="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 group-hover:rotate-12 group-hover:scale-110 shadow-sm"
-              >
+              <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 group-hover:rotate-12 group-hover:scale-110 shadow-sm">
                 <service.icon className="w-6 h-6" />
-              </motion.div>
+              </div>
               <h3 className="text-xl font-bold text-slate-900 mb-2">{service.title}</h3>
               <p className="text-slate-600 mb-6">{service.desc}</p>
               <div className="flex gap-2">

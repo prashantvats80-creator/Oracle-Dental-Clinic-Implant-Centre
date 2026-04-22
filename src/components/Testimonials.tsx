@@ -17,16 +17,8 @@ const Testimonials: React.FC = () => {
           <div className="flex justify-center items-center gap-2 mb-2">
             <span className="text-2xl font-bold text-slate-800">4.9</span>
             <div className="flex text-amber-500">
-              {[1, 2, 3, 4, 5].map((star, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ scale: 0, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1, type: "spring", stiffness: 200, damping: 10 }}
-                >
-                  <Star className="w-5 h-5 fill-current" />
-                </motion.div>
+              {[1, 2, 3, 4, 5].map((_, i) => (
+                <Star key={i} className="w-5 h-5 fill-current" />
               ))}
             </div>
           </div>
@@ -36,24 +28,16 @@ const Testimonials: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {reviews.map((review, idx) => (
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
+              transition={{ delay: Math.min(idx * 0.1, 0.4) }}
               key={idx} 
               className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer group"
             >
               <div className="flex text-amber-400 mb-3">
-                {[1, 2, 3, 4, 5].map((star, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ scale: 0, rotate: -45 }}
-                    whileInView={{ scale: 1, rotate: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: idx * 0.1 + i * 0.05 + 0.2, type: "spring", stiffness: 200, damping: 10 }}
-                  >
-                    <Star className="w-4 h-4 fill-current" />
-                  </motion.div>
+                {[1, 2, 3, 4, 5].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-current" />
                 ))}
               </div>
               <p className="text-slate-700 mb-4 italic">"{review.text}"</p>

@@ -24,12 +24,9 @@ import {
   Facebook,
   Instagram,
   Youtube,
-  Volume2,
-  VolumeX,
   Bot
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { SoundProvider, useSound } from './components/SoundManager';
 import { InteractiveButton } from './components/InteractiveButton';
 import { chatWithOracle } from './services/geminiService';
 
@@ -43,41 +40,11 @@ const Footer = lazy(() => import('./components/Footer'));
 
 export default function App() {
   return (
-    <SoundProvider>
-      <AppContent />
-      <WelcomeScreen />
-    </SoundProvider>
-  );
-}
-
-function WelcomeScreen() {
-  const [isVisible, setIsVisible] = useState(true);
-
-  if (!isVisible) return null;
-
-  return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-blue-950 text-white p-6 text-center"
-    >
-      <div className="space-y-6 max-w-md">
-        <h1 className="text-4xl font-bold tracking-tight">Oracle Dental</h1>
-        <p className="text-md text-blue-200">Welcome to your premium dental care experience.</p>
-        <InteractiveButton 
-          onClick={() => setIsVisible(false)}
-          className="bg-white text-blue-950 px-8 py-3 rounded-full font-bold shadow-lg hover:bg-blue-50 transition-colors"
-        >
-          Enter your journey
-        </InteractiveButton>
-      </div>
-    </motion.div>
+    <AppContent />
   );
 }
 
 function AppContent() {
-  const { startMusic } = useSound();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [activeSection, setActiveSection] = useState('');
@@ -96,21 +63,6 @@ function AppContent() {
     );
     setMessages(prev => [...prev, { role: 'assistant', text: oracleResponse }]);
   };
-
-  useEffect(() => {
-    // Initiate music playback on first interaction
-    const handleFirstInteraction = () => {
-      startMusic();
-      window.removeEventListener('click', handleFirstInteraction);
-      window.removeEventListener('touchstart', handleFirstInteraction);
-    };
-    window.addEventListener('click', handleFirstInteraction);
-    window.addEventListener('touchstart', handleFirstInteraction);
-    return () => {
-      window.removeEventListener('click', handleFirstInteraction);
-      window.removeEventListener('touchstart', handleFirstInteraction);
-    };
-  }, [startMusic]);
 
   const faqs = [
     {
@@ -252,10 +204,7 @@ function AppContent() {
                 >
                   {item.label}
                   {activeSection === item.id && (
-                    <motion.div 
-                      layoutId="activeNav"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full"
-                    />
+                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full" />
                   )}
                 </a>
               ))}
@@ -322,7 +271,7 @@ function AppContent() {
       </header>
 
       <main>
-        <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading...</div>}>
+        <Suspense fallback={null}>
           <Hero handleCall={handleCall} handleWhatsApp={handleWhatsApp} />
 
           {/* Emergency Banner */}
@@ -403,10 +352,22 @@ function AppContent() {
       </AnimatePresence>
 
       {/* Chatbot Popup Modal */}
-      {isAiPopupOpen && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-blue-900/40 backdrop-blur-sm" onClick={() => setIsAiPopupOpen(false)}></div>
-          <div className="bg-white rounded-3xl shadow-2xl overflow-hidden w-full max-w-sm h-[80vh] flex flex-col border border-blue-100 z-10">
+      <AnimatePresence>
+        {isAiPopupOpen && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[60] flex items-center justify-center p-4"
+          >
+            <div className="absolute inset-0 bg-blue-900/40 backdrop-blur-sm" onClick={() => setIsAiPopupOpen(false)}></div>
+            <motion.div 
+              initial={{ scale: 0.95, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="bg-white rounded-3xl shadow-2xl overflow-hidden w-full max-w-sm h-[80vh] flex flex-col border border-blue-100 z-10"
+            >
             {/* Premium Header */}
             <div className="bg-white p-6 border-b border-blue-50 flex justify-between items-center z-10 shadow-sm">
               <div className="flex items-center gap-3">
@@ -451,9 +412,10 @@ function AppContent() {
               />
               <InteractiveButton onClick={handleSendMessage} className="bg-blue-900 text-white p-3 rounded-full hover:bg-blue-800 transition-colors shadow-lg"><ChevronRight className="w-5 h-5"/></InteractiveButton>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
+      </AnimatePresence>
     </div>
   );
 }

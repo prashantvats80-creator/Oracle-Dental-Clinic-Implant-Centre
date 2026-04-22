@@ -25,22 +25,16 @@ const WhyUs: React.FC = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
           {features.map((feature, idx) => (
             <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.05 }}
+              transition={{ delay: Math.min(idx * 0.05, 0.4) }}
               key={idx} 
               className="bg-white p-6 rounded-2xl text-center shadow-sm border border-slate-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 hover:border-blue-200 group cursor-pointer"
             >
-              <motion.div 
-                initial={{ scale: 0, rotate: 45 }}
-                whileInView={{ scale: 1, rotate: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.05 + 0.2, type: "spring", stiffness: 200, damping: 10 }}
-                className="w-14 h-14 mx-auto bg-amber-50 text-amber-600 rounded-full flex items-center justify-center mb-4 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 shadow-sm"
-              >
+              <div className="w-14 h-14 mx-auto bg-amber-50 text-amber-600 rounded-full flex items-center justify-center mb-4 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 shadow-sm">
                 <feature.icon className="w-7 h-7" />
-              </motion.div>
+              </div>
               <h3 className="font-bold text-slate-800">{feature.title}</h3>
             </motion.div>
           ))}
