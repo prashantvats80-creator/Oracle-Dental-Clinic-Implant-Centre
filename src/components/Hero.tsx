@@ -17,6 +17,7 @@ const Hero: React.FC<HeroProps> = ({ handleCall, handleWhatsApp }) => {
           alt="Happy Indian Patient" 
           className="w-full h-full object-cover"
           referrerPolicy="no-referrer"
+          loading="lazy"
         />
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-blue-950 via-blue-900/80 to-transparent"></div>
@@ -81,12 +82,13 @@ const Hero: React.FC<HeroProps> = ({ handleCall, handleWhatsApp }) => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="w-full md:w-1/2 mt-12 md:mt-0 z-10 flex justify-center md:justify-end"
         >
-          <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full border-4 border-white/20 overflow-hidden shadow-2xl ring-4 ring-amber-500/30">
+          <div className="relative w-64 h-80 md:w-80 md:h-96 rounded-[50%] border-4 border-white/20 overflow-hidden shadow-2xl shadow-blue-950/40 ring-4 ring-amber-500/30">
             <img 
-              src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80" 
-              alt="Expert Indian Dentist" 
+              src="https://i.postimg.cc/tCd8wLDv/Chat-GPT-Image-Apr-22-2026-08-21-13-PM.png" 
+              alt="Dr. Prashant Kumar Vats" 
               className="w-full h-full object-cover"
               referrerPolicy="no-referrer"
+              loading="lazy"
             />
           </div>
         </motion.div>
