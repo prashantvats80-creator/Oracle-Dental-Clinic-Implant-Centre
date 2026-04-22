@@ -15,7 +15,7 @@ const getAi = () => {
   return aiInstance;
 };
 
-export async function chatWithOracle(message: string, history: { role: 'user' | 'assistant'; parts: { text: string }[] }[]) {
+export async function chatWithOracle(message: string, history: { role: 'user' | 'model'; parts: { text: string }[] }[]) {
   const ai = getAi();
   if (!ai) return "I'm sorry, I'm having trouble connecting right now. Please try again later or contact us directly via WhatsApp.";
 

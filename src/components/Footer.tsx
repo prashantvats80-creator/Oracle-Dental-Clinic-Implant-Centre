@@ -5,9 +5,10 @@ import { InteractiveButton } from './InteractiveButton';
 interface FooterProps {
   phoneNumber: string;
   handleWhatsApp: () => void;
+  scrollToSection: (e: React.MouseEvent<HTMLAnchorElement>, id: string) => void;
 }
 
-const Footer: React.FC<FooterProps> = ({ phoneNumber, handleWhatsApp }) => {
+const Footer: React.FC<FooterProps> = ({ phoneNumber, handleWhatsApp, scrollToSection }) => {
   return (
     <footer className="bg-slate-900 text-slate-300 py-12 border-t border-slate-800 pb-32 md:pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,10 +28,10 @@ const Footer: React.FC<FooterProps> = ({ phoneNumber, handleWhatsApp }) => {
           <div>
             <h4 className="text-white font-bold mb-4 uppercase tracking-wider text-sm">Quick Links</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#services" className="hover:text-white transition-colors">Services</a></li>
-              <li><a href="#why-us" className="hover:text-white transition-colors">Why Choose Us</a></li>
-              <li><a href="#testimonials" className="hover:text-white transition-colors">Patient Reviews</a></li>
-              <li><InteractiveButton onClick={handleWhatsApp} className="hover:text-white transition-colors">Book via WhatsApp</InteractiveButton></li>
+              <li><a href="#services" onClick={(e) => scrollToSection(e, 'services')} className="hover:text-white transition-colors">Services</a></li>
+              <li><a href="#why-us" onClick={(e) => scrollToSection(e, 'why-us')} className="hover:text-white transition-colors">Why Choose Us</a></li>
+              <li><a href="#testimonials" onClick={(e) => scrollToSection(e, 'testimonials')} className="hover:text-white transition-colors">Patient Reviews</a></li>
+              <li><InteractiveButton onClick={handleWhatsApp} className="hover:text-white transition-colors underline decoration-dotted underline-offset-4">Book via WhatsApp</InteractiveButton></li>
             </ul>
           </div>
           

@@ -24,9 +24,12 @@ import {
   Facebook,
   Instagram,
   Youtube,
+  Volume2,
+  VolumeX,
   Bot
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { SoundProvider, useSound } from './components/SoundManager';
 import { InteractiveButton } from './components/InteractiveButton';
 import { chatWithOracle } from './services/geminiService';
 
@@ -40,11 +43,14 @@ const Footer = lazy(() => import('./components/Footer'));
 
 export default function App() {
   return (
-    <AppContent />
+    <SoundProvider>
+      <AppContent />
+    </SoundProvider>
   );
 }
 
 function AppContent() {
+  const { isMuted, toggleMute, startMusic } = useSound();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [activeSection, setActiveSection] = useState('');
@@ -59,7 +65,7 @@ function AppContent() {
     setInput('');
     const oracleResponse = await chatWithOracle(
         input, 
-        messages.map(m => ({ role: m.role, parts: [{ text: m.text }] }))
+        messages.map(m => ({ role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.text }] }))
     );
     setMessages(prev => [...prev, { role: 'assistant', text: oracleResponse }]);
   };
@@ -108,6 +114,20 @@ function AppContent() {
   ];
 
   useEffect(() => {
+    // Initiate music playback on first interaction
+    const handleFirstInteraction = () => {
+      startMusic();
+      const events = ['click', 'touchstart', 'mousedown', 'pointerdown'];
+      events.forEach(e => window.removeEventListener(e, handleFirstInteraction));
+    };
+    const events = ['click', 'touchstart', 'mousedown', 'pointerdown'];
+    events.forEach(e => window.addEventListener(e, handleFirstInteraction));
+    return () => {
+      events.forEach(e => window.removeEventListener(e, handleFirstInteraction));
+    };
+  }, [startMusic]);
+
+  useEffect(() => {
     let ticking = false;
     const handleScroll = () => {
       if (!ticking) {
@@ -146,6 +166,28 @@ function AppContent() {
       top: 0,
       behavior: 'smooth'
     });
+  };
+
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    
+    // Close menu first on mobile to prevent layout shift during scroll
+    if (isMenuOpen) {
+      setIsMenuOpen(false);
+      
+      // Allow menu to close before initiating scroll
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 300);
+    } else {
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   };
 
   const phoneNumber = "7011961515";
@@ -187,7 +229,7 @@ function AppContent() {
             </div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex space-x-8 items-center">
+            <nav className="hidden md:flex space-x-6 items-center">
               {[
                 { id: 'services', label: 'Services' },
                 { id: 'why-us', label: 'Why Us' },
@@ -198,6 +240,7 @@ function AppContent() {
                 <a 
                   key={item.id}
                   href={`#${item.id}`} 
+                  onClick={(e) => scrollToSection(e, item.id)}
                   className={`font-medium transition-colors relative py-2 ${
                     activeSection === item.id ? 'text-blue-600' : 'text-slate-600 hover:text-blue-600'
                   }`}
@@ -208,10 +251,24 @@ function AppContent() {
                   )}
                 </a>
               ))}
+              <InteractiveButton 
+                onClick={toggleMute}
+                className="text-slate-500 hover:text-blue-600 p-2 rounded-full transition-colors"
+                aria-label={isMuted ? "Unmute music" : "Mute music"}
+              >
+                {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+              </InteractiveButton>
             </nav>
 
-            {/* Mobile menu button */}
-            <div className="flex items-center md:hidden gap-4">
+            {/* Mobile menu button and volume toggle */}
+            <div className="flex items-center md:hidden gap-2">
+              <InteractiveButton 
+                onClick={toggleMute}
+                className="text-slate-500 hover:text-blue-600 p-2 rounded-full transition-colors"
+                aria-label={isMuted ? "Unmute music" : "Mute music"}
+              >
+                {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+              </InteractiveButton>
               <InteractiveButton
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="text-slate-600 hover:text-blue-600 focus:outline-none p-2"
@@ -230,7 +287,7 @@ function AppContent() {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="md:hidden bg-white border-t border-slate-100 absolute w-full shadow-xl overflow-hidden"
+              className="md:hidden bg-white border-t border-slate-100 absolute w-full shadow-2xl overflow-hidden z-50 left-0 top-full"
             >
               <div className="px-4 pt-2 pb-4 space-y-1">
                 {[
@@ -243,7 +300,7 @@ function AppContent() {
                   <a 
                     key={item.id}
                     href={`#${item.id}`} 
-                    onClick={() => setIsMenuOpen(false)} 
+                    onClick={(e) => scrollToSection(e, item.id)} 
                     className={`block px-4 py-3 text-base font-medium rounded-xl transition-all ${
                       activeSection === item.id 
                         ? 'bg-blue-50 text-blue-700 border-l-4 border-blue-600' 
@@ -299,7 +356,7 @@ function AppContent() {
 
           <Services handleWhatsApp={handleWhatsApp} />
 
-          <WhyUs />
+          <WhyUs handleWhatsApp={handleWhatsApp} />
 
           <Testimonials />
 
@@ -309,7 +366,7 @@ function AppContent() {
         </Suspense>
       </main>
 
-      <Footer phoneNumber={phoneNumber} handleWhatsApp={handleWhatsApp} />
+      <Footer phoneNumber={phoneNumber} handleWhatsApp={handleWhatsApp} scrollToSection={scrollToSection} />
 
       {/* Floating Action Buttons (Sticky Bottom) */}
       <div className="fixed bottom-6 left-4 right-4 z-50 flex justify-between items-center pointer-events-none">

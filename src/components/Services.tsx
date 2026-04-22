@@ -43,6 +43,7 @@ const Services: React.FC<ServicesProps> = ({ handleWhatsApp }) => {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: Math.min(idx * 0.05, 0.3) }}
               key={idx} 
+              onClick={handleWhatsApp}
               className="bg-slate-50 rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 group cursor-pointer"
             >
               <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 group-hover:rotate-12 group-hover:scale-110 shadow-sm">
