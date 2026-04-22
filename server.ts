@@ -94,9 +94,14 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), "dist");
+    // Serve static files from the dist directory
     app.use(express.static(distPath));
-    app.get("*all", (req, res) => {
-      res.sendFile(path.join(distPath, "index.html"));
+    
+    // Fallback for SPA: serve index.html for all non-API routes
+    app.get("*", (req, res) => {
+      if (!req.path.startsWith('/api')) {
+        res.sendFile(path.join(distPath, "index.html"));
+      }
     });
   }
 

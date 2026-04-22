@@ -14,10 +14,10 @@ export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    // Using a calming, royalty-free background track
-    const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+    // Using a calming, premium piano background track appropriate for a dental clinic
+    const audio = new Audio('https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f694b.mp3?filename=calm-meditation-piano-music-11718.mp3');
     audio.loop = true;
-    audio.volume = 0.2;
+    audio.volume = 0.15;
     audioRef.current = audio;
 
     return () => {
@@ -42,16 +42,15 @@ export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       playPromise.then(() => {
         setHasStarted(true);
       }).catch(error => {
-        if (error.name === 'NotAllowedError') {
-          // Silent fail - user hasn't interacted yet
-          return;
-        }
-        console.error("Audio playback error:", error);
+        // Silent fail - user hasn't interacted yet
       });
     }
   };
 
   const toggleMute = () => {
+    if (!hasStarted && audioRef.current) {
+      startMusic();
+    }
     setIsMuted(prev => !prev);
   };
 
