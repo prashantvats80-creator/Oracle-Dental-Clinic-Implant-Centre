@@ -1,4 +1,3 @@
-import { GoogleGenAI } from "@google/genai";
 
 export async function chatWithOracle(message: string, history: { role: 'user' | 'model'; parts: { text: string }[] }[]) {
   try {

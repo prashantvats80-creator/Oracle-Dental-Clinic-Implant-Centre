@@ -55,6 +55,7 @@ function AppContent() {
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [isAiPopupOpen, setIsAiPopupOpen] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
   const [messages, setMessages] = useState<{ role: 'user' | 'assistant', text: string }[]>([]);
   const [input, setInput] = useState('');
 
@@ -63,11 +64,20 @@ function AppContent() {
     const userMessage = { role: 'user' as const, text: input };
     setMessages(prev => [...prev, userMessage]);
     setInput('');
-    const oracleResponse = await chatWithOracle(
-        input, 
-        messages.map(m => ({ role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.text }] }))
-    );
-    setMessages(prev => [...prev, { role: 'assistant', text: oracleResponse }]);
+    setIsTyping(true);
+    
+    try {
+      const oracleResponse = await chatWithOracle(
+          input, 
+          messages.map(m => ({ role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.text }] }))
+      );
+      setMessages(prev => [...prev, { role: 'assistant', text: oracleResponse }]);
+    } catch (error) {
+      console.error("Chat Error:", error);
+      setMessages(prev => [...prev, { role: 'assistant', text: "I'm having a bit of trouble right now. Please feel free to reach out to us via WhatsApp for a faster response." }]);
+    } finally {
+      setIsTyping(false);
+    }
   };
 
   const faqs = [
@@ -450,12 +460,23 @@ function AppContent() {
                   <p className="text-slate-500 text-sm">How can I assist you with your premium dental care experience today?</p>
                 </div>
               )}
-              {messages.map((m, i) => (
-                <motion.div key={i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className={`p-4 rounded-2xl shadow-sm text-sm ${m.role === 'user' ? 'bg-blue-600 text-white ml-auto max-w-[85%] rounded-br-none' : 'bg-white text-slate-800 mr-auto max-w-[85%] rounded-bl-none border border-blue-50'}`}>
-                    {m.text}
-                </motion.div>
-              ))}
-              <div ref={(el) => el?.scrollIntoView({ behavior: 'smooth' })}></div>
+                  {messages.map((m, i) => (
+                    <motion.div key={i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className={`p-4 rounded-2xl shadow-sm text-sm ${m.role === 'user' ? 'bg-blue-600 text-white ml-auto max-w-[85%] rounded-br-none' : 'bg-white text-slate-800 mr-auto max-w-[85%] rounded-bl-none border border-blue-50'}`}>
+                        {m.text}
+                    </motion.div>
+                  ))}
+                  {isTyping && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: 10 }} 
+                      animate={{ opacity: 1, y: 0 }} 
+                      className="bg-white text-slate-400 mr-auto p-4 rounded-2xl rounded-bl-none border border-blue-50 shadow-sm text-sm flex gap-1"
+                    >
+                      <motion.span animate={{ opacity: [0.3, 1, 0.3] }} transition={{ repeat: Infinity, duration: 1 }}>.</motion.span>
+                      <motion.span animate={{ opacity: [0.3, 1, 0.3] }} transition={{ repeat: Infinity, duration: 1, delay: 0.2 }}>.</motion.span>
+                      <motion.span animate={{ opacity: [0.3, 1, 0.3] }} transition={{ repeat: Infinity, duration: 1, delay: 0.4 }}>.</motion.span>
+                    </motion.div>
+                  )}
+                  <div ref={(el) => el?.scrollIntoView({ behavior: 'smooth' })}></div>
             </div>
             
             {/* Input Area */}

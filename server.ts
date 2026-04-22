@@ -2,7 +2,7 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import { createServer as createViteServer } from "vite";
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -26,9 +26,9 @@ async function startServer() {
         return res.status(500).json({ error: "GEMINI_API_KEY is missing on server." });
       }
 
-      const genAI = new GoogleGenAI(apiKey);
+      const genAI = new GoogleGenerativeAI(apiKey);
       const model = genAI.getGenerativeModel({
-        model: "gemini-2.0-flash-lite-preview-02-05",
+        model: "gemini-1.5-flash",
         systemInstruction: `You are the ultimate expert AI Dental Concierge for Oracle Dental Clinic & Implant Center. Your goal is to provide exceptional, premium guidance and convert conversations into booked appointments.
 
       [Clinic Information & Core Value]
