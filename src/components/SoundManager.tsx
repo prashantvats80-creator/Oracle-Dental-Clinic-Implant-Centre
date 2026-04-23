@@ -14,10 +14,10 @@ export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    // Using a calming, premium piano background track appropriate for a dental clinic
-    const audio = new Audio('https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f694b.mp3?filename=calm-meditation-piano-music-11718.mp3');
+    // Using a reliable calming ambient background track
+    const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3');
     audio.loop = true;
-    audio.volume = 0.15;
+    audio.volume = 0.3;
     audioRef.current = audio;
 
     return () => {
@@ -34,16 +34,22 @@ export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   }, [isMuted]);
 
-  const startMusic = () => {
+  const startMusic = async () => {
     if (hasStarted || !audioRef.current) return;
     
-    const playPromise = audioRef.current.play();
-    if (playPromise !== undefined) {
-      playPromise.then(() => {
+    try {
+      // Ensure the audio is loaded
+      audioRef.current.load();
+      
+      const playPromise = audioRef.current.play();
+      if (playPromise !== undefined) {
+        await playPromise;
         setHasStarted(true);
-      }).catch(error => {
-        // Silent fail - user hasn't interacted yet
-      });
+        console.log("Music started successfully");
+      }
+    } catch (error) {
+      console.error("Music playback failed:", error);
+      // If it fails, we keep hasStarted as false so it can try again on next interaction
     }
   };
 

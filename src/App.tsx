@@ -25,13 +25,11 @@ import {
   Instagram,
   Youtube,
   Volume2,
-  VolumeX,
-  Bot
+  VolumeX
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { SoundProvider, useSound } from './components/SoundManager';
 import { InteractiveButton } from './components/InteractiveButton';
-import { chatWithOracle } from './services/geminiService';
 
 const Hero = lazy(() => import('./components/Hero'));
 const Services = lazy(() => import('./components/Services'));
@@ -54,31 +52,6 @@ function AppContent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [activeSection, setActiveSection] = useState('');
-  const [isAiPopupOpen, setIsAiPopupOpen] = useState(false);
-  const [isTyping, setIsTyping] = useState(false);
-  const [messages, setMessages] = useState<{ role: 'user' | 'assistant', text: string }[]>([]);
-  const [input, setInput] = useState('');
-
-  const handleSendMessage = async () => {
-    if (!input.trim()) return;
-    const userMessage = { role: 'user' as const, text: input };
-    setMessages(prev => [...prev, userMessage]);
-    setInput('');
-    setIsTyping(true);
-    
-    try {
-      const oracleResponse = await chatWithOracle(
-          input, 
-          messages.map(m => ({ role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.text }] }))
-      );
-      setMessages(prev => [...prev, { role: 'assistant', text: oracleResponse }]);
-    } catch (error) {
-      console.error("Chat Error:", error);
-      setMessages(prev => [...prev, { role: 'assistant', text: "I'm having a bit of trouble right now. Please feel free to reach out to us via WhatsApp for a faster response." }]);
-    } finally {
-      setIsTyping(false);
-    }
-  };
 
   const faqs = [
     {
@@ -369,7 +342,7 @@ function AppContent() {
           <WhyUs handleWhatsApp={handleWhatsApp} />
 
           <Testimonials />
-
+          
           <FAQ faqs={faqs} />
 
           <Contact handleWhatsApp={handleWhatsApp} handleDirections={handleDirections} />
@@ -389,16 +362,14 @@ function AppContent() {
           <MessageCircle className="w-7 h-7" />
         </InteractiveButton>
 
-        {/* Chatbot Button */}
-        {!isAiPopupOpen && (
-          <InteractiveButton
-            onClick={() => setIsAiPopupOpen(true)}
-            className="pointer-events-auto bg-blue-600 text-white p-4 rounded-full shadow-2xl hover:bg-blue-700 transition-all flex items-center justify-center border-4 border-white"
-            aria-label="Chat with AI Assistant"
-          >
-            <Bot className="w-7 h-7" />
-          </InteractiveButton>
-        )}
+        {/* Call Button */}
+        <InteractiveButton
+          onClick={handleCall}
+          className="pointer-events-auto bg-blue-600 text-white p-4 rounded-full shadow-2xl hover:bg-blue-700 transition-all flex items-center justify-center border-4 border-white"
+          aria-label="Call Clinic"
+        >
+          <PhoneCall className="w-7 h-7" />
+        </InteractiveButton>
       </div>
 
       {/* Back to Top Button */}
@@ -416,83 +387,6 @@ function AppContent() {
             <ArrowUp className="w-6 h-6" />
           </InteractiveButton>
         )}
-      </AnimatePresence>
-
-      {/* Chatbot Popup Modal */}
-      <AnimatePresence>
-        {isAiPopupOpen && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] flex items-center justify-center p-4"
-          >
-            <div className="absolute inset-0 bg-blue-900/40 backdrop-blur-sm" onClick={() => setIsAiPopupOpen(false)}></div>
-            <motion.div 
-              initial={{ scale: 0.95, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              className="bg-white rounded-3xl shadow-2xl overflow-hidden w-full max-w-sm h-[80vh] flex flex-col border border-blue-100 z-10"
-            >
-            {/* Premium Header */}
-            <div className="bg-white p-6 border-b border-blue-50 flex justify-between items-center z-10 shadow-sm">
-              <div className="flex items-center gap-3">
-                <div className="bg-blue-600 p-2 rounded-xl text-white">
-                    <Bot className="w-5 h-5" />
-                </div>
-                <div>
-                    <h3 className="font-bold text-blue-900 text-lg leading-tight">Clinic Concierge</h3>
-                    <p className="text-xs text-blue-500 font-medium tracking-wide uppercase">Oracle Dental</p>
-                </div>
-              </div>
-              <InteractiveButton onClick={() => setIsAiPopupOpen(false)} className="hover:bg-slate-100 p-2 rounded-full transition-colors"><X className="w-5 h-5 text-slate-400"/></InteractiveButton>
-            </div>
-            
-            {/* Chat Area */}
-            <div className="flex-1 overflow-y-auto p-6 space-y-6 bg-slate-50/50">
-              {messages.length === 0 && (
-                <div className="text-center py-10 px-4">
-                  <div className="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center text-blue-600 mx-auto mb-4">
-                    <HeartPulse className="w-8 h-8" />
-                  </div>
-                  <h4 className="font-bold text-blue-900 text-lg">Hello!</h4>
-                  <p className="text-slate-500 text-sm">How can I assist you with your premium dental care experience today?</p>
-                </div>
-              )}
-                  {messages.map((m, i) => (
-                    <motion.div key={i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className={`p-4 rounded-2xl shadow-sm text-sm ${m.role === 'user' ? 'bg-blue-600 text-white ml-auto max-w-[85%] rounded-br-none' : 'bg-white text-slate-800 mr-auto max-w-[85%] rounded-bl-none border border-blue-50'}`}>
-                        {m.text}
-                    </motion.div>
-                  ))}
-                  {isTyping && (
-                    <motion.div 
-                      initial={{ opacity: 0, y: 10 }} 
-                      animate={{ opacity: 1, y: 0 }} 
-                      className="bg-white text-slate-400 mr-auto p-4 rounded-2xl rounded-bl-none border border-blue-50 shadow-sm text-sm flex gap-1"
-                    >
-                      <motion.span animate={{ opacity: [0.3, 1, 0.3] }} transition={{ repeat: Infinity, duration: 1 }}>.</motion.span>
-                      <motion.span animate={{ opacity: [0.3, 1, 0.3] }} transition={{ repeat: Infinity, duration: 1, delay: 0.2 }}>.</motion.span>
-                      <motion.span animate={{ opacity: [0.3, 1, 0.3] }} transition={{ repeat: Infinity, duration: 1, delay: 0.4 }}>.</motion.span>
-                    </motion.div>
-                  )}
-                  <div ref={(el) => el?.scrollIntoView({ behavior: 'smooth' })}></div>
-            </div>
-            
-            {/* Input Area */}
-            <div className="p-4 border-t border-blue-50 bg-white flex gap-2">
-              <input 
-                className="flex-1 bg-slate-50 border border-slate-200 p-3 rounded-full focus:ring-2 focus:ring-blue-200 focus:border-blue-400 transition-all text-sm outline-none" 
-                placeholder="Ask about dental health..."
-                value={input} 
-                onChange={(e) => setInput(e.target.value)} 
-                onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-              />
-              <InteractiveButton onClick={handleSendMessage} className="bg-blue-900 text-white p-3 rounded-full hover:bg-blue-800 transition-colors shadow-lg"><ChevronRight className="w-5 h-5"/></InteractiveButton>
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
       </AnimatePresence>
     </div>
   );

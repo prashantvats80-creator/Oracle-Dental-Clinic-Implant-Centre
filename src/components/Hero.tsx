@@ -35,16 +35,16 @@ const Hero: React.FC<HeroProps> = ({ handleCall, handleWhatsApp }) => {
           <motion.h1 
             className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4 leading-tight"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            animate={{ opacity: 1, y: 0, scale: [1, 1.01, 1] }}
+            transition={{ opacity: { duration: 0.6, delay: 0.2 }, y: { duration: 0.6, delay: 0.2 }, scale: { duration: 4, repeat: Infinity, ease: "easeInOut" } }}
           >
             Tooth Pain? <span className="text-amber-400 drop-shadow-md">Get Relief in 30 Minutes</span>
           </motion.h1>
           <motion.p 
             className="text-lg md:text-xl text-blue-100 mb-8 max-w-2xl mx-auto md:mx-0 font-light"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            initial={{ opacity: 0.7, y: 20 }}
+            animate={{ opacity: [0.7, 1, 0.7], y: 0 }}
+            transition={{ opacity: { duration: 4, repeat: Infinity, ease: "easeInOut" }, y: { duration: 0.6, delay: 0.3 } }}
           >
             Expert dental care, painless treatments, and advanced implants at affordable prices.
           </motion.p>
@@ -64,8 +64,12 @@ const Hero: React.FC<HeroProps> = ({ handleCall, handleWhatsApp }) => {
         
         <motion.div 
           initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          animate={{ opacity: 1, scale: 1, y: [0, -10, 0] }}
+          transition={{ 
+            opacity: { duration: 0.8, delay: 0.2 }, 
+            scale: { duration: 0.8, delay: 0.2 },
+            y: { duration: 4, repeat: Infinity, ease: "easeInOut" } 
+          }}
           className="w-full md:w-1/2 mt-12 md:mt-0 z-10 flex justify-center md:justify-end"
         >
           <div className="relative w-64 h-80 md:w-80 md:h-96 rounded-[50%] border-4 border-white/20 overflow-hidden shadow-2xl shadow-blue-950/40 ring-4 ring-amber-500/30">
