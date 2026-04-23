@@ -7,17 +7,9 @@ import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import {
   PhoneCall,
   MessageCircle,
-  Calendar,
   Clock,
   MapPin,
-  Star,
-  CheckCircle2,
-  ShieldCheck,
-  Stethoscope,
-  HeartPulse,
   Activity,
-  ChevronRight,
-  ChevronDown,
   Menu,
   X,
   ArrowUp,
@@ -352,23 +344,23 @@ function AppContent() {
       <Footer phoneNumber={phoneNumber} handleWhatsApp={handleWhatsApp} scrollToSection={scrollToSection} />
 
       {/* Floating Action Buttons (Sticky Bottom) */}
-      <div className="fixed bottom-6 left-4 right-4 z-50 flex justify-between items-center pointer-events-none">
+      <div className="fixed bottom-6 left-4 right-4 md:left-auto md:right-8 z-50 flex justify-between md:justify-end md:gap-4 items-center pointer-events-none">
         {/* WhatsApp Button */}
         <InteractiveButton 
           onClick={handleWhatsApp}
-          className="pointer-events-auto bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:bg-[#20b858] transition-all flex items-center justify-center border-4 border-white"
+          className="pointer-events-auto bg-[#25D366] text-white p-4 md:p-5 rounded-full shadow-[0_8px_30px_rgb(37,211,102,0.4)] hover:bg-[#20b858] transition-all flex items-center justify-center border-4 border-white hover:scale-105"
           aria-label="Chat on WhatsApp"
         >
-          <MessageCircle className="w-7 h-7" />
+          <MessageCircle className="w-8 h-8 md:w-9 md:h-9" />
         </InteractiveButton>
 
         {/* Call Button */}
         <InteractiveButton
           onClick={handleCall}
-          className="pointer-events-auto bg-blue-600 text-white p-4 rounded-full shadow-2xl hover:bg-blue-700 transition-all flex items-center justify-center border-4 border-white"
+          className="pointer-events-auto bg-blue-600 text-white p-4 md:p-5 rounded-full shadow-[0_8px_30px_rgb(37,99,235,0.4)] hover:bg-blue-700 transition-all flex items-center justify-center border-4 border-white hover:scale-105"
           aria-label="Call Clinic"
         >
-          <PhoneCall className="w-7 h-7" />
+          <PhoneCall className="w-8 h-8 md:w-9 md:h-9" />
         </InteractiveButton>
       </div>
 
@@ -381,7 +373,7 @@ function AppContent() {
             exit={{ opacity: 0, y: 20, scale: 0.8 }}
             transition={{ type: "spring", stiffness: 200, damping: 20 }}
             onClick={scrollToTop}
-            className="fixed bottom-24 right-4 md:bottom-24 md:right-8 bg-slate-800 text-white p-3 rounded-full shadow-2xl hover:bg-slate-700 transition-colors z-40 border-2 border-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+            className="fixed bottom-28 right-4 md:bottom-32 md:right-8 bg-slate-800 text-white p-3 rounded-full shadow-2xl hover:bg-slate-700 transition-colors z-40 border-2 border-white focus:outline-none focus:ring-2 focus:ring-amber-500"
             aria-label="Back to top"
           >
             <ArrowUp className="w-6 h-6" />

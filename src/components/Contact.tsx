@@ -57,7 +57,7 @@ const Contact: React.FC<ContactProps> = ({ handleWhatsApp, handleDirections }) =
             </div>
 
             {/* Map Integration */}
-            <div className="w-full h-64 md:h-80 bg-slate-200 rounded-2xl overflow-hidden relative border border-slate-300 shadow-inner">
+            <div className="w-full h-64 md:h-80 bg-slate-200 rounded-2xl overflow-hidden relative border border-slate-300 shadow-inner group">
               <iframe 
                 src="https://maps.google.com/maps?q=Oracle+Dental+Clinic+and+Implant+Center,+Jaat+Chowk,+Chipiyana+Buzurg,+near+ABES+Engineering+College,+Ghaziabad&t=&z=15&ie=UTF8&iwloc=&output=embed" 
                 width="100%" 
@@ -67,11 +67,15 @@ const Contact: React.FC<ContactProps> = ({ handleWhatsApp, handleDirections }) =
                 loading="lazy" 
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Oracle Dental Clinic Location"
-                className="absolute inset-0"
+                className="absolute inset-0 pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity"
               ></iframe>
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
-                <InteractiveButton onClick={handleDirections} className="bg-blue-600 text-white font-bold py-2 px-6 rounded-full shadow-lg hover:bg-blue-700 transition-colors whitespace-nowrap flex items-center gap-2">
-                  <MapPin className="w-4 h-4" /> Open in Maps
+              
+              {/* Overlay to ensure scrolling isn't hijacked */}
+              <div className="absolute inset-0 bg-blue-900/10 pointer-events-none"></div>
+
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 pointer-events-auto">
+                <InteractiveButton onClick={handleDirections} className="bg-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:bg-blue-700 transition-colors whitespace-nowrap flex items-center gap-2 border-2 border-white ring-2 ring-blue-600 shadow-blue-900/50">
+                  <MapPin className="w-5 h-5" /> Open in Google Maps
                 </InteractiveButton>
               </div>
             </div>

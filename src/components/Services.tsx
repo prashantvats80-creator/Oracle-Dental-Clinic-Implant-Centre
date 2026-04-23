@@ -43,8 +43,7 @@ const Services: React.FC<ServicesProps> = ({ handleWhatsApp }) => {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: Math.min(idx * 0.05, 0.3) }}
               key={idx} 
-              onClick={handleWhatsApp}
-              className="bg-slate-50 rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 group cursor-pointer"
+              className="bg-slate-50 rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 group"
             >
               <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 group-hover:rotate-12 group-hover:scale-110 shadow-sm">
                 <service.icon className="w-6 h-6" />
@@ -54,6 +53,7 @@ const Services: React.FC<ServicesProps> = ({ handleWhatsApp }) => {
               <div className="flex gap-2">
                 <a 
                   href="tel:7011961515" 
+                  onClick={(e) => e.stopPropagation()}
                   className="flex-1 bg-blue-600 text-white py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center gap-1"
                 >
                   <PhoneCall className="w-4 h-4" /> Call

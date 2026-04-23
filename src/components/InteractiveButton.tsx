@@ -6,10 +6,15 @@ interface InteractiveButtonProps extends HTMLMotionProps<"button"> {
 }
 
 export const InteractiveButton = ({ children, onClick, ...props }: InteractiveButtonProps) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    if (onClick) onClick(e);
+  };
+
   return (
     <motion.button
       whileTap={{ scale: 0.95 }}
-      onClick={onClick}
+      onClick={handleClick}
       {...props}
     >
       {children}
