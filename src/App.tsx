@@ -22,8 +22,9 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import { SoundProvider, useSound } from './components/SoundManager';
 import { InteractiveButton } from './components/InteractiveButton';
+import Hero from './components/Hero';
+import BeforeAfter from './components/BeforeAfter';
 
-const Hero = lazy(() => import('./components/Hero'));
 const Services = lazy(() => import('./components/Services'));
 const WhyUs = lazy(() => import('./components/WhyUs'));
 const Testimonials = lazy(() => import('./components/Testimonials'));
@@ -113,7 +114,7 @@ function AppContent() {
             setShowBackToTop(false);
           }
 
-          const sections = ['services', 'why-us', 'testimonials', 'faq', 'contact'];
+          const sections = ['transformations', 'services', 'why-us', 'testimonials', 'faq', 'contact'];
           let current = '';
           for (const section of sections) {
             const element = document.getElementById(section);
@@ -174,38 +175,39 @@ function AppContent() {
   const handleDirections = () => window.open('https://maps.app.goo.gl/FLz3muaqFN5rjg4s5', '_blank');
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-900 pb-20 md:pb-0">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/50 font-sans text-slate-950 pb-20 md:pb-0 scroll-smooth">
       {/* Top Bar (Desktop) */}
-      <div className="hidden md:flex bg-blue-900 text-white text-sm py-2 px-6 justify-between items-center">
-        <div className="flex items-center gap-4">
-          <span className="flex items-center gap-1"><Clock className="w-4 h-4 text-amber-400" /> Mon-Sun: 10 AM - 2 PM, 5 PM - 9 PM</span>
-          <span className="flex items-center gap-1"><MapPin className="w-4 h-4 text-amber-400" /> Chipiyana Buzurg, Ghaziabad</span>
+      <div className="hidden md:flex bg-gradient-to-r from-blue-950 via-indigo-950 to-blue-900 animate-gradient-xy text-white text-sm py-2.5 px-6 justify-between items-center shadow-md relative z-50">
+        <div className="flex items-center gap-4 font-medium tracking-wide">
+          <span className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-amber-400 animate-pulse" /> Mon-Sun: 10 AM - 2 PM, 5 PM - 9 PM</span>
+          <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4 text-amber-400" /> Chipiyana Buzurg, Ghaziabad</span>
         </div>
         <div className="flex items-center gap-4">
-          <a href={`tel:${phoneNumber}`} className="flex items-center gap-1 hover:text-amber-400 transition-colors">
-            <PhoneCall className="w-4 h-4" /> +91 {phoneNumber}
+          <a href={`tel:${phoneNumber}`} className="flex items-center gap-1.5 font-bold hover:text-amber-400 transition-colors">
+            <PhoneCall className="w-4 h-4 animate-bounce" style={{ animationDuration: '3s' }} /> +91 {phoneNumber}
           </a>
         </div>
       </div>
 
       {/* Header */}
-      <header className="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-40 border-b border-slate-100">
+      <header className="bg-white/90 backdrop-blur-xl shadow-[0_4px_30px_rgb(0,0,0,0.05)] sticky top-0 z-40 border-b border-indigo-50/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+          <div className="flex justify-between items-center h-20">
             {/* Logo */}
-            <div className="flex-shrink-0 flex items-center gap-2">
-              <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-md">
+            <div className="flex-shrink-0 flex items-center gap-3 group cursor-pointer" onClick={scrollToTop}>
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center text-white font-extrabold text-2xl shadow-lg ring-4 ring-indigo-50 group-hover:scale-105 transition-transform duration-300">
                 O
               </div>
               <div className="flex flex-col">
-                <span className="font-bold text-lg leading-tight text-blue-900">Oracle Dental</span>
-                <span className="text-xs text-amber-600 font-medium">Clinic & Implant Center</span>
+                <span className="font-extrabold text-xl leading-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-950 to-indigo-700">Oracle Dental</span>
+                <span className="text-xs text-amber-600 font-bold tracking-wider uppercase">Clinic & Implants</span>
               </div>
             </div>
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex space-x-6 items-center">
               {[
+                { id: 'transformations', label: 'Results' },
                 { id: 'services', label: 'Services' },
                 { id: 'why-us', label: 'Why Us' },
                 { id: 'testimonials', label: 'Reviews' },
@@ -266,6 +268,7 @@ function AppContent() {
             >
               <div className="px-4 pt-2 pb-4 space-y-1">
                 {[
+                  { id: 'transformations', label: 'Smile Results' },
                   { id: 'services', label: 'Services' },
                   { id: 'why-us', label: 'Why Choose Us' },
                   { id: 'testimonials', label: 'Patient Reviews' },
@@ -303,32 +306,41 @@ function AppContent() {
       </header>
 
       <main>
-        <Suspense fallback={null}>
-          <Hero handleCall={handleCall} handleWhatsApp={handleWhatsApp} />
-
-          {/* Emergency Banner */}
-          <motion.section 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="bg-red-600 text-white py-4 px-4 shadow-inner relative z-30"
-          >
-            <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <div className="bg-white/20 p-2 rounded-full animate-pulse">
-                  <Activity className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-lg">Severe Tooth Pain or Emergency?</h3>
-                  <p className="text-red-100 text-sm">Don't wait. We provide immediate relief.</p>
-                </div>
+        <Hero handleCall={handleCall} handleWhatsApp={handleWhatsApp} />
+        
+        {/* Emergency Banner */}
+        <motion.section 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="bg-gradient-to-r from-red-600 via-rose-600 to-red-700 text-white py-5 px-4 shadow-[0_10px_40px_rgba(225,29,72,0.3)] relative z-30 overflow-hidden"
+        >
+          {/* Animated background sheen */}
+          <div className="absolute inset-0 bg-white/10 skew-x-[-20deg] w-1/4 -translate-x-[200%] animate-sheen"></div>
+          
+          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 relative z-10">
+            <div className="flex items-center gap-4">
+              <div className="bg-white/20 p-3 rounded-2xl animate-pulse shadow-inner">
+                <Activity className="w-7 h-7 text-white" />
               </div>
-              <InteractiveButton onClick={handleCall} className="w-full sm:w-auto bg-white text-red-600 font-bold py-3 px-6 rounded-lg shadow-md hover:bg-red-50 transition-colors flex items-center justify-center gap-2 active:scale-95">
-                <PhoneCall className="w-5 h-5" /> Call Emergency
-              </InteractiveButton>
+              <div>
+                <h3 className="font-extrabold text-xl tracking-tight">Severe Tooth Pain or Emergency?</h3>
+                <p className="text-red-100 font-medium text-sm mt-0.5">Don't wait. We provide immediate relief, 24/7 support.</p>
+              </div>
             </div>
-          </motion.section>
+            <InteractiveButton onClick={handleCall} className="w-full sm:w-auto bg-white text-red-600 font-black tracking-wide py-3 px-8 rounded-xl shadow-xl hover:bg-slate-50 transition-all flex items-center justify-center gap-2 active:scale-95 hover:scale-105 hover:shadow-2xl border border-white/50">
+              <PhoneCall className="w-5 h-5 animate-ring" /> Call Emergency Now
+            </InteractiveButton>
+          </div>
+        </motion.section>
 
+        <BeforeAfter />
+
+        <Suspense fallback={
+          <div className="flex justify-center items-center h-32 my-12">
+            <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        }>
           <Services handleWhatsApp={handleWhatsApp} />
 
           <WhyUs handleWhatsApp={handleWhatsApp} />
@@ -344,24 +356,30 @@ function AppContent() {
       <Footer phoneNumber={phoneNumber} handleWhatsApp={handleWhatsApp} scrollToSection={scrollToSection} />
 
       {/* Floating Action Buttons (Sticky Bottom) */}
-      <div className="fixed bottom-6 left-4 right-4 md:left-auto md:right-8 z-50 flex justify-between md:justify-end md:gap-4 items-center pointer-events-none">
+      <div className="fixed bottom-6 left-4 right-4 md:left-auto md:right-8 z-50 flex justify-between md:justify-end md:gap-6 items-center pointer-events-none">
         {/* WhatsApp Button */}
-        <InteractiveButton 
-          onClick={handleWhatsApp}
-          className="pointer-events-auto bg-[#25D366] text-white p-4 md:p-5 rounded-full shadow-[0_8px_30px_rgb(37,211,102,0.4)] hover:bg-[#20b858] transition-all flex items-center justify-center border-4 border-white hover:scale-105"
-          aria-label="Chat on WhatsApp"
-        >
-          <MessageCircle className="w-8 h-8 md:w-9 md:h-9" />
-        </InteractiveButton>
+        <div className="relative pointer-events-auto group">
+          <div className="absolute inset-0 bg-[#25D366] rounded-full blur-md opacity-60 group-hover:opacity-100 transition-opacity animate-pulse"></div>
+          <InteractiveButton 
+            onClick={handleWhatsApp}
+            className="relative bg-[#25D366] text-white p-4 md:p-5 rounded-full shadow-[0_8px_30px_rgb(37,211,102,0.6)] hover:bg-[#20b858] transition-transform flex items-center justify-center border-2 border-white hover:scale-110 active:scale-95"
+            aria-label="Chat on WhatsApp"
+          >
+            <MessageCircle className="w-8 h-8 md:w-9 md:h-9" />
+          </InteractiveButton>
+        </div>
 
         {/* Call Button */}
-        <InteractiveButton
-          onClick={handleCall}
-          className="pointer-events-auto bg-blue-600 text-white p-4 md:p-5 rounded-full shadow-[0_8px_30px_rgb(37,99,235,0.4)] hover:bg-blue-700 transition-all flex items-center justify-center border-4 border-white hover:scale-105"
-          aria-label="Call Clinic"
-        >
-          <PhoneCall className="w-8 h-8 md:w-9 md:h-9" />
-        </InteractiveButton>
+        <div className="relative pointer-events-auto group">
+          <div className="absolute inset-0 bg-blue-600 rounded-full blur-md opacity-60 group-hover:opacity-100 transition-opacity animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+          <InteractiveButton
+            onClick={handleCall}
+            className="relative bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-4 md:p-5 rounded-full shadow-[0_8px_30px_rgb(37,99,235,0.6)] hover:from-blue-700 hover:to-indigo-700 transition-transform flex items-center justify-center border-2 border-white hover:scale-110 active:scale-95"
+            aria-label="Call Clinic"
+          >
+            <PhoneCall className="w-8 h-8 md:w-9 md:h-9" />
+          </InteractiveButton>
+        </div>
       </div>
 
       {/* Back to Top Button */}

@@ -43,26 +43,29 @@ const Services: React.FC<ServicesProps> = ({ handleWhatsApp }) => {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: Math.min(idx * 0.05, 0.3) }}
               key={idx} 
-              className="bg-slate-50 rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 group"
+              className="bg-white rounded-3xl p-6 border border-indigo-50 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(37,99,235,0.12)] hover:-translate-y-2 hover:scale-[1.03] transition-all duration-300 group cursor-pointer relative overflow-hidden"
             >
-              <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 group-hover:rotate-12 group-hover:scale-110 shadow-sm">
-                <service.icon className="w-6 h-6" />
+              {/* Subtle hover gradient background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-indigo-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
+              
+              <div className="relative z-10 w-14 h-14 bg-indigo-50 text-blue-600 rounded-2xl flex items-center justify-center mb-5 group-hover:bg-gradient-to-br group-hover:from-blue-600 group-hover:to-indigo-600 group-hover:text-white transition-all duration-300 group-hover:rotate-12 group-hover:scale-110 shadow-sm">
+                <service.icon className="w-7 h-7" />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-2">{service.title}</h3>
-              <p className="text-slate-600 mb-6">{service.desc}</p>
-              <div className="flex gap-2">
+              <h3 className="relative z-10 text-xl font-extrabold text-slate-900 mb-2 group-hover:text-blue-900 transition-colors">{service.title}</h3>
+              <p className="relative z-10 text-slate-600 mb-6 font-medium leading-relaxed">{service.desc}</p>
+              <div className="relative z-10 flex gap-3">
                 <a 
                   href="tel:7011961515" 
                   onClick={(e) => e.stopPropagation()}
-                  className="flex-1 bg-blue-600 text-white py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center gap-1"
+                  className="flex-1 bg-white border-2 border-blue-600 text-blue-600 py-2.5 rounded-xl text-sm font-bold hover:bg-blue-600 hover:text-white transition-all duration-300 flex items-center justify-center gap-1 active:scale-95 shadow-sm hover:shadow-md"
                 >
                   <PhoneCall className="w-4 h-4" /> Call
                 </a>
                 <InteractiveButton 
                   onClick={handleWhatsApp} 
-                  className="flex-1 bg-[#25D366] text-white py-2 rounded-lg text-sm font-semibold hover:bg-[#20b858] transition-colors flex items-center justify-center gap-1"
+                  className="flex-1 bg-gradient-to-r from-[#25D366] to-[#20b858] text-white py-2.5 rounded-xl text-sm font-bold hover:shadow-lg hover:shadow-[#25D366]/30 transition-all duration-300 flex items-center justify-center gap-1 active:scale-95"
                 >
-                  <MessageCircle className="w-4 h-4" /> WhatsApp
+                  <MessageCircle className="w-4 h-4" /> Get Quote
                 </InteractiveButton>
               </div>
             </motion.div>

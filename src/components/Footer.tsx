@@ -28,6 +28,7 @@ const Footer: React.FC<FooterProps> = ({ phoneNumber, handleWhatsApp, scrollToSe
           <div>
             <h4 className="text-white font-bold mb-4 uppercase tracking-wider text-sm">Quick Links</h4>
             <ul className="space-y-2 text-sm">
+              <li><a href="#transformations" onClick={(e) => scrollToSection(e, 'transformations')} className="hover:text-white transition-colors">Smile Results</a></li>
               <li><a href="#services" onClick={(e) => scrollToSection(e, 'services')} className="hover:text-white transition-colors">Services</a></li>
               <li><a href="#why-us" onClick={(e) => scrollToSection(e, 'why-us')} className="hover:text-white transition-colors">Why Choose Us</a></li>
               <li><a href="#testimonials" onClick={(e) => scrollToSection(e, 'testimonials')} className="hover:text-white transition-colors">Patient Reviews</a></li>
@@ -62,7 +63,14 @@ const Footer: React.FC<FooterProps> = ({ phoneNumber, handleWhatsApp, scrollToSe
         </div>
         
         <div className="border-t border-slate-800 mt-8 pt-8 text-center text-xs text-slate-500">
-          &copy; {new Date().getFullYear()} Oracle Dental Clinic and Implant Center. All rights reserved.
+          <p className="mb-4">&copy; {new Date().getFullYear()} Oracle Dental Clinic and Implant Center. All rights reserved.</p>
+          
+          <div className="mt-8 text-left text-[10px] text-slate-700 space-y-2 leading-relaxed">
+            <p><strong>Areas Served:</strong> Providing the <a href="/" className="hover:text-slate-500 transition-colors">Best Dental Implants in Ghaziabad</a>, Noida, and Greater Noida. We are known for offering <a href="/" className="hover:text-slate-500 transition-colors">Full Mouth Dental Implants Ghaziabad</a>, Single Tooth Implant, All-on-4 Dental Implants, and Immediate Dental Implants in Ghaziabad and NCR region. Rated as the Best Dental Implant Clinic Near Me and top Dental Implant Specialist in Greater Noida.</p>
+            <p><strong>Specialized Treatments:</strong> Specializing in premium <a href="#transformations" className="hover:text-slate-500 transition-colors">Smile Makeover Ghaziabad</a>, Digital Smile Design, Hollywood Smile, and Aesthetic Dentistry. As the Best Cosmetic Dentist in Ghaziabad, we provide high-quality Porcelain Veneers, Composite Veneers, and Teeth Whitening Ghaziabad. We are the preferred experts for Zirconia Crowns Ghaziabad, Ceramic Crowns, and Metal Free Crowns.</p>
+            <p><strong>General & Advanced Care:</strong> Known as the Best Dentist in Ghaziabad and Top Rated Dentist Ghaziabad, our Family Dentist team handles Microscopic Root Canal Treatment, Painless Root Canal Ghaziabad, Impacted Wisdom Tooth Removal, and Surgical Tooth Extraction. Find the Best Oral Surgeon Near me and RCT Specialist in Ghaziabad at our clinic.</p>
+            <p className="opacity-50">Keywords: Best Dentist Greater Noida, Best Dental Clinic Greater Noida, Cosmetic Dentist Noida, Best Implant Dentist Near Me, Best Smile Makeover Dentist Near Me, Best Veneers Dentist Near Me, Best Zirconia Crown Dentist Near Me, Best Dentist for Smile Makeover, Best Dentist for Dental Implants, Missing Teeth Replacement Ghaziabad.</p>
+          </div>
         </div>
       </div>
     </footer>
