@@ -19,7 +19,7 @@ const Hero: React.FC<HeroProps> = ({ handleCall, handleWhatsApp }) => {
   const opacityBg = useTransform(scrollYProgress, [0, 1], [0.2, 0.05]);
 
   return (
-    <section ref={ref} className="relative bg-blue-900 text-white overflow-hidden">
+    <section id="hero" ref={ref} className="relative bg-blue-900 text-white overflow-hidden">
       <motion.div 
         className="absolute inset-0"
         style={{ y: backgroundY, opacity: opacityBg }}
@@ -30,7 +30,7 @@ const Hero: React.FC<HeroProps> = ({ handleCall, handleWhatsApp }) => {
           className="w-full h-full object-cover"
           style={{ aspectRatio: '16/9' }}
           referrerPolicy="no-referrer"
-          loading="lazy"
+          loading="eager"
           decoding="async"
           fetchPriority="high"
         />
@@ -48,30 +48,30 @@ const Hero: React.FC<HeroProps> = ({ handleCall, handleWhatsApp }) => {
             ⭐ 5000+ Happy Smiles Transformed
           </div>
           <p className="text-cyan-300 font-bold mb-3 tracking-widest uppercase text-sm md:text-base drop-shadow-md">
-            Premium & Trusted Smile Makeovers and Dental Implants in Ghaziabad
+            Premium & Trusted Smile Makeovers and Dental Implants in Chipiyana Buzurg, Ghaziabad
           </p>
           <motion.h1 
             className="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-tight drop-shadow-2xl"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0, scale: [1, 1.01, 1] }}
-            transition={{ opacity: { duration: 0.6, delay: 0.2 }, y: { duration: 0.6, delay: 0.2 }, scale: { duration: 4, repeat: Infinity, ease: "easeInOut" } }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ opacity: { duration: 0.6, delay: 0.2 }, y: { duration: 0.6, delay: 0.2 } }}
           >
             Where Beautiful Smiles <br className="hidden md:block"/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-400 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">Meet Advanced Dentistry</span>
           </motion.h1>
           <motion.p 
             className="text-lg md:text-2xl text-blue-50 mb-10 max-w-2xl mx-auto md:mx-0 font-medium leading-relaxed drop-shadow-lg"
-            initial={{ opacity: 0.7, y: 20 }}
-            animate={{ opacity: [0.7, 1, 0.7], y: 0 }}
-            transition={{ opacity: { duration: 4, repeat: Infinity, ease: "easeInOut" }, y: { duration: 0.6, delay: 0.3 } }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ opacity: { duration: 0.6, delay: 0.3 }, y: { duration: 0.6, delay: 0.3 } }}
           >
-            Experience premium smile makeovers, natural-looking veneers, and long-lasting dental implants designed to enhance your confidence and transform your smile with advanced technology and personalized care.
+            Experience premium smile makeovers, natural-looking porcelain veneers, and long-lasting dental implants in Chipiyana Buzurg, Ghaziabad. We proudly serve patients across Crossing Republik, Noida Extension, and Greater Noida West with state-of-the-art diagnostic technology and personalized care.
           </motion.p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-            <InteractiveButton onClick={handleCall} className="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-blue-950 font-bold text-lg py-4 px-8 rounded-xl shadow-xl shadow-amber-500/30 transition-all flex items-center justify-center gap-2 active:scale-95 hover:scale-105 hover:-translate-y-1">
+            <InteractiveButton id="hero-call-btn" onClick={handleCall} className="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-blue-950 font-bold text-lg py-4 px-8 rounded-xl shadow-xl shadow-amber-500/30 transition-all flex items-center justify-center gap-2 active:scale-95 hover:scale-105 hover:-translate-y-1">
               <PhoneCall className="w-5 h-5" /> Book Consultation
             </InteractiveButton>
-            <InteractiveButton onClick={handleWhatsApp} className="w-full sm:w-auto bg-[#25D366] hover:bg-[#20b858] text-white font-bold text-lg py-4 px-8 rounded-xl shadow-xl shadow-[#25D366]/30 transition-all flex items-center justify-center gap-2 active:scale-95 hover:scale-105 hover:-translate-y-1">
+            <InteractiveButton id="hero-whatsapp-btn" onClick={handleWhatsApp} className="w-full sm:w-auto bg-[#25D366] hover:bg-[#20b858] text-white font-bold text-lg py-4 px-8 rounded-xl shadow-xl shadow-[#25D366]/30 transition-all flex items-center justify-center gap-2 active:scale-95 hover:scale-105 hover:-translate-y-1">
               <MessageCircle className="w-5 h-5" /> Book via WhatsApp
             </InteractiveButton>
           </div>
@@ -93,14 +93,14 @@ const Hero: React.FC<HeroProps> = ({ handleCall, handleWhatsApp }) => {
           {/* Animated decorative ring behind the image */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-96 md:w-96 md:h-[28rem] rounded-[50%] bg-gradient-to-tr from-cyan-500/30 to-amber-500/30 blur-2xl animate-pulse"></div>
           
-          <div className="relative w-64 h-80 md:w-[22rem] md:h-[28rem] rounded-[40px] border-[6px] border-white/10 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] ring-4 ring-cyan-400/50 transform hover:rotate-2 transition-transform duration-500">
+          <div id="doctor-hero-card" className="relative w-64 h-80 md:w-[22rem] md:h-[28rem] rounded-[40px] border-[6px] border-white/10 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] ring-4 ring-cyan-400/50 transform hover:rotate-2 transition-transform duration-500">
             <img 
               src="https://i.postimg.cc/tCd8wLDv/Chat-GPT-Image-Apr-22-2026-08-21-13-PM.png" 
               alt="Dr. Prashant Kumar Vats" 
               className="w-full h-full object-cover"
               style={{ aspectRatio: '3/4' }}
               referrerPolicy="no-referrer"
-              loading="lazy"
+              loading="eager"
               decoding="async"
               fetchPriority="high"
             />

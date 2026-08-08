@@ -14,12 +14,6 @@ export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    // Using a reliable calming ambient background track
-    const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3');
-    audio.loop = true;
-    audio.volume = 0.3;
-    audioRef.current = audio;
-
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
@@ -35,11 +29,17 @@ export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, [isMuted]);
 
   const startMusic = async () => {
-    if (hasStarted || !audioRef.current) return;
+    if (hasStarted) return;
     
     try {
-      // Ensure the audio is loaded
-      audioRef.current.load();
+      // Lazy initialization of the Audio element on first call
+      if (!audioRef.current) {
+        const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3');
+        audio.loop = true;
+        audio.volume = 0.3;
+        audio.muted = isMuted;
+        audioRef.current = audio;
+      }
       
       const playPromise = audioRef.current.play();
       if (playPromise !== undefined) {
@@ -49,7 +49,7 @@ export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       }
     } catch (error) {
       console.error("Music playback failed:", error);
-      // If it fails, we keep hasStarted as false so it can try again on next interaction
+      // Keep hasStarted as false so it can retry
     }
   };
 

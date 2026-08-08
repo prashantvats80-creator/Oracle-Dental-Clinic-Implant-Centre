@@ -23,7 +23,9 @@ const WhyUs: React.FC<WhyUsProps> = ({ handleWhatsApp }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-blue-900 mb-4">Why Choose Oracle Dental?</h2>
-          <p className="text-slate-600 max-w-2xl mx-auto">We combine expertise with compassion to deliver the best dental experience.</p>
+          <p className="text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            As a leading, trusted dental clinic in Chipiyana Buzurg, Ghaziabad, we combine advanced dental technology with compassionate patient care. Whether you are searching for an experienced implant dentist near Noida Extension, a reliable wisdom tooth specialist near Crossing Republik, or painless root canal treatment in Greater Noida, our multispeciality dental clinic is dedicated to delivering healthy, confident smiles.
+          </p>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
@@ -34,6 +36,7 @@ const WhyUs: React.FC<WhyUsProps> = ({ handleWhatsApp }) => {
               viewport={{ once: true }}
               transition={{ delay: Math.min(idx * 0.05, 0.4) }}
               key={idx} 
+              id={`why-us-card-${idx}`}
               className="bg-white p-6 rounded-2xl text-center shadow-sm border border-slate-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 hover:border-blue-200 group"
             >
               <div className="w-14 h-14 mx-auto bg-amber-50 text-amber-600 rounded-full flex items-center justify-center mb-4 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 shadow-sm">

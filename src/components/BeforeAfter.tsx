@@ -4,7 +4,16 @@ import { Sparkles, ArrowRight } from 'lucide-react';
 
 const BeforeAfter: React.FC = () => {
   // Placeholder data - we will replace these with your actual patient images
-  const transformations = [
+  type Transformation = {
+    id: number;
+    title: string;
+    description: string;
+    singleImg?: string;
+    beforeImg?: string;
+    afterImg?: string;
+  };
+
+  const transformations: Transformation[] = [
     {
       id: 0,
       title: "Teeth Whitening - Instant Glow",
@@ -89,6 +98,7 @@ const BeforeAfter: React.FC = () => {
           {transformations.map((item, idx) => (
             <motion.div 
               key={item.id}
+              id={`transformation-card-${item.id}`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

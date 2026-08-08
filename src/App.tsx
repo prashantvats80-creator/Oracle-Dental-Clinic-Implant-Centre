@@ -24,6 +24,8 @@ import { SoundProvider, useSound } from './components/SoundManager';
 import { InteractiveButton } from './components/InteractiveButton';
 import Hero from './components/Hero';
 import BeforeAfter from './components/BeforeAfter';
+import SEOHead from './components/SEOHead';
+import { GBP_CONFIG } from './config/googleBusinessProfile';
 
 const Services = lazy(() => import('./components/Services'));
 const WhyUs = lazy(() => import('./components/WhyUs'));
@@ -48,44 +50,40 @@ function AppContent() {
 
   const faqs = [
     {
-      question: "Is a root canal treatment (RCT) painful?",
-      answer: "A root canal is designed to relieve pain, not cause it. Thanks to advanced local anesthetics and modern techniques, the procedure itself is virtually painless, similar to getting a routine filling. You might experience slight tenderness for a few days afterward as the area heals."
+      question: "Where can I get dental implants near Chipiyana Buzurg?",
+      answer: "Oracle Dental Clinic & Implant Center is located in Chipiyana Buzurg, Ghaziabad, near the Ghaziabad–Greater Noida border, making it easily accessible from Crossing Republik, Noida Extension, and Greater Noida West. Our clinic features advanced diagnostic equipment and a certified implantologist to ensure safe, comfortable, and long-lasting dental implant treatments right in your neighborhood."
     },
     {
-      question: "Is tooth extraction painful?",
-      answer: "With modern anesthesia, tooth extraction is typically painless during the procedure. You may feel some pressure, but no sharp pain. Mild discomfort during recovery is normal and can be easily managed with prescribed or over-the-counter pain relievers."
+      question: "How much does a dental implant cost in Ghaziabad?",
+      answer: "The cost of dental implants in Ghaziabad varies depending on factors like the implant brand (e.g., Osstem, Nobel Biocare, Straumann), the type of crown (Zirconia or ceramic), and the bone structure of the patient. Single tooth implant procedures start from highly affordable ranges. During a comprehensive consultation at Oracle Dental Clinic, our implant specialist will assess your 3D scans and provide an accurate, transparent cost estimate tailored to your treatment plan."
     },
     {
-      question: "Is the dental implant procedure painful?",
-      answer: "Your comfort is our top priority. Dental implant surgery is performed under local anesthesia, ensuring you feel no pain during the procedure. Most patients report that the post-operative discomfort is less than that of a tooth extraction and subsides quickly."
+      question: "Is root canal treatment (RCT) painful?",
+      answer: "A root canal is designed to relieve the pain caused by deep decay or tooth infection, not cause it. At Oracle Dental Clinic, our experienced RCT specialist uses advanced local anesthetics, rotary endodontic systems, and microscopic technology to perform painless root canal treatments, often completed in a single comfortable sitting."
     },
     {
-      question: "How often should I get a dental check-up?",
-      answer: "We recommend visiting us for a routine check-up and professional cleaning every six months. However, depending on your specific oral health needs, we might suggest more frequent visits to maintain optimal dental hygiene."
+      question: "How do I choose a dental implant specialist in Ghaziabad?",
+      answer: "When choosing a dental implant specialist, look for experienced implantologists with specialized postgraduate training in oral implantology, verified patient success rates, and a clinic equipped with modern tools like digital radiography. At Oracle Dental Clinic and Implant Center, our lead doctor is a highly qualified dentist and implant expert who handles both single tooth restorations and full mouth rehabilitations."
     },
     {
-      question: "How can I safely whiten my teeth?",
-      answer: "Professional teeth whitening is the safest and most effective method. We offer both in-office treatments for immediate results and custom take-home kits. Over-the-counter products can sometimes cause sensitivity or damage enamel if used incorrectly."
+      question: "Is wisdom tooth extraction painful and when is it required?",
+      answer: "An extraction is performed under complete local anesthesia, making the wisdom tooth surgery itself virtually painless. Extraction is typically required when you have an impacted wisdom tooth, severe swelling, recurring gum infections (pericoronitis), or damage to adjacent teeth. Our oral surgeon in Ghaziabad ensures a gentle surgical extraction process with a smooth, painless recovery."
     },
     {
-      question: "Are dental X-rays safe?",
-      answer: "Yes, dental X-rays are highly safe. Modern digital X-rays emit extremely low levels of radiation—much less than traditional film X-rays and even less than the natural background radiation you are exposed to daily. We also use lead aprons for added protection."
+      question: "What is the difference between braces and clear aligners?",
+      answer: "Dental braces use metal or ceramic brackets and wires to align teeth, making them highly effective for severe crowding or complex orthodontic alignments. Clear aligners are invisible, removable plastic trays that straighten teeth discreetly. Clear aligners are highly popular with adults and working professionals in Greater Noida and Ghaziabad for teeth straightening because they are virtually invisible and offer easier oral hygiene."
     },
     {
-      question: "At what age should my child first visit the dentist?",
-      answer: "The American Dental Association recommends that a child's first dental visit should occur within six months after their first tooth appears, but no later than their first birthday. Early visits help establish a dental home and prevent early childhood cavities."
+      question: "Are clear aligners suitable for adults in Noida & Greater Noida?",
+      answer: "Absolutely! Clear aligners are highly popular among adults and teens alike who prefer a subtle, wire-free method of teeth straightening. They are comfortable, removable, and do not interfere with your diet or daily lifestyle. Our clear aligner specialist in Chipiyana Buzurg will map out your digital smile design and customize clear aligners for predictable, high-quality results."
     },
     {
-      question: "Do you offer emergency dental services?",
-      answer: "Yes, we provide emergency dental care. If you are experiencing severe pain, a knocked-out tooth, or swelling, please call our clinic immediately. We will do our best to accommodate you on the same day."
+      question: "How long does a root canal treatment take?",
+      answer: "With modern rotary technology and microscopic treatment methods, a root canal treatment at Oracle Dental Clinic is frequently completed in a single sitting of 30 to 45 minutes. However, in cases of severe infection, our RCT dentist may recommend two sittings to ensure the root canal is completely sanitized and sealed before placing a permanent tooth cap or Zirconia crown."
     },
     {
-      question: "Do you accept dental insurance?",
-      answer: "Yes, we accept most major dental insurance plans. Please contact our front desk with your insurance details before your appointment, and we will be happy to verify your coverage and explain your benefits."
-    },
-    {
-      question: "What is your cancellation policy?",
-      answer: "We kindly request at least 24 hours' notice if you need to cancel or reschedule your appointment. This allows us to offer the time slot to another patient in need of care."
+      question: "Does the clinic provide full mouth dental implants in Ghaziabad?",
+      answer: "Yes, Oracle Dental Clinic & Implant Center is a specialized multi-specialty center for full mouth rehabilitation. We offer state-of-the-art All-on-4 and All-on-6 full mouth dental implants that replace entire arches of missing teeth with permanent, natural-feeling teeth. This procedure is done after detailed diagnostic analysis to ensure proper support and bone preservation."
     }
   ];
 
@@ -102,6 +100,45 @@ function AppContent() {
       events.forEach(e => window.removeEventListener(e, handleFirstInteraction));
     };
   }, [startMusic]);
+
+  useEffect(() => {
+    // Delay and lazily load Google tag (gtag.js) to maximize initial speed on slow networks
+    const loadGtag = () => {
+      const win = window as any;
+      if (win.gtag) return;
+
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-16678614351';
+      document.head.appendChild(script);
+
+      script.onload = () => {
+        win.dataLayer = win.dataLayer || [];
+        win.gtag = function() {
+          win.dataLayer.push(arguments);
+        };
+        win.gtag('js', new Date());
+        win.gtag('config', 'AW-16678614351');
+      };
+    };
+
+    // Load after a 3.5s delay or immediately on first real user interaction
+    const timer = setTimeout(loadGtag, 3500);
+
+    const events = ['click', 'touchstart', 'scroll'];
+    const handleInteraction = () => {
+      loadGtag();
+      clearTimeout(timer);
+      events.forEach(e => window.removeEventListener(e, handleInteraction));
+    };
+
+    events.forEach(e => window.addEventListener(e, handleInteraction, { passive: true }));
+
+    return () => {
+      clearTimeout(timer);
+      events.forEach(e => window.removeEventListener(e, handleInteraction));
+    };
+  }, []);
 
   useEffect(() => {
     let ticking = false;
@@ -166,16 +203,18 @@ function AppContent() {
     }
   };
 
-  const phoneNumber = "7011961515";
+  const phoneNumber = "+917011961515";
+  const phoneNumberFormatted = "+91 70119 61515";
   const whatsappNumber = "917011961515"; // Assuming India country code
   const whatsappMessage = "I want to book an appointment.";
 
   const handleCall = () => window.open(`tel:${phoneNumber}`, '_self');
   const handleWhatsApp = () => window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
-  const handleDirections = () => window.open('https://maps.app.goo.gl/FLz3muaqFN5rjg4s5', '_blank');
+  const handleDirections = () => window.open(GBP_CONFIG.GOOGLE_MAPS_DIRECTIONS_URL, '_blank');
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/50 font-sans text-slate-950 pb-20 md:pb-0 scroll-smooth">
+      <SEOHead />
       {/* Top Bar (Desktop) */}
       <div className="hidden md:flex bg-gradient-to-r from-blue-950 via-indigo-950 to-blue-900 animate-gradient-xy text-white text-sm py-2.5 px-6 justify-between items-center shadow-md relative z-50">
         <div className="flex items-center gap-4 font-medium tracking-wide">
@@ -184,7 +223,7 @@ function AppContent() {
         </div>
         <div className="flex items-center gap-4">
           <a href={`tel:${phoneNumber}`} className="flex items-center gap-1.5 font-bold hover:text-amber-400 transition-colors">
-            <PhoneCall className="w-4 h-4 animate-bounce" style={{ animationDuration: '3s' }} /> +91 {phoneNumber}
+            <PhoneCall className="w-4 h-4 animate-bounce" style={{ animationDuration: '3s' }} /> {phoneNumberFormatted}
           </a>
         </div>
       </div>
@@ -229,6 +268,7 @@ function AppContent() {
                 </a>
               ))}
               <InteractiveButton 
+                id="mute-toggle-desktop"
                 onClick={toggleMute}
                 className="text-slate-500 hover:text-blue-600 p-2 rounded-full transition-colors"
                 aria-label={isMuted ? "Unmute music" : "Mute music"}
@@ -240,6 +280,7 @@ function AppContent() {
             {/* Mobile menu button and volume toggle */}
             <div className="flex items-center md:hidden gap-2">
               <InteractiveButton 
+                id="mute-toggle-mobile"
                 onClick={toggleMute}
                 className="text-slate-500 hover:text-blue-600 p-2 rounded-full transition-colors"
                 aria-label={isMuted ? "Unmute music" : "Mute music"}
@@ -247,6 +288,7 @@ function AppContent() {
                 {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
               </InteractiveButton>
               <InteractiveButton
+                id="mobile-menu-toggle"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="text-slate-600 hover:text-blue-600 focus:outline-none p-2"
               >
@@ -328,7 +370,7 @@ function AppContent() {
                 <p className="text-red-100 font-medium text-sm mt-0.5">Don't wait. We provide immediate relief, 24/7 support.</p>
               </div>
             </div>
-            <InteractiveButton onClick={handleCall} className="w-full sm:w-auto bg-white text-red-600 font-black tracking-wide py-3 px-8 rounded-xl shadow-xl hover:bg-slate-50 transition-all flex items-center justify-center gap-2 active:scale-95 hover:scale-105 hover:shadow-2xl border border-white/50">
+            <InteractiveButton id="emergency-call-btn" onClick={handleCall} className="w-full sm:w-auto bg-white text-red-600 font-black tracking-wide py-3 px-8 rounded-xl shadow-xl hover:bg-slate-50 transition-all flex items-center justify-center gap-2 active:scale-95 hover:scale-105 hover:shadow-2xl border border-white/50">
               <PhoneCall className="w-5 h-5 animate-ring" /> Call Emergency Now
             </InteractiveButton>
           </div>
@@ -361,6 +403,7 @@ function AppContent() {
         <div className="relative pointer-events-auto group">
           <div className="absolute inset-0 bg-[#25D366] rounded-full blur-md opacity-60 group-hover:opacity-100 transition-opacity animate-pulse"></div>
           <InteractiveButton 
+            id="floating-whatsapp-btn"
             onClick={handleWhatsApp}
             className="relative bg-[#25D366] text-white p-4 md:p-5 rounded-full shadow-[0_8px_30px_rgb(37,211,102,0.6)] hover:bg-[#20b858] transition-transform flex items-center justify-center border-2 border-white hover:scale-110 active:scale-95"
             aria-label="Chat on WhatsApp"
@@ -373,6 +416,7 @@ function AppContent() {
         <div className="relative pointer-events-auto group">
           <div className="absolute inset-0 bg-blue-600 rounded-full blur-md opacity-60 group-hover:opacity-100 transition-opacity animate-pulse" style={{ animationDelay: '0.5s' }}></div>
           <InteractiveButton
+            id="floating-call-btn"
             onClick={handleCall}
             className="relative bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-4 md:p-5 rounded-full shadow-[0_8px_30px_rgb(37,99,235,0.6)] hover:from-blue-700 hover:to-indigo-700 transition-transform flex items-center justify-center border-2 border-white hover:scale-110 active:scale-95"
             aria-label="Call Clinic"
@@ -386,6 +430,7 @@ function AppContent() {
       <AnimatePresence>
         {showBackToTop && (
           <InteractiveButton
+            id="back-to-top-btn"
             initial={{ opacity: 0, y: 20, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.8 }}

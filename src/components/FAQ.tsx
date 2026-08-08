@@ -28,6 +28,7 @@ const FAQ: React.FC<FAQProps> = ({ faqs }) => {
               className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
             >
               <InteractiveButton
+                id={`faq-toggle-btn-${index}`}
                 onClick={() => setOpenFaqIndex(openFaqIndex === index ? null : index)}
                 className="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none"
                 aria-expanded={openFaqIndex === index}

@@ -9,22 +9,18 @@ interface ServicesProps {
 
 const Services: React.FC<ServicesProps> = ({ handleWhatsApp }) => {
   const services = [
-    { title: 'Dental Implants', desc: 'Permanent solution for missing teeth. Look and feel natural.', icon: ShieldCheck },
-    { title: 'Full Mouth Implants', desc: 'Complete restoration for a full set of teeth.', icon: ShieldCheck },
-    { title: 'Zirconia Caps', desc: 'Strong, aesthetic, and metal-free dental crowns.', icon: ShieldCheck },
-    { title: 'Tooth Caps', desc: 'Durable crowns to protect and restore damaged teeth.', icon: ShieldCheck },
-    { title: 'Root Canal (RCT)', desc: 'Painless single-sitting RCT to save your natural tooth.', icon: HeartPulse },
-    { title: 'Teeth Cleaning & Polishing', desc: 'Professional cleaning for a healthy, plaque-free smile.', icon: Star },
-    { title: 'Teeth Whitening', desc: 'Get a brighter, confident smile in just one session.', icon: Star },
-    { title: 'Veneers', desc: 'Custom shells to improve the appearance of your teeth.', icon: Star },
-    { title: 'Braces', desc: 'Straighten teeth and design your perfect smile.', icon: Activity },
-    { title: 'Aligners', desc: 'Invisible, removable aligners for a discreet smile correction.', icon: Activity },
-    { title: 'Dentures', desc: 'Custom-made removable appliances to replace missing teeth.', icon: CheckCircle2 },
-    { title: 'Tooth Filling', desc: 'Restore decayed teeth with high-quality, tooth-colored fillings.', icon: CheckCircle2 },
-    { title: 'Tooth Extraction', desc: 'Safe and painless removal of damaged or decayed teeth.', icon: Stethoscope },
-    { title: 'Wisdom Tooth Extraction', desc: 'Safe and painless removal of impacted wisdom teeth.', icon: Stethoscope },
-    { title: 'Kids Dentistry', desc: 'Gentle and friendly dental care for your little ones.', icon: HeartPulse },
-    { title: 'General Dentistry', desc: 'Routine checkups, cleaning, and fillings for oral health.', icon: CheckCircle2 },
+    { title: 'Dental Implants', desc: 'Restore your smile with premium dental implants in Ghaziabad and Chipiyana Buzurg. Our high-quality single-tooth and multi-tooth dental implants look, feel, and function like natural teeth, performed by a certified implantologist.', icon: ShieldCheck },
+    { title: 'Full Mouth Rehabilitation', desc: 'Restore full function and aesthetics with advanced full mouth dental implants in Ghaziabad. We specialize in All-on-4 and All-on-6 implant systems for secure, long-lasting permanent teeth replacement.', icon: ShieldCheck },
+    { title: 'Zirconia Crowns & Caps', desc: 'Get premium, metal-free Zirconia crowns in Ghaziabad, Noida, and Greater Noida. Known for extreme durability, lifelike translucency, and perfect biocompatibility to protect your teeth.', icon: ShieldCheck },
+    { title: 'Painless Root Canal (RCT)', desc: 'Experience comfortable, single-sitting root canal treatment in Ghaziabad and Greater Noida. Handled by a dental RCT specialist using microscopic and rotary endodontic equipment for precision.', icon: HeartPulse },
+    { title: 'Clear Aligners', desc: 'Straighten your teeth discreetly with clear aligners in Ghaziabad and Chipiyana Buzurg. Comfortable, removable, and invisible teeth braces custom-designed for modern, metal-free teeth straightening.', icon: Activity },
+    { title: 'Dental Braces', desc: 'Get a perfect smile with advanced braces treatment in Ghaziabad and Greater Noida. We offer orthodontic braces, ceramic braces, and traditional metal brackets supervised by an experienced orthodontist.', icon: Activity },
+    { title: 'Wisdom Tooth Extraction', desc: 'Safe, precise, and painless wisdom tooth extraction in Ghaziabad and Chipiyana Buzurg. Specialised surgical removal of impacted wisdom teeth by an experienced oral surgeon for quick relief.', icon: Stethoscope },
+    { title: 'Smile Makeovers & Veneers', desc: 'Transform your look with customized porcelain or composite veneers in Ghaziabad. Our smile design and complete cosmetic smile corrections are designed to enhance your confidence and aesthetics.', icon: Star },
+    { title: 'Teeth Whitening', desc: 'Safely and effectively brighten discolored teeth. Get a radiant Hollywood smile with our in-office professional teeth whitening sessions or specialized take-home whitening kits.', icon: Star },
+    { title: 'Complete Dentures', desc: 'Custom-made, comfortable, and natural-looking full or partial dentures to restore missing teeth and support facial structures for healthy eating and speaking.', icon: CheckCircle2 },
+    { title: 'Cosmetic Fillings', desc: 'Restore cavities or chipped teeth with invisible, premium tooth-colored composite fillings that blend seamlessly with your natural tooth enamel.', icon: CheckCircle2 },
+    { title: 'Advanced Kid\'s Dentistry', desc: 'Gentle, patient, and friendly pediatric dental care in Chipiyana Buzurg for your children. We focus on positive early dental experiences, preventive care, and habit management.', icon: HeartPulse },
   ];
 
   return (
@@ -43,6 +39,7 @@ const Services: React.FC<ServicesProps> = ({ handleWhatsApp }) => {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: Math.min(idx * 0.05, 0.3) }}
               key={idx} 
+              id={`service-card-${idx}`}
               className="bg-white rounded-3xl p-6 border border-indigo-50 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(37,99,235,0.12)] hover:-translate-y-2 hover:scale-[1.03] transition-all duration-300 group cursor-pointer relative overflow-hidden"
             >
               {/* Subtle hover gradient background */}
@@ -55,13 +52,15 @@ const Services: React.FC<ServicesProps> = ({ handleWhatsApp }) => {
               <p className="relative z-10 text-slate-600 mb-6 font-medium leading-relaxed">{service.desc}</p>
               <div className="relative z-10 flex gap-3">
                 <a 
-                  href="tel:7011961515" 
+                  href="tel:+917011961515" 
+                  id={`service-call-btn-${idx}`}
                   onClick={(e) => e.stopPropagation()}
                   className="flex-1 bg-white border-2 border-blue-600 text-blue-600 py-2.5 rounded-xl text-sm font-bold hover:bg-blue-600 hover:text-white transition-all duration-300 flex items-center justify-center gap-1 active:scale-95 shadow-sm hover:shadow-md"
                 >
                   <PhoneCall className="w-4 h-4" /> Call
                 </a>
                 <InteractiveButton 
+                  id={`service-whatsapp-btn-${idx}`}
                   onClick={handleWhatsApp} 
                   className="flex-1 bg-gradient-to-r from-[#25D366] to-[#20b858] text-white py-2.5 rounded-xl text-sm font-bold hover:shadow-lg hover:shadow-[#25D366]/30 transition-all duration-300 flex items-center justify-center gap-1 active:scale-95"
                 >

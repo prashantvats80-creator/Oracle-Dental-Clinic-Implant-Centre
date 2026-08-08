@@ -28,11 +28,11 @@ const Footer: React.FC<FooterProps> = ({ phoneNumber, handleWhatsApp, scrollToSe
           <div>
             <h4 className="text-white font-bold mb-4 uppercase tracking-wider text-sm">Quick Links</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#transformations" onClick={(e) => scrollToSection(e, 'transformations')} className="hover:text-white transition-colors">Smile Results</a></li>
-              <li><a href="#services" onClick={(e) => scrollToSection(e, 'services')} className="hover:text-white transition-colors">Services</a></li>
-              <li><a href="#why-us" onClick={(e) => scrollToSection(e, 'why-us')} className="hover:text-white transition-colors">Why Choose Us</a></li>
-              <li><a href="#testimonials" onClick={(e) => scrollToSection(e, 'testimonials')} className="hover:text-white transition-colors">Patient Reviews</a></li>
-              <li><InteractiveButton onClick={handleWhatsApp} className="hover:text-white transition-colors underline decoration-dotted underline-offset-4">Book via WhatsApp</InteractiveButton></li>
+              <li><a id="footer-link-transformations" href="#transformations" onClick={(e) => scrollToSection(e, 'transformations')} className="hover:text-white transition-colors">Smile Results</a></li>
+              <li><a id="footer-link-services" href="#services" onClick={(e) => scrollToSection(e, 'services')} className="hover:text-white transition-colors">Services</a></li>
+              <li><a id="footer-link-why-us" href="#why-us" onClick={(e) => scrollToSection(e, 'why-us')} className="hover:text-white transition-colors">Why Choose Us</a></li>
+              <li><a id="footer-link-testimonials" href="#testimonials" onClick={(e) => scrollToSection(e, 'testimonials')} className="hover:text-white transition-colors">Patient Reviews</a></li>
+              <li><InteractiveButton id="footer-whatsapp-btn" onClick={handleWhatsApp} className="hover:text-white transition-colors underline decoration-dotted underline-offset-4">Book via WhatsApp</InteractiveButton></li>
             </ul>
           </div>
           
@@ -45,7 +45,7 @@ const Footer: React.FC<FooterProps> = ({ phoneNumber, handleWhatsApp, scrollToSe
               </li>
               <li className="flex items-center gap-2">
                 <PhoneCall className="w-4 h-4 text-amber-500" />
-                <a href={`tel:${phoneNumber}`} className="hover:text-white transition-colors">+91 {phoneNumber}</a>
+                <a href={`tel:${phoneNumber}`} className="hover:text-white transition-colors">+91 70119 61515</a>
               </li>
               <li className="flex items-center gap-4 pt-2">
                 <a href="https://www.facebook.com/profile.php?id=100083436112014" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-blue-500 transition-colors">

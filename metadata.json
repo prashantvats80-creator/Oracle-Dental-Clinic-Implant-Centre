@@ -1,5 +1,8 @@
 {
-  "name": "Oracle Dental Clinic",
-  "description": "Premium, high-converting mobile-first website for Oracle Dental Clinic and Implant Center.",
-  "requestFramePermissions": []
+  "name": "Oracle Dental Clinic & Implant Center",
+  "description": "Premium, high-converting mobile-first website for Oracle Dental Clinic & Implant Center in Chipiyana Buzurg, Ghaziabad.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }
