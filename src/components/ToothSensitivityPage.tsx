@@ -16,6 +16,8 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { InteractiveButton } from './InteractiveButton';
+import { TreatmentImage } from './TreatmentImage';
+import { Breadcrumbs } from './Breadcrumbs';
 
 interface ToothSensitivityPageProps {
   handleCall: () => void;
@@ -102,22 +104,14 @@ export default function ToothSensitivityPage({
 
   return (
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed">
-      {/* Breadcrumb Header */}
-      <div className="bg-slate-900 text-white py-3 px-4 border-b border-slate-800">
-        <div className="max-w-7xl mx-auto flex items-center justify-between text-xs sm:text-sm">
-          <div className="flex items-center gap-2 text-slate-400">
-            <button onClick={navigateToHome} className="hover:text-amber-400 flex items-center gap-1">
-              <ArrowLeft className="w-3.5 h-3.5" /> Home
-            </button>
-            <span>/</span>
-            <span className="text-amber-400 font-medium">Sensitive Teeth Treatment</span>
-          </div>
-          <div className="hidden sm:flex items-center gap-4 text-slate-300">
-            <span><MapPin className="w-3.5 h-3.5 text-amber-500 inline mr-1" /> Chipiyana Buzurg, Ghaziabad</span>
-            <span><Clock className="w-3.5 h-3.5 text-amber-500 inline mr-1" /> 10 AM–2 PM | 5 PM–9 PM</span>
-          </div>
-        </div>
-      </div>
+      <Breadcrumbs
+        items={[
+          { label: 'Dental Symptoms', path: '/#symptoms' },
+          { label: 'Sensitive Teeth Treatment', path: '/sensitive-teeth-treatment' }
+        ]}
+        navigateToHome={navigateToHome}
+        badge="Hypersensitivity Relief"
+      />
 
       {/* HERO */}
       <section className="relative bg-gradient-to-br from-slate-950 via-cyan-950 to-slate-900 text-white pt-12 pb-16 px-4">
@@ -161,6 +155,12 @@ export default function ToothSensitivityPage({
 
           <div className="lg:col-span-5 bg-slate-900/90 border border-slate-800 p-6 rounded-3xl space-y-4">
             <h3 className="text-white font-bold text-lg">What Causes Sensitivity?</h3>
+            <TreatmentImage
+              src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1000&q=80"
+              alt="Educational diagram showing exposed dentin tubules, gum recession and hot cold tooth sensitivity triggers"
+              caption="Educational diagram: Exposed dentin tubules transmitting temperature stimuli to nerve pulp."
+              aspectRatio="4/3"
+            />
             <p className="text-xs text-slate-300 leading-relaxed">
               Tooth sensitivity occurs when protective enamel wears away or gums recede, exposing microscopic dentinal tubules connected to nerve endings.
             </p>

@@ -2,13 +2,16 @@
 <html lang="en">
   <head>
     <script>
-      (function(){
-        var redirect = sessionStorage.redirect;
-        delete sessionStorage.redirect;
-        if (redirect && redirect != location.href) {
-          history.replaceState(null, null, redirect);
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
         }
-      })();
+      }(window.location));
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,6 +24,46 @@
     <link rel="dns-prefetch" href="https://i.postimg.cc">
     <link rel="preconnect" href="https://images.unsplash.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script type="application/ld+json" id="static-jsonld-website">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Oracle Dental Clinic & Implant Center",
+      "alternateName": ["Oracle Dental Clinic", "Oracle Dental"],
+      "description": "Official website of Oracle Dental Clinic & Implant Center in Ghaziabad and Chipiyana Buzurg.",
+      "inLanguage": "en-US"
+    }
+    </script>
+    <script type="application/ld+json" id="static-jsonld-localbusiness">
+    {
+      "@context": "https://schema.org",
+      "@type": ["Dentist", "LocalBusiness", "MedicalBusiness"],
+      "name": "Oracle Dental Clinic & Implant Center",
+      "legalName": "Oracle Dental Clinic & Implant Center",
+      "telephone": "+917011961515",
+      "priceRange": "₹₹",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "KTS Complex, Jaat Chowk, Chipiyana Buzurg, near ABES Engineering College",
+        "addressLocality": "Ghaziabad",
+        "addressRegion": "Uttar Pradesh",
+        "postalCode": "201009",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 28.6280,
+        "longitude": 77.4520
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "493",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -19,6 +19,8 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { InteractiveButton } from './InteractiveButton';
+import { TreatmentImage } from './TreatmentImage';
+import { Breadcrumbs } from './Breadcrumbs';
 import { GBP_CONFIG } from '../config/googleBusinessProfile';
 
 interface ChipiyanaLandingPageProps {
@@ -269,24 +271,14 @@ export default function ChipiyanaLandingPage({
 
   return (
     <div className="bg-slate-50 text-slate-900 font-sans leading-relaxed">
-      {/* Breadcrumb / Back Navigation */}
-      <div className="bg-slate-900 text-slate-300 py-3 px-4 sm:px-8 text-sm border-b border-slate-800">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <button 
-              onClick={navigateToHome}
-              className="hover:text-amber-400 transition-colors flex items-center gap-1 font-medium"
-            >
-              <ArrowLeft className="w-4 h-4" /> Home
-            </button>
-            <span>/</span>
-            <span className="text-white font-semibold truncate">Dentist in Chipiyana Buzurg</span>
-          </div>
-          <span className="hidden sm:inline-block text-xs bg-amber-500/20 text-amber-300 px-3 py-1 rounded-full border border-amber-500/30">
-            Local Dental Center
-          </span>
-        </div>
-      </div>
+      <Breadcrumbs
+        items={[
+          { label: 'Locations & Services', path: '/#about' },
+          { label: 'Dentist in Chipiyana Buzurg', path: '/dentist-in-chipiyana-buzurg-ghaziabad' }
+        ]}
+        navigateToHome={navigateToHome}
+        badge="Local Dental Center"
+      />
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-blue-950 via-indigo-950 to-slate-900 text-white py-12 md:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -526,6 +518,12 @@ export default function ChipiyanaLandingPage({
             <p>
               At Oracle Dental Clinic, Dr. Prashant Kumar Vats, BDS evaluates your dental condition through careful visual and clinical examination, offering structured guidance on treatment steps, oral hygiene maintenance, and preventive care.
             </p>
+            <TreatmentImage
+              src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=80"
+              alt="Clinical examination and dental consultation at Oracle Dental Clinic in Chipiyana Buzurg"
+              caption="Clinical evaluation & consultation at Oracle Dental Clinic, Chipiyana Buzurg, Ghaziabad."
+              aspectRatio="16/9"
+            />
           </div>
         </div>
       </section>

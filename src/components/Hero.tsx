@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { PhoneCall, MessageCircle, Clock, MapPin, Sparkles, HeartPulse, ShieldCheck, ArrowRight } from 'lucide-react';
 import { InteractiveButton } from './InteractiveButton';
+import { useLanguage } from '../context/LanguageContext';
 
 interface HeroProps {
   handleCall: () => void;
@@ -10,6 +11,7 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ handleCall, handleWhatsApp, navigateToPath }) => {
+  const { language } = useLanguage();
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -64,18 +66,35 @@ const Hero: React.FC<HeroProps> = ({ handleCall, handleWhatsApp, navigateToPath 
             className="inline-flex items-center gap-2 bg-blue-500/20 border border-blue-400/40 text-blue-200 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold backdrop-blur-md shadow-md"
           >
             <span className="animate-bounce">👋</span>
-            <span>Welcome to Oracle Dental Clinic. How can Dr. Prashant Vats help you today?</span>
+            <span>
+              {language === 'hi'
+                ? 'ऑरैकल डेंटल क्लीनिक में आपका स्वागत है। डॉ. प्रशांत वत्स आज आपकी कैसे मदद कर सकते हैं?'
+                : 'Welcome to Oracle Dental Clinic. How can Dr. Prashant Vats help you today?'}
+            </span>
           </motion.div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-6xl font-black tracking-tight leading-tight drop-shadow-2xl">
-            Gentle, Expert Dental Care <br className="hidden sm:block"/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-200 to-amber-400">
-              In Chipiyana Buzurg, Ghaziabad
-            </span>
+            {language === 'hi' ? (
+              <>
+                सुरक्षित एवं आरामदायक दंत चिकित्सा <br className="hidden sm:block"/>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-200 to-amber-400">
+                  चिपियाना बुजुर्ग, गाज़ियाबाद में
+                </span>
+              </>
+            ) : (
+              <>
+                Gentle, Expert Dental Care <br className="hidden sm:block"/>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-200 to-amber-400">
+                  In Chipiyana Buzurg, Ghaziabad
+                </span>
+              </>
+            )}
           </h1>
 
           <p className="text-base sm:text-lg lg:text-xl text-slate-300 max-w-2xl mx-auto md:mx-0 font-normal leading-relaxed drop-shadow-md">
-            Whether you need emergency toothache relief, dental implants, teeth cleaning, or a complete smile consultation—we are here to guide you with personal care and modern technology.
+            {language === 'hi'
+              ? 'दांत दर्द, डेंटल इम्प्लांट, दांतों की सफाई या संपूर्ण मुस्कान परामर्श—हम आधुनिक तकनीक और व्यक्तिगत देखभाल के साथ आपकी मदद करते हैं।'
+              : 'Whether you need emergency toothache relief, dental implants, teeth cleaning, or a complete smile consultation—we are here to guide you with personal care and modern technology.'}
           </p>
 
           {/* Interactive Conversational Prompt Chips */}

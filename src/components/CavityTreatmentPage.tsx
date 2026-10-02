@@ -13,6 +13,8 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { InteractiveButton } from './InteractiveButton';
+import { TreatmentImage } from './TreatmentImage';
+import { Breadcrumbs } from './Breadcrumbs';
 
 interface CavityTreatmentPageProps {
   handleCall: () => void;
@@ -99,21 +101,15 @@ export default function CavityTreatmentPage({
 
   return (
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed">
-      <div className="bg-slate-900 text-white py-3 px-4 border-b border-slate-800">
-        <div className="max-w-7xl mx-auto flex items-center justify-between text-xs sm:text-sm">
-          <div className="flex items-center gap-2 text-slate-400">
-            <button onClick={navigateToHome} className="hover:text-amber-400 flex items-center gap-1">
-              <ArrowLeft className="w-3.5 h-3.5" /> Home
-            </button>
-            <span>/</span>
-            <span className="text-amber-400 font-medium">Cavity Treatment</span>
-          </div>
-          <div className="hidden sm:flex items-center gap-4 text-slate-300">
-            <span><MapPin className="w-3.5 h-3.5 text-amber-500 inline mr-1" /> Chipiyana Buzurg, Ghaziabad</span>
-            <span><Clock className="w-3.5 h-3.5 text-amber-500 inline mr-1" /> 10 AM–2 PM | 5 PM–9 PM</span>
-          </div>
-        </div>
-      </div>
+      <Breadcrumbs
+        items={[
+          { label: 'Dental Treatments', path: '/#services' },
+          { label: 'Cavity Treatment', path: '/cavity-treatment' }
+        ]}
+        navigateToHome={navigateToHome}
+        navigateToPath={navigateToPath}
+        badge="Tooth Decay Care"
+      />
 
       <section className="relative bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 text-white pt-12 pb-16 px-4">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -156,6 +152,12 @@ export default function CavityTreatmentPage({
 
           <div className="lg:col-span-5 bg-slate-900/90 border border-slate-800 p-6 rounded-3xl space-y-4">
             <h3 className="text-white font-bold text-lg">Cavity Progression Stages</h3>
+            <TreatmentImage
+              src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=80"
+              alt="Educational diagram showing progression of tooth decay from enamel into dentin and pulp"
+              caption="Educational diagram: Cavity decay progression from superficial enamel demineralization to deep dentin involvement."
+              aspectRatio="4/3"
+            />
             <ul className="space-y-2 text-xs text-slate-300">
               <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-blue-400" /> Enamel Demineralization: White/dark spot on tooth surface</li>
               <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-blue-400" /> Dentin Cavitation: Sensitivity to sweets and cold water</li>

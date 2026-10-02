@@ -30,6 +30,9 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { InteractiveButton } from './InteractiveButton';
+import { TreatmentImage } from './TreatmentImage';
+import { Breadcrumbs } from './Breadcrumbs';
+import { preloadImages } from '../utils/imagePreloader';
 
 interface TeethCleaningPageProps {
   handleCall: () => void;
@@ -175,6 +178,12 @@ export default function TeethCleaningPage({
     scriptFaq.text = JSON.stringify(faqSchema);
     document.head.appendChild(scriptFaq);
 
+    // Preload critical teeth cleaning images
+    preloadImages([
+      "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=80"
+    ]);
+
     return () => {
       document.head.removeChild(scriptDentist);
       document.head.removeChild(scriptBreadcrumb);
@@ -188,25 +197,15 @@ export default function TeethCleaningPage({
 
   return (
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed">
-      {/* Top Breadcrumb Header Bar */}
-      <div className="bg-slate-900 text-white py-3 px-4 border-b border-slate-800">
-        <div className="max-w-7xl mx-auto flex items-center justify-between text-xs sm:text-sm">
-          <div className="flex items-center gap-2 text-slate-400">
-            <button 
-              onClick={navigateToHome}
-              className="hover:text-amber-400 flex items-center gap-1 transition-colors"
-            >
-              <ArrowLeft className="w-3.5 h-3.5" /> Home
-            </button>
-            <span>/</span>
-            <span className="text-amber-400 font-medium">Teeth Cleaning & Dental Scaling</span>
-          </div>
-          <div className="hidden sm:flex items-center gap-4 text-slate-300">
-            <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5 text-amber-500" /> Chipiyana Buzurg, Ghaziabad</span>
-            <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5 text-amber-500" /> 10 AM–2 PM | 5 PM–9 PM</span>
-          </div>
-        </div>
-      </div>
+      <Breadcrumbs
+        items={[
+          { label: 'Dental Treatments', path: '/#services' },
+          { label: 'Teeth Cleaning & Scaling', path: '/teeth-cleaning' }
+        ]}
+        navigateToHome={navigateToHome}
+        navigateToPath={navigateToPath}
+        badge="Oral Hygiene Care"
+      />
 
       {/* 1. HERO SECTION */}
       <section className="relative bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 text-white pt-12 pb-16 px-4 overflow-hidden">
@@ -501,6 +500,22 @@ export default function TeethCleaningPage({
             <p className="text-slate-600 leading-relaxed">
               Plaque and calculus harbour active bacterial colonies. When allowed to rest against gum tissue, they trigger localized inflammation known as <strong>gingivitis</strong> (characterized by redness and bleeding). If left unmanaged over time, gingivitis can progress to <strong>periodontitis</strong>, affecting deep periodontal ligament attachment and supporting bone.
             </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-4">
+              <TreatmentImage
+                src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=1000&q=80"
+                alt="Educational illustration of plaque biofilm and hard calculus accumulation along tooth surfaces"
+                caption="Educational diagram: Plaque biofilm and hard tartar accumulation along the gum margin causing gingival redness."
+                aspectRatio="4/3"
+              />
+              <TreatmentImage
+                src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80"
+                alt="Educational diagram illustrating professional dental ultrasonic scaling and plaque removal"
+                caption="Educational diagram: Professional ultrasonic scaling tip gently vibrating away hardened tartar deposits."
+                aspectRatio="4/3"
+              />
+            </div>
+
             <p className="text-slate-600 text-sm leading-relaxed">
               Dental scaling removes the bacterial irritants, giving gum tissues a clean environment to calm down and heal. However, advanced periodontal conditions may require specialized long-term maintenance.
             </p>
@@ -572,6 +587,21 @@ export default function TeethCleaningPage({
                   </tr>
                 </tbody>
               </table>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+              <TreatmentImage
+                src="https://i.postimg.cc/FsZjZccD/Chat-GPT-Image-Jun-23-2026-07-40-02-PM.png"
+                alt="Diagram showing gingivitis inflammation and preventative periodontal scaling care"
+                caption="Educational diagram: Gingivitis inflammation stages and periodontal prevention through scaling."
+                aspectRatio="4/3"
+              />
+              <TreatmentImage
+                src="https://i.postimg.cc/FHT82Ytw/Chat-GPT-Image-Jun-23-2026-07-42-37-PM.png"
+                alt="Educational comparison showing differences between dental scaling cleaning and cosmetic whitening"
+                caption="Educational illustration: Clinical distinction between dental scaling (tartar removal) and whitening."
+                aspectRatio="4/3"
+              />
             </div>
           </div>
 

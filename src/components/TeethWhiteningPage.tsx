@@ -26,6 +26,9 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { InteractiveButton } from './InteractiveButton';
+import { TreatmentImage } from './TreatmentImage';
+import { Breadcrumbs } from './Breadcrumbs';
+import { preloadImages } from '../utils/imagePreloader';
 
 interface TeethWhiteningPageProps {
   handleCall: () => void;
@@ -200,6 +203,12 @@ export default function TeethWhiteningPage({
     scriptFaq.innerHTML = JSON.stringify(faqSchema);
     document.head.appendChild(scriptFaq);
 
+    // Preload critical teeth whitening images
+    preloadImages([
+      "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80"
+    ]);
+
     window.scrollTo(0, 0);
 
     return () => {
@@ -354,31 +363,16 @@ export default function TeethWhiteningPage({
 
   return (
     <div className="bg-slate-50 text-slate-900 font-sans leading-relaxed">
-      {/* Breadcrumb Navigation */}
-      <nav className="bg-slate-900 text-slate-300 py-3 px-4 sm:px-8 text-sm border-b border-slate-800" aria-label="Breadcrumb">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <button 
-              onClick={navigateToHome}
-              className="hover:text-amber-400 transition-colors flex items-center gap-1 font-medium"
-            >
-              <ArrowLeft className="w-4 h-4" /> Home
-            </button>
-            <span>/</span>
-            <button
-              onClick={() => navigateToPath('/#services')}
-              className="hover:text-amber-400 transition-colors font-medium hidden sm:inline"
-            >
-              Dental Treatments
-            </button>
-            <span className="hidden sm:inline">/</span>
-            <span className="text-white font-semibold truncate">Teeth Whitening</span>
-          </div>
-          <span className="text-xs bg-amber-500/20 text-amber-300 px-3 py-1 rounded-full border border-amber-500/30">
-            Cosmetic Dentistry
-          </span>
-        </div>
-      </nav>
+      {/* Semantic Breadcrumb Navigation */}
+      <Breadcrumbs
+        items={[
+          { label: 'Dental Treatments', path: '/#services' },
+          { label: 'Teeth Whitening', path: '/teeth-whitening' }
+        ]}
+        navigateToHome={navigateToHome}
+        navigateToPath={navigateToPath}
+        badge="Cosmetic Dentistry"
+      />
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-blue-950 via-indigo-950 to-slate-900 text-white py-12 md:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -506,24 +500,32 @@ export default function TeethWhiteningPage({
               </p>
             </div>
 
-            <div className="md:col-span-5 bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-3">
-              <h3 className="font-bold text-slate-900 text-base flex items-center gap-2">
-                <Info className="w-5 h-5 text-blue-600" /> Important Realistic Facts
-              </h3>
-              <ul className="space-y-2 text-sm text-slate-600">
-                <li className="flex items-start gap-2">
-                  <span className="w-2 h-2 rounded-full bg-blue-600 mt-1.5 flex-shrink-0"></span>
-                  <span><strong>Whitening works on natural teeth:</strong> Bleaching gels do not change the color of existing crowns, veneers, or fillings.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="w-2 h-2 rounded-full bg-amber-500 mt-1.5 flex-shrink-0"></span>
-                  <span><strong>Response varies:</strong> Yellowish organic stains respond better than dark greyish intrinsic stains.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 mt-1.5 flex-shrink-0"></span>
-                  <span><strong>Pre-whitening examination:</strong> Ensures teeth are free of untreated cavities and active gum disease before bleaching.</span>
-                </li>
-              </ul>
+            <div className="md:col-span-5 space-y-4">
+              <TreatmentImage
+                src="https://i.postimg.cc/FsZjZccD/Chat-GPT-Image-Jun-23-2026-07-40-02-PM.png"
+                alt="Educational illustration showing extrinsic enamel surface staining and intrinsic dentin discoloration"
+                caption="Educational illustration: Extrinsic surface enamel stains vs intrinsic dentin shade variations."
+                aspectRatio="4/3"
+              />
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                <h3 className="font-bold text-slate-900 text-sm flex items-center gap-2">
+                  <Info className="w-4 h-4 text-blue-600" /> Important Realistic Facts
+                </h3>
+                <ul className="space-y-2 text-xs text-slate-600">
+                  <li className="flex items-start gap-2">
+                    <span className="w-2 h-2 rounded-full bg-blue-600 mt-1 flex-shrink-0"></span>
+                    <span><strong>Natural teeth only:</strong> Bleaching gels do not change crown, veneer, or filling color.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-2 h-2 rounded-full bg-amber-500 mt-1 flex-shrink-0"></span>
+                    <span><strong>Response varies:</strong> Organic yellow tones lighten more predictably than greyish tones.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 mt-1 flex-shrink-0"></span>
+                    <span><strong>Pre-bleaching check:</strong> Ensures cavity-free enamel and healthy gums before gel application.</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -644,6 +646,21 @@ export default function TeethWhiteningPage({
               </li>
             </ul>
           </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+          <TreatmentImage
+            src="https://i.postimg.cc/FHT82Ytw/Chat-GPT-Image-Jun-23-2026-07-42-37-PM.png"
+            alt="Educational diagram showing professional in-office teeth whitening treatment application"
+            caption="Educational diagram: Professional in-office whitening procedure with protective gingival barrier."
+            aspectRatio="4/3"
+          />
+          <TreatmentImage
+            src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1000&q=80"
+            alt="Educational diagram of custom dental whitening trays and shade maintenance guidelines"
+            caption="Educational diagram: Custom dentist-supervised whitening tray application for home maintenance."
+            aspectRatio="4/3"
+          />
         </div>
       </section>
 

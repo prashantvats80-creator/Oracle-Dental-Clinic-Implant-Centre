@@ -26,6 +26,9 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { InteractiveButton } from './InteractiveButton';
+import { TreatmentImage } from './TreatmentImage';
+import { Breadcrumbs } from './Breadcrumbs';
+import { preloadImages } from '../utils/imagePreloader';
 
 interface WisdomToothPageProps {
   handleCall: () => void;
@@ -200,6 +203,12 @@ export default function WisdomToothPage({
     scriptFaq.innerHTML = JSON.stringify(faqSchema);
     document.head.appendChild(scriptFaq);
 
+    // Preload wisdom tooth images
+    preloadImages([
+      "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=80"
+    ]);
+
     window.scrollTo(0, 0);
 
     return () => {
@@ -342,31 +351,16 @@ export default function WisdomToothPage({
 
   return (
     <div className="bg-slate-50 text-slate-900 font-sans leading-relaxed">
-      {/* Breadcrumb Navigation */}
-      <nav className="bg-slate-900 text-slate-300 py-3 px-4 sm:px-8 text-sm border-b border-slate-800" aria-label="Breadcrumb">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <button 
-              onClick={navigateToHome}
-              className="hover:text-amber-400 transition-colors flex items-center gap-1 font-medium"
-            >
-              <ArrowLeft className="w-4 h-4" /> Home
-            </button>
-            <span>/</span>
-            <button
-              onClick={() => navigateToPath('/#services')}
-              className="hover:text-amber-400 transition-colors font-medium hidden sm:inline"
-            >
-              Dental Treatments
-            </button>
-            <span className="hidden sm:inline">/</span>
-            <span className="text-white font-semibold truncate">Wisdom Tooth Extraction</span>
-          </div>
-          <span className="text-xs bg-rose-500/20 text-rose-300 px-3 py-1 rounded-full border border-rose-500/30">
-            Oral Surgery Care
-          </span>
-        </div>
-      </nav>
+      {/* Semantic Breadcrumb Navigation */}
+      <Breadcrumbs
+        items={[
+          { label: 'Dental Treatments', path: '/#services' },
+          { label: 'Wisdom Tooth Extraction', path: '/wisdom-tooth-extraction' }
+        ]}
+        navigateToHome={navigateToHome}
+        navigateToPath={navigateToPath}
+        badge="Oral Surgery Care"
+      />
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-blue-950 via-indigo-950 to-slate-900 text-white py-12 md:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -494,24 +488,33 @@ export default function WisdomToothPage({
               </p>
             </div>
 
-            <div className="md:col-span-5 bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-3">
-              <h3 className="font-bold text-slate-900 text-base flex items-center gap-2">
-                <Info className="w-5 h-5 text-blue-600" /> Key Clinical Facts
-              </h3>
-              <ul className="space-y-2 text-sm text-slate-600">
-                <li className="flex items-start gap-2">
-                  <span className="w-2 h-2 rounded-full bg-blue-600 mt-1.5 flex-shrink-0"></span>
-                  <span><strong>Not every wisdom tooth requires extraction:</strong> Healthy, cleanable, fully erupted teeth can often be retained.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="w-2 h-2 rounded-full bg-amber-500 mt-1.5 flex-shrink-0"></span>
-                  <span><strong>Extraction indications:</strong> Considered when there is pain, recurrent swelling, decay, or risk to adjacent teeth.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 mt-1.5 flex-shrink-0"></span>
-                  <span><strong>Pre-operative imaging:</strong> Dental X-rays evaluate root shapes and nerve proximity prior to treatment.</span>
-                </li>
-              </ul>
+            <div className="md:col-span-5 space-y-4">
+              <TreatmentImage
+                src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80"
+                alt="Educational illustration comparing normal erupting wisdom tooth with an impacted third molar"
+                caption="Educational diagram: Fully erupted normal tooth vs partially impacted third molar angled against second molar."
+                aspectRatio="4/3"
+                priority={true}
+              />
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                <h3 className="font-bold text-slate-900 text-sm flex items-center gap-2">
+                  <Info className="w-4 h-4 text-blue-600" /> Key Clinical Facts
+                </h3>
+                <ul className="space-y-2 text-xs text-slate-600">
+                  <li className="flex items-start gap-2">
+                    <span className="w-2 h-2 rounded-full bg-blue-600 mt-1 flex-shrink-0"></span>
+                    <span><strong>Not every wisdom tooth requires extraction:</strong> Cleanable, healthy teeth can be retained.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-2 h-2 rounded-full bg-amber-500 mt-1 flex-shrink-0"></span>
+                    <span><strong>Indications for extraction:</strong> Recurrent swelling, painful impaction, or risk to neighboring teeth.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 mt-1 flex-shrink-0"></span>
+                    <span><strong>Pre-op X-rays:</strong> OPG imaging assesses root curvature and mandibular nerve proximity.</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -618,6 +621,21 @@ export default function WisdomToothPage({
             </p>
           </div>
 
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+            <TreatmentImage
+              src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=1000&q=80"
+              alt="Diagram showing different clinical types of wisdom tooth impactions in the lower jaw"
+              caption="Educational diagram: Clinical classifications of wisdom tooth impaction (Mesial, Horizontal, Vertical, Distal)."
+              aspectRatio="4/3"
+            />
+            <TreatmentImage
+              src="https://i.postimg.cc/Zqd8SQBw/Chat-GPT-Image-Jun-23-2026-08-17-03-PM.png"
+              alt="Educational OPG X-ray illustration showing an impacted lower wisdom tooth position"
+              caption="Educational OPG X-ray view: Radiographic evaluation of an impacted mandibular 3rd molar."
+              aspectRatio="4/3"
+            />
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
@@ -716,6 +734,15 @@ export default function WisdomToothPage({
                 <p className="text-slate-600 text-sm leading-relaxed">{step.desc}</p>
               </div>
             ))}
+          </div>
+
+          <div className="mt-8 max-w-3xl mx-auto">
+            <TreatmentImage
+              src="https://i.postimg.cc/VkyshHw1/Chat-GPT-Image-Jun-23-2026-08-42-13-PM.png"
+              alt="Educational illustration of surgical wisdom tooth extraction procedure and socket healing"
+              caption="Educational illustration: Surgical wisdom tooth extraction and socket blood clot preservation protocol."
+              aspectRatio="16/9"
+            />
           </div>
         </div>
       </section>

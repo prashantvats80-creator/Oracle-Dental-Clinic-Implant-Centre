@@ -23,6 +23,8 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { InteractiveButton } from './InteractiveButton';
+import { TreatmentImage } from './TreatmentImage';
+import { Breadcrumbs } from './Breadcrumbs';
 
 interface ToothPainPageProps {
   handleCall: () => void;
@@ -122,22 +124,15 @@ export default function ToothPainPage({
 
   return (
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed">
-      {/* Breadcrumb Header */}
-      <div className="bg-slate-900 text-white py-3 px-4 border-b border-slate-800">
-        <div className="max-w-7xl mx-auto flex items-center justify-between text-xs sm:text-sm">
-          <div className="flex items-center gap-2 text-slate-400">
-            <button onClick={navigateToHome} className="hover:text-amber-400 flex items-center gap-1">
-              <ArrowLeft className="w-3.5 h-3.5" /> Home
-            </button>
-            <span>/</span>
-            <span className="text-amber-400 font-medium">Tooth Pain Treatment</span>
-          </div>
-          <div className="hidden sm:flex items-center gap-4 text-slate-300">
-            <span><MapPin className="w-3.5 h-3.5 text-amber-500 inline mr-1" /> Chipiyana Buzurg, Ghaziabad</span>
-            <span><Clock className="w-3.5 h-3.5 text-amber-500 inline mr-1" /> 10 AM–2 PM | 5 PM–9 PM</span>
-          </div>
-        </div>
-      </div>
+      <Breadcrumbs
+        items={[
+          { label: 'Dental Symptoms', path: '/#symptoms' },
+          { label: 'Tooth Pain Relief', path: '/tooth-pain' }
+        ]}
+        navigateToHome={navigateToHome}
+        navigateToPath={navigateToPath}
+        badge="Emergency Relief"
+      />
 
       {/* HERO SECTION */}
       <section className="relative bg-gradient-to-br from-slate-950 via-rose-950 to-slate-900 text-white pt-12 pb-16 px-4 overflow-hidden">
@@ -209,6 +204,22 @@ export default function ToothPainPage({
 
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-slate-900">Common Causes of Toothache</h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-4">
+              <TreatmentImage
+                src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=1000&q=80"
+                alt="Educational diagram illustrating deep cavity decay causing nerve pulp inflammation and toothache"
+                caption="Educational diagram: Deep enamel decay reaching inner pulp nerve causing throbbing tooth pain."
+                aspectRatio="4/3"
+              />
+              <TreatmentImage
+                src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=80"
+                alt="Educational illustration showing professional clinical examination for toothache diagnosis"
+                caption="Educational illustration: Clinical diagnostic examination and X-ray evaluation to identify pain root causes."
+                aspectRatio="4/3"
+              />
+            </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {[
                 { title: "Dental Cavities", desc: "Decay penetrating enamel into dentin or nerve pulp." },

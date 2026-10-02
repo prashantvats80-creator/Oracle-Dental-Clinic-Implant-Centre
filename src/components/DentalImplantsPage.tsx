@@ -25,6 +25,9 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { InteractiveButton } from './InteractiveButton';
+import { TreatmentImage } from './TreatmentImage';
+import { Breadcrumbs } from './Breadcrumbs';
+import { preloadImages } from '../utils/imagePreloader';
 import { GBP_CONFIG } from '../config/googleBusinessProfile';
 
 interface DentalImplantsPageProps {
@@ -216,6 +219,13 @@ export default function DentalImplantsPage({
     scriptFaq.innerHTML = JSON.stringify(faqSchema);
     document.head.appendChild(scriptFaq);
 
+    // Preload critical treatment images for instant scroll availability
+    preloadImages([
+      "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1000&q=80",
+      "https://i.postimg.cc/K88srmK7/Chat-GPT-Image-Jun-23-2026-07-48-17-PM.png",
+      "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=1000&q=80"
+    ]);
+
     window.scrollTo(0, 0);
 
     return () => {
@@ -370,31 +380,16 @@ export default function DentalImplantsPage({
 
   return (
     <div className="bg-slate-50 text-slate-900 font-sans leading-relaxed">
-      {/* Breadcrumb Navigation */}
-      <nav className="bg-slate-900 text-slate-300 py-3 px-4 sm:px-8 text-sm border-b border-slate-800" aria-label="Breadcrumb">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <button 
-              onClick={navigateToHome}
-              className="hover:text-amber-400 transition-colors flex items-center gap-1 font-medium"
-            >
-              <ArrowLeft className="w-4 h-4" /> Home
-            </button>
-            <span>/</span>
-            <button
-              onClick={() => navigateToPath('/#services')}
-              className="hover:text-amber-400 transition-colors font-medium hidden sm:inline"
-            >
-              Dental Treatments
-            </button>
-            <span className="hidden sm:inline">/</span>
-            <span className="text-white font-semibold truncate">Dental Implants</span>
-          </div>
-          <span className="text-xs bg-amber-500/20 text-amber-300 px-3 py-1 rounded-full border border-amber-500/30">
-            Implant Care Pillar
-          </span>
-        </div>
-      </nav>
+      {/* Semantic Breadcrumb Navigation */}
+      <Breadcrumbs
+        items={[
+          { label: 'Dental Treatments', path: '/#services' },
+          { label: 'Dental Implants', path: '/dental-implants' }
+        ]}
+        navigateToHome={navigateToHome}
+        navigateToPath={navigateToPath}
+        badge="Implant Care Pillar"
+      />
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-blue-950 via-indigo-950 to-slate-900 text-white py-12 md:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -522,22 +517,31 @@ export default function DentalImplantsPage({
               </p>
             </div>
 
-            <div className="md:col-span-5 bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4">
-              <h3 className="font-bold text-slate-900 text-base flex items-center gap-2">
-                <Layers className="w-5 h-5 text-blue-600" /> The 3 Main Components
-              </h3>
-              <div className="space-y-3 text-sm text-slate-600">
-                <div className="bg-white p-3 rounded-xl border border-slate-200">
-                  <p className="font-bold text-slate-900">1. Implant Fixture</p>
-                  <p className="text-xs">The titanium screw placed into the jawbone acting as the artificial root.</p>
-                </div>
-                <div className="bg-white p-3 rounded-xl border border-slate-200">
-                  <p className="font-bold text-slate-900">2. Abutment</p>
-                  <p className="text-xs">The connector piece fitted atop the implant to hold the crown securely.</p>
-                </div>
-                <div className="bg-white p-3 rounded-xl border border-slate-200">
-                  <p className="font-bold text-slate-900">3. Prosthetic Crown</p>
-                  <p className="text-xs">The visible, ceramic/zirconia artificial tooth shaped and colored like a natural tooth.</p>
+            <div className="md:col-span-5 space-y-4">
+              <TreatmentImage
+                src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1000&q=80"
+                alt="Educational illustration showing dental implant components including titanium fixture, abutment connector, and prosthetic crown"
+                caption="Educational illustration showing the 3 main parts of a dental implant: titanium post, abutment, and custom crown."
+                aspectRatio="4/3"
+                priority={true}
+              />
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                <h3 className="font-bold text-slate-900 text-sm flex items-center gap-2">
+                  <Layers className="w-4 h-4 text-blue-600" /> Key Structural Components
+                </h3>
+                <div className="space-y-2 text-xs text-slate-600">
+                  <div className="bg-white p-2.5 rounded-xl border border-slate-200">
+                    <p className="font-bold text-slate-900">1. Implant Fixture</p>
+                    <p className="text-[11px]">The titanium screw placed into the jawbone acting as the artificial root.</p>
+                  </div>
+                  <div className="bg-white p-2.5 rounded-xl border border-slate-200">
+                    <p className="font-bold text-slate-900">2. Abutment</p>
+                    <p className="text-[11px]">The connector piece fitted atop the implant to hold the crown securely.</p>
+                  </div>
+                  <div className="bg-white p-2.5 rounded-xl border border-slate-200">
+                    <p className="font-bold text-slate-900">3. Prosthetic Crown</p>
+                    <p className="text-[11px]">The visible, ceramic/zirconia artificial tooth shaped like a natural tooth.</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -582,6 +586,15 @@ export default function DentalImplantsPage({
                 <p className="text-slate-600 text-sm leading-relaxed">{reason.desc}</p>
               </div>
             ))}
+          </div>
+
+          <div className="mt-8 max-w-4xl mx-auto">
+            <TreatmentImage
+              src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80"
+              alt="Educational diagram comparing single missing tooth replacement with a fixed dental implant"
+              caption="Educational diagram: Missing tooth replacement using a standalone dental implant vs traditional tooth-supported bridges."
+              aspectRatio="16/9"
+            />
           </div>
         </div>
       </section>
@@ -688,6 +701,21 @@ export default function DentalImplantsPage({
                 Refers to attaching a <strong>provisional tooth crown or bridge onto the implant</strong> on the same day or within 48 hours of surgery. This requires exceptional initial primary stability in dense bone.
               </p>
             </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+            <TreatmentImage
+              src="https://i.postimg.cc/K88srmK7/Chat-GPT-Image-Jun-23-2026-07-48-17-PM.png"
+              alt="Educational diagram illustrating bone integration and osseointegration of a dental implant post in jawbone"
+              caption="Educational diagram: Biological osseointegration where jawbone fuses around titanium implant post."
+              aspectRatio="4/3"
+            />
+            <TreatmentImage
+              src="https://i.postimg.cc/QMR4356D/Chat-GPT-Image-Jun-23-2026-07-50-45-PM.png"
+              alt="Educational illustration showing multi-unit implant-supported bridge and full-arch rehabilitation concept"
+              caption="Educational illustration: Multi-unit implant bridge anchoring multiple missing teeth securely."
+              aspectRatio="4/3"
+            />
           </div>
         </div>
       </section>

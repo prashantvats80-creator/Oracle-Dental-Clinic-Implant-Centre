@@ -27,7 +27,12 @@ import Hero from './components/Hero';
 import BeforeAfter from './components/BeforeAfter';
 import SEOHead from './components/SEOHead';
 import ScrollProgressBar from './components/ScrollProgressBar';
+import LanguageSwitcher from './components/LanguageSwitcher';
+import { useLanguage } from './context/LanguageContext';
 import { GBP_CONFIG } from './config/googleBusinessProfile';
+import { preloadAllTopRoutes, preloadRoute } from './utils/routePreloader';
+import SkeletonHero from './components/SkeletonHero';
+import { SkeletonCardGrid } from './components/SkeletonCard';
 
 const Services = lazy(() => import('./components/Services'));
 const WhyUs = lazy(() => import('./components/WhyUs'));
@@ -82,8 +87,169 @@ function AppContent() {
   useEffect(() => {
     const handlePopState = () => setCurrentPath(window.location.pathname);
     window.addEventListener('popstate', handlePopState);
+    preloadAllTopRoutes();
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
+
+  // Ensure JSON-LD 'WebSite' and 'LocalBusiness' schema markup is consistently active across all pages
+  useEffect(() => {
+    const origin = window.location.origin;
+
+    // 1. WebSite Schema
+    const websiteSchema = {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": `${origin}/#website`,
+      "url": origin,
+      "name": GBP_CONFIG.BUSINESS_NAME,
+      "alternateName": [
+        "Oracle Dental Clinic",
+        "Oracle Dental",
+        "Oracle Dental Clinic & Implant Center"
+      ],
+      "description": "Official website of Oracle Dental Clinic & Implant Center in Ghaziabad and Chipiyana Buzurg. Providing advanced dental implants, painless root canal treatment, clear aligners, and comprehensive family dentistry.",
+      "inLanguage": "en-US",
+      "publisher": {
+        "@id": `${origin}/#localbusiness`
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": `${origin}/?s={search_term_string}`
+        },
+        "query-input": "required name=search_term_string"
+      }
+    };
+
+    // 2. LocalBusiness / Dentist Schema
+    const localBusinessSchema = {
+      "@context": "https://schema.org",
+      "@type": ["Dentist", "LocalBusiness", "MedicalBusiness"],
+      "@id": `${origin}/#localbusiness`,
+      "name": GBP_CONFIG.BUSINESS_NAME,
+      "legalName": "Oracle Dental Clinic & Implant Center",
+      "alternateName": [
+        "Oracle Dental Clinic",
+        "Oracle Dental Clinic Chipiyana",
+        "Best Dentist in Ghaziabad"
+      ],
+      "url": origin,
+      "logo": "https://i.postimg.cc/tCd8wLDv/Chat-GPT-Image-Apr-22-2026-08-21-13-PM.png",
+      "image": [
+        "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=800&q=80",
+        "https://i.postimg.cc/tCd8wLDv/Chat-GPT-Image-Apr-22-2026-08-21-13-PM.png"
+      ],
+      "telephone": GBP_CONFIG.PHONE,
+      "priceRange": "₹₹",
+      "currenciesAccepted": "INR",
+      "paymentAccepted": "Cash, Credit Card, Debit Card, UPI, Google Pay, PhonePe, Paytm, Net Banking",
+      "medicalSpecialty": [
+        "Dentistry",
+        "Endodontics",
+        "Implantology",
+        "Orthodontics",
+        "Periodontics",
+        "PediatricDentistry",
+        "CosmeticDentistry"
+      ],
+      "founder": {
+        "@type": "Person",
+        "name": "Dr. Prashant Kumar Vats",
+        "jobTitle": "Dental Surgeon & Implantologist",
+        "honorificSuffix": "BDS"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "KTS Complex, Jaat Chowk, Chipiyana Buzurg, near ABES Engineering College",
+        "addressLocality": "Ghaziabad",
+        "addressRegion": "Uttar Pradesh",
+        "postalCode": "201009",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 28.6280,
+        "longitude": 77.4520
+      },
+      "hasMap": GBP_CONFIG.GOOGLE_MAPS_DIRECTIONS_URL,
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+          "opens": "10:00",
+          "closes": "14:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+          "opens": "17:00",
+          "closes": "21:00"
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": GBP_CONFIG.FALLBACK_RATING.toString(),
+        "reviewCount": GBP_CONFIG.FALLBACK_REVIEW_COUNT.toString(),
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=100083436112014",
+        "https://www.instagram.com/oracledentalclinic0/",
+        "https://www.youtube.com/@OracleDentalClinic0",
+        GBP_CONFIG.GOOGLE_BUSINESS_PROFILE_URL
+      ],
+      "areaServed": [
+        { "@type": "AdministrativeArea", "name": "Chipiyana Buzurg" },
+        { "@type": "AdministrativeArea", "name": "Ghaziabad" },
+        { "@type": "AdministrativeArea", "name": "Greater Noida" },
+        { "@type": "AdministrativeArea", "name": "Greater Noida West" },
+        { "@type": "AdministrativeArea", "name": "Noida Extension" },
+        { "@type": "AdministrativeArea", "name": "Crossing Republik" },
+        { "@type": "AdministrativeArea", "name": "Lal Kuan" },
+        { "@type": "AdministrativeArea", "name": "Shahberi" },
+        { "@type": "AdministrativeArea", "name": "ABES Engineering College Area" }
+      ]
+    };
+
+    const updateOrCreateJsonLd = (id: string, schemaObj: object) => {
+      let script = document.getElementById(id) as HTMLScriptElement | null;
+      if (!script) {
+        script = document.createElement('script');
+        script.id = id;
+        script.type = 'application/ld+json';
+        document.head.appendChild(script);
+      }
+      script.text = JSON.stringify(schemaObj);
+    };
+
+    updateOrCreateJsonLd('app-jsonld-website', websiteSchema);
+    updateOrCreateJsonLd('app-jsonld-localbusiness', localBusinessSchema);
+  }, [currentPath]);
+
+  const normalizePath = (path: string) => {
+    if (!path || path === '/' || path === '') return '/';
+    let clean = path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path;
+    const knownRoutes = [
+      '/wisdom-tooth-extraction', '/tooth-pain-treatment', '/bleeding-gums',
+      '/tooth-sensitivity', '/bad-breath-treatment', '/loose-tooth-treatment',
+      '/broken-tooth-treatment', '/chipped-tooth', '/black-tooth',
+      '/missing-teeth', '/cavity-treatment', '/gum-disease-treatment',
+      '/swollen-gums', '/gum-recession', '/tooth-cap', '/tooth-extraction',
+      '/emergency-dentist', '/kids-dentist', '/dental-fillings',
+      '/dental-bridges', '/dentures', '/teeth-cleaning', '/teeth-whitening',
+      '/dental-implants', '/root-canal-treatment', '/dentist-chipiyana-buzurg-ghaziabad'
+    ];
+    for (const route of knownRoutes) {
+      if (clean.endsWith(route)) {
+        return route;
+      }
+    }
+    return clean;
+  };
+
+  const activeRoute = normalizePath(currentPath);
 
   const navigateToPath = (path: string) => {
     window.history.pushState({}, '', path);
@@ -284,6 +450,7 @@ function AppContent() {
           <a href={`tel:${phoneNumber}`} className="flex items-center gap-1.5 font-bold hover:text-amber-400 transition-colors">
             <PhoneCall className="w-4 h-4 animate-bounce" style={{ animationDuration: '3s' }} /> {phoneNumberFormatted}
           </a>
+          <LanguageSwitcher variant="topbar" />
         </div>
       </div>
 
@@ -388,6 +555,8 @@ function AppContent() {
                           <li key={idx}>
                             <a 
                               href={item.path}
+                              onMouseEnter={() => preloadRoute(item.path)}
+                              onTouchStart={() => preloadRoute(item.path)}
                               onClick={(e) => {
                                 e.preventDefault();
                                 setIsNavDropdownOpen(false);
@@ -427,6 +596,7 @@ function AppContent() {
                   )}
                 </a>
               ))}
+              <LanguageSwitcher variant="header" />
               <InteractiveButton 
                 id="mute-toggle-desktop"
                 onClick={toggleMute}
@@ -439,6 +609,7 @@ function AppContent() {
 
             {/* Mobile menu button and volume toggle */}
             <div className="flex items-center md:hidden gap-2">
+              <LanguageSwitcher variant="topbar" />
               <InteractiveButton 
                 id="mute-toggle-mobile"
                 onClick={toggleMute}
@@ -465,8 +636,8 @@ function AppContent() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="md:hidden bg-white border-t border-slate-100 absolute w-full shadow-2xl overflow-y-auto max-h-[85vh] z-50 left-0 top-full"
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="md:hidden bg-white border-t border-slate-100 absolute w-full shadow-2xl overflow-y-auto max-h-[85vh] z-50 left-0 top-full transform-gpu will-change-transform"
             >
               <div className="px-4 pt-2 pb-6 space-y-2">
                 <a 
@@ -476,95 +647,118 @@ function AppContent() {
                     setIsMenuOpen(false);
                     navigateToPath('/dentist-chipiyana-buzurg-ghaziabad');
                   }} 
-                  className="block px-4 py-3 text-sm font-extrabold text-amber-900 bg-amber-50 rounded-xl border-l-4 border-amber-500 my-1 flex items-center justify-between"
+                  className="block px-4 py-3 text-sm font-extrabold text-amber-900 bg-amber-50/90 rounded-xl border-l-4 border-amber-500 my-1 flex items-center justify-between active:scale-[0.99] transition-transform"
                 >
                   <span className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-amber-600" /> Dentist in Chipiyana
+                    <MapPin className="w-4 h-4 text-amber-600 shrink-0" /> Dentist in Chipiyana
                   </span>
-                  <span className="text-xs font-bold uppercase bg-amber-200 text-amber-900 px-2 py-0.5 rounded-md">Branch</span>
+                  <span className="text-xs font-bold uppercase bg-amber-200/80 text-amber-900 px-2 py-0.5 rounded-md shrink-0">Branch</span>
                 </a>
 
-                {/* Mobile Expandable All Treatments Section */}
-                <div className="border border-slate-200 rounded-xl overflow-hidden bg-slate-50">
+                {/* Mobile Expandable All Treatments Accordion with Framer Motion Layout Animation */}
+                <motion.div 
+                  layout
+                  transition={{ type: "spring", stiffness: 350, damping: 30, mass: 0.8 }}
+                  className="border border-slate-200/80 rounded-xl overflow-hidden bg-slate-50/80 transition-colors"
+                >
                   <button 
                     onClick={() => setIsMobileTreatmentsOpen(!isMobileTreatmentsOpen)}
-                    className="w-full px-4 py-3 text-sm font-bold text-slate-900 flex justify-between items-center bg-blue-50/80"
+                    type="button"
+                    aria-expanded={isMobileTreatmentsOpen}
+                    className="w-full px-4 py-3 text-sm font-bold text-slate-900 flex justify-between items-center bg-blue-50/80 active:bg-blue-100/80 transition-colors"
                   >
-                    <span>All Dental Care & Treatments (26 Pages)</span>
-                    <ChevronDown className={`w-4 h-4 text-blue-600 transition-transform ${isMobileTreatmentsOpen ? 'rotate-180' : ''}`} />
+                    <span className="truncate pr-2">All Dental Care & Treatments (26 Pages)</span>
+                    <ChevronDown className={`w-4 h-4 text-blue-600 shrink-0 transition-transform duration-300 ease-out transform-gpu ${isMobileTreatmentsOpen ? 'rotate-180' : ''}`} />
                   </button>
 
-                  {isMobileTreatmentsOpen && (
-                    <div className="p-3 bg-white space-y-3 text-xs">
-                      <div>
-                        <span className="font-extrabold text-amber-700 block uppercase mb-1">Treatments</span>
-                        <div className="grid grid-cols-1 gap-1">
-                          {[
-                            { title: 'Dental Implants', path: '/dental-implants' },
-                            { title: 'Root Canal Treatment', path: '/root-canal-treatment' },
-                            { title: 'Teeth Cleaning & Scaling', path: '/teeth-cleaning' },
-                            { title: 'Teeth Whitening', path: '/teeth-whitening' },
-                            { title: 'Wisdom Tooth Removal', path: '/wisdom-tooth-extraction' },
-                            { title: 'Tooth Cap & Crowns', path: '/tooth-cap' },
-                            { title: 'Dental Fillings', path: '/dental-fillings' },
-                            { title: 'Tooth Extraction', path: '/tooth-extraction' },
-                            { title: 'Dental Bridges', path: '/dental-bridges' },
-                            { title: 'Dentures', path: '/dentures' },
-                            { title: 'Kids Dentist', path: '/kids-dentist' },
-                            { title: 'Emergency Dentist', path: '/emergency-dentist' }
-                          ].map((item, idx) => (
-                            <a 
-                              key={idx}
-                              href={item.path}
-                              onClick={(e) => {
-                                e.preventDefault();
-                                setIsMenuOpen(false);
-                                navigateToPath(item.path);
-                              }}
-                              className="p-2 rounded-lg bg-slate-50 hover:bg-amber-100 font-medium text-slate-800"
-                            >
-                              {item.title}
-                            </a>
-                          ))}
-                        </div>
-                      </div>
+                  <AnimatePresence initial={false}>
+                    {isMobileTreatmentsOpen && (
+                      <motion.div
+                        key="treatments-accordion-content"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ type: "spring", stiffness: 320, damping: 32, mass: 0.8 }}
+                        className="overflow-hidden bg-white transform-gpu will-change-[height,opacity]"
+                      >
+                        <div className="p-3 space-y-3 text-xs border-t border-slate-100">
+                          <div>
+                            <span className="font-extrabold text-amber-700 block uppercase mb-1.5 text-[11px] tracking-wider">Treatments</span>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                              {[
+                                { title: 'Dental Implants', path: '/dental-implants' },
+                                { title: 'Root Canal Treatment', path: '/root-canal-treatment' },
+                                { title: 'Teeth Cleaning & Scaling', path: '/teeth-cleaning' },
+                                { title: 'Teeth Whitening', path: '/teeth-whitening' },
+                                { title: 'Wisdom Tooth Removal', path: '/wisdom-tooth-extraction' },
+                                { title: 'Tooth Cap & Crowns', path: '/tooth-cap' },
+                                { title: 'Dental Fillings', path: '/dental-fillings' },
+                                { title: 'Tooth Extraction', path: '/tooth-extraction' },
+                                { title: 'Dental Bridges', path: '/dental-bridges' },
+                                { title: 'Dentures', path: '/dentures' },
+                                { title: 'Kids Dentist', path: '/kids-dentist' },
+                                { title: 'Emergency Dentist', path: '/emergency-dentist' }
+                              ].map((item, idx) => (
+                                <motion.a 
+                                  key={idx}
+                                  layout="position"
+                                  href={item.path}
+                                  onMouseEnter={() => preloadRoute(item.path)}
+                                  onTouchStart={() => preloadRoute(item.path)}
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    setIsMenuOpen(false);
+                                    navigateToPath(item.path);
+                                  }}
+                                  className="p-2 rounded-lg bg-slate-50 hover:bg-amber-50 active:bg-amber-100 font-medium text-slate-800 transition-colors border border-slate-100/80 truncate block"
+                                >
+                                  {item.title}
+                                </motion.a>
+                              ))}
+                            </div>
+                          </div>
 
-                      <div className="pt-2 border-t border-slate-100">
-                        <span className="font-extrabold text-cyan-700 block uppercase mb-1">Symptoms & Conditions</span>
-                        <div className="grid grid-cols-1 gap-1">
-                          {[
-                            { title: 'Tooth Pain Treatment', path: '/tooth-pain-treatment' },
-                            { title: 'Bleeding Gums Care', path: '/bleeding-gums' },
-                            { title: 'Tooth Sensitivity Relief', path: '/tooth-sensitivity' },
-                            { title: 'Bad Breath Treatment', path: '/bad-breath-treatment' },
-                            { title: 'Loose Tooth Care', path: '/loose-tooth-treatment' },
-                            { title: 'Broken Tooth Repair', path: '/broken-tooth-treatment' },
-                            { title: 'Chipped Tooth Repair', path: '/chipped-tooth' },
-                            { title: 'Black / Dark Tooth', path: '/black-tooth' },
-                            { title: 'Missing Teeth Options', path: '/missing-teeth' },
-                            { title: 'Cavity Treatment', path: '/cavity-treatment' },
-                            { title: 'Gum Disease Care', path: '/gum-disease-treatment' },
-                            { title: 'Swollen Gums Care', path: '/swollen-gums' },
-                            { title: 'Gum Recession Care', path: '/gum-recession' }
-                          ].map((item, idx) => (
-                            <a 
-                              key={idx}
-                              href={item.path}
-                              onClick={(e) => {
-                                e.preventDefault();
-                                setIsMenuOpen(false);
-                                navigateToPath(item.path);
-                              }}
-                              className="p-2 rounded-lg bg-slate-50 hover:bg-cyan-100 font-medium text-slate-800"
-                            >
-                              {item.title}
-                            </a>
-                          ))}
+                          <div className="pt-2 border-t border-slate-100">
+                            <span className="font-extrabold text-cyan-700 block uppercase mb-1.5 text-[11px] tracking-wider">Symptoms & Conditions</span>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                              {[
+                                { title: 'Tooth Pain Treatment', path: '/tooth-pain-treatment' },
+                                { title: 'Bleeding Gums Care', path: '/bleeding-gums' },
+                                { title: 'Tooth Sensitivity Relief', path: '/tooth-sensitivity' },
+                                { title: 'Bad Breath Treatment', path: '/bad-breath-treatment' },
+                                { title: 'Loose Tooth Care', path: '/loose-tooth-treatment' },
+                                { title: 'Broken Tooth Repair', path: '/broken-tooth-treatment' },
+                                { title: 'Chipped Tooth Repair', path: '/chipped-tooth' },
+                                { title: 'Black / Dark Tooth', path: '/black-tooth' },
+                                { title: 'Missing Teeth Options', path: '/missing-teeth' },
+                                { title: 'Cavity Treatment', path: '/cavity-treatment' },
+                                { title: 'Gum Disease Care', path: '/gum-disease-treatment' },
+                                { title: 'Swollen Gums Care', path: '/swollen-gums' },
+                                { title: 'Gum Recession Care', path: '/gum-recession' }
+                              ].map((item, idx) => (
+                                <motion.a 
+                                  key={idx}
+                                  layout="position"
+                                  href={item.path}
+                                  onMouseEnter={() => preloadRoute(item.path)}
+                                  onTouchStart={() => preloadRoute(item.path)}
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    setIsMenuOpen(false);
+                                    navigateToPath(item.path);
+                                  }}
+                                  className="p-2 rounded-lg bg-slate-50 hover:bg-cyan-50 active:bg-cyan-100 font-medium text-slate-800 transition-colors border border-slate-100/80 truncate block"
+                                >
+                                  {item.title}
+                                </motion.a>
+                              ))}
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
 
                 {[
                   { id: 'transformations', label: 'Smile Results' },
@@ -574,8 +768,9 @@ function AppContent() {
                   { id: 'faq', label: 'FAQ' },
                   { id: 'contact', label: 'Contact Us' }
                 ].map((item) => (
-                  <a 
+                  <motion.a 
                     key={item.id}
+                    layout="position"
                     href={`#${item.id}`} 
                     onClick={(e) => scrollToSection(e, item.id)} 
                     className={`block px-4 py-3 text-sm font-medium rounded-xl transition-all ${
@@ -585,7 +780,7 @@ function AppContent() {
                     }`}
                   >
                     {item.label}
-                  </a>
+                  </motion.a>
                 ))}
                 <div className="flex items-center gap-6 px-4 pt-4 border-t border-slate-100">
                   <a href="https://www.facebook.com/profile.php?id=100083436112014" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-blue-600 transition-colors">
@@ -605,12 +800,8 @@ function AppContent() {
       </header>
 
       <main>
-        {currentPath === '/wisdom-tooth-extraction' ? (
-          <Suspense fallback={
-            <div className="flex justify-center items-center h-64 my-12">
-              <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-            </div>
-          }>
+        {activeRoute === '/wisdom-tooth-extraction' ? (
+          <Suspense fallback={<SkeletonHero />}>
             <WisdomToothPage 
               handleCall={handleCall}
               handleWhatsApp={handleWhatsApp}
@@ -619,106 +810,88 @@ function AppContent() {
               navigateToPath={navigateToPath}
             />
           </Suspense>
-        ) : currentPath === '/tooth-pain-treatment' ? (
-          <Suspense fallback={<div className="flex justify-center items-center h-64 my-12"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+        ) : activeRoute === '/tooth-pain-treatment' ? (
+          <Suspense fallback={<SkeletonHero />}>
             <ToothPainPage handleCall={handleCall} handleWhatsApp={handleWhatsApp} handleDirections={handleDirections} navigateToHome={() => navigateToPath('/')} navigateToPath={navigateToPath} />
           </Suspense>
-        ) : currentPath === '/bleeding-gums' ? (
-          <Suspense fallback={<div className="flex justify-center items-center h-64 my-12"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+        ) : activeRoute === '/bleeding-gums' ? (
+          <Suspense fallback={<SkeletonHero />}>
             <BleedingGumsPage handleCall={handleCall} handleWhatsApp={handleWhatsApp} handleDirections={handleDirections} navigateToHome={() => navigateToPath('/')} navigateToPath={navigateToPath} />
           </Suspense>
-        ) : currentPath === '/tooth-sensitivity' ? (
-          <Suspense fallback={<div className="flex justify-center items-center h-64 my-12"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+        ) : activeRoute === '/tooth-sensitivity' ? (
+          <Suspense fallback={<SkeletonHero />}>
             <ToothSensitivityPage handleCall={handleCall} handleWhatsApp={handleWhatsApp} handleDirections={handleDirections} navigateToHome={() => navigateToPath('/')} navigateToPath={navigateToPath} />
           </Suspense>
-        ) : currentPath === '/bad-breath-treatment' ? (
-          <Suspense fallback={<div className="flex justify-center items-center h-64 my-12"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+        ) : activeRoute === '/bad-breath-treatment' ? (
+          <Suspense fallback={<SkeletonHero />}>
             <BadBreathPage handleCall={handleCall} handleWhatsApp={handleWhatsApp} handleDirections={handleDirections} navigateToHome={() => navigateToPath('/')} navigateToPath={navigateToPath} />
           </Suspense>
-        ) : currentPath === '/loose-tooth-treatment' ? (
-          <Suspense fallback={<div className="flex justify-center items-center h-64 my-12"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+        ) : activeRoute === '/loose-tooth-treatment' ? (
+          <Suspense fallback={<SkeletonHero />}>
             <LooseToothPage handleCall={handleCall} handleWhatsApp={handleWhatsApp} handleDirections={handleDirections} navigateToHome={() => navigateToPath('/')} navigateToPath={navigateToPath} />
           </Suspense>
-        ) : currentPath === '/broken-tooth-treatment' ? (
-          <Suspense fallback={<div className="flex justify-center items-center h-64 my-12"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+        ) : activeRoute === '/broken-tooth-treatment' ? (
+          <Suspense fallback={<SkeletonHero />}>
             <BrokenToothPage handleCall={handleCall} handleWhatsApp={handleWhatsApp} handleDirections={handleDirections} navigateToHome={() => navigateToPath('/')} navigateToPath={navigateToPath} />
           </Suspense>
-        ) : currentPath === '/chipped-tooth' ? (
-          <Suspense fallback={<div className="flex justify-center items-center h-64 my-12"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+        ) : activeRoute === '/chipped-tooth' ? (
+          <Suspense fallback={<SkeletonHero />}>
             <ChippedToothPage handleCall={handleCall} handleWhatsApp={handleWhatsApp} handleDirections={handleDirections} navigateToHome={() => navigateToPath('/')} navigateToPath={navigateToPath} />
           </Suspense>
-        ) : currentPath === '/black-tooth' ? (
-          <Suspense fallback={<div className="flex justify-center items-center h-64 my-12"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+        ) : activeRoute === '/black-tooth' ? (
+          <Suspense fallback={<SkeletonHero />}>
             <BlackToothPage handleCall={handleCall} handleWhatsApp={handleWhatsApp} handleDirections={handleDirections} navigateToHome={() => navigateToPath('/')} navigateToPath={navigateToPath} />
           </Suspense>
-        ) : currentPath === '/missing-teeth' ? (
-          <Suspense fallback={<div className="flex justify-center items-center h-64 my-12"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+        ) : activeRoute === '/missing-teeth' ? (
+          <Suspense fallback={<SkeletonHero />}>
             <MissingTeethPage handleCall={handleCall} handleWhatsApp={handleWhatsApp} handleDirections={handleDirections} navigateToHome={() => navigateToPath('/')} navigateToPath={navigateToPath} />
           </Suspense>
-        ) : currentPath === '/cavity-treatment' ? (
-          <Suspense fallback={<div className="flex justify-center items-center h-64 my-12"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+        ) : activeRoute === '/cavity-treatment' ? (
+          <Suspense fallback={<SkeletonHero />}>
             <CavityTreatmentPage handleCall={handleCall} handleWhatsApp={handleWhatsApp} handleDirections={handleDirections} navigateToHome={() => navigateToPath('/')} navigateToPath={navigateToPath} />
           </Suspense>
-        ) : currentPath === '/gum-disease-treatment' ? (
-          <Suspense fallback={<div className="flex justify-center items-center h-64 my-12"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+        ) : activeRoute === '/gum-disease-treatment' ? (
+          <Suspense fallback={<SkeletonHero />}>
             <GumDiseasePage handleCall={handleCall} handleWhatsApp={handleWhatsApp} handleDirections={handleDirections} navigateToHome={() => navigateToPath('/')} navigateToPath={navigateToPath} />
           </Suspense>
-        ) : currentPath === '/swollen-gums' ? (
-          <Suspense fallback={<div className="flex justify-center items-center h-64 my-12"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+        ) : activeRoute === '/swollen-gums' ? (
+          <Suspense fallback={<SkeletonHero />}>
             <SwollenGumsPage handleCall={handleCall} handleWhatsApp={handleWhatsApp} handleDirections={handleDirections} navigateToHome={() => navigateToPath('/')} navigateToPath={navigateToPath} />
           </Suspense>
-        ) : currentPath === '/gum-recession' ? (
-          <Suspense fallback={<div className="flex justify-center items-center h-64 my-12"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+        ) : activeRoute === '/gum-recession' ? (
+          <Suspense fallback={<SkeletonHero />}>
             <GumRecessionPage handleCall={handleCall} handleWhatsApp={handleWhatsApp} handleDirections={handleDirections} navigateToHome={() => navigateToPath('/')} navigateToPath={navigateToPath} />
           </Suspense>
-        ) : currentPath === '/tooth-cap' ? (
-          <Suspense fallback={<div className="flex justify-center items-center h-64 my-12"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+        ) : activeRoute === '/tooth-cap' ? (
+          <Suspense fallback={<SkeletonHero />}>
             <ToothCapPage handleCall={handleCall} handleWhatsApp={handleWhatsApp} handleDirections={handleDirections} navigateToHome={() => navigateToPath('/')} navigateToPath={navigateToPath} />
           </Suspense>
-        ) : currentPath === '/tooth-extraction' ? (
-          <Suspense fallback={<div className="flex justify-center items-center h-64 my-12"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+        ) : activeRoute === '/tooth-extraction' ? (
+          <Suspense fallback={<SkeletonHero />}>
             <ToothExtractionPage handleCall={handleCall} handleWhatsApp={handleWhatsApp} handleDirections={handleDirections} navigateToHome={() => navigateToPath('/')} navigateToPath={navigateToPath} />
           </Suspense>
-        ) : currentPath === '/emergency-dentist' ? (
-          <Suspense fallback={<div className="flex justify-center items-center h-64 my-12"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+        ) : activeRoute === '/emergency-dentist' ? (
+          <Suspense fallback={<SkeletonHero />}>
             <EmergencyDentistPage handleCall={handleCall} handleWhatsApp={handleWhatsApp} handleDirections={handleDirections} navigateToHome={() => navigateToPath('/')} navigateToPath={navigateToPath} />
           </Suspense>
-        ) : currentPath === '/kids-dentist' ? (
-          <Suspense fallback={<div className="flex justify-center items-center h-64 my-12"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+        ) : activeRoute === '/kids-dentist' ? (
+          <Suspense fallback={<SkeletonHero />}>
             <KidsDentistPage handleCall={handleCall} handleWhatsApp={handleWhatsApp} handleDirections={handleDirections} navigateToHome={() => navigateToPath('/')} navigateToPath={navigateToPath} />
           </Suspense>
-        ) : currentPath === '/dental-fillings' ? (
-          <Suspense fallback={<div className="flex justify-center items-center h-64 my-12"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+        ) : activeRoute === '/dental-fillings' ? (
+          <Suspense fallback={<SkeletonHero />}>
             <DentalFillingsPage handleCall={handleCall} handleWhatsApp={handleWhatsApp} handleDirections={handleDirections} navigateToHome={() => navigateToPath('/')} navigateToPath={navigateToPath} />
           </Suspense>
-        ) : currentPath === '/dental-bridges' ? (
-          <Suspense fallback={<div className="flex justify-center items-center h-64 my-12"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+        ) : activeRoute === '/dental-bridges' ? (
+          <Suspense fallback={<SkeletonHero />}>
             <DentalBridgesPage handleCall={handleCall} handleWhatsApp={handleWhatsApp} handleDirections={handleDirections} navigateToHome={() => navigateToPath('/')} navigateToPath={navigateToPath} />
           </Suspense>
-        ) : currentPath === '/dentures' ? (
-          <Suspense fallback={<div className="flex justify-center items-center h-64 my-12"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+        ) : activeRoute === '/dentures' ? (
+          <Suspense fallback={<SkeletonHero />}>
             <DenturesPage handleCall={handleCall} handleWhatsApp={handleWhatsApp} handleDirections={handleDirections} navigateToHome={() => navigateToPath('/')} navigateToPath={navigateToPath} />
           </Suspense>
-        ) : currentPath === '/wisdom-tooth-extraction' ? (
-          <Suspense fallback={
-            <div className="flex justify-center items-center h-64 my-12">
-              <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-            </div>
-          }>
-            <WisdomToothPage 
-              handleCall={handleCall}
-              handleWhatsApp={handleWhatsApp}
-              handleDirections={handleDirections}
-              navigateToHome={() => navigateToPath('/')}
-              navigateToPath={navigateToPath}
-            />
-          </Suspense>
-        ) : currentPath === '/teeth-cleaning' ? (
-          <Suspense fallback={
-            <div className="flex justify-center items-center h-64 my-12">
-              <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-            </div>
-          }>
+        ) : activeRoute === '/teeth-cleaning' ? (
+          <Suspense fallback={<SkeletonHero />}>
             <TeethCleaningPage 
               handleCall={handleCall}
               handleWhatsApp={handleWhatsApp}
@@ -727,12 +900,8 @@ function AppContent() {
               navigateToPath={navigateToPath}
             />
           </Suspense>
-        ) : currentPath === '/teeth-whitening' ? (
-          <Suspense fallback={
-            <div className="flex justify-center items-center h-64 my-12">
-              <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-            </div>
-          }>
+        ) : activeRoute === '/teeth-whitening' ? (
+          <Suspense fallback={<SkeletonHero />}>
             <TeethWhiteningPage 
               handleCall={handleCall}
               handleWhatsApp={handleWhatsApp}
@@ -741,12 +910,8 @@ function AppContent() {
               navigateToPath={navigateToPath}
             />
           </Suspense>
-        ) : currentPath === '/dental-implants' ? (
-          <Suspense fallback={
-            <div className="flex justify-center items-center h-64 my-12">
-              <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-            </div>
-          }>
+        ) : activeRoute === '/dental-implants' ? (
+          <Suspense fallback={<SkeletonHero />}>
             <DentalImplantsPage 
               handleCall={handleCall}
               handleWhatsApp={handleWhatsApp}
@@ -755,12 +920,8 @@ function AppContent() {
               navigateToPath={navigateToPath}
             />
           </Suspense>
-        ) : currentPath === '/root-canal-treatment' ? (
-          <Suspense fallback={
-            <div className="flex justify-center items-center h-64 my-12">
-              <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-            </div>
-          }>
+        ) : activeRoute === '/root-canal-treatment' ? (
+          <Suspense fallback={<SkeletonHero />}>
             <RootCanalPage 
               handleCall={handleCall}
               handleWhatsApp={handleWhatsApp}
@@ -769,12 +930,8 @@ function AppContent() {
               navigateToPath={navigateToPath}
             />
           </Suspense>
-        ) : currentPath === '/dentist-chipiyana-buzurg-ghaziabad' ? (
-          <Suspense fallback={
-            <div className="flex justify-center items-center h-64 my-12">
-              <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-            </div>
-          }>
+        ) : activeRoute === '/dentist-chipiyana-buzurg-ghaziabad' ? (
+          <Suspense fallback={<SkeletonHero />}>
             <ChipiyanaLandingPage 
               handleCall={handleCall}
               handleWhatsApp={handleWhatsApp}
@@ -814,11 +971,7 @@ function AppContent() {
 
             <BeforeAfter />
 
-            <Suspense fallback={
-              <div className="flex justify-center items-center h-32 my-12">
-                <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-              </div>
-            }>
+            <Suspense fallback={<SkeletonCardGrid count={6} />}>
               <Services handleWhatsApp={handleWhatsApp} navigateToPath={navigateToPath} />
 
               <WhyUs handleWhatsApp={handleWhatsApp} />

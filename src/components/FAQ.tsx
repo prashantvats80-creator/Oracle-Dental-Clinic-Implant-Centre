@@ -49,6 +49,7 @@ const FAQ: React.FC<FAQProps> = ({ faqs }) => {
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                    className="overflow-hidden"
                   >
                     <div className="px-6 pb-6 text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
                       {faq.answer}

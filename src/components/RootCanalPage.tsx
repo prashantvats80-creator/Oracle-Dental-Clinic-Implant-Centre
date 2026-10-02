@@ -23,6 +23,9 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { InteractiveButton } from './InteractiveButton';
+import { TreatmentImage } from './TreatmentImage';
+import { Breadcrumbs } from './Breadcrumbs';
+import { preloadImages } from '../utils/imagePreloader';
 import { GBP_CONFIG } from '../config/googleBusinessProfile';
 
 interface RootCanalPageProps {
@@ -198,6 +201,13 @@ export default function RootCanalPage({
     scriptFaq.innerHTML = JSON.stringify(faqSchema);
     document.head.appendChild(scriptFaq);
 
+    // Preload critical treatment images
+    preloadImages([
+      "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=80"
+    ]);
+
     window.scrollTo(0, 0);
 
     return () => {
@@ -292,31 +302,16 @@ export default function RootCanalPage({
 
   return (
     <div className="bg-slate-50 text-slate-900 font-sans leading-relaxed">
-      {/* Breadcrumb Navigation */}
-      <nav className="bg-slate-900 text-slate-300 py-3 px-4 sm:px-8 text-sm border-b border-slate-800" aria-label="Breadcrumb">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <button 
-              onClick={navigateToHome}
-              className="hover:text-amber-400 transition-colors flex items-center gap-1 font-medium"
-            >
-              <ArrowLeft className="w-4 h-4" /> Home
-            </button>
-            <span>/</span>
-            <button
-              onClick={() => navigateToPath('/#services')}
-              className="hover:text-amber-400 transition-colors font-medium hidden sm:inline"
-            >
-              Dental Treatments
-            </button>
-            <span className="hidden sm:inline">/</span>
-            <span className="text-white font-semibold truncate">Root Canal Treatment</span>
-          </div>
-          <span className="text-xs bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full border border-blue-500/30">
-            Endodontic Care
-          </span>
-        </div>
-      </nav>
+      {/* Semantic Breadcrumb Navigation */}
+      <Breadcrumbs
+        items={[
+          { label: 'Dental Treatments', path: '/#services' },
+          { label: 'Root Canal Treatment', path: '/root-canal-treatment' }
+        ]}
+        navigateToHome={navigateToHome}
+        navigateToPath={navigateToPath}
+        badge="Endodontic Care"
+      />
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-blue-950 via-indigo-950 to-slate-900 text-white py-12 md:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -444,28 +439,37 @@ export default function RootCanalPage({
               </p>
             </div>
 
-            <div className="md:col-span-5 bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4">
-              <h3 className="font-bold text-slate-900 text-base flex items-center gap-2">
-                <Layers className="w-5 h-5 text-blue-600" /> Basic Tooth Anatomy
-              </h3>
-              <ul className="space-y-2.5 text-sm text-slate-600">
-                <li className="flex items-start gap-2">
-                  <span className="w-2 h-2 rounded-full bg-blue-600 mt-1.5 flex-shrink-0"></span>
-                  <span><strong>Enamel:</strong> Hard, protective outer layer of the tooth.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="w-2 h-2 rounded-full bg-blue-600 mt-1.5 flex-shrink-0"></span>
-                  <span><strong>Dentin:</strong> Dense tissue beneath enamel surrounding the pulp chamber.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="w-2 h-2 rounded-full bg-amber-500 mt-1.5 flex-shrink-0"></span>
-                  <span><strong>Dental Pulp:</strong> Center soft tissue containing nerves and blood vessels.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 mt-1.5 flex-shrink-0"></span>
-                  <span><strong>Root Canals:</strong> Tiny pathways extending from the pulp to the root tip.</span>
-                </li>
-              </ul>
+            <div className="md:col-span-5 space-y-4">
+              <TreatmentImage
+                src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=1000&q=80"
+                alt="Educational diagram illustrating dental pulp infection and deep decay requiring root canal treatment"
+                caption="Educational diagram showing healthy tooth structure vs deep decay penetrating the pulp chamber."
+                aspectRatio="4/3"
+                priority={true}
+              />
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                <h3 className="font-bold text-slate-900 text-sm flex items-center gap-2">
+                  <Layers className="w-4 h-4 text-blue-600" /> Key Anatomical Layers
+                </h3>
+                <ul className="space-y-2 text-xs text-slate-600">
+                  <li className="flex items-start gap-2">
+                    <span className="w-2 h-2 rounded-full bg-blue-600 mt-1 flex-shrink-0"></span>
+                    <span><strong>Enamel:</strong> Hard, protective outer layer of the tooth.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-2 h-2 rounded-full bg-blue-600 mt-1 flex-shrink-0"></span>
+                    <span><strong>Dentin:</strong> Dense tissue beneath enamel surrounding the pulp.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-2 h-2 rounded-full bg-amber-500 mt-1 flex-shrink-0"></span>
+                    <span><strong>Dental Pulp:</strong> Center soft tissue containing nerves and blood vessels.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 mt-1 flex-shrink-0"></span>
+                    <span><strong>Root Canals:</strong> Pathways extending from pulp chamber to root tip.</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -632,6 +636,21 @@ export default function RootCanalPage({
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+            <TreatmentImage
+              src="https://i.postimg.cc/fL7Y30vY/Chat-GPT-Image-Jun-23-2026-08-31-58-PM.png"
+              alt="Step-by-step root canal treatment procedure illustration showing cleaning, shaping, and sealing"
+              caption="Educational illustration: Step-by-step root canal cleaning, anti-bacterial shaping, and gutta-percha canal sealing."
+              aspectRatio="4/3"
+            />
+            <TreatmentImage
+              src="https://i.postimg.cc/gcT2V2Bw/Chat-GPT-Image-Jun-23-2026-08-38-15-PM.png"
+              alt="Educational diagram showing dental crown placement over a root canal treated tooth for structural strength"
+              caption="Educational diagram: Dental crown placed over a root-canal treated tooth to restore structural durability."
+              aspectRatio="4/3"
+            />
           </div>
         </div>
       </section>
