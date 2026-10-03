@@ -124,7 +124,7 @@ export default function ToothExtractionPage({ handleCall, handleWhatsApp, handle
         <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/90 shadow-2xs space-y-6">
           <h2 className="text-2xl font-extrabold text-slate-900">Post-Extraction Socket Healing & Replacement</h2>
           <p className="text-slate-600 text-sm leading-relaxed">
-            Following tooth removal, protecting the initial blood clot in the socket is vital for smooth bone and soft tissue recovery. Following healing, replacing missing teeth with <button onClick={() => navigateToPath('/dental-implants')} className="text-blue-600 underline font-bold">Dental Implants</button> or <button onClick={() => navigateToPath('/dental-bridges')} className="text-blue-600 underline font-bold">Dental Bridges</button> prevents adjacent teeth from shifting.
+            Following tooth removal, protecting the initial blood clot in the socket is vital for smooth bone and soft tissue recovery. Following healing, replacing missing teeth with <button onClick={() => navigateToPath('/dental-implants')} className="text-blue-600 underline font-bold">Dental Implants</button> or <button onClick={() => navigateToPath('/dental-bridges')} className="text-blue-600 underline font-bold">Dental Bridges</button> prevents adjacent teeth from shifting. For transparent fee details and pricing factors, view our dedicated <button onClick={() => navigateToPath('/tooth-extraction-cost-ghaziabad')} className="text-blue-600 underline font-bold">Tooth Extraction Cost in Ghaziabad Guide</button>.
           </p>
 
           <TreatmentImage

@@ -4,6 +4,9 @@
   publish = "dist"
   command = "npm run build"
 
+[build.environment]
+  NODE_VERSION = "20"
+
 # Route all requests to index.html to support SPA routing if needed
 [[redirects]]
   from = "/*"

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Home, ChevronRight } from 'lucide-react';
 
 export interface BreadcrumbItem {
@@ -21,7 +21,18 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
 }) => {
   const origin = typeof window !== 'undefined' ? window.location.origin : 'https://oracle-dental.com';
 
-  // Build Schema.org BreadcrumbList JSON-LD object
+  const resolveItemUrl = (path?: string) => {
+    if (!path) {
+      return typeof window !== 'undefined' ? window.location.href : `${origin}/`;
+    }
+    if (path.startsWith('http://') || path.startsWith('https://')) {
+      return path;
+    }
+    const cleanPath = path.startsWith('/') ? path : `/${path}`;
+    return `${origin}${cleanPath}`;
+  };
+
+  // Build Schema.org BreadcrumbList JSON-LD object with Home base and strict hierarchy
   const schemaList = [
     {
       '@type': 'ListItem',
@@ -29,12 +40,15 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
       name: 'Home',
       item: `${origin}/`
     },
-    ...items.map((item, idx) => ({
-      '@type': 'ListItem',
-      position: idx + 2,
-      name: item.label,
-      ...(item.path ? { item: `${origin}${item.path}` } : {})
-    }))
+    ...items.map((item, idx) => {
+      const itemUrl = resolveItemUrl(item.path);
+      return {
+        '@type': 'ListItem',
+        position: idx + 2,
+        name: item.label,
+        item: itemUrl
+      };
+    })
   ];
 
   const jsonLdData = {
@@ -42,6 +56,26 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
     '@type': 'BreadcrumbList',
     itemListElement: schemaList
   };
+
+  // Synchronize BreadcrumbList script in document.head for rich snippet crawlers
+  useEffect(() => {
+    const scriptId = 'breadcrumb-jsonld';
+    let script = document.getElementById(scriptId) as HTMLScriptElement | null;
+    if (!script) {
+      script = document.createElement('script');
+      script.id = scriptId;
+      script.type = 'application/ld+json';
+      document.head.appendChild(script);
+    }
+    script.text = JSON.stringify(jsonLdData);
+
+    return () => {
+      const existingScript = document.getElementById(scriptId);
+      if (existingScript) {
+        existingScript.remove();
+      }
+    };
+  }, [items, origin]);
 
   const handleItemClick = (e: React.MouseEvent, path?: string) => {
     e.preventDefault();
@@ -82,21 +116,24 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
             {items.map((item, index) => {
               const isLast = index === items.length - 1;
               const position = index + 2;
+              const itemUrl = resolveItemUrl(item.path);
 
               return (
                 <li key={index} itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem" className="flex items-center">
                   <ChevronRight className="w-3.5 h-3.5 mx-1 text-slate-500 shrink-0" aria-hidden="true" />
-                  {isLast || !item.path ? (
-                    <span 
-                      itemProp="name" 
-                      className="text-white font-semibold truncate max-w-[200px] sm:max-w-none"
+                  {isLast ? (
+                    <a
+                      href={itemUrl}
+                      onClick={(e) => handleItemClick(e, item.path)}
+                      itemProp="item"
+                      className="text-white font-semibold truncate max-w-[200px] sm:max-w-none cursor-default"
                       aria-current="page"
                     >
-                      {item.label}
-                    </span>
+                      <span itemProp="name">{item.label}</span>
+                    </a>
                   ) : (
                     <a
-                      href={item.path}
+                      href={itemUrl}
                       onClick={(e) => handleItemClick(e, item.path)}
                       itemProp="item"
                       className="hover:text-amber-400 transition-colors font-medium text-slate-300"

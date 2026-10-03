@@ -848,9 +848,12 @@ export default function WisdomToothPage({
               <li><strong>Surgical Extraction:</strong> Partially or fully impacted teeth requiring gum access or tooth sectioning.</li>
               <li><strong>Diagnostic Imaging Needed:</strong> Digital X-ray or panoramic OPG scan requirements.</li>
             </ul>
-            <div className="bg-blue-50 p-5 rounded-2xl border border-blue-200 mt-4">
+            <div className="bg-blue-50 p-5 rounded-2xl border border-blue-200 mt-4 space-y-2">
               <p className="text-blue-900 text-sm font-semibold">
                 Consultation Fee: Initial clinical examination and wisdom tooth evaluation fee at Oracle Dental Clinic is <strong>₹200</strong>.
+              </p>
+              <p className="text-blue-800 text-xs">
+                For a complete breakdown covering impaction angles, OPG/CBCT scans, and recovery care, view our dedicated <button onClick={() => navigateToPath && navigateToPath('/wisdom-tooth-extraction-cost-ghaziabad')} className="text-blue-950 underline font-bold hover:text-blue-700">Wisdom Tooth Extraction Cost in Ghaziabad Guide</button>.
               </p>
             </div>
           </div>

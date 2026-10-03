@@ -45,6 +45,13 @@ const Services: React.FC<ServicesProps> = ({ handleWhatsApp, navigateToPath }) =
     { title: "Kids Dentist", path: "/kids-dentist" },
     { title: "Emergency Dentist", path: "/emergency-dentist" },
     { title: "Dentist in Chipiyana Buzurg", path: "/dentist-chipiyana-buzurg-ghaziabad" },
+    { title: "Dentist in Ghaziabad", path: "/dentist-ghaziabad" },
+    { title: "Dental Clinic in Ghaziabad", path: "/dental-clinic-ghaziabad" },
+    { title: "Dentist Near Me", path: "/dentist-near-me" },
+    { title: "Impacted Wisdom Tooth", path: "/impacted-wisdom-tooth" },
+    { title: "Emergency Dentist Ghaziabad", path: "/emergency-dentist-ghaziabad" },
+    { title: "Immediate Implant After Extraction", path: "/dental-implant-after-tooth-extraction" },
+    { title: "Smile Makeover Ghaziabad", path: "/smile-makeover-ghaziabad" }
   ];
 
   const allSymptomPages = [
@@ -61,7 +68,25 @@ const Services: React.FC<ServicesProps> = ({ handleWhatsApp, navigateToPath }) =
     { title: "Gum Disease Treatment", path: "/gum-disease-treatment" },
     { title: "Swollen Gums Care", path: "/swollen-gums" },
     { title: "Gum Recession Care", path: "/gum-recession" },
+    { title: "Dental Abscess Treatment", path: "/dental-abscess-treatment" },
+    { title: "Periodontal Gum Treatment", path: "/periodontal-gum-treatment-ghaziabad" }
   ];
+
+  const allCostPages = [
+    { title: "Dental Treatment Cost", path: "/dental-treatment-cost-ghaziabad" },
+    { title: "Dental Implant Cost", path: "/dental-implant-cost-ghaziabad" },
+    { title: "Root Canal Cost", path: "/root-canal-cost-ghaziabad" },
+    { title: "Tooth Cap / Crown Cost", path: "/tooth-cap-cost-ghaziabad" },
+    { title: "Tooth Filling Cost", path: "/tooth-filling-cost-ghaziabad" },
+    { title: "Teeth Cleaning Cost", path: "/teeth-cleaning-cost-ghaziabad" },
+    { title: "Wisdom Tooth Removal Cost", path: "/wisdom-tooth-extraction-cost-ghaziabad" },
+    { title: "Tooth Extraction Cost", path: "/tooth-extraction-cost-ghaziabad" },
+    { title: "Dental Bridge Cost", path: "/dental-bridge-cost-ghaziabad" },
+    { title: "Dentures Cost in Ghaziabad", path: "/dentures-cost-ghaziabad" },
+    { title: "Teeth Whitening Cost", path: "/teeth-whitening-cost-ghaziabad" }
+  ];
+
+  const totalPagesCount = allTreatmentPages.length + allSymptomPages.length + allCostPages.length;
 
   return (
     <section id="services" className="py-16 bg-white">
@@ -114,17 +139,17 @@ const Services: React.FC<ServicesProps> = ({ handleWhatsApp, navigateToPath }) =
         <div className="bg-slate-900 text-white rounded-3xl p-8 shadow-2xl border border-slate-800 space-y-8">
           <div className="text-center space-y-2">
             <span className="text-amber-400 font-bold text-xs uppercase tracking-wider">Complete Dental Directory</span>
-            <h3 className="text-2xl font-black text-white">Explore All Dental Treatments & Symptoms Pages</h3>
+            <h3 className="text-2xl font-black text-white">Explore All Dental Treatments, Symptoms & Clinic Guides ({totalPagesCount} Pages)</h3>
             <p className="text-slate-400 text-sm max-w-xl mx-auto">Click any link below to visit the dedicated, comprehensive guide for your specific dental concern.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-2">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-2">
             {/* Dental Treatments Column */}
             <div className="bg-slate-800/80 p-6 rounded-2xl border border-slate-700 space-y-4">
               <h4 className="text-amber-400 font-extrabold text-sm uppercase tracking-wide flex items-center gap-2 border-b border-slate-700 pb-2">
-                <ShieldCheck className="w-4 h-4 text-amber-400" /> Key Dental Treatments (13 Pages)
+                <ShieldCheck className="w-4 h-4 text-amber-400" /> Treatments & Locations ({allTreatmentPages.length} Pages)
               </h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-200">
+              <div className="grid grid-cols-1 gap-1.5 text-xs text-slate-200">
                 {allTreatmentPages.map((item, i) => (
                   <a 
                     key={i} 
@@ -133,7 +158,7 @@ const Services: React.FC<ServicesProps> = ({ handleWhatsApp, navigateToPath }) =
                     className="p-2 rounded-lg bg-slate-900/60 hover:bg-amber-500 hover:text-slate-950 font-medium transition-all flex items-center justify-between group"
                   >
                     <span>{item.title}</span>
-                    <ArrowRight className="w-3 h-3 text-slate-500 group-hover:text-slate-950" />
+                    <ArrowRight className="w-3 h-3 text-slate-500 group-hover:text-slate-950 shrink-0" />
                   </a>
                 ))}
               </div>
@@ -142,9 +167,9 @@ const Services: React.FC<ServicesProps> = ({ handleWhatsApp, navigateToPath }) =
             {/* Symptoms & Conditions Column */}
             <div className="bg-slate-800/80 p-6 rounded-2xl border border-slate-700 space-y-4">
               <h4 className="text-cyan-400 font-extrabold text-sm uppercase tracking-wide flex items-center gap-2 border-b border-slate-700 pb-2">
-                <HeartPulse className="w-4 h-4 text-cyan-400" /> Symptoms & Dental Care (13 Pages)
+                <HeartPulse className="w-4 h-4 text-cyan-400" /> Symptoms & Concerns ({allSymptomPages.length} Pages)
               </h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-200">
+              <div className="grid grid-cols-1 gap-1.5 text-xs text-slate-200">
                 {allSymptomPages.map((item, i) => (
                   <a 
                     key={i} 
@@ -153,7 +178,27 @@ const Services: React.FC<ServicesProps> = ({ handleWhatsApp, navigateToPath }) =
                     className="p-2 rounded-lg bg-slate-900/60 hover:bg-cyan-400 hover:text-slate-950 font-medium transition-all flex items-center justify-between group"
                   >
                     <span>{item.title}</span>
-                    <ArrowRight className="w-3 h-3 text-slate-500 group-hover:text-slate-950" />
+                    <ArrowRight className="w-3 h-3 text-slate-500 group-hover:text-slate-950 shrink-0" />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Cost Guides Column */}
+            <div className="bg-slate-800/80 p-6 rounded-2xl border border-slate-700 space-y-4">
+              <h4 className="text-emerald-400 font-extrabold text-sm uppercase tracking-wide flex items-center gap-2 border-b border-slate-700 pb-2">
+                <Sparkles className="w-4 h-4 text-emerald-400" /> Ghaziabad Cost Guides ({allCostPages.length} Pages)
+              </h4>
+              <div className="grid grid-cols-1 gap-1.5 text-xs text-slate-200">
+                {allCostPages.map((item, i) => (
+                  <a 
+                    key={i} 
+                    href={item.path} 
+                    onClick={(e) => handlePageClick(e, item.path)}
+                    className="p-2 rounded-lg bg-slate-900/60 hover:bg-emerald-400 hover:text-slate-950 font-medium transition-all flex items-center justify-between group"
+                  >
+                    <span>{item.title}</span>
+                    <ArrowRight className="w-3 h-3 text-slate-500 group-hover:text-slate-950 shrink-0" />
                   </a>
                 ))}
               </div>

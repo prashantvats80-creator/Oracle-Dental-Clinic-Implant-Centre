@@ -827,7 +827,7 @@ export default function TeethCleaningPage({
                 <span className="text-amber-400 font-bold text-xs uppercase tracking-wider block mb-1">Transparent Pricing</span>
                 <h3 className="font-extrabold text-xl text-white">Consultation Fee: ₹200</h3>
                 <p className="text-xs text-slate-300 mt-2 leading-relaxed">
-                  During your initial dental examination, Dr. Prashant Vats BDS will assess your teeth and gum health and provide an exact, transparent estimate before starting treatment.
+                  During your initial dental examination, Dr. Prashant Vats BDS will assess your teeth and gum health and provide an exact, transparent estimate before starting treatment. For a full breakdown, explore our <button onClick={() => navigateToPath && navigateToPath('/teeth-cleaning-cost-ghaziabad')} className="text-amber-300 underline font-bold">Teeth Cleaning Cost in Ghaziabad Guide</button>.
                 </p>
               </div>
               <InteractiveButton 

@@ -89,7 +89,7 @@ export default function DentalBridgesPage({ handleCall, handleWhatsApp, navigate
         <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-2xs space-y-6">
           <h2 className="text-2xl font-extrabold text-slate-900">Dental Bridge vs. Dental Implant</h2>
           <p className="text-slate-600 text-sm leading-relaxed">
-            While conventional bridges rely on adjacent natural teeth for support, <button onClick={() => navigateToPath('/dental-implants')} className="text-blue-600 underline font-bold">Dental Implants</button> replace the root independently without needing to alter neighboring healthy enamel.
+            While conventional bridges rely on adjacent natural teeth for support, <button onClick={() => navigateToPath('/dental-implants')} className="text-blue-600 underline font-bold">Dental Implants</button> replace the root independently without needing to alter neighboring healthy enamel. For transparent unit calculations, material choices (Zirconia vs. PFM), and pricing factors, view our dedicated <button onClick={() => navigateToPath('/dental-bridge-cost-ghaziabad')} className="text-blue-600 underline font-bold">Dental Bridge Cost in Ghaziabad Guide</button>.
           </p>
 
           <TreatmentImage

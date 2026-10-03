@@ -1,8 +1,9 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
-import { PhoneCall, MessageCircle, Clock, MapPin, Sparkles, HeartPulse, ShieldCheck, ArrowRight } from 'lucide-react';
+import { PhoneCall, MessageCircle, Clock, MapPin, Sparkles, HeartPulse, ShieldCheck, ArrowRight, Star } from 'lucide-react';
 import { InteractiveButton } from './InteractiveButton';
 import { useLanguage } from '../context/LanguageContext';
+import { GBP_CONFIG } from '../config/googleBusinessProfile';
 
 interface HeroProps {
   handleCall: () => void;
@@ -58,20 +59,43 @@ const Hero: React.FC<HeroProps> = ({ handleCall, handleWhatsApp, navigateToPath 
           transition={{ duration: 0.7 }}
           className="w-full md:w-7/12 z-10 text-center md:text-left space-y-5"
         >
-          {/* Conversational Welcome Banner */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="inline-flex items-center gap-2 bg-blue-500/20 border border-blue-400/40 text-blue-200 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold backdrop-blur-md shadow-md"
-          >
-            <span className="animate-bounce">👋</span>
-            <span>
-              {language === 'hi'
-                ? 'ऑरैकल डेंटल क्लीनिक में आपका स्वागत है। डॉ. प्रशांत वत्स आज आपकी कैसे मदद कर सकते हैं?'
-                : 'Welcome to Oracle Dental Clinic. How can Dr. Prashant Vats help you today?'}
-            </span>
-          </motion.div>
+          {/* Conversational Welcome Banner & Google Rating Badge */}
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-2.5">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="inline-flex items-center gap-2 bg-blue-500/20 border border-blue-400/40 text-blue-200 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold backdrop-blur-md shadow-md"
+            >
+              <span className="animate-bounce">👋</span>
+              <span>
+                {language === 'hi'
+                  ? 'ऑरैकल डेंटल क्लीनिक में आपका स्वागत है। डॉ. प्रशांत वत्स आज आपकी कैसे मदद कर सकते हैं?'
+                  : 'Welcome to Oracle Dental Clinic. How can Dr. Prashant Vats help you today?'}
+              </span>
+            </motion.div>
+
+            <motion.a 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              href="#testimonials"
+              onClick={(e) => {
+                e.preventDefault();
+                const el = document.getElementById('testimonials');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="inline-flex items-center gap-2 bg-amber-400/15 hover:bg-amber-400/25 border border-amber-400/40 text-amber-200 px-3.5 py-2 rounded-full text-xs font-bold backdrop-blur-md shadow-md transition-all hover:scale-105 cursor-pointer"
+            >
+              <div className="flex text-amber-400">
+                {[1, 2, 3, 4, 5].map((_, i) => (
+                  <Star key={i} className="w-3.5 h-3.5 fill-current" />
+                ))}
+              </div>
+              <span className="text-white font-extrabold">{GBP_CONFIG.FALLBACK_RATING}</span>
+              <span className="text-amber-300">({GBP_CONFIG.FALLBACK_REVIEW_COUNT}+ Google Reviews)</span>
+            </motion.a>
+          </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-6xl font-black tracking-tight leading-tight drop-shadow-2xl">
             {language === 'hi' ? (

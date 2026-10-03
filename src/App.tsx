@@ -18,7 +18,8 @@ import {
   Youtube,
   Volume2,
   VolumeX,
-  ChevronDown
+  ChevronDown,
+  Search
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { SoundProvider, useSound } from './components/SoundManager';
@@ -66,6 +67,83 @@ const KidsDentistPage = lazy(() => import('./components/KidsDentistPage'));
 const DentalFillingsPage = lazy(() => import('./components/DentalFillingsPage'));
 const DentalBridgesPage = lazy(() => import('./components/DentalBridgesPage'));
 const DenturesPage = lazy(() => import('./components/DenturesPage'));
+const DentistGhaziabadPage = lazy(() => import('./components/DentistGhaziabadPage'));
+const DentalClinicGhaziabadPage = lazy(() => import('./components/DentalClinicGhaziabadPage'));
+const DentistNearMePage = lazy(() => import('./components/DentistNearMePage'));
+const DentalTreatmentCostPage = lazy(() => import('./components/DentalTreatmentCostPage'));
+const DentalImplantCostPage = lazy(() => import('./components/DentalImplantCostPage'));
+const RootCanalCostPage = lazy(() => import('./components/RootCanalCostPage'));
+const ToothCapCostPage = lazy(() => import('./components/ToothCapCostPage'));
+const DentalAbscessPage = lazy(() => import('./components/DentalAbscessPage'));
+const ImpactedWisdomToothPage = lazy(() => import('./components/ImpactedWisdomToothPage'));
+const PeriodontalTreatmentPage = lazy(() => import('./components/PeriodontalTreatmentPage'));
+const ToothFillingCostPage = lazy(() => import('./components/ToothFillingCostPage'));
+const TeethCleaningCostPage = lazy(() => import('./components/TeethCleaningCostPage'));
+const WisdomToothCostPage = lazy(() => import('./components/WisdomToothCostPage'));
+const ToothExtractionCostPage = lazy(() => import('./components/ToothExtractionCostPage'));
+const DentalBridgeCostPage = lazy(() => import('./components/DentalBridgeCostPage'));
+const DenturesCostPage = lazy(() => import('./components/DenturesCostPage'));
+const TeethWhiteningCostPage = lazy(() => import('./components/TeethWhiteningCostPage'));
+const EmergencyDentistGhaziabadPage = lazy(() => import('./components/EmergencyDentistGhaziabadPage'));
+const ImmediateDentalImplantPage = lazy(() => import('./components/ImmediateDentalImplantPage'));
+const SmileMakeoverGhaziabadPage = lazy(() => import('./components/SmileMakeoverGhaziabadPage'));
+
+const ALL_DENTAL_PAGES = [
+  // Key Treatments & Locations (17)
+  { title: 'Dental Implants', path: '/dental-implants', category: 'Treatment', keywords: 'teeth replacement fixture tooth implant' },
+  { title: 'Root Canal Treatment', path: '/root-canal-treatment', category: 'Treatment', keywords: 'rct tooth nerve pain infection single sitting' },
+  { title: 'Teeth Cleaning & Scaling', path: '/teeth-cleaning', category: 'Treatment', keywords: 'scaling tartar plaque stains hygiene ultrasonic' },
+  { title: 'Teeth Whitening', path: '/teeth-whitening', category: 'Treatment', keywords: 'bleaching bright white smile cosmetic yellow' },
+  { title: 'Wisdom Tooth Removal', path: '/wisdom-tooth-extraction', category: 'Treatment', keywords: 'third molar extraction surgical surgery impaction' },
+  { title: 'Tooth Cap & Crowns', path: '/tooth-cap', category: 'Treatment', keywords: 'crown zirconia ceramic pfm cap after rct' },
+  { title: 'Dental Fillings', path: '/dental-fillings', category: 'Treatment', keywords: 'composite tooth colored restoration decay cavity' },
+  { title: 'Tooth Extraction', path: '/tooth-extraction', category: 'Treatment', keywords: 'pull tooth removal dental surgery' },
+  { title: 'Dental Bridges', path: '/dental-bridges', category: 'Treatment', keywords: 'fixed bridge missing teeth ceramic' },
+  { title: 'Dentures', path: '/dentures', category: 'Treatment', keywords: 'false teeth complete partial acrylic flexible' },
+  { title: 'Kids Dentist', path: '/kids-dentist', category: 'Treatment', keywords: 'pediatric children dental care child tooth' },
+  { title: 'Emergency Dentist', path: '/emergency-dentist', category: 'Treatment', keywords: 'urgent toothache trauma swelling 24/7' },
+  { title: 'Dentist in Chipiyana Buzurg', path: '/dentist-chipiyana-buzurg-ghaziabad', category: 'Location', keywords: 'chipiyana clinic local branch jaat chowk' },
+  { title: 'Dentist in Ghaziabad', path: '/dentist-ghaziabad', category: 'Location', keywords: 'ghaziabad dental clinic dr prashant vats' },
+  { title: 'Dental Clinic in Ghaziabad', path: '/dental-clinic-ghaziabad', category: 'Location', keywords: 'ghaziabad center facility kts complex' },
+  { title: 'Dentist Near Me', path: '/dentist-near-me', category: 'Location', keywords: 'nearby dentist clinic close to me directions crossings republik' },
+  { title: 'Impacted Wisdom Tooth', path: '/impacted-wisdom-tooth', category: 'Treatment', keywords: 'horizontal wisdom tooth surgery pain swelling pericoronitis' },
+
+  // Symptoms, Conditions & Cost Guides (30)
+  { title: 'Tooth Pain Treatment', path: '/tooth-pain-treatment', category: 'Symptom', keywords: 'toothache throbbing sharp pain relief ache' },
+  { title: 'Bleeding Gums Care', path: '/bleeding-gums', category: 'Symptom', keywords: 'gingivitis blood brushing red gums tender' },
+  { title: 'Tooth Sensitivity Relief', path: '/tooth-sensitivity', category: 'Symptom', keywords: 'sensitive teeth hot cold sweet tingling enamel' },
+  { title: 'Bad Breath Treatment', path: '/bad-breath-treatment', category: 'Symptom', keywords: 'halitosis mouth odor smell tongue bacteria' },
+  { title: 'Loose Tooth Care', path: '/loose-tooth-treatment', category: 'Symptom', keywords: 'mobile shaky wobbly tooth bone loss periodontitis' },
+  { title: 'Broken Tooth Repair', path: '/broken-tooth-treatment', category: 'Symptom', keywords: 'fractured split cracked trauma crown restoration' },
+  { title: 'Chipped Tooth Repair', path: '/chipped-tooth', category: 'Symptom', keywords: 'bonding veneer front tooth cosmetic fix chip' },
+  { title: 'Black / Dark Tooth Care', path: '/black-tooth', category: 'Symptom', keywords: 'discolored dark dead tooth stain pulp trauma' },
+  { title: 'Missing Teeth Options', path: '/missing-teeth', category: 'Symptom', keywords: 'gap missing tooth replace implant bridge' },
+  { title: 'Cavity Treatment', path: '/cavity-treatment', category: 'Symptom', keywords: 'caries hole tooth decay filling restoration' },
+  { title: 'Gum Disease Care', path: '/gum-disease-treatment', category: 'Symptom', keywords: 'periodontitis pockets bone loss scaling root planing' },
+  { title: 'Swollen Gums Care', path: '/swollen-gums', category: 'Symptom', keywords: 'puffy inflamed gums abscess infection tenderness' },
+  { title: 'Gum Recession Care', path: '/gum-recession', category: 'Symptom', keywords: 'receding gums exposed roots sensitivity grafting' },
+  { title: 'Dental Abscess Treatment', path: '/dental-abscess-treatment', category: 'Urgent Care', keywords: 'pus swelling infection dental abscess emergency face' },
+  { title: 'Periodontal Gum Treatment', path: '/periodontal-gum-treatment-ghaziabad', category: 'Specialized', keywords: 'deep cleaning scaling root planing bone loss pockets' },
+  { title: 'Dental Treatment Cost', path: '/dental-treatment-cost-ghaziabad', category: 'Cost Guide', keywords: 'cost price charges fee estimates 200 consultation' },
+  { title: 'Dental Implant Cost', path: '/dental-implant-cost-ghaziabad', category: 'Cost Guide', keywords: 'implant price cost estimates single full mouth' },
+  { title: 'Root Canal Cost', path: '/root-canal-cost-ghaziabad', category: 'Cost Guide', keywords: 'rct price molar front tooth root canal cost' },
+  { title: 'Tooth Cap / Crown Cost', path: '/tooth-cap-cost-ghaziabad', category: 'Cost Guide', keywords: 'crown price zirconia ceramic pfm cap cost' },
+  { title: 'Tooth Filling Cost', path: '/tooth-filling-cost-ghaziabad', category: 'Cost Guide', keywords: 'filling cost composite gic silver cavity price' },
+  { title: 'Teeth Cleaning Cost', path: '/teeth-cleaning-cost-ghaziabad', category: 'Cost Guide', keywords: 'cleaning scaling polishing tartar calculus price' },
+  { title: 'Wisdom Tooth Extraction Cost', path: '/wisdom-tooth-extraction-cost-ghaziabad', category: 'Cost Guide', keywords: 'wisdom tooth surgery impaction surgical extraction price' },
+  { title: 'Tooth Extraction Cost', path: '/tooth-extraction-cost-ghaziabad', category: 'Cost Guide', keywords: 'pull tooth simple extraction cost surgical removal price' },
+  { title: 'Dental Bridge Cost', path: '/dental-bridge-cost-ghaziabad', category: 'Cost Guide', keywords: 'bridge cost zirconia pfm unit price missing teeth' },
+  { title: 'Dentures Cost', path: '/dentures-cost-ghaziabad', category: 'Cost Guide', keywords: 'denture price complete partial flexible valplast bps cost' },
+  { title: 'Teeth Whitening Cost', path: '/teeth-whitening-cost-ghaziabad', category: 'Cost Guide', keywords: 'teeth bleaching whitening laser in office price cost' },
+  { title: 'Emergency Dentist in Ghaziabad', path: '/emergency-dentist-ghaziabad', category: 'Urgent Care', keywords: 'urgent toothache emergency clinic 24/7 pain swelling relief' },
+  { title: 'Dental Implant After Tooth Extraction', path: '/dental-implant-after-tooth-extraction', category: 'Treatment', keywords: 'immediate implant same day extraction socket bone graft' },
+  { title: 'Smile Makeover in Ghaziabad', path: '/smile-makeover-ghaziabad', category: 'Cosmetic', keywords: 'smile design veneers composite bonding aesthetic cosmetic dentist' }
+];
+
+const TOTAL_DENTAL_PAGES_COUNT = ALL_DENTAL_PAGES.length;
+const treatmentPagesList = ALL_DENTAL_PAGES.filter(p => ['Treatment', 'Location', 'Cosmetic'].includes(p.category));
+const symptomPagesList = ALL_DENTAL_PAGES.filter(p => ['Symptom', 'Urgent Care', 'Specialized'].includes(p.category));
+const costPagesList = ALL_DENTAL_PAGES.filter(p => p.category === 'Cost Guide');
 
 export default function App() {
   return (
@@ -83,6 +161,25 @@ function AppContent() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
   const [isNavDropdownOpen, setIsNavDropdownOpen] = useState(false);
   const [isMobileTreatmentsOpen, setIsMobileTreatmentsOpen] = useState(false);
+  const [mobileSearchQuery, setMobileSearchQuery] = useState('');
+
+  useEffect(() => {
+    if (!isMenuOpen) {
+      setMobileSearchQuery('');
+    }
+  }, [isMenuOpen]);
+
+  const filteredMobilePages = mobileSearchQuery.trim() === ''
+    ? []
+    : ALL_DENTAL_PAGES.filter((page) => {
+        const q = mobileSearchQuery.toLowerCase().trim();
+        return (
+          page.title.toLowerCase().includes(q) ||
+          page.path.toLowerCase().includes(q) ||
+          page.category.toLowerCase().includes(q) ||
+          (page.keywords && page.keywords.toLowerCase().includes(q))
+        );
+      });
 
   useEffect(() => {
     const handlePopState = () => setCurrentPath(window.location.pathname);
@@ -228,32 +325,68 @@ function AppContent() {
     updateOrCreateJsonLd('app-jsonld-localbusiness', localBusinessSchema);
   }, [currentPath]);
 
+  const KNOWN_ROUTES = [
+    '/wisdom-tooth-extraction', '/tooth-pain-treatment', '/bleeding-gums',
+    '/tooth-sensitivity', '/bad-breath-treatment', '/loose-tooth-treatment',
+    '/broken-tooth-treatment', '/chipped-tooth', '/black-tooth',
+    '/missing-teeth', '/cavity-treatment', '/gum-disease-treatment',
+    '/swollen-gums', '/gum-recession', '/tooth-cap', '/tooth-extraction',
+    '/emergency-dentist', '/kids-dentist', '/dental-fillings',
+    '/dental-bridges', '/dentures', '/teeth-cleaning', '/teeth-whitening',
+    '/dental-implants', '/root-canal-treatment', '/dentist-chipiyana-buzurg-ghaziabad',
+    '/dentist-ghaziabad', '/dental-clinic-ghaziabad', '/dentist-near-me',
+    '/dental-treatment-cost-ghaziabad', '/dental-implant-cost-ghaziabad',
+    '/root-canal-cost-ghaziabad', '/tooth-cap-cost-ghaziabad',
+    '/dental-abscess-treatment', '/impacted-wisdom-tooth',
+    '/periodontal-gum-treatment-ghaziabad', '/tooth-filling-cost-ghaziabad',
+    '/teeth-cleaning-cost-ghaziabad', '/wisdom-tooth-extraction-cost-ghaziabad',
+    '/tooth-extraction-cost-ghaziabad', '/dental-bridge-cost-ghaziabad',
+    '/dentures-cost-ghaziabad', '/teeth-whitening-cost-ghaziabad',
+    '/emergency-dentist-ghaziabad', '/dental-implant-after-tooth-extraction',
+    '/smile-makeover-ghaziabad'
+  ];
+
+  const getBasePath = (): string => {
+    const metaEnv = (import.meta as unknown as { env?: { BASE_URL?: string } }).env;
+    const baseUrl = metaEnv?.BASE_URL;
+    if (baseUrl && baseUrl !== '/' && baseUrl !== './') {
+      return baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+    }
+    if (typeof window !== 'undefined') {
+      const segments = window.location.pathname.split('/').filter(Boolean);
+      if (window.location.hostname.endsWith('github.io') && segments.length > 0) {
+        const first = '/' + segments[0];
+        if (!KNOWN_ROUTES.includes(first)) {
+          return first;
+        }
+      }
+    }
+    return '';
+  };
+
   const normalizePath = (path: string) => {
     if (!path || path === '/' || path === '') return '/';
     let clean = path.endsWith('/') && path.length > 1 ? path.slice(0, -1) : path;
-    const knownRoutes = [
-      '/wisdom-tooth-extraction', '/tooth-pain-treatment', '/bleeding-gums',
-      '/tooth-sensitivity', '/bad-breath-treatment', '/loose-tooth-treatment',
-      '/broken-tooth-treatment', '/chipped-tooth', '/black-tooth',
-      '/missing-teeth', '/cavity-treatment', '/gum-disease-treatment',
-      '/swollen-gums', '/gum-recession', '/tooth-cap', '/tooth-extraction',
-      '/emergency-dentist', '/kids-dentist', '/dental-fillings',
-      '/dental-bridges', '/dentures', '/teeth-cleaning', '/teeth-whitening',
-      '/dental-implants', '/root-canal-treatment', '/dentist-chipiyana-buzurg-ghaziabad'
-    ];
-    for (const route of knownRoutes) {
-      if (clean.endsWith(route)) {
+    const base = getBasePath();
+    if (base && clean.startsWith(base)) {
+      clean = clean.slice(base.length) || '/';
+    }
+    for (const route of KNOWN_ROUTES) {
+      if (clean === route || clean.endsWith(route)) {
         return route;
       }
     }
-    return clean;
+    return '/';
   };
 
   const activeRoute = normalizePath(currentPath);
 
   const navigateToPath = (path: string) => {
-    window.history.pushState({}, '', path);
-    setCurrentPath(path);
+    const base = getBasePath();
+    const target = path.startsWith('/') ? path : '/' + path;
+    const fullPath = base ? (target === '/' ? base + '/' : base + target) : target;
+    window.history.pushState({}, '', fullPath);
+    setCurrentPath(target);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -384,7 +517,7 @@ function AppContent() {
   }, []);
 
   const scrollToTop = () => {
-    if (currentPath !== '/') {
+    if (activeRoute !== '/') {
       navigateToPath('/');
     } else {
       window.scrollTo({
@@ -396,8 +529,10 @@ function AppContent() {
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
-    if (currentPath !== '/') {
-      window.history.pushState({}, '', '/#' + id);
+    if (activeRoute !== '/') {
+      const base = getBasePath();
+      const targetHash = (base ? base : '') + '/#' + id;
+      window.history.pushState({}, '', targetHash);
       setCurrentPath('/');
       setTimeout(() => {
         const el = document.getElementById(id);
@@ -494,64 +629,18 @@ function AppContent() {
                   onClick={() => setIsNavDropdownOpen(!isNavDropdownOpen)}
                   className="font-bold text-xs py-2 px-3 rounded-lg bg-blue-50 text-blue-800 hover:bg-blue-100 transition-colors flex items-center gap-1 border border-blue-200 shadow-2xs"
                 >
-                  <span>All Dental Pages (26)</span>
+                  <span>All Dental Pages ({TOTAL_DENTAL_PAGES_COUNT})</span>
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isNavDropdownOpen ? 'rotate-180' : ''}`} />
                 </button>
 
                 {isNavDropdownOpen && (
-                  <div className="absolute top-full left-0 w-[580px] bg-white rounded-2xl shadow-2xl border border-slate-200 p-5 mt-1 grid grid-cols-2 gap-4 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                  <div className="absolute top-full left-0 w-[780px] max-w-[95vw] bg-white rounded-2xl shadow-2xl border border-slate-200 p-5 mt-1 grid grid-cols-3 gap-4 z-50 animate-in fade-in slide-in-from-top-2 duration-200 max-h-[80vh] overflow-y-auto">
                     <div>
-                      <h4 className="font-extrabold text-xs text-amber-700 uppercase tracking-wider mb-2 pb-1 border-b border-slate-100">Dental Treatments</h4>
+                      <h4 className="font-extrabold text-xs text-amber-700 uppercase tracking-wider mb-2 pb-1 border-b border-slate-100 flex items-center justify-between">
+                        <span>Treatments ({treatmentPagesList.length})</span>
+                      </h4>
                       <ul className="space-y-1 text-xs text-slate-700">
-                        {[
-                          { title: 'Dental Implants', path: '/dental-implants' },
-                          { title: 'Root Canal Treatment', path: '/root-canal-treatment' },
-                          { title: 'Teeth Cleaning & Scaling', path: '/teeth-cleaning' },
-                          { title: 'Teeth Whitening', path: '/teeth-whitening' },
-                          { title: 'Wisdom Tooth Removal', path: '/wisdom-tooth-extraction' },
-                          { title: 'Tooth Cap & Crowns', path: '/tooth-cap' },
-                          { title: 'Dental Fillings', path: '/dental-fillings' },
-                          { title: 'Tooth Extraction', path: '/tooth-extraction' },
-                          { title: 'Dental Bridges', path: '/dental-bridges' },
-                          { title: 'Dentures', path: '/dentures' },
-                          { title: 'Kids Dentist', path: '/kids-dentist' },
-                          { title: 'Emergency Dentist', path: '/emergency-dentist' }
-                        ].map((item, idx) => (
-                          <li key={idx}>
-                            <a 
-                              href={item.path}
-                              onClick={(e) => {
-                                e.preventDefault();
-                                setIsNavDropdownOpen(false);
-                                navigateToPath(item.path);
-                              }}
-                              className="block p-1.5 rounded-md hover:bg-amber-50 hover:text-amber-900 transition-colors font-medium"
-                            >
-                              {item.title}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div>
-                      <h4 className="font-extrabold text-xs text-cyan-700 uppercase tracking-wider mb-2 pb-1 border-b border-slate-100">Symptoms & Care</h4>
-                      <ul className="space-y-1 text-xs text-slate-700">
-                        {[
-                          { title: 'Tooth Pain Treatment', path: '/tooth-pain-treatment' },
-                          { title: 'Bleeding Gums Care', path: '/bleeding-gums' },
-                          { title: 'Tooth Sensitivity Relief', path: '/tooth-sensitivity' },
-                          { title: 'Bad Breath Treatment', path: '/bad-breath-treatment' },
-                          { title: 'Loose Tooth Care', path: '/loose-tooth-treatment' },
-                          { title: 'Broken Tooth Repair', path: '/broken-tooth-treatment' },
-                          { title: 'Chipped Tooth Repair', path: '/chipped-tooth' },
-                          { title: 'Black / Dark Tooth', path: '/black-tooth' },
-                          { title: 'Missing Teeth Options', path: '/missing-teeth' },
-                          { title: 'Cavity Treatment', path: '/cavity-treatment' },
-                          { title: 'Gum Disease Care', path: '/gum-disease-treatment' },
-                          { title: 'Swollen Gums Care', path: '/swollen-gums' },
-                          { title: 'Gum Recession Care', path: '/gum-recession' }
-                        ].map((item, idx) => (
+                        {treatmentPagesList.map((item, idx) => (
                           <li key={idx}>
                             <a 
                               href={item.path}
@@ -562,7 +651,57 @@ function AppContent() {
                                 setIsNavDropdownOpen(false);
                                 navigateToPath(item.path);
                               }}
-                              className="block p-1.5 rounded-md hover:bg-cyan-50 hover:text-cyan-900 transition-colors font-medium"
+                              className="block p-1.5 rounded-md hover:bg-amber-50 hover:text-amber-900 transition-colors font-medium truncate"
+                            >
+                              {item.title}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h4 className="font-extrabold text-xs text-cyan-700 uppercase tracking-wider mb-2 pb-1 border-b border-slate-100 flex items-center justify-between">
+                        <span>Symptoms ({symptomPagesList.length})</span>
+                      </h4>
+                      <ul className="space-y-1 text-xs text-slate-700">
+                        {symptomPagesList.map((item, idx) => (
+                          <li key={idx}>
+                            <a 
+                              href={item.path}
+                              onMouseEnter={() => preloadRoute(item.path)}
+                              onTouchStart={() => preloadRoute(item.path)}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setIsNavDropdownOpen(false);
+                                navigateToPath(item.path);
+                              }}
+                              className="block p-1.5 rounded-md hover:bg-cyan-50 hover:text-cyan-900 transition-colors font-medium truncate"
+                            >
+                              {item.title}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h4 className="font-extrabold text-xs text-emerald-700 uppercase tracking-wider mb-2 pb-1 border-b border-slate-100 flex items-center justify-between">
+                        <span>Cost Guides ({costPagesList.length})</span>
+                      </h4>
+                      <ul className="space-y-1 text-xs text-slate-700">
+                        {costPagesList.map((item, idx) => (
+                          <li key={idx}>
+                            <a 
+                              href={item.path}
+                              onMouseEnter={() => preloadRoute(item.path)}
+                              onTouchStart={() => preloadRoute(item.path)}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setIsNavDropdownOpen(false);
+                                navigateToPath(item.path);
+                              }}
+                              className="block p-1.5 rounded-md hover:bg-emerald-50 hover:text-emerald-900 transition-colors font-medium truncate"
                             >
                               {item.title}
                             </a>
@@ -639,7 +778,70 @@ function AppContent() {
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               className="md:hidden bg-white border-t border-slate-100 absolute w-full shadow-2xl overflow-y-auto max-h-[85vh] z-50 left-0 top-full transform-gpu will-change-transform"
             >
-              <div className="px-4 pt-2 pb-6 space-y-2">
+              <div className="px-4 pt-3 pb-6 space-y-2.5">
+                {/* Search Bar at Top of Expanded Mobile Menu to Filter All Pages */}
+                <div className="relative">
+                  <div className="relative flex items-center">
+                    <Search className="w-4 h-4 text-slate-400 absolute left-3.5 pointer-events-none" />
+                    <input
+                      id="mobile-treatment-search-input"
+                      type="text"
+                      value={mobileSearchQuery}
+                      onChange={(e) => setMobileSearchQuery(e.target.value)}
+                      placeholder={`Search all ${TOTAL_DENTAL_PAGES_COUNT} treatments, symptoms, costs...`}
+                      className="w-full pl-10 pr-9 py-2.5 bg-slate-100/90 hover:bg-slate-50 focus:bg-white text-slate-900 text-xs sm:text-sm rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none transition-all placeholder:text-slate-400"
+                    />
+                    {mobileSearchQuery && (
+                      <button
+                        type="button"
+                        onClick={() => setMobileSearchQuery('')}
+                        className="absolute right-3 p-1 text-slate-400 hover:text-slate-600 rounded-full focus:outline-none"
+                        aria-label="Clear search"
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Real-time Filtered Results Panel */}
+                  {mobileSearchQuery.trim() !== '' && (
+                    <div className="mt-2 bg-white rounded-xl border border-slate-200 shadow-xl p-2 max-h-64 overflow-y-auto space-y-1">
+                      <div className="px-2 py-1 text-[11px] font-bold text-slate-500 flex justify-between items-center border-b border-slate-100 pb-1.5 mb-1">
+                        <span>Matching Pages ({filteredMobilePages.length})</span>
+                        <span className="text-[10px] text-blue-600 font-semibold">Tap to view</span>
+                      </div>
+
+                      {filteredMobilePages.length > 0 ? (
+                        filteredMobilePages.map((page, idx) => (
+                          <a
+                            key={idx}
+                            href={page.path}
+                            onMouseEnter={() => preloadRoute(page.path)}
+                            onTouchStart={() => preloadRoute(page.path)}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setIsMenuOpen(false);
+                              setMobileSearchQuery('');
+                              navigateToPath(page.path);
+                            }}
+                            className="p-2.5 rounded-lg hover:bg-blue-50 active:bg-blue-100 flex items-center justify-between text-xs font-semibold text-slate-800 transition-colors group"
+                          >
+                            <span className="truncate pr-2">{page.title}</span>
+                            <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 group-hover:bg-blue-100 group-hover:text-blue-800 shrink-0">
+                              {page.category}
+                            </span>
+                          </a>
+                        ))
+                      ) : (
+                        <div className="py-4 text-center text-xs text-slate-500">
+                          <p className="font-semibold text-slate-700">No pages matching "{mobileSearchQuery}"</p>
+                          <p className="text-[11px] text-slate-400 mt-1">Try "implants", "rct", "pain", "cleaning", or "cost"</p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+
                 <a 
                   href="/dentist-chipiyana-buzurg-ghaziabad" 
                   onClick={(e) => {
@@ -667,7 +869,7 @@ function AppContent() {
                     aria-expanded={isMobileTreatmentsOpen}
                     className="w-full px-4 py-3 text-sm font-bold text-slate-900 flex justify-between items-center bg-blue-50/80 active:bg-blue-100/80 transition-colors"
                   >
-                    <span className="truncate pr-2">All Dental Care & Treatments (26 Pages)</span>
+                    <span className="truncate pr-2">All Dental Care & Treatments ({TOTAL_DENTAL_PAGES_COUNT} Pages)</span>
                     <ChevronDown className={`w-4 h-4 text-blue-600 shrink-0 transition-transform duration-300 ease-out transform-gpu ${isMobileTreatmentsOpen ? 'rotate-180' : ''}`} />
                   </button>
 
@@ -683,22 +885,9 @@ function AppContent() {
                       >
                         <div className="p-3 space-y-3 text-xs border-t border-slate-100">
                           <div>
-                            <span className="font-extrabold text-amber-700 block uppercase mb-1.5 text-[11px] tracking-wider">Treatments</span>
+                            <span className="font-extrabold text-amber-700 block uppercase mb-1.5 text-[11px] tracking-wider">Treatments & Clinics ({treatmentPagesList.length})</span>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
-                              {[
-                                { title: 'Dental Implants', path: '/dental-implants' },
-                                { title: 'Root Canal Treatment', path: '/root-canal-treatment' },
-                                { title: 'Teeth Cleaning & Scaling', path: '/teeth-cleaning' },
-                                { title: 'Teeth Whitening', path: '/teeth-whitening' },
-                                { title: 'Wisdom Tooth Removal', path: '/wisdom-tooth-extraction' },
-                                { title: 'Tooth Cap & Crowns', path: '/tooth-cap' },
-                                { title: 'Dental Fillings', path: '/dental-fillings' },
-                                { title: 'Tooth Extraction', path: '/tooth-extraction' },
-                                { title: 'Dental Bridges', path: '/dental-bridges' },
-                                { title: 'Dentures', path: '/dentures' },
-                                { title: 'Kids Dentist', path: '/kids-dentist' },
-                                { title: 'Emergency Dentist', path: '/emergency-dentist' }
-                              ].map((item, idx) => (
+                              {treatmentPagesList.map((item, idx) => (
                                 <motion.a 
                                   key={idx}
                                   layout="position"
@@ -719,23 +908,9 @@ function AppContent() {
                           </div>
 
                           <div className="pt-2 border-t border-slate-100">
-                            <span className="font-extrabold text-cyan-700 block uppercase mb-1.5 text-[11px] tracking-wider">Symptoms & Conditions</span>
+                            <span className="font-extrabold text-cyan-700 block uppercase mb-1.5 text-[11px] tracking-wider">Symptoms & Conditions ({symptomPagesList.length})</span>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
-                              {[
-                                { title: 'Tooth Pain Treatment', path: '/tooth-pain-treatment' },
-                                { title: 'Bleeding Gums Care', path: '/bleeding-gums' },
-                                { title: 'Tooth Sensitivity Relief', path: '/tooth-sensitivity' },
-                                { title: 'Bad Breath Treatment', path: '/bad-breath-treatment' },
-                                { title: 'Loose Tooth Care', path: '/loose-tooth-treatment' },
-                                { title: 'Broken Tooth Repair', path: '/broken-tooth-treatment' },
-                                { title: 'Chipped Tooth Repair', path: '/chipped-tooth' },
-                                { title: 'Black / Dark Tooth', path: '/black-tooth' },
-                                { title: 'Missing Teeth Options', path: '/missing-teeth' },
-                                { title: 'Cavity Treatment', path: '/cavity-treatment' },
-                                { title: 'Gum Disease Care', path: '/gum-disease-treatment' },
-                                { title: 'Swollen Gums Care', path: '/swollen-gums' },
-                                { title: 'Gum Recession Care', path: '/gum-recession' }
-                              ].map((item, idx) => (
+                              {symptomPagesList.map((item, idx) => (
                                 <motion.a 
                                   key={idx}
                                   layout="position"
@@ -748,6 +923,29 @@ function AppContent() {
                                     navigateToPath(item.path);
                                   }}
                                   className="p-2 rounded-lg bg-slate-50 hover:bg-cyan-50 active:bg-cyan-100 font-medium text-slate-800 transition-colors border border-slate-100/80 truncate block"
+                                >
+                                  {item.title}
+                                </motion.a>
+                              ))}
+                            </div>
+                          </div>
+
+                          <div className="pt-2 border-t border-slate-100">
+                            <span className="font-extrabold text-emerald-700 block uppercase mb-1.5 text-[11px] tracking-wider">Ghaziabad Cost Guides ({costPagesList.length})</span>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                              {costPagesList.map((item, idx) => (
+                                <motion.a 
+                                  key={idx}
+                                  layout="position"
+                                  href={item.path}
+                                  onMouseEnter={() => preloadRoute(item.path)}
+                                  onTouchStart={() => preloadRoute(item.path)}
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    setIsMenuOpen(false);
+                                    navigateToPath(item.path);
+                                  }}
+                                  className="p-2 rounded-lg bg-slate-50 hover:bg-emerald-50 active:bg-emerald-100 font-medium text-slate-800 transition-colors border border-slate-100/80 truncate block"
                                 >
                                   {item.title}
                                 </motion.a>
@@ -937,6 +1135,206 @@ function AppContent() {
               handleWhatsApp={handleWhatsApp}
               handleDirections={handleDirections}
               navigateToHome={() => navigateToPath('/')}
+            />
+          </Suspense>
+        ) : activeRoute === '/dentist-ghaziabad' ? (
+          <Suspense fallback={<SkeletonHero />}>
+            <DentistGhaziabadPage 
+              handleCall={handleCall}
+              handleWhatsApp={handleWhatsApp}
+              handleDirections={handleDirections}
+              navigateToHome={() => navigateToPath('/')}
+              navigateToPath={navigateToPath}
+            />
+          </Suspense>
+        ) : activeRoute === '/dental-clinic-ghaziabad' ? (
+          <Suspense fallback={<SkeletonHero />}>
+            <DentalClinicGhaziabadPage 
+              handleCall={handleCall}
+              handleWhatsApp={handleWhatsApp}
+              handleDirections={handleDirections}
+              navigateToHome={() => navigateToPath('/')}
+              navigateToPath={navigateToPath}
+            />
+          </Suspense>
+        ) : activeRoute === '/dentist-near-me' ? (
+          <Suspense fallback={<SkeletonHero />}>
+            <DentistNearMePage 
+              handleCall={handleCall}
+              handleWhatsApp={handleWhatsApp}
+              handleDirections={handleDirections}
+              navigateToHome={() => navigateToPath('/')}
+              navigateToPath={navigateToPath}
+            />
+          </Suspense>
+        ) : activeRoute === '/dental-treatment-cost-ghaziabad' ? (
+          <Suspense fallback={<SkeletonHero />}>
+            <DentalTreatmentCostPage 
+              handleCall={handleCall}
+              handleWhatsApp={handleWhatsApp}
+              handleDirections={handleDirections}
+              navigateToHome={() => navigateToPath('/')}
+              navigateToPath={navigateToPath}
+            />
+          </Suspense>
+        ) : activeRoute === '/dental-implant-cost-ghaziabad' ? (
+          <Suspense fallback={<SkeletonHero />}>
+            <DentalImplantCostPage 
+              handleCall={handleCall}
+              handleWhatsApp={handleWhatsApp}
+              handleDirections={handleDirections}
+              navigateToHome={() => navigateToPath('/')}
+              navigateToPath={navigateToPath}
+            />
+          </Suspense>
+        ) : activeRoute === '/root-canal-cost-ghaziabad' ? (
+          <Suspense fallback={<SkeletonHero />}>
+            <RootCanalCostPage 
+              handleCall={handleCall}
+              handleWhatsApp={handleWhatsApp}
+              handleDirections={handleDirections}
+              navigateToHome={() => navigateToPath('/')}
+              navigateToPath={navigateToPath}
+            />
+          </Suspense>
+        ) : activeRoute === '/tooth-cap-cost-ghaziabad' ? (
+          <Suspense fallback={<SkeletonHero />}>
+            <ToothCapCostPage 
+              handleCall={handleCall}
+              handleWhatsApp={handleWhatsApp}
+              handleDirections={handleDirections}
+              navigateToHome={() => navigateToPath('/')}
+              navigateToPath={navigateToPath}
+            />
+          </Suspense>
+        ) : activeRoute === '/dental-abscess-treatment' ? (
+          <Suspense fallback={<SkeletonHero />}>
+            <DentalAbscessPage 
+              handleCall={handleCall}
+              handleWhatsApp={handleWhatsApp}
+              handleDirections={handleDirections}
+              navigateToHome={() => navigateToPath('/')}
+              navigateToPath={navigateToPath}
+            />
+          </Suspense>
+        ) : activeRoute === '/impacted-wisdom-tooth' ? (
+          <Suspense fallback={<SkeletonHero />}>
+            <ImpactedWisdomToothPage 
+              handleCall={handleCall}
+              handleWhatsApp={handleWhatsApp}
+              handleDirections={handleDirections}
+              navigateToHome={() => navigateToPath('/')}
+              navigateToPath={navigateToPath}
+            />
+          </Suspense>
+        ) : activeRoute === '/periodontal-gum-treatment-ghaziabad' ? (
+          <Suspense fallback={<SkeletonHero />}>
+            <PeriodontalTreatmentPage 
+              handleCall={handleCall}
+              handleWhatsApp={handleWhatsApp}
+              handleDirections={handleDirections}
+              navigateToHome={() => navigateToPath('/')}
+              navigateToPath={navigateToPath}
+            />
+          </Suspense>
+        ) : activeRoute === '/tooth-filling-cost-ghaziabad' ? (
+          <Suspense fallback={<SkeletonHero />}>
+            <ToothFillingCostPage 
+              handleCall={handleCall}
+              handleWhatsApp={handleWhatsApp}
+              handleDirections={handleDirections}
+              navigateToHome={() => navigateToPath('/')}
+              navigateToPath={navigateToPath}
+            />
+          </Suspense>
+        ) : activeRoute === '/teeth-cleaning-cost-ghaziabad' ? (
+          <Suspense fallback={<SkeletonHero />}>
+            <TeethCleaningCostPage 
+              handleCall={handleCall}
+              handleWhatsApp={handleWhatsApp}
+              handleDirections={handleDirections}
+              navigateToHome={() => navigateToPath('/')}
+              navigateToPath={navigateToPath}
+            />
+          </Suspense>
+        ) : activeRoute === '/wisdom-tooth-extraction-cost-ghaziabad' ? (
+          <Suspense fallback={<SkeletonHero />}>
+            <WisdomToothCostPage 
+              handleCall={handleCall}
+              handleWhatsApp={handleWhatsApp}
+              handleDirections={handleDirections}
+              navigateToHome={() => navigateToPath('/')}
+              navigateToPath={navigateToPath}
+            />
+          </Suspense>
+        ) : activeRoute === '/tooth-extraction-cost-ghaziabad' ? (
+          <Suspense fallback={<SkeletonHero />}>
+            <ToothExtractionCostPage 
+              handleCall={handleCall}
+              handleWhatsApp={handleWhatsApp}
+              handleDirections={handleDirections}
+              navigateToHome={() => navigateToPath('/')}
+              navigateToPath={navigateToPath}
+            />
+          </Suspense>
+        ) : activeRoute === '/dental-bridge-cost-ghaziabad' ? (
+          <Suspense fallback={<SkeletonHero />}>
+            <DentalBridgeCostPage 
+              handleCall={handleCall}
+              handleWhatsApp={handleWhatsApp}
+              handleDirections={handleDirections}
+              navigateToHome={() => navigateToPath('/')}
+              navigateToPath={navigateToPath}
+            />
+          </Suspense>
+        ) : activeRoute === '/dentures-cost-ghaziabad' ? (
+          <Suspense fallback={<SkeletonHero />}>
+            <DenturesCostPage 
+              handleCall={handleCall}
+              handleWhatsApp={handleWhatsApp}
+              handleDirections={handleDirections}
+              navigateToHome={() => navigateToPath('/')}
+              navigateToPath={navigateToPath}
+            />
+          </Suspense>
+        ) : activeRoute === '/teeth-whitening-cost-ghaziabad' ? (
+          <Suspense fallback={<SkeletonHero />}>
+            <TeethWhiteningCostPage 
+              handleCall={handleCall}
+              handleWhatsApp={handleWhatsApp}
+              handleDirections={handleDirections}
+              navigateToHome={() => navigateToPath('/')}
+              navigateToPath={navigateToPath}
+            />
+          </Suspense>
+        ) : activeRoute === '/emergency-dentist-ghaziabad' ? (
+          <Suspense fallback={<SkeletonHero />}>
+            <EmergencyDentistGhaziabadPage 
+              handleCall={handleCall}
+              handleWhatsApp={handleWhatsApp}
+              handleDirections={handleDirections}
+              navigateToHome={() => navigateToPath('/')}
+              navigateToPath={navigateToPath}
+            />
+          </Suspense>
+        ) : activeRoute === '/dental-implant-after-tooth-extraction' ? (
+          <Suspense fallback={<SkeletonHero />}>
+            <ImmediateDentalImplantPage 
+              handleCall={handleCall}
+              handleWhatsApp={handleWhatsApp}
+              handleDirections={handleDirections}
+              navigateToHome={() => navigateToPath('/')}
+              navigateToPath={navigateToPath}
+            />
+          </Suspense>
+        ) : activeRoute === '/smile-makeover-ghaziabad' ? (
+          <Suspense fallback={<SkeletonHero />}>
+            <SmileMakeoverGhaziabadPage 
+              handleCall={handleCall}
+              handleWhatsApp={handleWhatsApp}
+              handleDirections={handleDirections}
+              navigateToHome={() => navigateToPath('/')}
+              navigateToPath={navigateToPath}
             />
           </Suspense>
         ) : (

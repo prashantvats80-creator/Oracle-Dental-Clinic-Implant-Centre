@@ -13,8 +13,14 @@ const CORE_ASSETS = [
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_STATIC).then((cache) => {
-      return cache.addAll(CORE_ASSETS);
+    caches.open(CACHE_STATIC).then(async (cache) => {
+      await Promise.allSettled(
+        CORE_ASSETS.map((asset) =>
+          cache.add(asset).catch((err) => {
+            console.warn(`[SW] Pre-caching asset skipped: ${asset}`, err);
+          })
+        )
+      );
     }).then(() => self.skipWaiting())
   );
 });
@@ -48,7 +54,10 @@ self.addEventListener('fetch', (event) => {
           return response;
         })
         .catch(() => {
-          return caches.match('./index.html') || caches.match('./');
+          return caches.match('./index.html')
+            .then(res => res || caches.match('/index.html'))
+            .then(res => res || caches.match('./'))
+            .then(res => res || caches.match('/'));
         })
     );
     return;

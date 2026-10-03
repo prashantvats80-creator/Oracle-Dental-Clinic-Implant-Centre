@@ -8,7 +8,7 @@ export default defineConfig(({mode}) => {
   const isProd = mode === 'production';
 
   return {
-    base: './',
+    base: process.env.VITE_BASE_PATH || '/',
     plugins: [react(), tailwindcss()],
     define: {
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),

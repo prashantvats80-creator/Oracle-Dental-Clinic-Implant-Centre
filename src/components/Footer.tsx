@@ -72,6 +72,10 @@ const Footer: React.FC<FooterProps> = ({ phoneNumber, handleWhatsApp, scrollToSe
               <li><a id="footer-l-dentures" href="/dentures" onClick={(e) => handleLinkClick(e, '/dentures')} className="hover:text-purple-300 transition-colors">Dentures</a></li>
               <li><a id="footer-l-kids" href="/kids-dentist" onClick={(e) => handleLinkClick(e, '/kids-dentist')} className="hover:text-amber-300 transition-colors">Kids Dentist Care</a></li>
               <li><a id="footer-l-emergency" href="/emergency-dentist" onClick={(e) => handleLinkClick(e, '/emergency-dentist')} className="hover:text-red-400 font-semibold transition-colors">Emergency Dentist</a></li>
+              <li><a id="footer-l-dentist-ghz" href="/dentist-ghaziabad" onClick={(e) => handleLinkClick(e, '/dentist-ghaziabad')} className="hover:text-amber-300 font-bold transition-colors">Dentist in Ghaziabad</a></li>
+              <li><a id="footer-l-clinic-ghz" href="/dental-clinic-ghaziabad" onClick={(e) => handleLinkClick(e, '/dental-clinic-ghaziabad')} className="hover:text-blue-300 font-bold transition-colors">Dental Clinic in Ghaziabad</a></li>
+              <li><a id="footer-l-near-me" href="/dentist-near-me" onClick={(e) => handleLinkClick(e, '/dentist-near-me')} className="hover:text-emerald-300 font-bold transition-colors">Dentist Near Me</a></li>
+              <li><a id="footer-l-impacted" href="/impacted-wisdom-tooth" onClick={(e) => handleLinkClick(e, '/impacted-wisdom-tooth')} className="hover:text-rose-300 transition-colors">Impacted Wisdom Tooth</a></li>
             </ul>
           </div>
 
@@ -92,6 +96,9 @@ const Footer: React.FC<FooterProps> = ({ phoneNumber, handleWhatsApp, scrollToSe
               <li><a id="footer-l-gumdis" href="/gum-disease-treatment" onClick={(e) => handleLinkClick(e, '/gum-disease-treatment')} className="hover:text-emerald-300 transition-colors">Gum Disease Care</a></li>
               <li><a id="footer-l-swollen" href="/swollen-gums" onClick={(e) => handleLinkClick(e, '/swollen-gums')} className="hover:text-rose-300 transition-colors">Swollen Gums Care</a></li>
               <li><a id="footer-l-recession" href="/gum-recession" onClick={(e) => handleLinkClick(e, '/gum-recession')} className="hover:text-indigo-300 transition-colors">Gum Recession Care</a></li>
+              <li><a id="footer-l-abscess" href="/dental-abscess-treatment" onClick={(e) => handleLinkClick(e, '/dental-abscess-treatment')} className="hover:text-rose-400 font-semibold transition-colors">Dental Abscess Treatment</a></li>
+              <li><a id="footer-l-perio" href="/periodontal-gum-treatment-ghaziabad" onClick={(e) => handleLinkClick(e, '/periodontal-gum-treatment-ghaziabad')} className="hover:text-emerald-300 font-semibold transition-colors">Periodontal Gum Treatment</a></li>
+              <li><a id="footer-l-cost" href="/dental-treatment-cost-ghaziabad" onClick={(e) => handleLinkClick(e, '/dental-treatment-cost-ghaziabad')} className="hover:text-amber-300 font-bold transition-colors">Dental Treatment Cost</a></li>
               <li><a id="footer-l-chipiyana" href="/dentist-chipiyana-buzurg-ghaziabad" onClick={(e) => handleLinkClick(e, '/dentist-chipiyana-buzurg-ghaziabad')} className="hover:text-amber-300 font-bold transition-colors">Dentist in Chipiyana Buzurg</a></li>
             </ul>
           </div>

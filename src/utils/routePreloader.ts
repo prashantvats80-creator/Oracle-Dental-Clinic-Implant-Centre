@@ -31,7 +31,27 @@ const routeImports: Record<string, () => Promise<unknown>> = {
   '/teeth-whitening': () => import('../components/TeethWhiteningPage'),
   '/dental-implants': () => import('../components/DentalImplantsPage'),
   '/root-canal-treatment': () => import('../components/RootCanalPage'),
-  '/dentist-chipiyana-buzurg-ghaziabad': () => import('../components/ChipiyanaLandingPage')
+  '/dentist-chipiyana-buzurg-ghaziabad': () => import('../components/ChipiyanaLandingPage'),
+  '/dentist-ghaziabad': () => import('../components/DentistGhaziabadPage'),
+  '/dental-clinic-ghaziabad': () => import('../components/DentalClinicGhaziabadPage'),
+  '/dentist-near-me': () => import('../components/DentistNearMePage'),
+  '/dental-treatment-cost-ghaziabad': () => import('../components/DentalTreatmentCostPage'),
+  '/dental-implant-cost-ghaziabad': () => import('../components/DentalImplantCostPage'),
+  '/root-canal-cost-ghaziabad': () => import('../components/RootCanalCostPage'),
+  '/tooth-cap-cost-ghaziabad': () => import('../components/ToothCapCostPage'),
+  '/dental-abscess-treatment': () => import('../components/DentalAbscessPage'),
+  '/impacted-wisdom-tooth': () => import('../components/ImpactedWisdomToothPage'),
+  '/periodontal-gum-treatment-ghaziabad': () => import('../components/PeriodontalTreatmentPage'),
+  '/tooth-filling-cost-ghaziabad': () => import('../components/ToothFillingCostPage'),
+  '/teeth-cleaning-cost-ghaziabad': () => import('../components/TeethCleaningCostPage'),
+  '/wisdom-tooth-extraction-cost-ghaziabad': () => import('../components/WisdomToothCostPage'),
+  '/tooth-extraction-cost-ghaziabad': () => import('../components/ToothExtractionCostPage'),
+  '/dental-bridge-cost-ghaziabad': () => import('../components/DentalBridgeCostPage'),
+  '/dentures-cost-ghaziabad': () => import('../components/DenturesCostPage'),
+  '/teeth-whitening-cost-ghaziabad': () => import('../components/TeethWhiteningCostPage'),
+  '/emergency-dentist-ghaziabad': () => import('../components/EmergencyDentistGhaziabadPage'),
+  '/dental-implant-after-tooth-extraction': () => import('../components/ImmediateDentalImplantPage'),
+  '/smile-makeover-ghaziabad': () => import('../components/SmileMakeoverGhaziabadPage')
 };
 
 export function preloadRoute(path: string): void {

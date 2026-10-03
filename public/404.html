@@ -4,9 +4,14 @@
     <meta charset="utf-8">
     <title>Oracle Dental Clinic & Implant Center</title>
     <script type="text/javascript">
-      // SPA Fallback redirect for GitHub Pages
-      var pathSegmentsToKeep = 0;
+      // Single Page Apps for GitHub Pages & Static Hosts
+      // Automatically detect if deployed under a subpath (e.g. username.github.io/repo-name/)
+      // or root / custom domain (e.g. username.github.io, custom domain, Netlify)
       var l = window.location;
+      var pathSegments = l.pathname.split('/').filter(Boolean);
+      var isGitHubProject = l.hostname.endsWith('github.io') && pathSegments.length > 0;
+      var pathSegmentsToKeep = isGitHubProject ? 1 : 0;
+
       l.replace(
         l.protocol + '//' + l.host + (l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/')) + '/?/' +
         l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +

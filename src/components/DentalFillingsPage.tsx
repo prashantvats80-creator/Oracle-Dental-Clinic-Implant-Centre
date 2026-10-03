@@ -93,7 +93,7 @@ export default function DentalFillingsPage({ handleCall, handleWhatsApp, navigat
         <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-2xs space-y-6">
           <h2 className="text-2xl font-extrabold text-slate-900">Preventing Cavity Recurrence</h2>
           <p className="text-slate-600 text-sm leading-relaxed">
-            Maintaining daily brushing, flossing, and attending semi-annual professional <button onClick={() => navigateToPath('/teeth-cleaning')} className="text-blue-600 underline font-bold">Teeth Cleaning</button> ensures your dental fillings remain tight, leak-free, and long-lasting.
+            Maintaining daily brushing, flossing, and attending semi-annual professional <button onClick={() => navigateToPath('/teeth-cleaning')} className="text-blue-600 underline font-bold">Teeth Cleaning</button> ensures your dental fillings remain tight, leak-free, and long-lasting. For transparent fee details, material differences, and surface pricing factors, explore our <button onClick={() => navigateToPath('/tooth-filling-cost-ghaziabad')} className="text-blue-600 underline font-bold">Tooth Filling Cost in Ghaziabad Guide</button>.
           </p>
 
           <TreatmentImage

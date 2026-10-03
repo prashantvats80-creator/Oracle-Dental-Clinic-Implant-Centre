@@ -98,6 +98,19 @@ export default function DenturesPage({ handleCall, handleWhatsApp, navigateToHom
             caption="Educational illustration: Implant-retained overdenture snapping securely onto locator implants."
             aspectRatio="16/9"
           />
+
+          <div className="bg-blue-50 p-6 rounded-2xl border border-blue-200 mt-4 space-y-3">
+            <h3 className="text-base font-bold text-blue-950">Denture Pricing & Material Guide in Ghaziabad</h3>
+            <p className="text-slate-700 text-xs sm:text-sm leading-relaxed">
+              Explore transparent complete and partial denture pricing, flexible Valplast options, cast metal frameworks, and implant overdentures with clear consultation fees (₹200) under Dr. Prashant Kumar Vats, BDS.
+            </p>
+            <button
+              onClick={() => navigateToPath('/dentures-cost-ghaziabad')}
+              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition-all shadow-xs"
+            >
+              View Detailed Dentures Cost Guide →
+            </button>
+          </div>
         </div>
       </section>
     </div>
