@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   PhoneCall, 
   MessageCircle, 
@@ -55,158 +55,7 @@ export default function DentistGhaziabadPage({
     }
   };
 
-  useEffect(() => {
-    // 1. Page Title & Meta Description (Strictly matching specifications)
-    const title = "Dentist in Ghaziabad | Oracle Dental Clinic";
-    const description = "Looking for a reliable dentist in Ghaziabad? Oracle Dental Clinic, led by Dr. Prashant Kumar Vats, BDS, provides comprehensive dental care in Chipiyana Buzurg near Jaat Chowk. Consultation fee ₹200.";
-    const pageUrl = `${window.location.origin}/dentist-ghaziabad`;
-
-    document.title = title;
-
-    const setMetaTag = (attrName: string, attrVal: string, contentVal: string) => {
-      let el = document.querySelector(`meta[${attrName}="${attrVal}"]`);
-      if (!el) {
-        el = document.createElement('meta');
-        el.setAttribute(attrName, attrVal);
-        document.head.appendChild(el);
-      }
-      el.setAttribute('content', contentVal);
-    };
-
-    setMetaTag("name", "description", description);
-    setMetaTag("name", "keywords", "dentist in Ghaziabad, dentist Ghaziabad, dentist near me, dental clinic Ghaziabad, dental clinic near me, nearby dentist, nearby dental clinic, dentist in Chipiyana Buzurg, dental treatment Ghaziabad, dentist near Chipiyana Buzurg, dental doctor Ghaziabad, dental surgeon Ghaziabad, Oracle Dental Clinic Ghaziabad");
-
-    setMetaTag("property", "og:title", title);
-    setMetaTag("property", "og:description", description);
-    setMetaTag("property", "og:type", "website");
-    setMetaTag("property", "og:url", pageUrl);
-    setMetaTag("property", "og:image", "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=80");
-
-    setMetaTag("name", "twitter:card", "summary_large_image");
-    setMetaTag("name", "twitter:title", title);
-    setMetaTag("name", "twitter:description", description);
-    setMetaTag("name", "twitter:image", "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=80");
-
-    // Canonical link
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute('href', pageUrl);
-
-    // 2. Structured Data (JSON-LD) for LocalBusiness/Dentist and WebPage
-    const dentistSchema = {
-      "@context": "https://schema.org",
-      "@type": ["Dentist", "LocalBusiness", "MedicalBusiness"],
-      "@id": `${pageUrl}#dentist`,
-      "name": "Oracle Dental Clinic",
-      "legalName": "Oracle Dental Clinic",
-      "url": pageUrl,
-      "telephone": "+917011961515",
-      "priceRange": "₹200 Consultation",
-      "image": [
-        "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=800&q=80"
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Shop No. 47, KTS Complex, Jaat Chowk, near Dolphin Public School, Chipiyana Buzurg",
-        "addressLocality": "Ghaziabad",
-        "addressRegion": "Uttar Pradesh",
-        "postalCode": "201009",
-        "addressCountry": "IN"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 28.6280,
-        "longitude": 77.4520
-      },
-      "hasMap": GBP_CONFIG.GOOGLE_MAPS_DIRECTIONS_URL,
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-          "opens": "10:00",
-          "closes": "14:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-          "opens": "17:00",
-          "closes": "21:00"
-        }
-      ],
-      "founder": {
-        "@type": "Person",
-        "name": "Dr. Prashant Kumar Vats",
-        "jobTitle": "Dental Surgeon & Oral Health Practitioner",
-        "honorificSuffix": "BDS"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": GBP_CONFIG.FALLBACK_RATING.toString(),
-        "reviewCount": GBP_CONFIG.FALLBACK_REVIEW_COUNT.toString(),
-        "bestRating": "5",
-        "worstRating": "1"
-      },
-      "areaServed": [
-        { "@type": "AdministrativeArea", "name": "Ghaziabad" },
-        { "@type": "AdministrativeArea", "name": "Chipiyana Buzurg" },
-        { "@type": "AdministrativeArea", "name": "Crossings Republik" },
-        { "@type": "AdministrativeArea", "name": "Lal Kuan" },
-        { "@type": "AdministrativeArea", "name": "Noida Extension" },
-        { "@type": "AdministrativeArea", "name": "Shahberi" },
-        { "@type": "AdministrativeArea", "name": "Chappraula" },
-        { "@type": "AdministrativeArea", "name": "Panchsheel Greens 2" },
-        { "@type": "AdministrativeArea", "name": "ABES Area" }
-      ]
-    };
-
-    const webpageSchema = {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "@id": `${pageUrl}#webpage`,
-      "url": pageUrl,
-      "name": "Dentist in Ghaziabad | Oracle Dental Clinic",
-      "description": description,
-      "isPartOf": {
-        "@type": "WebSite",
-        "name": "Oracle Dental Clinic",
-        "url": window.location.origin
-      },
-      "about": {
-        "@id": `${pageUrl}#dentist`
-      }
-    };
-
-    let script1 = document.getElementById('dentist-ghaziabad-schema') as HTMLScriptElement | null;
-    if (!script1) {
-      script1 = document.createElement('script');
-      script1.id = 'dentist-ghaziabad-schema';
-      script1.type = 'application/ld+json';
-      document.head.appendChild(script1);
-    }
-    script1.text = JSON.stringify(dentistSchema);
-
-    let script2 = document.getElementById('dentist-ghaziabad-webpage-schema') as HTMLScriptElement | null;
-    if (!script2) {
-      script2 = document.createElement('script');
-      script2.id = 'dentist-ghaziabad-webpage-schema';
-      script2.type = 'application/ld+json';
-      document.head.appendChild(script2);
-    }
-    script2.text = JSON.stringify(webpageSchema);
-
-    return () => {
-      const s1 = document.getElementById('dentist-ghaziabad-schema');
-      if (s1) s1.remove();
-      const s2 = document.getElementById('dentist-ghaziabad-webpage-schema');
-      if (s2) s2.remove();
-    };
-  }, []);
+  
 
   const faqs = [
     {
@@ -223,7 +72,7 @@ export default function DentistGhaziabadPage({
     },
     {
       q: "What are your daily clinic hours?",
-      a: "We are open daily Monday through Sunday with two convenient daily shifts: Morning from 10:00 AM to 2:00 PM, and Evening from 5:00 PM to 9:00 PM. Evening slots allow working professionals and families to visit after office or school hours."
+      a: "We are open daily Monday through Sunday with Open 24 Hours, 7 Days (Monday – Sunday). Evening slots allow working professionals and families to visit after office or school hours."
     },
     {
       q: "Do I need an appointment before visiting, or can walk-in patients be accommodated?",
@@ -294,7 +143,7 @@ export default function DentistGhaziabadPage({
                 className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold px-6 py-3.5 rounded-xl flex items-center gap-2 shadow-lg transition-transform active:scale-95"
               >
                 <PhoneCall className="w-4 h-4" />
-                <span>Call 7011961515</span>
+                <span>Call +91 7011961515</span>
               </InteractiveButton>
 
               <InteractiveButton
@@ -345,7 +194,7 @@ export default function DentistGhaziabadPage({
                 </div>
                 <div className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-100">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Convenient Hours:</strong> Open daily 10:00 AM–2:00 PM and 5:00 PM–9:00 PM for working families.</span>
+                  <span><strong>Convenient Hours:</strong> Open 24 Hours, 7 Days (Monday – Sunday) for routine and urgent visits.</span>
                 </div>
                 <div className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-100">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
@@ -761,7 +610,7 @@ export default function DentistGhaziabadPage({
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-900 bg-amber-200/70 hover:bg-amber-300/80 px-3.5 py-2 rounded-xl border border-amber-300 transition-colors"
                 >
                   <MapPin className="w-3.5 h-3.5 text-amber-800" />
-                  <span>Visit Dedicated Chipiyana Buzurg Branch Page</span>
+                  <span>Visit Dedicated Chipiyana Buzurg Clinic Page</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </a>
               </div>
@@ -861,7 +710,7 @@ export default function DentistGhaziabadPage({
               className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold px-7 py-3.5 rounded-xl flex items-center gap-2 shadow-lg transition-transform active:scale-95"
             >
               <PhoneCall className="w-4 h-4" />
-              <span>Call 7011961515</span>
+              <span>Call +91 7011961515</span>
             </InteractiveButton>
 
             <InteractiveButton

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { PhoneCall, MessageCircle, CheckCircle2 } from 'lucide-react';
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
@@ -13,16 +13,7 @@ interface Props {
 }
 
 export default function GumDiseasePage({ handleCall, handleWhatsApp, handleDirections, navigateToHome, navigateToPath }: Props) {
-  useEffect(() => {
-    const title = "Gum Disease & Periodontitis Treatment in Ghaziabad | Oracle Dental Clinic";
-    const description = "Seeking treatment for gingivitis or periodontitis? Visit Oracle Dental Clinic in Chipiyana Buzurg, Ghaziabad for scaling, deep cleaning, and periodontal gum care.";
-    const pageUrl = `${window.location.origin}/gum-disease-treatment`;
-    document.title = title;
-    let canonical = document.querySelector('link[rel="canonical"]') || document.createElement('link');
-    canonical.setAttribute('rel', 'canonical'); 
-    canonical.setAttribute('href', pageUrl); 
-    document.head.appendChild(canonical);
-  }, []);
+  
 
   return (
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed">
@@ -44,7 +35,7 @@ export default function GumDiseasePage({ handleCall, handleWhatsApp, handleDirec
           </p>
           <div className="flex flex-wrap gap-3">
             <InteractiveButton id="gd-call" onClick={handleCall} className="bg-amber-500 text-slate-950 font-black py-3.5 px-6 rounded-xl shadow-md">
-              <PhoneCall className="w-4 h-4 inline mr-2" /> Call 7011961515
+              <PhoneCall className="w-4 h-4 inline mr-2" /> Call +91 7011961515
             </InteractiveButton>
             <InteractiveButton id="gd-wa" onClick={handleWhatsApp} className="bg-emerald-600 text-white font-bold py-3.5 px-6 rounded-xl shadow-md">
               <MessageCircle className="w-4 h-4 inline mr-2" /> WhatsApp Booking

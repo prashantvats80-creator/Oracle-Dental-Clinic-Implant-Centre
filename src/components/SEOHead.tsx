@@ -1,152 +1,247 @@
-import React, { useEffect } from "react";
-import SchemaMarkup from "./SchemaMarkup";
+import React, { useEffect } from 'react';
+import { GBP_CONFIG } from '../config/googleBusinessProfile';
+import { ROUTE_SEO_MAP, NOT_FOUND_SEO, getCanonicalUrl } from '../config/seoData';
 
-interface SEOProps {
-  title?: string;
-  description?: string;
-  keywords?: string[];
-  ogImage?: string;
-  ogUrl?: string;
+interface SEOHeadProps {
+  routePath: string;
+  isNotFound?: boolean;
 }
 
-const SEOHead: React.FC<SEOProps> = ({
-  title = "Oracle Dental Clinic & Implant Center | Best Dentist in Ghaziabad, Noida, Greater Noida",
-  description = "Experience premium smile makeovers, natural-looking veneers, and long-lasting dental implants in Ghaziabad. Offering advanced technology, microscopic root canals, and single sitting wisdom tooth removals.",
-  keywords = [
-    "Dental Implants Ghaziabad",
-    "Best Dental Implants Ghaziabad",
-    "Dental Implant Specialist Ghaziabad",
-    "Dental Implant Clinic Ghaziabad",
-    "Best Implant Dentist Ghaziabad",
-    "Full Mouth Dental Implants Ghaziabad",
-    "Single Tooth Implant Ghaziabad",
-    "All-on-4 Dental Implants Ghaziabad",
-    "All-on-6 Dental Implants Ghaziabad",
-    "Immediate Dental Implants Ghaziabad",
-    "Dental Implants Near Me",
-    "Dental Implants Greater Noida",
-    "Best Dental Implants Greater Noida",
-    "Dental Implant Specialist Greater Noida",
-    "Dental Implants Noida",
-    "Best Dental Implants Noida",
-    "Full Mouth Rehabilitation Ghaziabad",
-    "Missing Teeth Replacement Ghaziabad",
-    "Permanent Teeth Replacement Ghaziabad",
-    "Smile Makeover Ghaziabad",
-    "Best Smile Makeover Dentist Ghaziabad",
-    "Smile Design Ghaziabad",
-    "Digital Smile Design Ghaziabad",
-    "Cosmetic Dentist Ghaziabad",
-    "Best Cosmetic Dentist Ghaziabad",
-    "Smile Transformation Ghaziabad",
-    "Hollywood Smile Ghaziabad",
-    "Dental Veneers Ghaziabad",
-    "Porcelain Veneers Ghaziabad",
-    "Composite Veneers Ghaziabad",
-    "Teeth Whitening Ghaziabad",
-    "Smile Correction Ghaziabad",
-    "Aesthetic Dentistry Ghaziabad",
-    "Smile Makeover Greater Noida",
-    "Best Cosmetic Dentist Greater Noida",
-    "Smile Design Greater Noida",
-    "Smile Makeover Noida",
-    "Cosmetic Dentist Noida",
-    "Zirconia Crowns Ghaziabad",
-    "Best Zirconia Crown Ghaziabad",
-    "Dental Crown Specialist Ghaziabad",
-    "Tooth Cap Ghaziabad",
-    "Ceramic Crowns Ghaziabad",
-    "Metal Free Crowns Ghaziabad",
-    "Zirconia Crowns Greater Noida",
-    "Zirconia Crowns Noida",
-    "Best Dental Crowns Ghaziabad",
-    "Best Dentist Ghaziabad",
-    "Top Dentist Ghaziabad",
-    "Experienced Dentist Ghaziabad",
-    "Family Dentist Ghaziabad",
-    "Dental Clinic Ghaziabad",
-    "Best Dental Clinic Ghaziabad",
-    "Dentist Near Me",
-    "Top Rated Dentist Ghaziabad",
-    "Best Dentist Greater Noida",
-    "Best Dental Clinic Greater Noida",
-    "Best Dentist Noida",
-    "Root Canal Treatment Ghaziabad",
-    "RCT Specialist Ghaziabad",
-    "Best Root Canal Dentist Ghaziabad",
-    "Microscopic Root Canal Ghaziabad",
-    "Painless Root Canal Ghaziabad",
-    "Root Canal Specialist Greater Noida",
-    "Root Canal Treatment Noida",
-    "Wisdom Tooth Removal Ghaziabad",
-    "Wisdom Tooth Extraction Ghaziabad",
-    "Oral Surgeon Ghaziabad",
-    "Best Oral Surgeon Ghaziabad",
-    "Impacted Wisdom Tooth Ghaziabad",
-    "Surgical Tooth Extraction Ghaziabad",
-    "Wisdom Tooth Removal Greater Noida",
-    "Oral Surgeon Greater Noida",
-    "Wisdom Tooth Removal Noida",
-    "Best Cosmetic Dentist Near Me",
-    "Best Implant Dentist Near Me",
-    "Best Smile Makeover Dentist Near Me",
-    "Best Dental Implant Clinic Near Me",
-    "Best Veneers Dentist Near Me",
-    "Best Zirconia Crown Dentist Near Me",
-    "Best Oral Surgeon Near Me",
-    "Best Root Canal Specialist Near Me",
-    "Best Dentist for Smile Makeover",
-    "Best Dentist for Dental Implants"
-  ],
-  ogImage = "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=800&q=80",
-  ogUrl = "https://oracle-dental.com"
-}) => {
+const SEOHead: React.FC<SEOHeadProps> = ({ routePath, isNotFound = false }) => {
   useEffect(() => {
-    // 1. Update document title
-    document.title = title;
+    const seo = isNotFound
+      ? NOT_FOUND_SEO
+      : ROUTE_SEO_MAP[routePath] || ROUTE_SEO_MAP['/'];
 
-    // Helper to set or create meta tags
-    const setMetaTag = (attributeName: string, attributeValue: string, contentValue: string) => {
-      let element = document.querySelector(`meta[${attributeName}="${attributeValue}"]`);
-      if (!element) {
-        element = document.createElement("meta");
-        element.setAttribute(attributeName, attributeValue);
-        document.head.appendChild(element);
+    const canonicalUrl = isNotFound
+      ? getCanonicalUrl('/404')
+      : getCanonicalUrl(seo.path);
+
+    const robotsDirective =
+      seo.robots ||
+      'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
+
+    // 1. Document Title
+    document.title = seo.title;
+
+    // Helper for meta tag upsert
+    const setMetaTag = (attr: 'name' | 'property', key: string, content: string) => {
+      let el = document.querySelector(`meta[${attr}="${key}"]`);
+      if (!el) {
+        el = document.createElement('meta');
+        el.setAttribute(attr, key);
+        document.head.appendChild(el);
       }
-      element.setAttribute("content", contentValue);
+      el.setAttribute('content', content);
     };
 
-    // 2. Set description
-    setMetaTag("name", "description", description);
+    // 2. Core Meta Tags
+    setMetaTag('name', 'description', seo.description);
+    setMetaTag('name', 'robots', robotsDirective);
 
-    // 3. Set keywords
-    setMetaTag("name", "keywords", keywords.join(", "));
+    // Remove legacy stuffed meta keywords tag if present
+    const legacyKeywords = document.querySelector('meta[name="keywords"]');
+    if (legacyKeywords) {
+      legacyKeywords.remove();
+    }
 
-    // 4. Set OpenGraph tags
-    setMetaTag("property", "og:title", title);
-    setMetaTag("property", "og:description", description);
-    setMetaTag("property", "og:image", ogImage);
-    setMetaTag("property", "og:url", ogUrl);
-    setMetaTag("property", "og:type", "website");
+    // 3. Open Graph Tags
+    setMetaTag('property', 'og:type', 'website');
+    setMetaTag('property', 'og:locale', 'en_IN');
+    setMetaTag('property', 'og:site_name', GBP_CONFIG.BUSINESS_NAME);
+    setMetaTag('property', 'og:title', seo.title);
+    setMetaTag('property', 'og:description', seo.description);
+    setMetaTag('property', 'og:url', canonicalUrl);
+    setMetaTag('property', 'og:image', GBP_CONFIG.CLINIC_HERO_IMAGE);
 
-    // 5. Set Twitter tags
-    setMetaTag("name", "twitter:card", "summary_large_image");
-    setMetaTag("name", "twitter:title", title);
-    setMetaTag("name", "twitter:description", description);
-    setMetaTag("name", "twitter:image", ogImage);
+    // 4. Twitter Card Tags
+    setMetaTag('name', 'twitter:card', 'summary_large_image');
+    setMetaTag('name', 'twitter:title', seo.title);
+    setMetaTag('name', 'twitter:description', seo.description);
+    setMetaTag('name', 'twitter:image', GBP_CONFIG.CLINIC_HERO_IMAGE);
 
-    // 6. Set Canonical link tag
-    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    // 5. Canonical Tag (ensure only one exists)
+    const canonicals = document.querySelectorAll('link[rel="canonical"]');
+    let canonicalLink = canonicals[0] as HTMLLinkElement | undefined;
+    canonicals.forEach((node, idx) => {
+      if (idx > 0) node.remove();
+    });
     if (!canonicalLink) {
-      canonicalLink = document.createElement("link");
-      canonicalLink.setAttribute("rel", "canonical");
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
       document.head.appendChild(canonicalLink);
     }
-    canonicalLink.setAttribute("href", ogUrl);
+    canonicalLink.setAttribute('href', canonicalUrl);
 
-  }, [title, description, keywords, ogImage, ogUrl]);
+    // 6. Clean up any legacy duplicate JSON-LD scripts injected by older page versions
+    const legacyScriptIds = [
+      'static-jsonld-website',
+      'static-jsonld-localbusiness',
+      'app-jsonld-website',
+      'app-jsonld-localbusiness',
+      'local-business-schema',
+      'website-schema',
+    ];
+    legacyScriptIds.forEach((id) => {
+      const node = document.getElementById(id);
+      if (node) node.remove();
+    });
 
-  return <SchemaMarkup />;
+    // 7. Build Unified @graph JSON-LD with ONE consistent business entity identifier
+    const graphNodes: Record<string, unknown>[] = [
+      {
+        '@type': 'WebSite',
+        '@id': GBP_CONFIG.WEBSITE_ID,
+        url: `${GBP_CONFIG.SITE_URL}/`,
+        name: GBP_CONFIG.BUSINESS_NAME,
+        inLanguage: 'en-IN',
+        publisher: { '@id': GBP_CONFIG.ENTITY_ID },
+      },
+      {
+        '@type': ['Dentist', 'LocalBusiness', 'MedicalBusiness'],
+        '@id': GBP_CONFIG.ENTITY_ID,
+        name: GBP_CONFIG.BUSINESS_NAME,
+        url: `${GBP_CONFIG.SITE_URL}/`,
+        telephone: GBP_CONFIG.PHONE,
+        priceRange: '₹₹',
+        currenciesAccepted: 'INR',
+        image: [GBP_CONFIG.CLINIC_HERO_IMAGE, GBP_CONFIG.DOCTOR_IMAGE],
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: GBP_CONFIG.STREET_ADDRESS,
+          addressLocality: GBP_CONFIG.LOCALITY,
+          addressRegion: GBP_CONFIG.REGION,
+          postalCode: GBP_CONFIG.POSTAL_CODE,
+          addressCountry: GBP_CONFIG.COUNTRY,
+        },
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: GBP_CONFIG.GEO.latitude,
+          longitude: GBP_CONFIG.GEO.longitude,
+        },
+        hasMap: GBP_CONFIG.GOOGLE_MAPS_DIRECTIONS_URL,
+        openingHoursSpecification: [
+          {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: [
+              'Monday',
+              'Tuesday',
+              'Wednesday',
+              'Thursday',
+              'Friday',
+              'Saturday',
+              'Sunday',
+            ],
+            opens: '00:00',
+            closes: '23:59',
+          },
+        ],
+        areaServed: [
+          { '@type': 'Place', name: 'Chipiyana Buzurg, Ghaziabad' },
+          { '@type': 'Place', name: 'Jaat Chowk, Ghaziabad' },
+          { '@type': 'Place', name: 'Shahberi' },
+          { '@type': 'Place', name: 'Crossings Republik, Ghaziabad' },
+          { '@type': 'Place', name: 'Noida Extension' },
+          { '@type': 'Place', name: 'Greater Noida West' },
+          { '@type': 'Place', name: 'Lal Kuan, Ghaziabad' },
+        ],
+        founder: { '@id': GBP_CONFIG.PERSON_ID },
+        sameAs: GBP_CONFIG.SOCIAL_URLS,
+      },
+      {
+        '@type': 'Person',
+        '@id': GBP_CONFIG.PERSON_ID,
+        name: GBP_CONFIG.DOCTOR_NAME,
+        honorificPrefix: 'Dr.',
+        honorificSuffix: GBP_CONFIG.DOCTOR_QUALIFICATION,
+        jobTitle: 'Dental Surgeon',
+        image: GBP_CONFIG.DOCTOR_IMAGE,
+        worksFor: { '@id': GBP_CONFIG.ENTITY_ID },
+      },
+      {
+        '@type': 'WebPage',
+        '@id': `${canonicalUrl}#webpage`,
+        url: canonicalUrl,
+        name: seo.title,
+        description: seo.description,
+        isPartOf: { '@id': GBP_CONFIG.WEBSITE_ID },
+        about: { '@id': GBP_CONFIG.ENTITY_ID },
+        inLanguage: 'en-IN',
+      },
+    ];
+
+    // Add Service / MedicalProcedure & BreadcrumbList Schema for every valid treatment or landing page
+    if (!isNotFound && seo.serviceName) {
+      graphNodes.push({
+        '@type': seo.schemaType || 'Service',
+        '@id': `${canonicalUrl}#service`,
+        name: seo.serviceName,
+        serviceType: seo.serviceType || 'Dental Treatment',
+        description: seo.description,
+        url: canonicalUrl,
+        provider: { '@id': GBP_CONFIG.ENTITY_ID },
+        areaServed: [
+          { '@type': 'Place', name: 'Chipiyana Buzurg, Ghaziabad' },
+          { '@type': 'Place', name: 'Noida Extension' },
+          { '@type': 'Place', name: 'Greater Noida' },
+        ],
+      });
+    }
+
+    if (!isNotFound && seo.path !== '/') {
+      const breadcrumbItems = [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: `${GBP_CONFIG.SITE_URL}/`,
+        },
+      ];
+      if (seo.path !== '/dental-services') {
+        breadcrumbItems.push({
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Dental Services',
+          item: `${GBP_CONFIG.SITE_URL}/dental-services`,
+        });
+        breadcrumbItems.push({
+          '@type': 'ListItem',
+          position: 3,
+          name: seo.serviceName || seo.title,
+          item: canonicalUrl,
+        });
+      } else {
+        breadcrumbItems.push({
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Dental Treatments & Services',
+          item: canonicalUrl,
+        });
+      }
+      graphNodes.push({
+        '@type': 'BreadcrumbList',
+        '@id': `${canonicalUrl}#breadcrumb`,
+        itemListElement: breadcrumbItems,
+      });
+    }
+
+    const schemaPayload = {
+      '@context': 'https://schema.org',
+      '@graph': graphNodes,
+    };
+
+    const scriptId = 'oracle-dental-schema-graph';
+    let script = document.getElementById(scriptId) as HTMLScriptElement | null;
+    if (!script) {
+      script = document.createElement('script');
+      script.id = scriptId;
+      script.type = 'application/ld+json';
+      document.head.appendChild(script);
+    }
+    script.text = JSON.stringify(schemaPayload);
+  }, [routePath, isNotFound]);
+
+  return null;
 };
 
 export default SEOHead;

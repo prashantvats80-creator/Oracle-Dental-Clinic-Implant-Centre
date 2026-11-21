@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   PhoneCall, 
   MessageCircle, 
@@ -50,90 +50,7 @@ export default function DentistNearMePage({
     }
   };
 
-  useEffect(() => {
-    const title = "Dentist Near Me in Ghaziabad | Oracle Dental Clinic";
-    const description = "Searching for a trusted dentist near me in Ghaziabad? Oracle Dental Clinic at KTS Complex, Jaat Chowk, Chipiyana Buzurg offers fast appointments and emergency care. Consultation ₹200.";
-    const pageUrl = `${window.location.origin}/dentist-near-me`;
-
-    document.title = title;
-
-    const setMetaTag = (attrName: string, attrVal: string, contentVal: string) => {
-      let el = document.querySelector(`meta[${attrName}="${attrVal}"]`);
-      if (!el) {
-        el = document.createElement('meta');
-        el.setAttribute(attrName, attrVal);
-        document.head.appendChild(el);
-      }
-      el.setAttribute('content', contentVal);
-    };
-
-    setMetaTag("name", "description", description);
-    setMetaTag("name", "keywords", "dentist near me, dental clinic near me, nearby dentist, nearby dental clinic, dentist near me Ghaziabad, dentist near Chipiyana Buzurg, dentist near Jaat Chowk, dentist near Crossings Republik, dentist near Lal Kuan, dentist near Noida Extension");
-
-    setMetaTag("property", "og:title", title);
-    setMetaTag("property", "og:description", description);
-    setMetaTag("property", "og:type", "website");
-    setMetaTag("property", "og:url", pageUrl);
-
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute('href', pageUrl);
-
-    const schema = {
-      "@context": "https://schema.org",
-      "@type": ["Dentist", "LocalBusiness"],
-      "@id": `${pageUrl}#dentist-near-me`,
-      "name": "Oracle Dental Clinic",
-      "url": pageUrl,
-      "telephone": "+917011961515",
-      "priceRange": "₹200 Consultation",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Shop No. 47, KTS Complex, Jaat Chowk, near Dolphin Public School, Chipiyana Buzurg",
-        "addressLocality": "Ghaziabad",
-        "addressRegion": "Uttar Pradesh",
-        "postalCode": "201009",
-        "addressCountry": "IN"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 28.6280,
-        "longitude": 77.4520
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-          "opens": "10:00",
-          "closes": "14:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-          "opens": "17:00",
-          "closes": "21:00"
-        }
-      ]
-    };
-
-    let script = document.getElementById('dentist-near-me-schema') as HTMLScriptElement | null;
-    if (!script) {
-      script = document.createElement('script');
-      script.id = 'dentist-near-me-schema';
-      script.type = 'application/ld+json';
-      document.head.appendChild(script);
-    }
-    script.text = JSON.stringify(schema);
-
-    return () => {
-      const s = document.getElementById('dentist-near-me-schema');
-      if (s) s.remove();
-    };
-  }, []);
+  
 
   const faqs = [
     {
@@ -142,7 +59,7 @@ export default function DentistNearMePage({
     },
     {
       q: "Can I get an immediate appointment if I am nearby and in pain?",
-      a: "Yes. We accommodate emergency walk-in patients during our clinic hours (10:00 AM–2:00 PM and 5:00 PM–9:00 PM daily). You can also call 7011961515 while on your way so our team is prepared."
+      a: "Yes. We accommodate emergency walk-in patients 24 hours a day, 7 days a week. You can also call 7011961515 while on your way so our team is prepared."
     },
     {
       q: "What is the consultation fee for nearby patients?",
@@ -199,7 +116,7 @@ export default function DentistNearMePage({
 
             <div className="flex flex-wrap items-center gap-3 pt-2">
               <InteractiveButton id="near-me-call" onClick={handleCall} className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold px-6 py-3.5 rounded-xl flex items-center gap-2 shadow-lg">
-                <PhoneCall className="w-4 h-4" /> <span>Call 7011961515</span>
+                <PhoneCall className="w-4 h-4" /> <span>Call +91 7011961515</span>
               </InteractiveButton>
               <InteractiveButton id="near-me-wa" onClick={handleWhatsApp} className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-6 py-3.5 rounded-xl flex items-center gap-2 shadow-lg">
                 <MessageCircle className="w-4 h-4" /> <span>WhatsApp Desk</span>

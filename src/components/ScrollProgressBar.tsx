@@ -1,24 +1,41 @@
-import React from 'react';
-import { motion, useScroll, useSpring } from 'motion/react';
+import React, { useEffect, useRef } from 'react';
 
 export default function ScrollProgressBar() {
-  const { scrollYProgress } = useScroll();
-  
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
+  const barRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    let ticking = false;
+    const updateProgress = () => {
+      if (!barRef.current) return;
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? Math.min(Math.max(scrollTop / docHeight, 0), 1) : 0;
+      barRef.current.style.transform = `scaleX(${progress})`;
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateProgress);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    updateProgress();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
-    <div 
-      className="fixed top-0 left-0 right-0 z-[100] h-1 md:h-[4px] bg-slate-200/20 pointer-events-none overflow-hidden"
+    <div
+      className="fixed top-0 left-0 right-0 z-[100] h-1 bg-slate-200/20 pointer-events-none overflow-hidden"
       role="progressbar"
-      aria-label="Scroll progress bar"
+      aria-label="Reading progress"
     >
-      <motion.div
-        className="h-full bg-gradient-to-r from-blue-600 via-indigo-600 to-amber-500 origin-left shadow-[0_0_10px_rgba(37,99,235,0.5)]"
-        style={{ scaleX }}
+      <div
+        ref={barRef}
+        className="h-full w-full bg-gradient-to-r from-blue-600 via-indigo-600 to-amber-500 origin-left"
+        style={{ transform: 'scaleX(0)' }}
       />
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   PhoneCall, 
   MessageCircle, 
@@ -51,124 +51,7 @@ export default function SmileMakeoverGhaziabadPage({
     }
   };
 
-  useEffect(() => {
-    const title = "Smile Makeover in Ghaziabad | Cosmetic Dentistry | Oracle Dental Clinic";
-    const description = "Comprehensive smile makeover in Ghaziabad. Custom veneers, teeth whitening, composite bonding & zirconia crowns by Dr. Prashant Kumar Vats. Fee ₹200.";
-    const pageUrl = `${window.location.origin}/smile-makeover-ghaziabad`;
-
-    document.title = title;
-
-    const setMetaTag = (attrName: string, attrVal: string, contentVal: string) => {
-      let el = document.querySelector(`meta[${attrName}="${attrVal}"]`);
-      if (!el) {
-        el = document.createElement('meta');
-        el.setAttribute(attrName, attrVal);
-        document.head.appendChild(el);
-      }
-      el.setAttribute('content', contentVal);
-    };
-
-    setMetaTag("name", "description", description);
-    setMetaTag("name", "keywords", "smile makeover Ghaziabad, cosmetic dentistry Ghaziabad, dental veneers Ghaziabad, composite bonding, aesthetic dentist Chipiyana Buzurg, teeth redesign");
-
-    setMetaTag("property", "og:title", title);
-    setMetaTag("property", "og:description", description);
-    setMetaTag("property", "og:type", "website");
-    setMetaTag("property", "og:url", pageUrl);
-
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute('href', pageUrl);
-
-    // Schema: Service, WebPage, BreadcrumbList
-    const schemaData = {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebPage",
-          "@id": `${pageUrl}#webpage`,
-          "url": pageUrl,
-          "name": title,
-          "description": description,
-          "breadcrumb": {
-            "@id": `${pageUrl}#breadcrumb`
-          },
-          "isPartOf": {
-            "@type": "WebSite",
-            "@id": `${window.location.origin}/#website`
-          }
-        },
-        {
-          "@type": "BreadcrumbList",
-          "@id": `${pageUrl}#breadcrumb`,
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Home",
-              "item": `${window.location.origin}/`
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Cosmetic Dentistry",
-              "item": `${window.location.origin}/teeth-whitening`
-            },
-            {
-              "@type": "ListItem",
-              "position": 3,
-              "name": "Smile Makeover in Ghaziabad",
-              "item": pageUrl
-            }
-          ]
-        },
-        {
-          "@type": "Service",
-          "@id": `${pageUrl}#service`,
-          "name": "Comprehensive Smile Makeover & Aesthetic Dentistry",
-          "serviceType": "Cosmetic Dentistry",
-          "provider": {
-            "@type": "Dentist",
-            "name": "Oracle Dental Clinic",
-            "telephone": "+91-7011961515",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "Shop No. 47, KTS Complex, Jaat Chowk, near Dolphin Public School, Chipiyana Buzurg",
-              "addressLocality": "Ghaziabad",
-              "addressRegion": "Uttar Pradesh",
-              "postalCode": "201009",
-              "addressCountry": "IN"
-            }
-          },
-          "areaServed": [
-            { "@type": "AdministrativeArea", "name": "Ghaziabad" },
-            { "@type": "AdministrativeArea", "name": "Chipiyana Buzurg" },
-            { "@type": "AdministrativeArea", "name": "Crossings Republik" },
-            { "@type": "AdministrativeArea", "name": "Noida Extension" }
-          ],
-          "description": "Multi-disciplinary cosmetic smile design combining porcelain veneers, composite bonding, in-office whitening, and gingival contouring."
-        }
-      ]
-    };
-
-    let scriptTag = document.getElementById('smile-makeover-schema');
-    if (!scriptTag) {
-      scriptTag = document.createElement('script');
-      scriptTag.id = 'smile-makeover-schema';
-      scriptTag.setAttribute('type', 'application/ld+json');
-      document.head.appendChild(scriptTag);
-    }
-    scriptTag.textContent = JSON.stringify(schemaData);
-
-    return () => {
-      const el = document.getElementById('smile-makeover-schema');
-      if (el) el.remove();
-    };
-  }, []);
+  
 
   const faqs = [
     {
@@ -228,7 +111,7 @@ export default function SmileMakeoverGhaziabadPage({
               onClick={handleCall} 
               className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold px-6 py-3.5 rounded-xl flex items-center gap-2 transition-all shadow-md active:scale-95"
             >
-              <PhoneCall className="w-4 h-4" /> <span>Consultation: Call 7011961515</span>
+              <PhoneCall className="w-4 h-4" /> <span>Consultation: Call +91 7011961515</span>
             </InteractiveButton>
             <InteractiveButton 
               id="makeover-wa-btn" 
@@ -452,7 +335,7 @@ export default function SmileMakeoverGhaziabadPage({
               onClick={handleCall} 
               className="bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold px-8 py-4 rounded-xl flex items-center gap-2 shadow-lg transition-all"
             >
-              <PhoneCall className="w-4 h-4" /> <span>Call 7011961515</span>
+              <PhoneCall className="w-4 h-4" /> <span>Call +91 7011961515</span>
             </InteractiveButton>
             <InteractiveButton 
               id="makeover-bottom-wa-btn" 
@@ -464,8 +347,15 @@ export default function SmileMakeoverGhaziabadPage({
           </div>
 
           <div className="pt-4 flex flex-wrap justify-center items-center gap-6 text-xs text-purple-200">
-            <span className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-amber-400" /> Mon–Sun: 10 AM–2 PM, 5 PM–9 PM</span>
-            <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4 text-amber-400" /> KTS Complex, Jaat Chowk, Chipiyana Buzurg</span>
+            <span className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-amber-400" /> Open 24 Hours, 7 Days (Mon–Sun)</span>
+            <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4 text-amber-400" /> Shop No. 47, KTS Complex, Jaat Chowk, Near Dolphin Public School, Chipiyana Buzurg, Ghaziabad</span>
+          </div>
+          <div className="flex flex-wrap justify-center gap-2 pt-4">
+            <a href="/cosmetic-dentistry" onClick={(e) => handleLinkClick(e, '/cosmetic-dentistry')} className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20">Cosmetic Dentistry</a>
+            <a href="/dental-veneers" onClick={(e) => handleLinkClick(e, '/dental-veneers')} className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20">Dental Veneers</a>
+            <a href="/teeth-whitening" onClick={(e) => handleLinkClick(e, '/teeth-whitening')} className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20">Teeth Whitening</a>
+            <a href="/zirconia-crowns" onClick={(e) => handleLinkClick(e, '/zirconia-crowns')} className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20">Zirconia Crowns</a>
+            <a href="/clear-aligners" onClick={(e) => handleLinkClick(e, '/clear-aligners')} className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20">Clear Aligners</a>
           </div>
         </section>
 

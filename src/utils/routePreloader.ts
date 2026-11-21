@@ -1,11 +1,12 @@
 /**
  * Route preloader utility to pre-fetch lazy-loaded React page components
- * on idle or hover for instant sub-second page transitions.
+ * politely on user hover/focus without competing with initial mobile LCP bandwidth.
  */
 
 const preloadedRoutes = new Set<string>();
 
 const routeImports: Record<string, () => Promise<unknown>> = {
+  '/dental-services': () => import('../components/DentalServicesPage'),
   '/wisdom-tooth-extraction': () => import('../components/WisdomToothPage'),
   '/tooth-pain-treatment': () => import('../components/ToothPainPage'),
   '/bleeding-gums': () => import('../components/BleedingGumsPage'),
@@ -30,6 +31,12 @@ const routeImports: Record<string, () => Promise<unknown>> = {
   '/teeth-cleaning': () => import('../components/TeethCleaningPage'),
   '/teeth-whitening': () => import('../components/TeethWhiteningPage'),
   '/dental-implants': () => import('../components/DentalImplantsPage'),
+  '/full-mouth-dental-implants': () => import('../components/FullMouthImplantsPage'),
+  '/cosmetic-dentistry': () => import('../components/CosmeticDentistryPage'),
+  '/dental-veneers': () => import('../components/DentalVeneersPage'),
+  '/zirconia-crowns': () => import('../components/ZirconiaCrownsPage'),
+  '/dental-braces': () => import('../components/DentalBracesPage'),
+  '/clear-aligners': () => import('../components/ClearAlignersPage'),
   '/root-canal-treatment': () => import('../components/RootCanalPage'),
   '/dentist-chipiyana-buzurg-ghaziabad': () => import('../components/ChipiyanaLandingPage'),
   '/dentist-ghaziabad': () => import('../components/DentistGhaziabadPage'),
@@ -51,7 +58,7 @@ const routeImports: Record<string, () => Promise<unknown>> = {
   '/teeth-whitening-cost-ghaziabad': () => import('../components/TeethWhiteningCostPage'),
   '/emergency-dentist-ghaziabad': () => import('../components/EmergencyDentistGhaziabadPage'),
   '/dental-implant-after-tooth-extraction': () => import('../components/ImmediateDentalImplantPage'),
-  '/smile-makeover-ghaziabad': () => import('../components/SmileMakeoverGhaziabadPage')
+  '/smile-makeover-ghaziabad': () => import('../components/SmileMakeoverGhaziabadPage'),
 };
 
 export function preloadRoute(path: string): void {
@@ -67,22 +74,20 @@ export function preloadRoute(path: string): void {
 }
 
 export function preloadAllTopRoutes(): void {
-  const topRoutes = [
-    '/dental-implants',
-    '/root-canal-treatment',
-    '/wisdom-tooth-extraction',
-    '/teeth-cleaning',
-    '/teeth-whitening',
-    '/tooth-pain-treatment'
-  ];
-
-  if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
-    window.requestIdleCallback(() => {
-      topRoutes.forEach((r) => preloadRoute(r));
-    });
-  } else {
-    setTimeout(() => {
-      topRoutes.forEach((r) => preloadRoute(r));
-    }, 1500);
+  // Respect Save-Data and slow connections on mobile so initial Lighthouse & 3G/4G loads stay ultra-fast
+  if (typeof navigator !== 'undefined') {
+    const conn = (navigator as unknown as { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
+    if (conn?.saveData || (conn?.effectiveType && conn.effectiveType !== '4g')) {
+      return;
+    }
   }
+  // Only warm top routes lazily well after initial load is complete
+  const topRoutes = ['/dental-implants', '/root-canal-treatment', '/wisdom-tooth-extraction'];
+  setTimeout(() => {
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      window.requestIdleCallback(() => {
+        topRoutes.forEach((r) => preloadRoute(r));
+      });
+    }
+  }, 5000);
 }

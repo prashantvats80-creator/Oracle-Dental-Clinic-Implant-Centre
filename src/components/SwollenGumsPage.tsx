@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { PhoneCall, MessageCircle } from 'lucide-react';
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
@@ -7,13 +7,7 @@ import { Breadcrumbs } from './Breadcrumbs';
 interface Props { handleCall: () => void; handleWhatsApp: () => void; handleDirections: () => void; navigateToHome: () => void; navigateToPath: (p: string) => void; }
 
 export default function SwollenGumsPage({ handleCall, handleWhatsApp, navigateToHome, navigateToPath }: Props) {
-  useEffect(() => {
-    document.title = "Swollen Gums Treatment in Ghaziabad | Oracle Dental Clinic";
-    let canonical = document.querySelector('link[rel="canonical"]') || document.createElement('link');
-    canonical.setAttribute('rel', 'canonical'); 
-    canonical.setAttribute('href', `${window.location.origin}/swollen-gums`); 
-    document.head.appendChild(canonical);
-  }, []);
+  
 
   return (
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed">
@@ -31,7 +25,7 @@ export default function SwollenGumsPage({ handleCall, handleWhatsApp, navigateTo
           <h1 className="text-3xl sm:text-4xl font-black">Swollen Gums Treatment in Ghaziabad</h1>
           <p className="text-slate-300 max-w-2xl">Swollen or puffy gums around teeth require evaluation to check for food impaction, abscess, or gingivitis at Oracle Dental Clinic in Chipiyana Buzurg under Dr. Prashant Kumar Vats, BDS.</p>
           <div className="flex flex-wrap gap-3">
-            <InteractiveButton id="sg-call" onClick={handleCall} className="bg-amber-500 text-slate-950 font-black py-3.5 px-6 rounded-xl">Call 7011961515</InteractiveButton>
+            <InteractiveButton id="sg-call" onClick={handleCall} className="bg-amber-500 text-slate-950 font-black py-3.5 px-6 rounded-xl">Call +91 7011961515</InteractiveButton>
             <InteractiveButton id="sg-wa" onClick={handleWhatsApp} className="bg-emerald-600 text-white font-bold py-3.5 px-6 rounded-xl">WhatsApp Booking</InteractiveButton>
           </div>
         </div>

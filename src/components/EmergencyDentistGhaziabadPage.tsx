@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   PhoneCall, 
   MessageCircle, 
@@ -50,124 +50,7 @@ export default function EmergencyDentistGhaziabadPage({
     }
   };
 
-  useEffect(() => {
-    const title = "Emergency Dentist in Ghaziabad | Urgent Dental Pain Relief | Oracle Dental Clinic";
-    const description = "Immediate emergency dental care in Ghaziabad. Fast relief for severe toothache, dental abscess, broken tooth, or facial swelling. Consultation fee ₹200.";
-    const pageUrl = `${window.location.origin}/emergency-dentist-ghaziabad`;
-
-    document.title = title;
-
-    const setMetaTag = (attrName: string, attrVal: string, contentVal: string) => {
-      let el = document.querySelector(`meta[${attrName}="${attrVal}"]`);
-      if (!el) {
-        el = document.createElement('meta');
-        el.setAttribute(attrName, attrVal);
-        document.head.appendChild(el);
-      }
-      el.setAttribute('content', contentVal);
-    };
-
-    setMetaTag("name", "description", description);
-    setMetaTag("name", "keywords", "emergency dentist Ghaziabad, urgent dental care Ghaziabad, toothache emergency Ghaziabad, 24/7 dentist Ghaziabad, dental clinic emergency chipiyana buzurg");
-
-    setMetaTag("property", "og:title", title);
-    setMetaTag("property", "og:description", description);
-    setMetaTag("property", "og:type", "website");
-    setMetaTag("property", "og:url", pageUrl);
-
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute('href', pageUrl);
-
-    // Schema: EmergencyService, MedicalWebPage, BreadcrumbList
-    const schemaData = {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "MedicalWebPage",
-          "@id": `${pageUrl}#webpage`,
-          "url": pageUrl,
-          "name": title,
-          "description": description,
-          "breadcrumb": {
-            "@id": `${pageUrl}#breadcrumb`
-          },
-          "isPartOf": {
-            "@type": "WebSite",
-            "@id": `${window.location.origin}/#website`
-          }
-        },
-        {
-          "@type": "BreadcrumbList",
-          "@id": `${pageUrl}#breadcrumb`,
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Home",
-              "item": `${window.location.origin}/`
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Emergency Dental Care",
-              "item": `${window.location.origin}/emergency-dentist`
-            },
-            {
-              "@type": "ListItem",
-              "position": 3,
-              "name": "Emergency Dentist in Ghaziabad",
-              "item": pageUrl
-            }
-          ]
-        },
-        {
-          "@type": "EmergencyService",
-          "@id": `${pageUrl}#service`,
-          "name": "Urgent Dental Pain Relief & Trauma Care",
-          "serviceType": "Emergency Dentistry",
-          "provider": {
-            "@type": "Dentist",
-            "name": "Oracle Dental Clinic",
-            "telephone": "+91-7011961515",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "Shop No. 47, KTS Complex, Jaat Chowk, near Dolphin Public School, Chipiyana Buzurg",
-              "addressLocality": "Ghaziabad",
-              "addressRegion": "Uttar Pradesh",
-              "postalCode": "201009",
-              "addressCountry": "IN"
-            }
-          },
-          "areaServed": [
-            { "@type": "AdministrativeArea", "name": "Ghaziabad" },
-            { "@type": "AdministrativeArea", "name": "Chipiyana Buzurg" },
-            { "@type": "AdministrativeArea", "name": "Crossings Republik" },
-            { "@type": "AdministrativeArea", "name": "Noida Extension" }
-          ],
-          "description": "Urgent triage and clinical intervention for acute pulpitis, facial swellings, dental abscess drainage, knocked-out teeth, and severe dental fractures."
-        }
-      ]
-    };
-
-    let scriptTag = document.getElementById('emergency-dentist-ghaziabad-schema');
-    if (!scriptTag) {
-      scriptTag = document.createElement('script');
-      scriptTag.id = 'emergency-dentist-ghaziabad-schema';
-      scriptTag.setAttribute('type', 'application/ld+json');
-      document.head.appendChild(scriptTag);
-    }
-    scriptTag.textContent = JSON.stringify(schemaData);
-
-    return () => {
-      const el = document.getElementById('emergency-dentist-ghaziabad-schema');
-      if (el) el.remove();
-    };
-  }, []);
+  
 
   const faqs = [
     {
@@ -451,7 +334,7 @@ export default function EmergencyDentistGhaziabadPage({
               onClick={handleCall} 
               className="bg-amber-400 hover:bg-amber-300 text-slate-950 font-black px-8 py-4 rounded-xl flex items-center gap-2 shadow-lg transition-all text-base"
             >
-              <PhoneCall className="w-5 h-5 text-slate-950" /> <span>Call 7011961515</span>
+              <PhoneCall className="w-5 h-5 text-slate-950" /> <span>Call +91 7011961515</span>
             </InteractiveButton>
             <InteractiveButton 
               id="emergency-bottom-wa-btn" 
@@ -463,7 +346,7 @@ export default function EmergencyDentistGhaziabadPage({
           </div>
 
           <div className="pt-4 flex flex-wrap justify-center items-center gap-6 text-xs text-red-200">
-            <span className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-amber-400" /> Mon–Sun: 10 AM–2 PM, 5 PM–9 PM (Emergency triage available)</span>
+            <span className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-amber-400" /> Open 24 Hours, 7 Days (Mon–Sun)</span>
             <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4 text-amber-400" /> KTS Complex, Jaat Chowk, Chipiyana Buzurg</span>
           </div>
         </section>

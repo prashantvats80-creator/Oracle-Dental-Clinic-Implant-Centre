@@ -1,12 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-heading: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-heading: "Outfit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 section {
@@ -15,83 +16,114 @@ section {
 
 body {
   font-family: var(--font-sans);
+  overflow-x: clip;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
+  text-wrap: balance;
 }
 
-@keyframes pulse-ring {
-  0% { transform: scale(0.8); opacity: 0.5; }
-  100% { transform: scale(1.3); opacity: 0; }
-}
-
-.animate-pulse-ring::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background-color: inherit;
-  z-index: -1;
-  animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
-}
-
-@keyframes gradient-xy {
-  0%, 100% {
-    background-size: 400% 400%;
-    background-position: 0% 0%;
-  }
-  50% {
-    background-size: 400% 400%;
-    background-position: 100% 100%;
-  }
-}
-
-.animate-gradient-xy {
-  animation: gradient-xy 15s ease infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-.animate-float {
-  animation: float 4s ease-in-out infinite;
-}
-
-@keyframes sheen {
-  0% { transform: translateX(-200%) skewX(-20deg); }
-  100% { transform: translateX(500%) skewX(-20deg); }
-}
-
-.animate-sheen {
-  animation: sheen 3s ease-in-out infinite;
-}
-
-@keyframes ring {
-  0%, 100% { transform: rotate(0deg); }
-  10%, 30%, 50%, 70%, 90% { transform: rotate(-10deg); }
-  20%, 40%, 60%, 80% { transform: rotate(10deg); }
-}
-
-.animate-ring {
-  animation: ring 2s ease-in-out infinite;
-}
-
+/* Lightweight Skeleton Shimmer */
 @keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 .animate-shimmer {
   animation: shimmer 1.8s ease-in-out infinite;
 }
 
+/* Compact Floating Contact Icons: Subtle Compositor-Only Pulse Ring + Soft Glow */
+@keyframes fab-soft-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  70% {
+    transform: scale(1.42);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.42);
+    opacity: 0;
+  }
+}
+
+@keyframes fab-gentle-breathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+.fab-contact-btn {
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 180ms ease;
+  animation: fab-gentle-breathe 3.6s ease-in-out infinite;
+  -webkit-tap-highlight-color: transparent;
+  isolation: isolate;
+}
+
+.fab-contact-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background-color: inherit;
+  z-index: -1;
+  pointer-events: none;
+  animation: fab-soft-pulse 3.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.fab-contact-call {
+  animation-delay: 1.6s;
+}
+
+.fab-contact-call::before {
+  animation-delay: 1.6s;
+}
+
+.fab-contact-btn:hover {
+  transform: scale(1.08);
+}
+
+.fab-contact-btn:active {
+  transform: scale(0.94);
+}
+
+/* Safe-area bottom offset for notched mobile browsers */
+@supports (bottom: env(safe-area-inset-bottom)) {
+  .fab-safe-bottom {
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  }
+  @media (min-width: 640px) {
+    .fab-safe-bottom {
+      bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+    }
+  }
+}
+
+/* Clean native <details> summary marker suppression */
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Respect User Reduced-Motion Accessibility Preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .fab-contact-btn,
+  .fab-contact-btn::before,
+  .animate-shimmer,
+  .animate-pulse,
+  .animate-bounce {
+    animation: none !important;
+    transition: none !important;
+  }
+}

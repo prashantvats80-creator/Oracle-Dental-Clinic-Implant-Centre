@@ -1,23 +1,42 @@
 import React from 'react';
-import { motion, HTMLMotionProps } from 'motion/react';
 
-interface InteractiveButtonProps extends HTMLMotionProps<"button"> {
+interface InteractiveButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
+  // Optional legacy motion props kept for seamless compatibility without bundling motion/react
+  initial?: unknown;
+  animate?: unknown;
+  exit?: unknown;
+  transition?: unknown;
+  whileTap?: unknown;
+  whileHover?: unknown;
 }
 
-export const InteractiveButton = ({ children, onClick, ...props }: InteractiveButtonProps) => {
+export const InteractiveButton: React.FC<InteractiveButtonProps> = ({
+  children,
+  onClick,
+  className = '',
+  type = 'button',
+  initial: _initial,
+  animate: _animate,
+  exit: _exit,
+  transition: _transition,
+  whileTap: _whileTap,
+  whileHover: _whileHover,
+  ...props
+}) => {
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     if (onClick) onClick(e);
   };
 
   return (
-    <motion.button
-      whileTap={{ scale: 0.95 }}
+    <button
+      type={type}
       onClick={handleClick}
+      className={`cursor-pointer active:scale-95 transition-transform duration-150 ${className}`}
       {...props}
     >
       {children}
-    </motion.button>
+    </button>
   );
 };

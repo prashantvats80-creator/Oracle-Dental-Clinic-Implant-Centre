@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { PhoneCall, MessageCircle } from 'lucide-react';
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
@@ -13,13 +13,7 @@ interface Props {
 }
 
 export default function GumRecessionPage({ handleCall, handleWhatsApp, navigateToHome, navigateToPath }: Props) {
-  useEffect(() => {
-    document.title = "Gum Recession Care in Ghaziabad | Oracle Dental Clinic";
-    let canonical = document.querySelector('link[rel="canonical"]') || document.createElement('link');
-    canonical.setAttribute('rel', 'canonical'); 
-    canonical.setAttribute('href', `${window.location.origin}/gum-recession`); 
-    document.head.appendChild(canonical);
-  }, []);
+  
 
   return (
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed">
@@ -41,7 +35,7 @@ export default function GumRecessionPage({ handleCall, handleWhatsApp, navigateT
           </p>
           <div className="flex flex-wrap gap-3">
             <InteractiveButton id="gr-call" onClick={handleCall} className="bg-amber-500 text-slate-950 font-black py-3.5 px-6 rounded-xl shadow-md">
-              <PhoneCall className="w-4 h-4 inline mr-2" /> Call 7011961515
+              <PhoneCall className="w-4 h-4 inline mr-2" /> Call +91 7011961515
             </InteractiveButton>
             <InteractiveButton id="gr-wa" onClick={handleWhatsApp} className="bg-emerald-600 text-white font-bold py-3.5 px-6 rounded-xl shadow-md">
               <MessageCircle className="w-4 h-4 inline mr-2" /> WhatsApp Booking

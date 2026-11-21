@@ -1,6 +1,6 @@
 // Oracle Dental Clinic Service Worker - 2G Performance & Offline Strategy
-const CACHE_STATIC = 'oracle-dental-static-v2';
-const CACHE_IMAGES = 'oracle-dental-images-v2';
+const CACHE_STATIC = 'oracle-dental-static-v3';
+const CACHE_IMAGES = 'oracle-dental-images-v3';
 
 const CORE_ASSETS = [
   './',
@@ -8,7 +8,7 @@ const CORE_ASSETS = [
   './404.html',
   './robots.txt',
   './sitemap.xml',
-  'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap'
+  'https://fonts.googleapis.com/css2?family=Outfit:wght@600;700&display=swap'
 ];
 
 self.addEventListener('install', (event) => {
@@ -16,8 +16,8 @@ self.addEventListener('install', (event) => {
     caches.open(CACHE_STATIC).then(async (cache) => {
       await Promise.allSettled(
         CORE_ASSETS.map((asset) =>
-          cache.add(asset).catch((err) => {
-            console.warn(`[SW] Pre-caching asset skipped: ${asset}`, err);
+          cache.add(asset).catch(() => {
+            // Skip unreachable optional asset on offline install
           })
         )
       );
@@ -42,6 +42,11 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(event.request.url);
 
+  // Never cache Vite dev modules or source files
+  if (url.pathname.startsWith('/src/') || url.pathname.startsWith('/@') || url.pathname.includes('node_modules')) {
+    return;
+  }
+
   // 1. Navigation requests (HTML) -> Network-First with cached fallback
   if (event.request.mode === 'navigate') {
     event.respondWith(
@@ -55,20 +60,19 @@ self.addEventListener('fetch', (event) => {
         })
         .catch(() => {
           return caches.match('./index.html')
-            .then(res => res || caches.match('/index.html'))
-            .then(res => res || caches.match('./'))
-            .then(res => res || caches.match('/'));
+            .then((res) => res || caches.match('/index.html'))
+            .then((res) => res || caches.match('./'))
+            .then((res) => res || caches.match('/'));
         })
     );
     return;
   }
 
-  // 2. Fonts, CSS, JS static assets -> Cache-First
+  // 2. Hashed Vite production assets & Google Fonts -> Cache-First
   if (
     url.hostname.includes('fonts.gstatic.com') ||
     url.hostname.includes('fonts.googleapis.com') ||
-    url.pathname.endsWith('.css') ||
-    url.pathname.endsWith('.js') ||
+    (url.pathname.includes('/assets/') && (url.pathname.endsWith('.css') || url.pathname.endsWith('.js'))) ||
     url.pathname.endsWith('.woff2')
   ) {
     event.respondWith(
@@ -86,7 +90,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 3. Medical Images -> Stale-While-Revalidate
+  // 3. Clinic Images -> Stale-While-Revalidate
   if (
     url.hostname.includes('images.unsplash.com') ||
     url.hostname.includes('i.postimg.cc') ||
@@ -109,10 +113,8 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 4. Default Stale-While-Revalidate
+  // 4. Default -> Network-First with cache fallback
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      return cached || fetch(event.request);
-    })
+    fetch(event.request).catch(() => caches.match(event.request))
   );
 });

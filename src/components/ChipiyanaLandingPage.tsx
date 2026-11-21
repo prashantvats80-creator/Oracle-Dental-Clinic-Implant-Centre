@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   PhoneCall, 
   MessageCircle, 
@@ -38,138 +38,7 @@ export default function ChipiyanaLandingPage({
 }: ChipiyanaLandingPageProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  useEffect(() => {
-    // 1. Page Title & Meta Description
-    const title = "Dentist in Chipiyana Buzurg, Ghaziabad | Oracle Dental Clinic";
-    const description = "Looking for a dentist in Chipiyana Buzurg, Ghaziabad? Oracle Dental Clinic at KTS Complex near Jaat Chowk offers expert dental care by Dr. Prashant Kumar Vats.";
-    const pageUrl = `${window.location.origin}/dentist-chipiyana-buzurg-ghaziabad`;
-
-    document.title = title;
-
-    const setMetaTag = (attrName: string, attrVal: string, contentVal: string) => {
-      let el = document.querySelector(`meta[${attrName}="${attrVal}"]`);
-      if (!el) {
-        el = document.createElement('meta');
-        el.setAttribute(attrName, attrVal);
-        document.head.appendChild(el);
-      }
-      el.setAttribute('content', contentVal);
-    };
-
-    setMetaTag("name", "description", description);
-    setMetaTag("name", "keywords", "dentist in Chipiyana Buzurg, dentist near me, nearby dentist, nearby dental clinic, dental clinic in Chipiyana Buzurg, dental clinic near me, dentist in Ghaziabad, dental clinic in Ghaziabad, dentist near Jaat Chowk, dental clinic near KTS Complex, Oracle Dental Clinic");
-
-    setMetaTag("property", "og:title", title);
-    setMetaTag("property", "og:description", description);
-    setMetaTag("property", "og:type", "website");
-    setMetaTag("property", "og:url", pageUrl);
-
-    setMetaTag("name", "twitter:card", "summary_large_image");
-    setMetaTag("name", "twitter:title", title);
-    setMetaTag("name", "twitter:description", description);
-
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute('href', pageUrl);
-
-    // 2. Structured Data (JSON-LD) for LocalBusiness/Dentist and FAQPage
-    const dentistSchema = {
-      "@context": "https://schema.org",
-      "@type": "Dentist",
-      "@id": `${pageUrl}#dentist`,
-      "name": "Oracle Dental Clinic",
-      "image": [
-        "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=800&q=80",
-        "https://i.postimg.cc/tCd8wLDv/Chat-GPT-Image-Apr-22-2026-08-21-13-PM.png"
-      ],
-      "url": pageUrl,
-      "telephone": "+917011961515",
-      "priceRange": "₹200 Consultation",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Shop No. 47, KTS Complex, Jaat Chowk, Chipiyana Buzurg",
-        "addressLocality": "Ghaziabad",
-        "addressRegion": "Uttar Pradesh",
-        "postalCode": "201009",
-        "addressCountry": "IN"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "28.6280",
-        "longitude": "77.4520"
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-          "opens": "10:00",
-          "closes": "14:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-          "opens": "17:00",
-          "closes": "21:00"
-        }
-      ],
-      "founder": {
-        "@type": "Person",
-        "name": "Dr. Prashant Kumar Vats",
-        "jobTitle": "Dentist & Implantologist",
-        "honorificSuffix": "BDS"
-      },
-      "areaServed": [
-        "Chipiyana Buzurg",
-        "Jaat Chowk",
-        "KTS Complex",
-        "Dolphin Public School",
-        "Crossings Republik",
-        "Lal Kuan Ghaziabad",
-        "Noida Extension",
-        "Shahberi",
-        "Chappraula",
-        "Panchsheel Greens 2",
-        "ABES",
-        "Ghaziabad"
-      ]
-    };
-
-    const faqSchema = {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": faqs.map(faq => ({
-        "@type": "Question",
-        "name": faq.question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faq.answer
-        }
-      }))
-    };
-
-    const scriptDentist = document.createElement('script');
-    scriptDentist.type = 'application/ld+json';
-    scriptDentist.id = 'chipiyana-dentist-schema';
-    scriptDentist.innerHTML = JSON.stringify(dentistSchema);
-    document.head.appendChild(scriptDentist);
-
-    const scriptFaq = document.createElement('script');
-    scriptFaq.type = 'application/ld+json';
-    scriptFaq.id = 'chipiyana-faq-schema';
-    scriptFaq.innerHTML = JSON.stringify(faqSchema);
-    document.head.appendChild(scriptFaq);
-
-    window.scrollTo(0, 0);
-
-    return () => {
-      document.getElementById('chipiyana-dentist-schema')?.remove();
-      document.getElementById('chipiyana-faq-schema')?.remove();
-    };
-  }, []);
+  
 
   const servicesList = [
     {
@@ -257,7 +126,7 @@ export default function ChipiyanaLandingPage({
     },
     {
       question: "What are the clinic timings?",
-      answer: "The clinic is open all 7 days of the week with morning timings from 10:00 AM to 2:00 PM and evening timings from 5:00 PM to 9:00 PM."
+      answer: "The clinic is open all 7 days of the week with 24 hours a day, 7 days a week (Monday to Sunday)."
     },
     {
       question: "How can I book an appointment?",
@@ -308,7 +177,7 @@ export default function ChipiyanaLandingPage({
               </div>
               <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex flex-col col-span-2 sm:col-span-1">
                 <span className="text-slate-400 text-xs">Clinic Timings</span>
-                <span className="text-cyan-300 font-bold text-xs sm:text-xs">10 AM - 2 PM, 5 PM - 9 PM</span>
+                <span className="text-cyan-300 font-bold text-xs sm:text-xs">Open 24 Hours, 7 Days</span>
               </div>
             </div>
 
@@ -346,8 +215,8 @@ export default function ChipiyanaLandingPage({
                   O
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-white">Oracle Dental Clinic</h3>
-                  <p className="text-xs text-amber-400 font-medium">Chipiyana Buzurg Branch</p>
+                  <h3 className="text-lg font-bold text-white">Oracle Dental Clinic &amp; Implant Center</h3>
+                  <p className="text-xs text-amber-400 font-medium">Chipiyana Buzurg, Ghaziabad</p>
                 </div>
               </div>
 
@@ -370,7 +239,7 @@ export default function ChipiyanaLandingPage({
                 <div className="flex items-start gap-2.5">
                   <Clock className="w-4 h-4 text-emerald-400 mt-1 flex-shrink-0" />
                   <p className="text-xs text-slate-300">
-                    10:00 AM – 2:00 PM | 5:00 PM – 9:00 PM (All Days)
+                    Open 24 Hours, 7 Days (Mon–Sun)
                   </p>
                 </div>
               </div>
@@ -438,7 +307,7 @@ export default function ChipiyanaLandingPage({
               },
               {
                 title: "Convenient Morning & Evening Timings",
-                desc: "Open all days from 10:00 AM – 2:00 PM and 5:00 PM – 9:00 PM to fit your daily schedule."
+                desc: "Open all days 24 Hours, 7 Days (Monday – Sunday) to fit your daily schedule."
               },
               {
                 title: "Individualized Treatment Planning",
@@ -616,7 +485,7 @@ export default function ChipiyanaLandingPage({
 
               <p className="flex items-center gap-3">
                 <Clock className="w-5 h-5 text-emerald-400 flex-shrink-0" />
-                <span><strong>Timings:</strong> 10:00 AM – 2:00 PM & 5:00 PM – 9:00 PM (All days)</span>
+                <span><strong>Timings:</strong> Open 24 Hours, 7 Days (Monday – Sunday)</span>
               </p>
 
               <p className="flex items-center gap-3">
@@ -778,7 +647,7 @@ export default function ChipiyanaLandingPage({
               onClick={handleCall}
               className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 px-6 rounded-xl text-sm"
             >
-              Call 7011961515
+              Call +91 7011961515
             </InteractiveButton>
 
             <button

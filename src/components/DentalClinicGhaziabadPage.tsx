@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   PhoneCall, 
   MessageCircle, 
@@ -51,101 +51,7 @@ export default function DentalClinicGhaziabadPage({
     }
   };
 
-  useEffect(() => {
-    const title = "Dental Clinic in Ghaziabad | Oracle Dental Clinic";
-    const description = "Looking for a modern dental clinic in Ghaziabad? Oracle Dental Clinic at KTS Complex, Jaat Chowk offers comprehensive multi-specialty dental care, rotary RCT, implants & crowns. Consultation ₹200.";
-    const pageUrl = `${window.location.origin}/dental-clinic-ghaziabad`;
-
-    document.title = title;
-
-    const setMetaTag = (attrName: string, attrVal: string, contentVal: string) => {
-      let el = document.querySelector(`meta[${attrName}="${attrVal}"]`);
-      if (!el) {
-        el = document.createElement('meta');
-        el.setAttribute(attrName, attrVal);
-        document.head.appendChild(el);
-      }
-      el.setAttribute('content', contentVal);
-    };
-
-    setMetaTag("name", "description", description);
-    setMetaTag("name", "keywords", "dental clinic in Ghaziabad, dental clinic Ghaziabad, dental clinic near me, dentist near me, dental treatment Ghaziabad, nearby dental clinic, dental clinic Chipiyana Buzurg, dental care Ghaziabad, dental doctor Ghaziabad, family dental clinic Ghaziabad");
-
-    setMetaTag("property", "og:title", title);
-    setMetaTag("property", "og:description", description);
-    setMetaTag("property", "og:type", "website");
-    setMetaTag("property", "og:url", pageUrl);
-    setMetaTag("property", "og:image", "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=80");
-
-    setMetaTag("name", "twitter:card", "summary_large_image");
-    setMetaTag("name", "twitter:title", title);
-    setMetaTag("name", "twitter:description", description);
-
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute('href', pageUrl);
-
-    const clinicSchema = {
-      "@context": "https://schema.org",
-      "@type": ["Dentist", "LocalBusiness", "MedicalClinic"],
-      "@id": `${pageUrl}#clinic`,
-      "name": "Oracle Dental Clinic",
-      "url": pageUrl,
-      "telephone": "+917011961515",
-      "priceRange": "₹200 Consultation",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Shop No. 47, KTS Complex, Jaat Chowk, near Dolphin Public School, Chipiyana Buzurg",
-        "addressLocality": "Ghaziabad",
-        "addressRegion": "Uttar Pradesh",
-        "postalCode": "201009",
-        "addressCountry": "IN"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 28.6280,
-        "longitude": 77.4520
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-          "opens": "10:00",
-          "closes": "14:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-          "opens": "17:00",
-          "closes": "21:00"
-        }
-      ],
-      "founder": {
-        "@type": "Person",
-        "name": "Dr. Prashant Kumar Vats",
-        "jobTitle": "Dental Surgeon & Oral Health Practitioner",
-        "honorificSuffix": "BDS"
-      }
-    };
-
-    let script = document.getElementById('dental-clinic-ghaziabad-schema') as HTMLScriptElement | null;
-    if (!script) {
-      script = document.createElement('script');
-      script.id = 'dental-clinic-ghaziabad-schema';
-      script.type = 'application/ld+json';
-      document.head.appendChild(script);
-    }
-    script.text = JSON.stringify(clinicSchema);
-
-    return () => {
-      const s = document.getElementById('dental-clinic-ghaziabad-schema');
-      if (s) s.remove();
-    };
-  }, []);
+  
 
   const faqs = [
     {
@@ -158,7 +64,7 @@ export default function DentalClinicGhaziabadPage({
     },
     {
       q: "What are the clinic's operational timings?",
-      a: "We operate daily Monday through Sunday with two convenient daily shifts: 10:00 AM to 2:00 PM in the morning, and 5:00 PM to 9:00 PM in the evening, accommodating working individuals and school schedules."
+      a: "We operate daily Monday through Sunday with Open 24 Hours, 7 Days (Monday – Sunday), accommodating working individuals and school schedules."
     },
     {
       q: "How can I book an appointment at Oracle Dental Clinic?",
@@ -216,7 +122,7 @@ export default function DentalClinicGhaziabadPage({
                 className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold px-6 py-3.5 rounded-xl flex items-center gap-2 shadow-lg transition-transform active:scale-95"
               >
                 <PhoneCall className="w-4 h-4" />
-                <span>Call 7011961515</span>
+                <span>Call +91 7011961515</span>
               </InteractiveButton>
 
               <InteractiveButton
@@ -380,7 +286,7 @@ export default function DentalClinicGhaziabadPage({
 
             <div className="lg:col-span-5 bg-white p-6 rounded-2xl border border-slate-200 space-y-3">
               <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block">Quick Contact & Timings</span>
-              <p className="text-xs text-slate-700"><strong>Daily Hours:</strong> 10:00 AM–2:00 PM & 5:00 PM–9:00 PM</p>
+              <p className="text-xs text-slate-700"><strong>Daily Hours:</strong> Open 24 Hours, 7 Days (Mon–Sun)</p>
               <p className="text-xs text-slate-700"><strong>Direct Helpline:</strong> 7011961515</p>
               <InteractiveButton
                 id="clinic-ghz-map-btn-2"
@@ -435,7 +341,7 @@ export default function DentalClinicGhaziabadPage({
           </div>
           <div className="flex flex-wrap justify-center gap-4">
             <InteractiveButton id="clinic-call-cta" onClick={handleCall} className="bg-amber-500 text-slate-950 font-extrabold px-6 py-3 rounded-xl flex items-center gap-2">
-              <PhoneCall className="w-4 h-4" /> Call 7011961515
+              <PhoneCall className="w-4 h-4" /> Call +91 7011961515
             </InteractiveButton>
             <InteractiveButton id="clinic-wa-cta" onClick={handleWhatsApp} className="bg-emerald-600 text-white font-bold px-6 py-3 rounded-xl flex items-center gap-2">
               <MessageCircle className="w-4 h-4" /> WhatsApp Booking

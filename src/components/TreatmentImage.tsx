@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { preloadImage } from '../utils/imagePreloader';
+import React, { useState } from 'react';
 
 interface TreatmentImageProps {
   src: string;
@@ -11,6 +10,13 @@ interface TreatmentImageProps {
   sizes?: string;
 }
 
+const ASPECT_DIMENSIONS: Record<NonNullable<TreatmentImageProps['aspectRatio']>, { width: number; height: number }> = {
+  '16/9': { width: 800, height: 450 },
+  '4/3': { width: 800, height: 600 },
+  '1/1': { width: 600, height: 600 },
+  '3/2': { width: 750, height: 500 },
+};
+
 export const TreatmentImage: React.FC<TreatmentImageProps> = ({
   src,
   alt,
@@ -18,57 +24,51 @@ export const TreatmentImage: React.FC<TreatmentImageProps> = ({
   aspectRatio = '16/9',
   className = '',
   priority = false,
-  sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px'
+  sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px',
 }) => {
   const [hasError, setHasError] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
 
-  // Fallback high quality medical dental illustration
-  const fallbackSrc = "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=800&q=80";
-  const imageSrc = hasError ? fallbackSrc : src;
+  const dims = ASPECT_DIMENSIONS[aspectRatio];
+  const isUnsplash = src.includes('images.unsplash.com');
+  const cleanUrl = isUnsplash ? src.split('?')[0] : src;
 
-  // Build responsive srcSet for Unsplash images to save data on 2G mobile networks
-  const isUnsplash = imageSrc.includes('images.unsplash.com');
-  const cleanUrl = isUnsplash ? imageSrc.split('?')[0] : imageSrc;
+  const optimizedSrc = isUnsplash
+    ? `${cleanUrl}?auto=format&fit=crop&fm=webp&w=800&q=75`
+    : src;
+
   const srcSet = isUnsplash
-    ? `${cleanUrl}?auto=format&fit=crop&w=400&q=75 400w, ${cleanUrl}?auto=format&fit=crop&w=800&q=80 800w, ${cleanUrl}?auto=format&fit=crop&w=1200&q=85 1200w`
+    ? `${cleanUrl}?auto=format&fit=crop&fm=webp&w=400&q=70 400w, ${cleanUrl}?auto=format&fit=crop&fm=webp&w=800&q=75 800w`
     : undefined;
 
-  useEffect(() => {
-    preloadImage(imageSrc).then(() => {
-      setIsLoaded(true);
-    });
-  }, [imageSrc]);
-
   return (
-    <figure className={`my-6 overflow-hidden rounded-2xl border border-slate-200/90 bg-slate-50 shadow-xs transition-all duration-300 hover:shadow-md ${className}`}>
-      <div className="relative w-full overflow-hidden bg-slate-100 flex items-center justify-center">
-        {/* Shimmer loading skeleton placeholder */}
-        {!isLoaded && (
-          <div className="absolute inset-0 bg-slate-200 overflow-hidden z-10">
-            <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/70 to-transparent animate-shimmer" />
+    <figure
+      className={`my-5 overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 ${className}`}
+    >
+      <div
+        className="relative w-full overflow-hidden bg-slate-100 flex items-center justify-center"
+        style={{ aspectRatio }}
+      >
+        {hasError ? (
+          <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-slate-100 text-slate-600">
+            <span className="text-sm font-semibold text-slate-800">{alt}</span>
+            <span className="text-xs text-slate-500 mt-1">Oracle Dental Clinic &amp; Implant Center</span>
           </div>
+        ) : (
+          <img
+            src={optimizedSrc}
+            srcSet={srcSet}
+            sizes={sizes}
+            alt={alt}
+            width={dims.width}
+            height={dims.height}
+            loading={priority ? 'eager' : 'lazy'}
+            fetchPriority={priority ? 'high' : 'auto'}
+            decoding="async"
+            referrerPolicy="no-referrer"
+            onError={() => setHasError(true)}
+            className="w-full h-full object-cover"
+          />
         )}
-        <img
-          src={imageSrc}
-          srcSet={srcSet}
-          sizes={sizes}
-          alt={alt}
-          loading={priority ? 'eager' : 'lazy'}
-          fetchPriority={priority ? 'high' : 'low'}
-          // @ts-ignore - React HTML attribute compatibility
-          fetchpriority={priority ? 'high' : 'low'}
-          decoding="async"
-          onLoad={() => setIsLoaded(true)}
-          onError={() => setHasError(true)}
-          className={`w-full h-auto object-cover transition-all duration-500 hover:scale-[1.02] ${
-            isLoaded ? 'opacity-100 blur-0' : 'opacity-0 blur-xs'
-          }`}
-          style={{ aspectRatio }}
-        />
-        <div className="absolute top-2 right-2 bg-slate-900/75 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1 rounded-full border border-white/20 uppercase tracking-wider shadow-xs z-20">
-          Educational Visual
-        </div>
       </div>
       {caption && (
         <figcaption className="p-3 text-center text-xs font-medium text-slate-600 bg-white border-t border-slate-100 leading-snug">

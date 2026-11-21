@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   PhoneCall, 
   MessageCircle, 
@@ -45,39 +45,7 @@ export default function DentalAbscessPage({
     }
   };
 
-  useEffect(() => {
-    const title = "Dental Abscess & Tooth Infection Treatment in Ghaziabad | Oracle Dental Clinic";
-    const description = "Urgent clinical care for dental abscess and tooth infections in Ghaziabad. Drainage, root canal, and infection relief by Dr. Prashant Kumar Vats, BDS. Consultation ₹200.";
-    const pageUrl = `${window.location.origin}/dental-abscess-treatment`;
-
-    document.title = title;
-
-    const setMetaTag = (attrName: string, attrVal: string, contentVal: string) => {
-      let el = document.querySelector(`meta[${attrName}="${attrVal}"]`);
-      if (!el) {
-        el = document.createElement('meta');
-        el.setAttribute(attrName, attrVal);
-        document.head.appendChild(el);
-      }
-      el.setAttribute('content', contentVal);
-    };
-
-    setMetaTag("name", "description", description);
-    setMetaTag("name", "keywords", "dental abscess treatment, tooth abscess treatment, dental infection treatment, tooth infection treatment, gum abscess treatment, dental abscess dentist near me, tooth infection dentist Ghaziabad, swollen face due to tooth infection");
-
-    setMetaTag("property", "og:title", title);
-    setMetaTag("property", "og:description", description);
-    setMetaTag("property", "og:type", "website");
-    setMetaTag("property", "og:url", pageUrl);
-
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute('href', pageUrl);
-  }, []);
+  
 
   const faqs = [
     {

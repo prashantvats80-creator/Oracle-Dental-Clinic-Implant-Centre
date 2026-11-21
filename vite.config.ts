@@ -29,7 +29,7 @@ export default defineConfig(({mode}) => {
       cssMinify: 'esbuild',
       cssCodeSplit: true,
       minify: 'esbuild',
-      target: 'es2020',
+      target: 'es2018',
       assetsInlineLimit: 4096,
       modulePreload: { polyfill: false },
       reportCompressedSize: true,

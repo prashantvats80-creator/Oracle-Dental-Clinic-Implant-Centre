@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   PhoneCall, 
   MessageCircle, 
@@ -36,71 +36,7 @@ export default function ToothSensitivityPage({
 }: ToothSensitivityPageProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  useEffect(() => {
-    const title = "Sensitive Teeth Treatment in Ghaziabad | Oracle Dental Clinic";
-    const description = "Experiencing sharp pain with cold water, hot tea, or sweets? Visit Oracle Dental Clinic in Chipiyana Buzurg, Ghaziabad for tooth sensitivity evaluation and relief.";
-    const pageUrl = `${window.location.origin}/tooth-sensitivity`;
-
-    document.title = title;
-
-    const setMetaTag = (attrName: string, attrVal: string, contentVal: string) => {
-      let el = document.querySelector(`meta[${attrName}="${attrVal}"]`);
-      if (!el) { el = document.createElement('meta'); el.setAttribute(attrName, attrVal); document.head.appendChild(el); }
-      el.setAttribute('content', contentVal);
-    };
-
-    setMetaTag("name", "description", description);
-    setMetaTag("name", "keywords", "sensitive teeth treatment, tooth sensitivity treatment, sensitive tooth treatment, teeth sensitivity dentist, sensitive teeth treatment near me, sensitive teeth dentist Ghaziabad, tooth sensitivity Chipiyana Buzurg");
-
-    setMetaTag("property", "og:title", title);
-    setMetaTag("property", "og:description", description);
-    setMetaTag("property", "og:url", pageUrl);
-
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) { canonical = document.createElement('link'); canonical.setAttribute('rel', 'canonical'); document.head.appendChild(canonical); }
-    canonical.setAttribute('href', pageUrl);
-
-    const dentistSchema = {
-      "@context": "https://schema.org",
-      "@type": "Dentist",
-      "@id": `${pageUrl}#dentist`,
-      "name": "Oracle Dental Clinic",
-      "url": pageUrl,
-      "telephone": "+917011961515",
-      "priceRange": "₹200 Consultation",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Shop No. 47, KTS Complex, near Dolphin Public School, Jaat Chowk, Chipiyana Buzurg",
-        "addressLocality": "Ghaziabad",
-        "addressRegion": "Uttar Pradesh",
-        "postalCode": "201009",
-        "addressCountry": "IN"
-      }
-    };
-
-    const breadcrumbSchema = {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": window.location.origin },
-        { "@type": "ListItem", "position": 2, "name": "Sensitive Teeth Treatment", "item": pageUrl }
-      ]
-    };
-
-    const faqSchema = {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": faqsList.map(faq => ({
-        "@type": "Question", "name": faq.q, "acceptedAnswer": { "@type": "Answer", "text": faq.a }
-      }))
-    };
-
-    const s1 = document.createElement('script'); s1.type = 'application/ld+json'; s1.text = JSON.stringify(dentistSchema); document.head.appendChild(s1);
-    const s2 = document.createElement('script'); s2.type = 'application/ld+json'; s2.text = JSON.stringify(breadcrumbSchema); document.head.appendChild(s2);
-    const s3 = document.createElement('script'); s3.type = 'application/ld+json'; s3.text = JSON.stringify(faqSchema); document.head.appendChild(s3);
-
-    return () => { document.head.removeChild(s1); document.head.removeChild(s2); document.head.removeChild(s3); };
-  }, []);
+  
 
   return (
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed">
@@ -142,7 +78,7 @@ export default function ToothSensitivityPage({
             </div>
             <div className="flex flex-col sm:flex-row gap-3 pt-4">
               <InteractiveButton id="ts-call" onClick={handleCall} className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 text-sm">
-                <PhoneCall className="w-5 h-5" /> Call 7011961515
+                <PhoneCall className="w-5 h-5" /> Call +91 7011961515
               </InteractiveButton>
               <InteractiveButton id="ts-wa" onClick={handleWhatsApp} className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 text-sm">
                 <MessageCircle className="w-5 h-5" /> WhatsApp Consultation
@@ -229,7 +165,7 @@ export default function ToothSensitivityPage({
           <h3 className="text-xl font-bold">Schedule Your Sensitivity Examination</h3>
           <p className="text-xs text-slate-400">Jaat Chowk, Chipiyana Buzurg, Ghaziabad. Consultation fee ₹200.</p>
           <div className="flex justify-center gap-3">
-            <InteractiveButton id="ts-f-call" onClick={handleCall} className="bg-amber-500 text-slate-950 font-black py-3 px-6 rounded-xl text-sm">Call 7011961515</InteractiveButton>
+            <InteractiveButton id="ts-f-call" onClick={handleCall} className="bg-amber-500 text-slate-950 font-black py-3 px-6 rounded-xl text-sm">Call +91 7011961515</InteractiveButton>
             <InteractiveButton id="ts-f-wa" onClick={handleWhatsApp} className="bg-emerald-600 text-white font-bold py-3 px-6 rounded-xl text-sm">WhatsApp Booking</InteractiveButton>
           </div>
         </div>

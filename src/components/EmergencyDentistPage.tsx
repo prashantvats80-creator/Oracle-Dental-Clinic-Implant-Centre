@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { PhoneCall, MessageCircle, AlertTriangle } from 'lucide-react';
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
@@ -13,13 +13,7 @@ interface Props {
 }
 
 export default function EmergencyDentistPage({ handleCall, handleWhatsApp, navigateToHome, navigateToPath }: Props) {
-  useEffect(() => {
-    document.title = "Emergency Dental Care in Ghaziabad | Immediate Pain Relief | Oracle Dental Clinic";
-    let canonical = document.querySelector('link[rel="canonical"]') || document.createElement('link');
-    canonical.setAttribute('rel', 'canonical'); 
-    canonical.setAttribute('href', `${window.location.origin}/emergency-dentist`); 
-    document.head.appendChild(canonical);
-  }, []);
+  
 
   return (
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed">

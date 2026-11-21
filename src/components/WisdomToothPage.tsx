@@ -48,174 +48,10 @@ export default function WisdomToothPage({
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   useEffect(() => {
-    // 1. Page Title, Meta Description & Canonical
-    const title = "Wisdom Tooth Extraction in Ghaziabad | Oracle Dental Clinic";
-    const description = "Looking for wisdom tooth extraction near you in Ghaziabad? Oracle Dental Clinic in Chipiyana Buzurg provides evaluation and treatment for painful, impacted and problematic wisdom teeth.";
-    const pageUrl = `${window.location.origin}/wisdom-tooth-extraction`;
-
-    document.title = title;
-
-    const setMetaTag = (attrName: string, attrVal: string, contentVal: string) => {
-      let el = document.querySelector(`meta[${attrName}="${attrVal}"]`);
-      if (!el) {
-        el = document.createElement('meta');
-        el.setAttribute(attrName, attrVal);
-        document.head.appendChild(el);
-      }
-      el.setAttribute('content', contentVal);
-    };
-
-    setMetaTag("name", "description", description);
-    setMetaTag("name", "keywords", "wisdom tooth extraction, wisdom tooth removal, wisdom tooth extraction in Ghaziabad, wisdom tooth removal in Ghaziabad, wisdom tooth extraction in Chipiyana Buzurg, wisdom tooth removal in Chipiyana Buzurg, wisdom tooth dentist in Ghaziabad, wisdom tooth dentist near me, wisdom tooth extraction near me, wisdom tooth removal near me, wisdom tooth pain treatment, impacted wisdom tooth removal, impacted tooth extraction, impacted wisdom tooth extraction, wisdom tooth surgery, wisdom tooth surgery in Ghaziabad, wisdom tooth specialist in Ghaziabad, dental clinic for wisdom tooth removal, nearby dentist for wisdom tooth, nearby dental clinic for wisdom tooth, dentist near me for wisdom tooth, dental clinic near me for wisdom tooth, Oracle Dental Clinic");
-
-    setMetaTag("property", "og:title", title);
-    setMetaTag("property", "og:description", description);
-    setMetaTag("property", "og:type", "website");
-    setMetaTag("property", "og:url", pageUrl);
-
-    setMetaTag("name", "twitter:card", "summary_large_image");
-    setMetaTag("name", "twitter:title", title);
-    setMetaTag("name", "twitter:description", description);
-
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute('href', pageUrl);
-
-    // 2. Structured Data (JSON-LD)
-    const dentistSchema = {
-      "@context": "https://schema.org",
-      "@type": "Dentist",
-      "@id": `${pageUrl}#dentist`,
-      "name": "Oracle Dental Clinic",
-      "image": [
-        "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=800&q=80",
-        "https://i.postimg.cc/tCd8wLDv/Chat-GPT-Image-Apr-22-2026-08-21-13-PM.png"
-      ],
-      "url": pageUrl,
-      "telephone": "+917011961515",
-      "priceRange": "₹200 Consultation",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Shop No. 47, KTS Complex, Jaat Chowk, Chipiyana Buzurg",
-        "addressLocality": "Ghaziabad",
-        "addressRegion": "Uttar Pradesh",
-        "postalCode": "201009",
-        "addressCountry": "IN"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "28.6280",
-        "longitude": "77.4520"
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-          "opens": "10:00",
-          "closes": "14:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-          "opens": "17:00",
-          "closes": "21:00"
-        }
-      ],
-      "founder": {
-        "@type": "Person",
-        "name": "Dr. Prashant Kumar Vats",
-        "jobTitle": "Dentist & Oral Healthcare Specialist",
-        "honorificSuffix": "BDS"
-      },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Wisdom Tooth Services",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Wisdom Tooth Extraction & Surgery",
-              "description": "Clinical evaluation, simple extraction, and surgical removal for erupted or impacted wisdom teeth."
-            }
-          }
-        ]
-      }
-    };
-
-    const breadcrumbSchema = {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": window.location.origin
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Dental Treatments",
-          "item": `${window.location.origin}/#services`
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Wisdom Tooth Extraction",
-          "item": pageUrl
-        }
-      ]
-    };
-
-    const faqSchema = {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": faqs.map(faq => ({
-        "@type": "Question",
-        "name": faq.question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faq.answer
-        }
-      }))
-    };
-
-    const scriptDentist = document.createElement('script');
-    scriptDentist.type = 'application/ld+json';
-    scriptDentist.id = 'wisdom-dentist-schema';
-    scriptDentist.innerHTML = JSON.stringify(dentistSchema);
-    document.head.appendChild(scriptDentist);
-
-    const scriptBreadcrumb = document.createElement('script');
-    scriptBreadcrumb.type = 'application/ld+json';
-    scriptBreadcrumb.id = 'wisdom-breadcrumb-schema';
-    scriptBreadcrumb.innerHTML = JSON.stringify(breadcrumbSchema);
-    document.head.appendChild(scriptBreadcrumb);
-
-    const scriptFaq = document.createElement('script');
-    scriptFaq.type = 'application/ld+json';
-    scriptFaq.id = 'wisdom-faq-schema';
-    scriptFaq.innerHTML = JSON.stringify(faqSchema);
-    document.head.appendChild(scriptFaq);
-
-    // Preload wisdom tooth images
     preloadImages([
       "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80",
       "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=80"
     ]);
-
-    window.scrollTo(0, 0);
-
-    return () => {
-      document.getElementById('wisdom-dentist-schema')?.remove();
-      document.getElementById('wisdom-breadcrumb-schema')?.remove();
-      document.getElementById('wisdom-faq-schema')?.remove();
-    };
   }, []);
 
   const faqs = [
@@ -341,7 +177,7 @@ export default function WisdomToothPage({
     },
     {
       question: "How can I book a wisdom tooth consultation?",
-      answer: "You can book a consultation by calling 7011961515, messaging on WhatsApp, or visiting Oracle Dental Clinic during working hours (10:00 AM – 2:00 PM & 5:00 PM – 9:00 PM daily)."
+      answer: "You can book a consultation by calling +91 7011961515, messaging on WhatsApp, or visiting Oracle Dental Clinic & Implant Center (Open 24 Hours, 7 Days, Monday–Sunday)."
     },
     {
       question: "Do I need an X-ray before wisdom tooth extraction?",
@@ -390,7 +226,7 @@ export default function WisdomToothPage({
               </div>
               <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex flex-col col-span-2 sm:col-span-1">
                 <span className="text-slate-400 text-xs">Clinic Hours</span>
-                <span className="text-cyan-300 font-bold text-xs">10 AM - 2 PM, 5 PM - 9 PM</span>
+                <span className="text-cyan-300 font-bold text-xs">Open 24 Hours, 7 Days</span>
               </div>
             </div>
 
@@ -452,7 +288,7 @@ export default function WisdomToothPage({
                 <div className="flex items-start gap-2.5">
                   <Clock className="w-4 h-4 text-emerald-400 mt-1 flex-shrink-0" />
                   <p className="text-xs text-slate-300">
-                    10:00 AM – 2:00 PM | 5:00 PM – 9:00 PM (Daily)
+                    Open 24 Hours, 7 Days (Mon–Sun)
                   </p>
                 </div>
               </div>
@@ -908,7 +744,7 @@ export default function WisdomToothPage({
               onClick={handleCall}
               className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 px-6 rounded-xl text-sm"
             >
-              Call 7011961515
+              Call +91 7011961515
             </InteractiveButton>
 
             <InteractiveButton
@@ -961,7 +797,7 @@ export default function WisdomToothPage({
             },
             {
               title: "Flexible Working Hours",
-              desc: "Open all 7 days from 10:00 AM – 2:00 PM and 5:00 PM – 9:00 PM daily."
+              desc: "Open 24 Hours, 7 Days (Monday – Sunday) for scheduled and urgent visits."
             },
             {
               title: "Structured Aftercare Support",
@@ -1040,8 +876,22 @@ export default function WisdomToothPage({
               onClick={handleCall}
               className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 px-6 rounded-xl text-sm"
             >
-              Call 7011961515
+              Call +91 7011961515
             </InteractiveButton>
+
+            <button
+              onClick={() => navigateToPath('/tooth-extraction')}
+              className="bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-6 rounded-xl border border-white/20 text-sm transition-colors"
+            >
+              Tooth Extraction Guide
+            </button>
+
+            <button
+              onClick={() => navigateToPath('/impacted-wisdom-tooth')}
+              className="bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-6 rounded-xl border border-white/20 text-sm transition-colors"
+            >
+              Impacted Wisdom Tooth
+            </button>
 
             <button
               onClick={() => navigateToPath('/dental-implants')}

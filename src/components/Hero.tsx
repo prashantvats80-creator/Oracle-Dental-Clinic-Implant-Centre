@@ -1,228 +1,216 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
-import { PhoneCall, MessageCircle, Clock, MapPin, Sparkles, HeartPulse, ShieldCheck, ArrowRight, Star } from 'lucide-react';
-import { InteractiveButton } from './InteractiveButton';
+import React from 'react';
+import { PhoneCall, MessageCircle, Clock, MapPin, Star, ArrowRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { GBP_CONFIG } from '../config/googleBusinessProfile';
+import { trackClinicEvent } from '../utils/analytics';
 
 interface HeroProps {
-  handleCall: () => void;
-  handleWhatsApp: () => void;
+  handleCall?: () => void;
+  handleWhatsApp?: () => void;
   navigateToPath?: (path: string) => void;
 }
 
-const Hero: React.FC<HeroProps> = ({ handleCall, handleWhatsApp, navigateToPath }) => {
+const Hero: React.FC<HeroProps> = ({ navigateToPath }) => {
   const { language } = useLanguage();
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"]
-  });
 
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
-  const opacityBg = useTransform(scrollYProgress, [0, 1], [0.25, 0.05]);
-
-  const handleChipClick = (path: string) => {
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
     if (navigateToPath) {
+      e.preventDefault();
       navigateToPath(path);
     }
   };
 
   return (
-    <section id="hero" ref={ref} className="relative bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 text-white overflow-hidden">
-      <motion.div 
-        className="absolute inset-0 pointer-events-none"
-        style={{ y: backgroundY, opacity: opacityBg }}
-      >
-        <img 
-          src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1200&q=80" 
-          alt="Happy Patient" 
+    <section
+      id="hero"
+      className="relative bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 text-white overflow-hidden"
+    >
+      {/* Subtle Ambient Background Photo (WebP responsive, preserves original clinic ambience photo) */}
+      <div className="absolute inset-0 pointer-events-none opacity-15">
+        <img
+          src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&fm=webp&w=800&q=70"
+          srcSet="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&fm=webp&w=480&q=65 480w, https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&fm=webp&w=900&q=70 900w"
+          sizes="100vw"
+          alt=""
+          aria-hidden="true"
+          width="900"
+          height="506"
           className="w-full h-full object-cover"
-          style={{ aspectRatio: '16/9' }}
           referrerPolicy="no-referrer"
-          loading="eager"
+          loading="lazy"
           decoding="async"
-          fetchPriority="high"
         />
-      </motion.div>
+      </div>
 
-      {/* Subtle animated background sheen */}
-      <div className="absolute inset-0 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:24px_24px] opacity-10 pointer-events-none"></div>
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-blue-950/90 to-transparent"></div>
-      
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-20 lg:py-28 flex flex-col md:flex-row items-center gap-8">
-        
-        {/* Left Column: Conversational Greeting & Call to Actions */}
-        <motion.div 
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="w-full md:w-7/12 z-10 text-center md:text-left space-y-5"
-        >
-          {/* Conversational Welcome Banner & Google Rating Badge */}
-          <div className="flex flex-wrap items-center justify-center md:justify-start gap-2.5">
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="inline-flex items-center gap-2 bg-blue-500/20 border border-blue-400/40 text-blue-200 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold backdrop-blur-md shadow-md"
-            >
-              <span className="animate-bounce">👋</span>
-              <span>
-                {language === 'hi'
-                  ? 'ऑरैकल डेंटल क्लीनिक में आपका स्वागत है। डॉ. प्रशांत वत्स आज आपकी कैसे मदद कर सकते हैं?'
-                  : 'Welcome to Oracle Dental Clinic. How can Dr. Prashant Vats help you today?'}
-              </span>
-            </motion.div>
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-blue-950/90 to-transparent pointer-events-none" />
 
-            <motion.a 
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              href="#testimonials"
-              onClick={(e) => {
-                e.preventDefault();
-                const el = document.getElementById('testimonials');
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="inline-flex items-center gap-2 bg-amber-400/15 hover:bg-amber-400/25 border border-amber-400/40 text-amber-200 px-3.5 py-2 rounded-full text-xs font-bold backdrop-blur-md shadow-md transition-all hover:scale-105 cursor-pointer"
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16 lg:py-20 flex flex-col md:flex-row items-center gap-8">
+        {/* Left Column: Primary Local SEO Headline & Immediate Native Anchor CTAs */}
+        <div className="w-full md:w-7/12 z-10 text-center md:text-left space-y-5">
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-3 gap-y-1 text-xs sm:text-sm text-blue-100">
+            <span className="font-semibold">
+              {language === 'hi'
+                ? 'ऑरैकल डेंटल क्लीनिक एवं इम्प्लांट सेंटर'
+                : 'Oracle Dental Clinic & Implant Center'}
+            </span>
+            <span aria-hidden="true" className="text-blue-400">·</span>
+            <span>Jaat Chowk, Chipiyana Buzurg</span>
+            <span aria-hidden="true" className="text-blue-400">·</span>
+            <a
+              href={GBP_CONFIG.GOOGLE_BUSINESS_PROFILE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-amber-300 hover:text-amber-200 font-semibold underline-offset-2 hover:underline"
             >
-              <div className="flex text-amber-400">
-                {[1, 2, 3, 4, 5].map((_, i) => (
-                  <Star key={i} className="w-3.5 h-3.5 fill-current" />
-                ))}
-              </div>
-              <span className="text-white font-extrabold">{GBP_CONFIG.FALLBACK_RATING}</span>
-              <span className="text-amber-300">({GBP_CONFIG.FALLBACK_REVIEW_COUNT}+ Google Reviews)</span>
-            </motion.a>
+              <Star className="w-3.5 h-3.5 text-amber-400 fill-current" aria-hidden="true" />
+              <span>{GBP_CONFIG.FALLBACK_RATING} on Google Maps</span>
+            </a>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-6xl font-black tracking-tight leading-tight drop-shadow-2xl">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.15]">
             {language === 'hi' ? (
               <>
-                सुरक्षित एवं आरामदायक दंत चिकित्सा <br className="hidden sm:block"/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-200 to-amber-400">
-                  चिपियाना बुजुर्ग, गाज़ियाबाद में
+                चिपियाना बुजुर्ग, गाज़ियाबाद में{' '}
+                <span className="text-amber-300">
+                  विश्वसनीय डेंटिस्ट और डेंटल इम्प्लांट क्लीनिक
                 </span>
               </>
             ) : (
               <>
-                Gentle, Expert Dental Care <br className="hidden sm:block"/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-200 to-amber-400">
-                  In Chipiyana Buzurg, Ghaziabad
-                </span>
+                Dentist &amp; Dental Implants in{' '}
+                <span className="text-amber-300">Chipiyana Buzurg, Ghaziabad</span>
               </>
             )}
           </h1>
 
-          <p className="text-base sm:text-lg lg:text-xl text-slate-300 max-w-2xl mx-auto md:mx-0 font-normal leading-relaxed drop-shadow-md">
+          <p className="text-base sm:text-lg text-slate-200 max-w-2xl mx-auto md:mx-0 font-normal leading-relaxed">
             {language === 'hi'
-              ? 'दांत दर्द, डेंटल इम्प्लांट, दांतों की सफाई या संपूर्ण मुस्कान परामर्श—हम आधुनिक तकनीक और व्यक्तिगत देखभाल के साथ आपकी मदद करते हैं।'
-              : 'Whether you need emergency toothache relief, dental implants, teeth cleaning, or a complete smile consultation—we are here to guide you with personal care and modern technology.'}
+              ? 'डॉ. प्रशांत कुमार वत्स (BDS) द्वारा डेंटल इम्प्लांट, रूट कैनाल (RCT), अकल दाढ़ सर्जरी, ज़िरकोनिया क्राउन, स्माइल मेकओवर और 24 घंटे इमरजेंसी दंत चिकित्सा।'
+              : 'Comprehensive dental implants, root canal treatment (RCT), wisdom tooth surgery, zirconia crowns, clear aligners, smile makeovers, and 24-hour emergency dental care by Dr. Prashant Kumar Vats, BDS—serving Ghaziabad, Noida Extension, Greater Noida West, Crossings Republik & Shahberi.'}
           </p>
 
-          {/* Interactive Conversational Prompt Chips */}
-          <div className="pt-1">
-            <span className="text-xs text-amber-400 font-bold uppercase tracking-wider block mb-2">
-              ✨ What brings you to us today? Click an option:
-            </span>
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-2">
-              <button 
-                onClick={() => handleChipClick('/tooth-pain-treatment')}
-                className="bg-white/10 hover:bg-rose-600/80 text-white border border-white/20 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 shadow-sm active:scale-95"
-              >
-                <HeartPulse className="w-3.5 h-3.5 text-rose-400" /> I have a toothache
-              </button>
-
-              <button 
-                onClick={() => handleChipClick('/dental-implants')}
-                className="bg-white/10 hover:bg-amber-500/80 text-white border border-white/20 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 shadow-sm active:scale-95"
-              >
-                <ShieldCheck className="w-3.5 h-3.5 text-amber-400" /> I need dental implants
-              </button>
-
-              <button 
-                onClick={() => handleChipClick('/teeth-cleaning')}
-                className="bg-white/10 hover:bg-emerald-600/80 text-white border border-white/20 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 shadow-sm active:scale-95"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-emerald-400" /> I need teeth cleaning
-              </button>
-
-              <button 
-                onClick={() => handleChipClick('/dentist-chipiyana-buzurg-ghaziabad')}
-                className="bg-white/10 hover:bg-blue-600/80 text-white border border-white/20 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 shadow-sm active:scale-95"
-              >
-                <MapPin className="w-3.5 h-3.5 text-blue-400" /> Clinic address & timing
-              </button>
-            </div>
-          </div>
-
-          {/* Primary Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start pt-2">
-            <InteractiveButton 
-              id="hero-call-btn" 
-              onClick={handleCall} 
-              className="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-base py-3.5 px-7 rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2 active:scale-95 hover:scale-105"
+          {/* Primary Native Anchor Appointment Buttons */}
+          <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start pt-1">
+            <a
+              id="hero-whatsapp-btn"
+              href={GBP_CONFIG.WHATSAPP_BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Book an appointment on WhatsApp with Oracle Dental Clinic"
+              onClick={() =>
+                trackClinicEvent('appointment_cta_click', {
+                  placement: 'hero_whatsapp',
+                  interaction_label: 'book_whatsapp',
+                })
+              }
+              className="w-full sm:w-auto min-h-[48px] bg-[#16A34A] hover:bg-[#15803D] text-white font-bold text-base py-3.5 px-7 rounded-xl shadow-lg transition-colors flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-300"
             >
-              <PhoneCall className="w-5 h-5" /> Call 7011961515
-            </InteractiveButton>
+              <MessageCircle className="w-5 h-5 shrink-0" aria-hidden="true" />
+              <span>Book Appointment on WhatsApp</span>
+            </a>
 
-            <InteractiveButton 
-              id="hero-whatsapp-btn" 
-              onClick={handleWhatsApp} 
-              className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-base py-3.5 px-7 rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2 active:scale-95 hover:scale-105"
+            <a
+              id="hero-call-btn"
+              href={GBP_CONFIG.CALL_URL}
+              aria-label={`Call Oracle Dental Clinic at ${GBP_CONFIG.PHONE_DISPLAY}`}
+              onClick={() =>
+                trackClinicEvent('call_click', {
+                  placement: 'hero_call',
+                  interaction_label: 'call_clinic',
+                })
+              }
+              className="w-full sm:w-auto min-h-[48px] bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-base py-3.5 px-7 rounded-xl shadow-lg transition-colors flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-300"
             >
-              <MessageCircle className="w-5 h-5" /> Book via WhatsApp
-            </InteractiveButton>
+              <PhoneCall className="w-5 h-5 shrink-0" aria-hidden="true" />
+              <span>Call {GBP_CONFIG.PHONE_DISPLAY}</span>
+            </a>
           </div>
 
-          <div className="flex items-center justify-center md:justify-start gap-4 text-xs text-slate-300 pt-1">
-            <span className="flex items-center gap-1">
-              <Clock className="w-3.5 h-3.5 text-amber-400" /> Open Daily: 10 AM–2 PM | 5 PM–9 PM
-            </span>
-            <span>•</span>
-            <span className="font-semibold text-amber-300">Consultation Fee ₹200</span>
+          {/* Direct Navigation to Interactive 9-Category Dental Services Page & Top Treatments */}
+          <div className="pt-2 flex flex-wrap items-center justify-center md:justify-start gap-x-4 gap-y-2 text-xs sm:text-sm text-slate-200">
+            <a
+              href="/dental-services"
+              onClick={(e) => handleLinkClick(e, '/dental-services')}
+              className="inline-flex items-center gap-1.5 font-semibold text-amber-300 hover:text-amber-200 underline underline-offset-4"
+            >
+              <span>Explore All 9 Dental Service Categories</span>
+              <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+            </a>
+            <span aria-hidden="true" className="text-slate-600">|</span>
+            <a
+              href="/dental-implants"
+              onClick={(e) => handleLinkClick(e, '/dental-implants')}
+              className="hover:text-white underline-offset-4 hover:underline"
+            >
+              Dental Implants
+            </a>
+            <a
+              href="/root-canal-treatment"
+              onClick={(e) => handleLinkClick(e, '/root-canal-treatment')}
+              className="hover:text-white underline-offset-4 hover:underline"
+            >
+              Root Canal (RCT)
+            </a>
+            <a
+              href="/cosmetic-dentistry"
+              onClick={(e) => handleLinkClick(e, '/cosmetic-dentistry')}
+              className="hover:text-white underline-offset-4 hover:underline"
+            >
+              Smile Makeover
+            </a>
           </div>
-        </motion.div>
-        
-        {/* Right Column: Doctor Card & Local Credibility */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="w-full md:w-5/12 z-10 flex justify-center md:justify-end relative"
-        >
-          <div className="relative w-72 sm:w-80 bg-slate-900/90 border border-slate-800 p-5 rounded-3xl shadow-2xl backdrop-blur-md space-y-4">
-            <div className="relative h-72 sm:h-80 rounded-2xl overflow-hidden border border-slate-700 shadow-lg">
-              <img 
-                src="https://i.postimg.cc/tCd8wLDv/Chat-GPT-Image-Apr-22-2026-08-21-13-PM.png" 
-                alt="Dr. Prashant Kumar Vats, BDS" 
+
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-4 gap-y-1 text-xs text-slate-300 pt-1">
+            <span className="flex items-center gap-1.5 font-medium">
+              <Clock className="w-3.5 h-3.5 text-amber-400 shrink-0" aria-hidden="true" />
+              <span>{GBP_CONFIG.HOURS}</span>
+            </span>
+            <span className="hidden sm:inline" aria-hidden="true">·</span>
+            <span className="flex items-center gap-1.5">
+              <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" aria-hidden="true" />
+              <span>Near Dolphin Public School, Jaat Chowk, Ghaziabad</span>
+            </span>
+          </div>
+        </div>
+
+        {/* Right Column: Doctor Card (Preserved Original Doctor Photo — Priority LCP Element) */}
+        <div className="w-full md:w-5/12 z-10 flex justify-center md:justify-end relative">
+          <div className="relative w-72 sm:w-80 bg-slate-900 border border-slate-800 p-4 rounded-3xl shadow-xl space-y-3.5">
+            <div className="relative h-72 sm:h-80 rounded-2xl overflow-hidden border border-slate-700 bg-slate-800">
+              <img
+                src={GBP_CONFIG.DOCTOR_IMAGE}
+                alt="Dr. Prashant Kumar Vats, BDS at Oracle Dental Clinic & Implant Center in Chipiyana Buzurg, Ghaziabad"
+                width="320"
+                height="320"
                 className="w-full h-full object-cover object-top"
                 referrerPolicy="no-referrer"
                 loading="eager"
                 decoding="async"
                 fetchPriority="high"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent" />
               <div className="absolute bottom-3 left-3 right-3 text-white">
-                <h3 className="font-extrabold text-base leading-tight text-amber-300">Dr. Prashant Kumar Vats, BDS</h3>
-                <p className="text-xs text-slate-300">Lead Dentist & Implant Specialist</p>
+                <p className="font-bold text-base leading-tight text-amber-300">
+                  {GBP_CONFIG.DOCTOR_TITLE}
+                </p>
+                <p className="text-xs text-slate-200">Dental Surgeon · Oracle Dental Clinic</p>
               </div>
             </div>
 
-            <div className="space-y-1.5 text-xs text-slate-300 bg-slate-950/80 p-3 rounded-xl border border-slate-800">
-              <div className="flex items-center justify-between font-semibold">
-                <span className="text-slate-400">Clinic Name:</span>
-                <span className="text-amber-300">Oracle Dental Clinic</span>
+            <div className="space-y-1.5 text-xs text-slate-300 bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+              <div className="flex items-start justify-between gap-2 font-semibold">
+                <span className="text-slate-400 shrink-0">Clinic:</span>
+                <span className="text-amber-300 text-right">{GBP_CONFIG.BUSINESS_NAME}</span>
               </div>
-              <div className="flex items-center justify-between">
-                <span className="text-slate-400">Address:</span>
-                <span className="text-slate-200">Jaat Chowk, Chipiyana Buzurg</span>
+              <div className="flex items-start justify-between gap-2">
+                <span className="text-slate-400 shrink-0">Address:</span>
+                <span className="text-slate-200 text-right">
+                  Shop No. 47, KTS Complex, Jaat Chowk, Near Dolphin Public School, Chipiyana Buzurg
+                </span>
               </div>
             </div>
           </div>
-        </motion.div>
-
+        </div>
       </div>
     </section>
   );

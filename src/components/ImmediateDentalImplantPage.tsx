@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   PhoneCall, 
   MessageCircle, 
@@ -50,124 +50,7 @@ export default function ImmediateDentalImplantPage({
     }
   };
 
-  useEffect(() => {
-    const title = "Dental Implant After Tooth Extraction | Immediate Implants Ghaziabad | Oracle Dental";
-    const description = "Can you get a dental implant immediately after tooth extraction? Learn about same-day socket implants, bone preservation & healing in Ghaziabad. Fee ₹200.";
-    const pageUrl = `${window.location.origin}/dental-implant-after-tooth-extraction`;
-
-    document.title = title;
-
-    const setMetaTag = (attrName: string, attrVal: string, contentVal: string) => {
-      let el = document.querySelector(`meta[${attrName}="${attrVal}"]`);
-      if (!el) {
-        el = document.createElement('meta');
-        el.setAttribute(attrName, attrVal);
-        document.head.appendChild(el);
-      }
-      el.setAttribute('content', contentVal);
-    };
-
-    setMetaTag("name", "description", description);
-    setMetaTag("name", "keywords", "dental implant after tooth extraction, immediate dental implant Ghaziabad, same day implant tooth extraction, socket preservation bone graft, implant placement after extraction");
-
-    setMetaTag("property", "og:title", title);
-    setMetaTag("property", "og:description", description);
-    setMetaTag("property", "og:type", "website");
-    setMetaTag("property", "og:url", pageUrl);
-
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute('href', pageUrl);
-
-    // Schema: Service, WebPage, BreadcrumbList
-    const schemaData = {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebPage",
-          "@id": `${pageUrl}#webpage`,
-          "url": pageUrl,
-          "name": title,
-          "description": description,
-          "breadcrumb": {
-            "@id": `${pageUrl}#breadcrumb`
-          },
-          "isPartOf": {
-            "@type": "WebSite",
-            "@id": `${window.location.origin}/#website`
-          }
-        },
-        {
-          "@type": "BreadcrumbList",
-          "@id": `${pageUrl}#breadcrumb`,
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Home",
-              "item": `${window.location.origin}/`
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Dental Implants",
-              "item": `${window.location.origin}/dental-implants`
-            },
-            {
-              "@type": "ListItem",
-              "position": 3,
-              "name": "Dental Implant After Tooth Extraction",
-              "item": pageUrl
-            }
-          ]
-        },
-        {
-          "@type": "Service",
-          "@id": `${pageUrl}#service`,
-          "name": "Immediate Dental Implant Placement",
-          "serviceType": "Oral Implantology",
-          "provider": {
-            "@type": "Dentist",
-            "name": "Oracle Dental Clinic",
-            "telephone": "+91-7011961515",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "Shop No. 47, KTS Complex, Jaat Chowk, near Dolphin Public School, Chipiyana Buzurg",
-              "addressLocality": "Ghaziabad",
-              "addressRegion": "Uttar Pradesh",
-              "postalCode": "201009",
-              "addressCountry": "IN"
-            }
-          },
-          "areaServed": [
-            { "@type": "AdministrativeArea", "name": "Ghaziabad" },
-            { "@type": "AdministrativeArea", "name": "Chipiyana Buzurg" },
-            { "@type": "AdministrativeArea", "name": "Crossings Republik" },
-            { "@type": "AdministrativeArea", "name": "Noida Extension" }
-          ],
-          "description": "Immediate implant placement directly into the extraction socket, preserving natural jawbone architecture and minimizing surgical recovery cycles."
-        }
-      ]
-    };
-
-    let scriptTag = document.getElementById('immediate-implant-schema');
-    if (!scriptTag) {
-      scriptTag = document.createElement('script');
-      scriptTag.id = 'immediate-implant-schema';
-      scriptTag.setAttribute('type', 'application/ld+json');
-      document.head.appendChild(scriptTag);
-    }
-    scriptTag.textContent = JSON.stringify(schemaData);
-
-    return () => {
-      const el = document.getElementById('immediate-implant-schema');
-      if (el) el.remove();
-    };
-  }, []);
+  
 
   const faqs = [
     {
@@ -227,7 +110,7 @@ export default function ImmediateDentalImplantPage({
               onClick={handleCall} 
               className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold px-6 py-3.5 rounded-xl flex items-center gap-2 transition-all shadow-md active:scale-95"
             >
-              <PhoneCall className="w-4 h-4" /> <span>Consultation: Call 7011961515</span>
+              <PhoneCall className="w-4 h-4" /> <span>Consultation: Call +91 7011961515</span>
             </InteractiveButton>
             <InteractiveButton 
               id="immediate-implant-wa-btn" 
@@ -458,7 +341,7 @@ export default function ImmediateDentalImplantPage({
               onClick={handleCall} 
               className="bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold px-8 py-4 rounded-xl flex items-center gap-2 shadow-lg transition-all"
             >
-              <PhoneCall className="w-4 h-4" /> <span>Call 7011961515</span>
+              <PhoneCall className="w-4 h-4" /> <span>Call +91 7011961515</span>
             </InteractiveButton>
             <InteractiveButton 
               id="immediate-bottom-wa-btn" 
@@ -470,7 +353,7 @@ export default function ImmediateDentalImplantPage({
           </div>
 
           <div className="pt-4 flex flex-wrap justify-center items-center gap-6 text-xs text-blue-200">
-            <span className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-amber-400" /> Mon–Sun: 10 AM–2 PM, 5 PM–9 PM</span>
+            <span className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-amber-400" /> Open 24 Hours, 7 Days (Mon–Sun)</span>
             <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4 text-amber-400" /> KTS Complex, Jaat Chowk, Chipiyana Buzurg</span>
           </div>
         </section>

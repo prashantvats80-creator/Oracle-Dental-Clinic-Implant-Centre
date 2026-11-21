@@ -48,174 +48,10 @@ export default function TeethWhiteningPage({
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   useEffect(() => {
-    // 1. Page Title, Meta Description & Canonical
-    const title = "Teeth Whitening in Ghaziabad | Professional Teeth Whitening | Oracle Dental Clinic";
-    const description = "Looking for professional teeth whitening in Ghaziabad? Oracle Dental Clinic in Chipiyana Buzurg provides dental evaluation and professional teeth whitening options for stained or discoloured teeth.";
-    const pageUrl = `${window.location.origin}/teeth-whitening`;
-
-    document.title = title;
-
-    const setMetaTag = (attrName: string, attrVal: string, contentVal: string) => {
-      let el = document.querySelector(`meta[${attrName}="${attrVal}"]`);
-      if (!el) {
-        el = document.createElement('meta');
-        el.setAttribute(attrName, attrVal);
-        document.head.appendChild(el);
-      }
-      el.setAttribute('content', contentVal);
-    };
-
-    setMetaTag("name", "description", description);
-    setMetaTag("name", "keywords", "teeth whitening, teeth whitening treatment, professional teeth whitening, teeth whitening dentist, teeth whitening in Ghaziabad, professional teeth whitening in Ghaziabad, teeth whitening in Chipiyana Buzurg, teeth whitening near me, professional teeth whitening near me, teeth whitening dentist near me, teeth whitening clinic near me, dental teeth whitening, tooth whitening, teeth bleaching, dental bleaching, yellow teeth treatment, yellow teeth whitening, stained teeth treatment, teeth stain removal, teeth whitening treatment in Ghaziabad, teeth whitening dentist in Ghaziabad, cosmetic dentist in Ghaziabad, cosmetic dental treatment in Ghaziabad, Oracle Dental Clinic");
-
-    setMetaTag("property", "og:title", title);
-    setMetaTag("property", "og:description", description);
-    setMetaTag("property", "og:type", "website");
-    setMetaTag("property", "og:url", pageUrl);
-
-    setMetaTag("name", "twitter:card", "summary_large_image");
-    setMetaTag("name", "twitter:title", title);
-    setMetaTag("name", "twitter:description", description);
-
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute('href', pageUrl);
-
-    // 2. Structured Data (JSON-LD)
-    const dentistSchema = {
-      "@context": "https://schema.org",
-      "@type": "Dentist",
-      "@id": `${pageUrl}#dentist`,
-      "name": "Oracle Dental Clinic",
-      "image": [
-        "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=800&q=80",
-        "https://i.postimg.cc/tCd8wLDv/Chat-GPT-Image-Apr-22-2026-08-21-13-PM.png"
-      ],
-      "url": pageUrl,
-      "telephone": "+917011961515",
-      "priceRange": "₹200 Consultation",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Shop No. 47, KTS Complex, Jaat Chowk, Chipiyana Buzurg",
-        "addressLocality": "Ghaziabad",
-        "addressRegion": "Uttar Pradesh",
-        "postalCode": "201009",
-        "addressCountry": "IN"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "28.6280",
-        "longitude": "77.4520"
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-          "opens": "10:00",
-          "closes": "14:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-          "opens": "17:00",
-          "closes": "21:00"
-        }
-      ],
-      "founder": {
-        "@type": "Person",
-        "name": "Dr. Prashant Kumar Vats",
-        "jobTitle": "Dentist & Oral Healthcare Specialist",
-        "honorificSuffix": "BDS"
-      },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Cosmetic Dentistry & Whitening Services",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Professional Teeth Whitening",
-              "description": "Dental evaluation and professional teeth whitening for stained or discoloured natural teeth."
-            }
-          }
-        ]
-      }
-    };
-
-    const breadcrumbSchema = {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": window.location.origin
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Dental Treatments",
-          "item": `${window.location.origin}/#services`
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Teeth Whitening",
-          "item": pageUrl
-        }
-      ]
-    };
-
-    const faqSchema = {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": faqs.map(faq => ({
-        "@type": "Question",
-        "name": faq.question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faq.answer
-        }
-      }))
-    };
-
-    const scriptDentist = document.createElement('script');
-    scriptDentist.type = 'application/ld+json';
-    scriptDentist.id = 'whitening-dentist-schema';
-    scriptDentist.innerHTML = JSON.stringify(dentistSchema);
-    document.head.appendChild(scriptDentist);
-
-    const scriptBreadcrumb = document.createElement('script');
-    scriptBreadcrumb.type = 'application/ld+json';
-    scriptBreadcrumb.id = 'whitening-breadcrumb-schema';
-    scriptBreadcrumb.innerHTML = JSON.stringify(breadcrumbSchema);
-    document.head.appendChild(scriptBreadcrumb);
-
-    const scriptFaq = document.createElement('script');
-    scriptFaq.type = 'application/ld+json';
-    scriptFaq.id = 'whitening-faq-schema';
-    scriptFaq.innerHTML = JSON.stringify(faqSchema);
-    document.head.appendChild(scriptFaq);
-
-    // Preload critical teeth whitening images
     preloadImages([
       "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1000&q=80",
       "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80"
     ]);
-
-    window.scrollTo(0, 0);
-
-    return () => {
-      document.getElementById('whitening-dentist-schema')?.remove();
-      document.getElementById('whitening-breadcrumb-schema')?.remove();
-      document.getElementById('whitening-faq-schema')?.remove();
-    };
   }, []);
 
   const faqs = [
@@ -402,7 +238,7 @@ export default function TeethWhiteningPage({
               </div>
               <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex flex-col col-span-2 sm:col-span-1">
                 <span className="text-slate-400 text-xs">Clinic Hours</span>
-                <span className="text-cyan-300 font-bold text-xs">10 AM - 2 PM, 5 PM - 9 PM</span>
+                <span className="text-cyan-300 font-bold text-xs">Open 24 Hours, 7 Days</span>
               </div>
             </div>
 
@@ -464,7 +300,7 @@ export default function TeethWhiteningPage({
                 <div className="flex items-start gap-2.5">
                   <Clock className="w-4 h-4 text-emerald-400 mt-1 flex-shrink-0" />
                   <p className="text-xs text-slate-300">
-                    10:00 AM – 2:00 PM | 5:00 PM – 9:00 PM (Daily)
+                    Open 24 Hours, 7 Days (Mon–Sun)
                   </p>
                 </div>
               </div>
@@ -911,7 +747,7 @@ export default function TeethWhiteningPage({
               onClick={handleCall}
               className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 px-6 rounded-xl text-sm"
             >
-              Call 7011961515
+              Call +91 7011961515
             </InteractiveButton>
 
             <InteractiveButton
@@ -964,7 +800,7 @@ export default function TeethWhiteningPage({
             },
             {
               title: "Flexible Working Hours",
-              desc: "Open all 7 days from 10:00 AM – 2:00 PM and 5:00 PM – 9:00 PM daily."
+              desc: "Open 24 Hours, 7 Days (Monday – Sunday) for scheduled and urgent visits."
             },
             {
               title: "Comprehensive Dental Care",
@@ -1043,7 +879,7 @@ export default function TeethWhiteningPage({
               onClick={handleCall}
               className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 px-6 rounded-xl text-sm"
             >
-              Call 7011961515
+              Call +91 7011961515
             </InteractiveButton>
 
             <button

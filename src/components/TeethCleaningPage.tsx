@@ -52,143 +52,10 @@ export default function TeethCleaningPage({
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   useEffect(() => {
-    // 1. Page Title, Meta Description & Canonical
-    const title = "Teeth Cleaning & Dental Scaling in Ghaziabad | Oracle Dental Clinic";
-    const description = "Get professional teeth cleaning, dental scaling and polishing in Ghaziabad at Oracle Dental Clinic, Chipiyana Buzurg. Remove plaque, tartar and surface stains and maintain healthier gums.";
-    const pageUrl = `${window.location.origin}/teeth-cleaning`;
-
-    document.title = title;
-
-    const setMetaTag = (attrName: string, attrVal: string, contentVal: string) => {
-      let el = document.querySelector(`meta[${attrName}="${attrVal}"]`);
-      if (!el) {
-        el = document.createElement('meta');
-        el.setAttribute(attrName, attrVal);
-        document.head.appendChild(el);
-      }
-      el.setAttribute('content', contentVal);
-    };
-
-    setMetaTag("name", "description", description);
-    setMetaTag("name", "keywords", "teeth cleaning, teeth cleaning in Ghaziabad, teeth cleaning in Chipiyana Buzurg, teeth cleaning near me, dental cleaning, dental cleaning in Ghaziabad, dental cleaning near me, professional teeth cleaning, professional dental cleaning, dental scaling, dental scaling in Ghaziabad, dental scaling near me, teeth scaling, teeth scaling in Ghaziabad, teeth scaling near me, scaling and polishing, dental scaling and polishing, tartar removal, tartar removal in Ghaziabad, tartar removal near me, calculus removal, plaque removal, dentist for teeth cleaning, dentist near me for teeth cleaning, dental clinic near me for cleaning, nearby dentist for scaling, nearby dental clinic for scaling, gum cleaning, gum treatment, oral hygiene cleaning, professional scaling, teeth cleaning dentist, dental cleaning clinic, dental hygiene treatment, teeth cleaning near Jaat Chowk, dental scaling near Jaat Chowk, teeth cleaning near KTS Complex, dental cleaning near Dolphin Public School, scaling near Crossings Republik, teeth cleaning near Lal Kuan, dental cleaning near Noida Extension, scaling near Shahberi, teeth cleaning near Chappraula, dental scaling near Panchsheel Greens 2, teeth cleaning near ABES area");
-
-    setMetaTag("property", "og:title", title);
-    setMetaTag("property", "og:description", description);
-    setMetaTag("property", "og:type", "website");
-    setMetaTag("property", "og:url", pageUrl);
-
-    setMetaTag("name", "twitter:card", "summary_large_image");
-    setMetaTag("name", "twitter:title", title);
-    setMetaTag("name", "twitter:description", description);
-
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute('href', pageUrl);
-
-    // 2. Structured Data (JSON-LD)
-    const dentistSchema = {
-      "@context": "https://schema.org",
-      "@type": "Dentist",
-      "@id": `${pageUrl}#dentist`,
-      "name": "Oracle Dental Clinic",
-      "image": [
-        "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=800&q=80",
-        "https://i.postimg.cc/tCd8wLDv/Chat-GPT-Image-Apr-22-2026-08-21-13-PM.png"
-      ],
-      "url": pageUrl,
-      "telephone": "+917011961515",
-      "priceRange": "₹200 Consultation",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Shop No. 47, KTS Complex, Jaat Chowk, Chipiyana Buzurg",
-        "addressLocality": "Ghaziabad",
-        "addressRegion": "Uttar Pradesh",
-        "postalCode": "201009",
-        "addressCountry": "IN"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "28.6280",
-        "longitude": "77.4520"
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-          "opens": "10:00",
-          "closes": "14:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-          "opens": "17:00",
-          "closes": "21:00"
-        }
-      ]
-    };
-
-    const breadcrumbSchema = {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": window.location.origin
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Teeth Cleaning & Scaling",
-          "item": pageUrl
-        }
-      ]
-    };
-
-    const faqSchema = {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": faqsList.map(faq => ({
-        "@type": "Question",
-        "name": faq.q,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faq.a
-        }
-      }))
-    };
-
-    const scriptDentist = document.createElement('script');
-    scriptDentist.type = 'application/ld+json';
-    scriptDentist.text = JSON.stringify(dentistSchema);
-    document.head.appendChild(scriptDentist);
-
-    const scriptBreadcrumb = document.createElement('script');
-    scriptBreadcrumb.type = 'application/ld+json';
-    scriptBreadcrumb.text = JSON.stringify(breadcrumbSchema);
-    document.head.appendChild(scriptBreadcrumb);
-
-    const scriptFaq = document.createElement('script');
-    scriptFaq.type = 'application/ld+json';
-    scriptFaq.text = JSON.stringify(faqSchema);
-    document.head.appendChild(scriptFaq);
-
-    // Preload critical teeth cleaning images
     preloadImages([
       "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80",
       "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=80"
     ]);
-
-    return () => {
-      document.head.removeChild(scriptDentist);
-      document.head.removeChild(scriptBreadcrumb);
-      document.head.removeChild(scriptFaq);
-    };
   }, []);
 
   const toggleFaq = (index: number) => {
@@ -249,7 +116,7 @@ export default function TeethCleaningPage({
                   onClick={handleCall}
                   className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3.5 px-6 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-all text-sm sm:text-base"
                 >
-                  <PhoneCall className="w-5 h-5" /> Call 7011961515
+                  <PhoneCall className="w-5 h-5" /> Call +91 7011961515
                 </InteractiveButton>
 
                 <InteractiveButton 
@@ -302,8 +169,8 @@ export default function TeethCleaningPage({
                   <p className="font-semibold text-amber-300 flex items-center gap-1">
                     <Clock className="w-3.5 h-3.5" /> Clinic Timings:
                   </p>
-                  <p>Morning: 10:00 AM – 2:00 PM</p>
-                  <p>Evening: 5:00 PM – 9:00 PM (Open Daily)</p>
+                  <p>Open 24 Hours, 7 Days</p>
+                  <p>(Monday – Sunday)</p>
                 </div>
 
                 <InteractiveButton 
@@ -903,7 +770,7 @@ export default function TeethCleaningPage({
               <Clock className="w-6 h-6 text-blue-400" />
               <h3 className="font-bold text-white text-base">Convenient Daily Hours</h3>
               <p className="text-xs text-slate-300 leading-relaxed">
-                Open daily from 10:00 AM – 2:00 PM and 5:00 PM – 9:00 PM to fit your routine.
+                Open 24 Hours, 7 Days (Monday – Sunday).
               </p>
             </div>
           </div>
@@ -980,7 +847,7 @@ export default function TeethCleaningPage({
               onClick={handleCall}
               className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3 px-6 rounded-xl flex items-center gap-2 text-sm shadow-md transition-all"
             >
-              <PhoneCall className="w-4 h-4" /> Call 7011961515
+              <PhoneCall className="w-4 h-4" /> Call +91 7011961515
             </InteractiveButton>
             <InteractiveButton 
               id="footer-wa-btn"
@@ -1140,6 +1007,6 @@ const faqsList = [
   },
   {
     q: "Do I need an appointment for teeth cleaning?",
-    a: "While walk-ins are welcomed during clinic hours (10 AM–2 PM and 5 PM–9 PM), booking an appointment via call or WhatsApp ensures zero waiting time."
+    a: "While walk-ins are welcomed 24 hours a day, 7 days a week, booking an appointment via call or WhatsApp ensures zero waiting time."
   }
 ];

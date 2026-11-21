@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   PhoneCall, 
   MessageCircle, 
@@ -44,39 +44,7 @@ export default function DentalImplantCostPage({
     }
   };
 
-  useEffect(() => {
-    const title = "Dental Implant Cost in Ghaziabad | Oracle Dental Clinic";
-    const description = "Comprehensive clinical guide to dental implant costs in Ghaziabad. Learn about implant components, single vs full-mouth implants, bone grafting & consultation fee ₹200.";
-    const pageUrl = `${window.location.origin}/dental-implant-cost-ghaziabad`;
-
-    document.title = title;
-
-    const setMetaTag = (attrName: string, attrVal: string, contentVal: string) => {
-      let el = document.querySelector(`meta[${attrName}="${attrVal}"]`);
-      if (!el) {
-        el = document.createElement('meta');
-        el.setAttribute(attrName, attrVal);
-        document.head.appendChild(el);
-      }
-      el.setAttribute('content', contentVal);
-    };
-
-    setMetaTag("name", "description", description);
-    setMetaTag("name", "keywords", "dental implant cost Ghaziabad, dental implant price Ghaziabad, implant cost near me, tooth implant cost Ghaziabad, dental implant cost near me, single tooth implant cost, full mouth dental implant cost");
-
-    setMetaTag("property", "og:title", title);
-    setMetaTag("property", "og:description", description);
-    setMetaTag("property", "og:type", "website");
-    setMetaTag("property", "og:url", pageUrl);
-
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute('href', pageUrl);
-  }, []);
+  
 
   const faqs = [
     {
@@ -123,7 +91,7 @@ export default function DentalImplantCostPage({
 
           <div className="flex flex-wrap items-center gap-3 pt-2">
             <InteractiveButton id="imp-cost-call" onClick={handleCall} className="bg-amber-500 text-slate-950 font-extrabold px-6 py-3.5 rounded-xl flex items-center gap-2">
-              <PhoneCall className="w-4 h-4" /> <span>Consultation: Call 7011961515</span>
+              <PhoneCall className="w-4 h-4" /> <span>Consultation: Call +91 7011961515</span>
             </InteractiveButton>
             <InteractiveButton id="imp-cost-wa" onClick={handleWhatsApp} className="bg-emerald-600 text-white font-bold px-6 py-3.5 rounded-xl flex items-center gap-2">
               <MessageCircle className="w-4 h-4" /> <span>WhatsApp Consultation</span>

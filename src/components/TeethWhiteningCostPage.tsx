@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   PhoneCall, 
   MessageCircle, 
@@ -50,124 +50,7 @@ export default function TeethWhiteningCostPage({
     }
   };
 
-  useEffect(() => {
-    const title = "Teeth Whitening Cost in Ghaziabad | Laser & In-Office Price | Oracle Dental Clinic";
-    const description = "Transparent teeth whitening cost in Ghaziabad. Compare in-office laser whitening, home bleaching trays, and scaling polish. Consultation fee ₹200.";
-    const pageUrl = `${window.location.origin}/teeth-whitening-cost-ghaziabad`;
-
-    document.title = title;
-
-    const setMetaTag = (attrName: string, attrVal: string, contentVal: string) => {
-      let el = document.querySelector(`meta[${attrName}="${attrVal}"]`);
-      if (!el) {
-        el = document.createElement('meta');
-        el.setAttribute(attrName, attrVal);
-        document.head.appendChild(el);
-      }
-      el.setAttribute('content', contentVal);
-    };
-
-    setMetaTag("name", "description", description);
-    setMetaTag("name", "keywords", "teeth whitening cost Ghaziabad, teeth bleaching price Ghaziabad, laser teeth whitening cost, in office bleaching price, yellow teeth cleaning cost Ghaziabad");
-
-    setMetaTag("property", "og:title", title);
-    setMetaTag("property", "og:description", description);
-    setMetaTag("property", "og:type", "website");
-    setMetaTag("property", "og:url", pageUrl);
-
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute('href', pageUrl);
-
-    // Schema: Service, WebPage, BreadcrumbList
-    const schemaData = {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebPage",
-          "@id": `${pageUrl}#webpage`,
-          "url": pageUrl,
-          "name": title,
-          "description": description,
-          "breadcrumb": {
-            "@id": `${pageUrl}#breadcrumb`
-          },
-          "isPartOf": {
-            "@type": "WebSite",
-            "@id": `${window.location.origin}/#website`
-          }
-        },
-        {
-          "@type": "BreadcrumbList",
-          "@id": `${pageUrl}#breadcrumb`,
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Home",
-              "item": `${window.location.origin}/`
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Teeth Whitening",
-              "item": `${window.location.origin}/teeth-whitening`
-            },
-            {
-              "@type": "ListItem",
-              "position": 3,
-              "name": "Teeth Whitening Cost in Ghaziabad",
-              "item": pageUrl
-            }
-          ]
-        },
-        {
-          "@type": "Service",
-          "@id": `${pageUrl}#service`,
-          "name": "Professional Teeth Whitening & Bleaching",
-          "serviceType": "Cosmetic Dentistry",
-          "provider": {
-            "@type": "Dentist",
-            "name": "Oracle Dental Clinic",
-            "telephone": "+91-7011961515",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "Shop No. 47, KTS Complex, Jaat Chowk, near Dolphin Public School, Chipiyana Buzurg",
-              "addressLocality": "Ghaziabad",
-              "addressRegion": "Uttar Pradesh",
-              "postalCode": "201009",
-              "addressCountry": "IN"
-            }
-          },
-          "areaServed": [
-            { "@type": "AdministrativeArea", "name": "Ghaziabad" },
-            { "@type": "AdministrativeArea", "name": "Chipiyana Buzurg" },
-            { "@type": "AdministrativeArea", "name": "Crossings Republik" },
-            { "@type": "AdministrativeArea", "name": "Noida Extension" }
-          ],
-          "description": "Safe, clinic-supervised teeth whitening and enamel stain removal delivering noticeable shade lightening with minimal sensitivity."
-        }
-      ]
-    };
-
-    let scriptTag = document.getElementById('teeth-whitening-cost-schema');
-    if (!scriptTag) {
-      scriptTag = document.createElement('script');
-      scriptTag.id = 'teeth-whitening-cost-schema';
-      scriptTag.setAttribute('type', 'application/ld+json');
-      document.head.appendChild(scriptTag);
-    }
-    scriptTag.textContent = JSON.stringify(schemaData);
-
-    return () => {
-      const el = document.getElementById('teeth-whitening-cost-schema');
-      if (el) el.remove();
-    };
-  }, []);
+  
 
   const faqs = [
     {
@@ -227,7 +110,7 @@ export default function TeethWhiteningCostPage({
               onClick={handleCall} 
               className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold px-6 py-3.5 rounded-xl flex items-center gap-2 transition-all shadow-md active:scale-95"
             >
-              <PhoneCall className="w-4 h-4" /> <span>Consultation: Call 7011961515</span>
+              <PhoneCall className="w-4 h-4" /> <span>Consultation: Call +91 7011961515</span>
             </InteractiveButton>
             <InteractiveButton 
               id="whitening-cost-wa-btn" 
@@ -458,7 +341,7 @@ export default function TeethWhiteningCostPage({
               onClick={handleCall} 
               className="bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold px-8 py-4 rounded-xl flex items-center gap-2 shadow-lg transition-all"
             >
-              <PhoneCall className="w-4 h-4" /> <span>Call 7011961515</span>
+              <PhoneCall className="w-4 h-4" /> <span>Call +91 7011961515</span>
             </InteractiveButton>
             <InteractiveButton 
               id="whitening-bottom-wa-btn" 
@@ -470,7 +353,7 @@ export default function TeethWhiteningCostPage({
           </div>
 
           <div className="pt-4 flex flex-wrap justify-center items-center gap-6 text-xs text-blue-200">
-            <span className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-amber-400" /> Mon–Sun: 10 AM–2 PM, 5 PM–9 PM</span>
+            <span className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-amber-400" /> Open 24 Hours, 7 Days (Mon–Sun)</span>
             <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4 text-amber-400" /> KTS Complex, Jaat Chowk, Chipiyana Buzurg</span>
           </div>
         </section>
