@@ -72,28 +72,31 @@ const BeforeAfter: React.FC = () => {
   ];
 
   return (
-    <section id="transformations" className="py-16 bg-white border-t border-slate-100">
+    <section id="transformations" className="cv-auto py-14 sm:py-16 bg-[#FFF8EC] border-t border-[#087B57]/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <div className="text-center mb-10 sm:mb-12">
+          <p className="text-xs font-extrabold uppercase tracking-wider text-[#FF8A24] mb-2">
+            Real Clinical Focus
+          </p>
           <div className="flex items-center justify-center gap-2 mb-3">
-            <Sparkles className="w-6 h-6 text-amber-500" aria-hidden="true" />
-            <h2 className="text-3xl font-bold text-blue-900">Smile Transformations</h2>
-            <Sparkles className="w-6 h-6 text-amber-500" aria-hidden="true" />
+            <Sparkles className="w-6 h-6 text-[#FF8A24] shrink-0" aria-hidden="true" />
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-[#087B57]">Smile Transformations</h2>
+            <Sparkles className="w-6 h-6 text-[#FF8A24] shrink-0" aria-hidden="true" />
           </div>
-          <p className="text-slate-600 max-w-2xl mx-auto text-sm sm:text-base">
+          <p className="text-[#26352F]/75 max-w-2xl mx-auto text-sm sm:text-base">
             Illustrative dental treatment outcomes. Individual clinical results vary based on oral health, bone volume, and treatment plan.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
           {transformations.map((item) => (
             <div
               key={item.id}
               id={`transformation-card-${item.id}`}
-              className="bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 shadow-xs hover:shadow-lg transition-shadow duration-200"
+              className="bg-white rounded-3xl overflow-hidden border border-[#087B57]/12 shadow-xs hover:shadow-lg hover:border-[#00A99D] transition-all duration-200 hover:-translate-y-0.5"
             >
-              <div className="p-4">
-                <div className="w-full rounded-xl overflow-hidden shadow-inner border border-slate-200 bg-slate-100">
+              <div className="p-4 bg-[#E5F5EC]/45">
+                <div className="w-full rounded-xl overflow-hidden border border-[#087B57]/10 bg-white">
                   <img
                     src={item.singleImg}
                     alt={`${item.title} – Oracle Dental Clinic Chipiyana Buzurg`}
@@ -107,9 +110,9 @@ const BeforeAfter: React.FC = () => {
                 </div>
               </div>
 
-              <div className="p-5 text-center border-t border-slate-100 bg-white">
-                <h3 className="text-lg font-bold text-slate-900 mb-1.5">{item.title}</h3>
-                <p className="text-sm text-slate-600">{item.description}</p>
+              <div className="p-5 text-center border-t border-[#E5F5EC] bg-white">
+                <h3 className="text-lg font-bold text-[#26352F] mb-1.5">{item.title}</h3>
+                <p className="text-sm text-[#26352F]/75">{item.description}</p>
               </div>
             </div>
           ))}

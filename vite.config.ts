@@ -38,17 +38,14 @@ export default defineConfig(({mode}) => {
         output: {
           manualChunks(id) {
             if (id.includes('node_modules')) {
-              if (id.includes('react/') || id.includes('react-dom/') || id.includes('scheduler/')) {
-                return 'vendor-react';
-              }
               if (id.includes('lucide-react')) {
                 return 'vendor-icons';
               }
+              if (/[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/.test(id)) {
+                return 'vendor-react';
+              }
               if (id.includes('motion') || id.includes('framer-motion')) {
                 return 'vendor-motion';
-              }
-              if (id.includes('react-markdown') || id.includes('clsx') || id.includes('tailwind-merge')) {
-                return 'vendor-ui-utils';
               }
               return 'vendor-misc';
             }

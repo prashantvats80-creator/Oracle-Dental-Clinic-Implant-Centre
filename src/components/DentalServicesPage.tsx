@@ -55,7 +55,7 @@ export default function DentalServicesPage({
   };
 
   return (
-    <div className="bg-slate-50 min-h-screen text-slate-900 leading-relaxed">
+    <div className="bg-[#FFF8EC] min-h-screen text-[#26352F] leading-relaxed">
       <Breadcrumbs
         items={[{ label: 'Dental Treatments & Services', path: '/dental-services' }]}
         navigateToHome={navigateToHome}
@@ -63,23 +63,23 @@ export default function DentalServicesPage({
       />
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 text-white py-12 sm:py-16 px-4">
+      <section className="bg-gradient-to-br from-[#087B57] via-[#066647] to-[#00A99D] text-white py-12 sm:py-16 px-4">
         <div className="max-w-6xl mx-auto space-y-6">
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs sm:text-sm text-blue-200">
-            <span className="font-semibold text-amber-300">{GBP_CONFIG.BUSINESS_NAME}</span>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs sm:text-sm text-[#E5F5EC]">
+            <span className="font-bold text-[#FFD36A]">{GBP_CONFIG.BUSINESS_NAME}</span>
             <span aria-hidden="true">·</span>
             <span>{GBP_CONFIG.DOCTOR_TITLE}</span>
             <span aria-hidden="true">·</span>
             <span>Chipiyana Buzurg, Ghaziabad</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-bold tracking-tight leading-[1.15] max-w-4xl">
+          <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold tracking-tight leading-[1.15] max-w-4xl">
             Dental Treatments &amp; Services in Greater Noida, Noida Extension and Ghaziabad
           </h1>
 
-          <p className="text-slate-200 text-base sm:text-lg max-w-3xl leading-relaxed">
+          <p className="text-[#E5F5EC] text-base sm:text-lg max-w-3xl leading-relaxed">
             Complete Dental Care, Advanced Dental Implants, Cosmetic Dentistry and Smile Makeovers at{' '}
-            <strong>Oracle Dental Clinic</strong>, conveniently located in Chipiyana Buzurg near the
+            <strong className="text-white">Oracle Dental Clinic</strong>, conveniently located in Chipiyana Buzurg near the
             Ghaziabad–Noida Extension–Greater Noida region.
           </p>
 
@@ -96,7 +96,7 @@ export default function DentalServicesPage({
                   service_category: 'all_services',
                 })
               }
-              className="min-h-[48px] bg-[#16A34A] hover:bg-[#15803D] text-white font-bold text-sm sm:text-base py-3 px-6 rounded-xl shadow-md transition-colors inline-flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-300"
+              className="min-h-[48px] bg-[#FF654F] hover:bg-[#e8533d] text-white font-bold text-sm sm:text-base py-3 px-6 rounded-full shadow-md transition-colors inline-flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFD36A]"
             >
               <MessageCircle className="w-5 h-5 shrink-0" aria-hidden="true" />
               <span>Book Consultation on WhatsApp</span>
@@ -111,20 +111,20 @@ export default function DentalServicesPage({
                   service_category: 'all_services',
                 })
               }
-              className="min-h-[48px] bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm sm:text-base py-3 px-6 rounded-xl shadow-md transition-colors inline-flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-300"
+              className="min-h-[48px] bg-white hover:bg-[#FFF8EC] text-[#087B57] font-bold text-sm sm:text-base py-3 px-6 rounded-full shadow-md transition-colors inline-flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFD36A]"
             >
               <PhoneCall className="w-5 h-5 shrink-0" aria-hidden="true" />
               <span>Call {GBP_CONFIG.PHONE_DISPLAY}</span>
             </a>
           </div>
 
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-slate-300 pt-2 border-t border-white/10">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#E5F5EC] pt-2 border-t border-white/15">
             <span className="inline-flex items-center gap-1.5">
-              <MapPin className="w-4 h-4 text-amber-400 shrink-0" aria-hidden="true" />
+              <MapPin className="w-4 h-4 text-[#FFD36A] shrink-0" aria-hidden="true" />
               <span>{GBP_CONFIG.SHORT_ADDRESS}, UP 201009</span>
             </span>
             <span className="inline-flex items-center gap-1.5">
-              <Clock className="w-4 h-4 text-amber-400 shrink-0" aria-hidden="true" />
+              <Clock className="w-4 h-4 text-[#FFD36A] shrink-0" aria-hidden="true" />
               <span>{GBP_CONFIG.HOURS}</span>
             </span>
           </div>
@@ -132,7 +132,7 @@ export default function DentalServicesPage({
       </section>
 
       {/* Interactive Category Filter Bar (Accessible Segmented Buttons) */}
-      <div className="bg-white border-b border-slate-200 sticky top-20 z-30">
+      <div className="bg-white/95 backdrop-blur-sm border-b border-[#087B57]/12 sticky top-20 z-30">
         <div className="max-w-6xl mx-auto px-4 py-3">
           <div
             className="flex items-center gap-2 overflow-x-auto pb-1"
@@ -144,10 +144,10 @@ export default function DentalServicesPage({
               role="tab"
               aria-selected={activeCategoryId === 'all'}
               onClick={() => setActiveCategoryId('all')}
-              className={`min-h-[40px] px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap shrink-0 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ${
+              className={`min-h-[40px] px-4 py-2 rounded-full text-xs sm:text-sm font-bold whitespace-nowrap shrink-0 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#087B57] ${
                 activeCategoryId === 'all'
-                  ? 'bg-slate-900 text-white'
-                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                  ? 'bg-[#087B57] text-white shadow-xs'
+                  : 'bg-[#E5F5EC] text-[#26352F] hover:bg-[#00A99D]/15'
               }`}
             >
               All 9 Categories
@@ -159,10 +159,10 @@ export default function DentalServicesPage({
                 role="tab"
                 aria-selected={activeCategoryId === category.id}
                 onClick={() => setActiveCategoryId(category.id)}
-                className={`min-h-[40px] px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap shrink-0 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ${
+                className={`min-h-[40px] px-4 py-2 rounded-full text-xs sm:text-sm font-bold whitespace-nowrap shrink-0 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#087B57] ${
                   activeCategoryId === category.id
-                    ? 'bg-blue-700 text-white'
-                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                    ? 'bg-[#FF654F] text-white shadow-xs'
+                    : 'bg-[#FFF8EC] text-[#26352F] border border-[#087B57]/12 hover:bg-[#E5F5EC]'
                 }`}
               >
                 {category.number}. {category.name}
@@ -181,14 +181,14 @@ export default function DentalServicesPage({
             aria-labelledby={`heading-${category.id}`}
             className="space-y-6"
           >
-            <div className="border-b border-slate-200 pb-4 space-y-1.5">
+            <div className="border-b border-[#087B57]/15 pb-4 space-y-1.5">
               <h2
                 id={`heading-${category.id}`}
-                className="text-2xl sm:text-3xl font-bold text-slate-950"
+                className="text-2xl sm:text-3xl font-extrabold text-[#087B57]"
               >
                 {category.number}. {category.name}
               </h2>
-              <p className="text-slate-600 text-sm sm:text-base max-w-3xl">{category.summary}</p>
+              <p className="text-[#26352F]/75 text-sm sm:text-base max-w-3xl">{category.summary}</p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
@@ -200,10 +200,10 @@ export default function DentalServicesPage({
                 return (
                   <article
                     key={service.id}
-                    className={`bg-white rounded-2xl border transition-colors overflow-hidden ${
+                    className={`bg-white rounded-3xl border transition-colors overflow-hidden shadow-xs ${
                       isOpen
-                        ? 'border-blue-300 shadow-md lg:col-span-2'
-                        : 'border-slate-200 hover:border-slate-300'
+                        ? 'border-[#00A99D] shadow-md lg:col-span-2'
+                        : 'border-[#087B57]/12 hover:border-[#00A99D]/50'
                     }`}
                   >
                     {/* Semantic native <details> keeps all clinical SEO copy crawlable & works even without JS */}
@@ -214,19 +214,19 @@ export default function DentalServicesPage({
                         toggleService(service, category.id, target.open);
                       }}
                     >
-                      <summary className="cursor-pointer focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/40 rounded-t-2xl block">
+                      <summary className="cursor-pointer focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#00A99D]/40 rounded-t-3xl block">
                         <div className={isOpen ? 'grid grid-cols-1 md:grid-cols-12' : ''}>
                           <div
-                            className={`relative bg-slate-100 overflow-hidden ${
+                            className={`relative bg-[#E5F5EC] overflow-hidden ${
                               isOpen ? 'md:col-span-5 h-56 md:h-full' : 'aspect-[16/9] w-full'
                             }`}
                           >
                             {imgFailed ? (
-                              <div className="w-full h-full min-h-[180px] flex flex-col items-center justify-center p-4 text-center bg-slate-100 text-slate-600">
-                                <span className="font-semibold text-sm text-slate-800">
+                              <div className="w-full h-full min-h-[180px] flex flex-col items-center justify-center p-4 text-center bg-[#E5F5EC] text-[#26352F]">
+                                <span className="font-bold text-sm text-[#087B57]">
                                   {service.title}
                                 </span>
-                                <span className="text-xs text-slate-500 mt-1">
+                                <span className="text-xs text-[#26352F]/70 mt-1">
                                   Oracle Dental Clinic &amp; Implant Center
                                 </span>
                               </div>
@@ -253,25 +253,25 @@ export default function DentalServicesPage({
                             }`}
                           >
                             <div className="space-y-2">
-                              <p className="text-xs font-medium text-slate-500">
+                              <p className="text-xs font-bold uppercase tracking-wider text-[#FF8A24]">
                                 {category.name} · Oracle Dental Clinic
                               </p>
-                              <h3 className="text-lg sm:text-xl font-bold text-slate-950 leading-snug">
+                              <h3 className="text-lg sm:text-xl font-extrabold text-[#26352F] leading-snug">
                                 {service.title}
                               </h3>
-                              <p className="text-sm text-slate-600 leading-relaxed">
+                              <p className="text-sm text-[#26352F]/75 leading-relaxed">
                                 {service.shortDescription}
                               </p>
                             </div>
 
-                            <div className="flex items-center justify-between pt-2 border-t border-slate-100">
-                              <span className="text-xs sm:text-sm font-bold text-blue-700 inline-flex items-center gap-1.5">
+                            <div className="flex items-center justify-between pt-2 border-t border-[#087B57]/10">
+                              <span className="text-xs sm:text-sm font-bold text-[#087B57] inline-flex items-center gap-1.5">
                                 {isOpen ? 'Hide Treatment Details' : 'Read Full Treatment Details'}
                               </span>
                               <span
                                 aria-hidden="true"
-                                className={`w-9 h-9 rounded-full bg-slate-100 text-slate-700 inline-flex items-center justify-center transition-transform duration-200 ${
-                                  isOpen ? 'rotate-180 bg-blue-50 text-blue-700' : ''
+                                className={`w-9 h-9 rounded-full bg-[#E5F5EC] text-[#087B57] inline-flex items-center justify-center transition-transform duration-200 ${
+                                  isOpen ? 'rotate-180 bg-[#087B57] text-white' : ''
                                 }`}
                               >
                                 <ChevronDown className="w-4 h-4" />
@@ -282,7 +282,7 @@ export default function DentalServicesPage({
                       </summary>
 
                       {/* Expanded Clinical Details Panel (Same Page, Zero Redirects) */}
-                      <div className="px-5 sm:px-7 pb-6 pt-4 border-t border-slate-200 bg-slate-50/70 space-y-6">
+                      <div className="px-5 sm:px-7 pb-6 pt-4 border-t border-[#087B57]/12 bg-[#E5F5EC]/55 space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                           <div className="space-y-1.5">
                             <h4 className="text-sm font-bold text-slate-950">What the Treatment Is</h4>
@@ -365,7 +365,7 @@ export default function DentalServicesPage({
                         </div>
 
                         {/* Treatment-Specific Appointment CTAs */}
-                        <div className="pt-4 border-t border-slate-200 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3">
+                        <div className="pt-4 border-t border-[#087B57]/12 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3">
                           <a
                             href={whatsappHref}
                             target="_blank"
@@ -378,7 +378,7 @@ export default function DentalServicesPage({
                                 interaction_label: service.id,
                               })
                             }
-                            className="min-h-[44px] bg-[#16A34A] hover:bg-[#15803D] text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-colors inline-flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-300"
+                            className="min-h-[44px] bg-[#FF654F] hover:bg-[#e8533d] text-white font-bold text-sm px-5 py-2.5 rounded-full transition-colors inline-flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FF654F]/40"
                           >
                             <MessageCircle className="w-4 h-4 shrink-0" aria-hidden="true" />
                             <span>WhatsApp About {service.title.split('(')[0].trim()}</span>
@@ -394,7 +394,7 @@ export default function DentalServicesPage({
                                 interaction_label: service.id,
                               })
                             }
-                            className="min-h-[44px] bg-blue-700 hover:bg-blue-800 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-colors inline-flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-300"
+                            className="min-h-[44px] bg-[#087B57] hover:bg-[#066647] text-white font-bold text-sm px-5 py-2.5 rounded-full transition-colors inline-flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#00A99D]/40"
                           >
                             <PhoneCall className="w-4 h-4 shrink-0" aria-hidden="true" />
                             <span>Call {GBP_CONFIG.PHONE_DISPLAY}</span>
@@ -404,10 +404,10 @@ export default function DentalServicesPage({
                             <a
                               href={service.deepGuidePath}
                               onClick={(e) => handleLinkClick(e, service.deepGuidePath!)}
-                              className="min-h-[44px] bg-white hover:bg-slate-100 text-slate-800 border border-slate-300 font-semibold text-sm px-4 py-2.5 rounded-xl transition-colors inline-flex items-center justify-center gap-1.5"
+                              className="min-h-[44px] bg-white hover:bg-[#FFF8EC] text-[#26352F] border border-[#087B57]/20 font-semibold text-sm px-4 py-2.5 rounded-full transition-colors inline-flex items-center justify-center gap-1.5"
                             >
                               <span>Dedicated Treatment Guide</span>
-                              <ArrowRight className="w-4 h-4 shrink-0" aria-hidden="true" />
+                              <ArrowRight className="w-4 h-4 shrink-0 text-[#087B57]" aria-hidden="true" />
                             </a>
                           )}
                         </div>
@@ -421,18 +421,18 @@ export default function DentalServicesPage({
         ))}
 
         {/* Honest Location & Service Area Transparency Note */}
-        <section className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 space-y-3">
-          <h2 className="text-xl sm:text-2xl font-bold text-slate-950">
+        <section className="bg-white rounded-3xl border border-[#087B57]/12 shadow-xs p-6 sm:p-8 space-y-3">
+          <h2 className="text-xl sm:text-2xl font-extrabold text-[#087B57]">
             Conveniently Located in Chipiyana Buzurg for Ghaziabad, Noida Extension &amp; Greater Noida Patients
           </h2>
-          <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
+          <p className="text-sm sm:text-base text-[#26352F]/80 leading-relaxed">
             <strong>{GBP_CONFIG.BUSINESS_NAME}</strong> operates from our single physical clinic at{' '}
             <strong>{GBP_CONFIG.ADDRESS}</strong>, led by <strong>{GBP_CONFIG.DOCTOR_TITLE}</strong>.
             Because Chipiyana Buzurg sits right along the Ghaziabad–Greater Noida West border near Jaat
-            Chowk and Crossings Republik, patients from <strong>Noida Extension</strong>,{' '}
-            <strong>Greater Noida</strong>, <strong>Shahberi</strong>, <strong>Lal Kuan</strong>, and
-            central <strong>Ghaziabad</strong> visit us conveniently for consultations and staged dental
-            care.
+            Chowk, <strong>ABES Engineering College</strong>, and <strong>Crossings Republik</strong>,
+            patients from <strong>Noida Extension</strong>, <strong>Greater Noida</strong>,{' '}
+            <strong>Shahberi</strong>, <strong>Lal Kuan</strong>, and central{' '}
+            <strong>Ghaziabad</strong> visit us conveniently for consultations and staged dental care.
           </p>
         </section>
       </div>

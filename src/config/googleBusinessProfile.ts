@@ -57,8 +57,9 @@ export const GBP_CONFIG = {
   PRIMARY_AREA: "Chipiyana Buzurg, Ghaziabad",
   SECONDARY_AREAS: [
     "Jaat Chowk",
-    "Shahberi",
     "Crossings Republik",
+    "ABES Engineering College area",
+    "Shahberi",
     "Noida Extension",
     "Greater Noida West",
     "Lal Kuan",
@@ -70,13 +71,13 @@ export const GBP_CONFIG = {
 
   // Official Clinic Images (Preserved originals)
   DOCTOR_IMAGE: "https://i.postimg.cc/tCd8wLDv/Chat-GPT-Image-Apr-22-2026-08-21-13-PM.png",
-  CLINIC_HERO_IMAGE: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=800&q=80",
+  CLINIC_HERO_IMAGE: "https://oracledentals.netlify.app/assets/images/hero-patient.jpg",
 
   // Social Profiles
   SOCIAL_URLS: [
     "https://www.facebook.com/profile.php?id=100083436112014",
     "https://www.instagram.com/oracledentalclinic0/",
-    "https://www.youtube.com/@OracleDentalClinic0",
+    "https://www.youtube.com/@oracledentalclinic0",
     "https://share.google/3jkiHdvq2N8aYDGm0",
   ],
 

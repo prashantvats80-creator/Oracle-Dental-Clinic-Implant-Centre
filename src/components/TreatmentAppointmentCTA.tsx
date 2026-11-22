@@ -16,34 +16,34 @@ export const TreatmentAppointmentCTA: React.FC<TreatmentAppointmentCTAProps> = (
   return (
     <section
       aria-label={`Book ${treatmentName} appointment`}
-      className="py-12 px-4 sm:px-6 bg-slate-100 border-t border-slate-200"
+      className="py-12 px-4 sm:px-6 bg-[#FFF8EC] border-t border-[#087B57]/10"
     >
-      <div className="max-w-5xl mx-auto bg-slate-950 text-white rounded-3xl p-6 sm:p-10 shadow-lg border border-slate-800">
+      <div className="max-w-5xl mx-auto bg-gradient-to-br from-[#087B57] via-[#066647] to-[#00A99D] text-white rounded-3xl p-6 sm:p-10 shadow-lg">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 space-y-4">
-            <p className="inline-flex items-center gap-2 text-xs font-semibold tracking-wide text-amber-300">
+            <p className="inline-flex items-center gap-2 text-xs font-bold tracking-wide text-[#FFD36A]">
               <Stethoscope className="w-4 h-4 shrink-0" aria-hidden="true" />
               <span>Book Your Dental Appointment</span>
             </p>
-            <h2 className="text-2xl sm:text-3xl font-bold leading-tight">
+            <h2 className="text-2xl sm:text-3xl font-extrabold leading-tight">
               Schedule Your {treatmentName} in Chipiyana Buzurg, Ghaziabad
             </h2>
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+            <p className="text-[#E5F5EC] text-sm sm:text-base leading-relaxed">
               Consult <strong>{GBP_CONFIG.DOCTOR_TITLE}</strong> at{' '}
               <strong>{GBP_CONFIG.BUSINESS_NAME}</strong> for a thorough oral examination, clear
               treatment options, and transparent cost guidance before any procedure begins.
             </p>
-            <div className="space-y-2 text-xs sm:text-sm text-slate-300 pt-1">
+            <div className="space-y-2 text-xs sm:text-sm text-white/95 pt-1">
               <p className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" aria-hidden="true" />
+                <MapPin className="w-4 h-4 text-[#FFD36A] shrink-0 mt-0.5" aria-hidden="true" />
                 <span>{GBP_CONFIG.ADDRESS}</span>
               </p>
               <p className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-amber-400 shrink-0" aria-hidden="true" />
+                <Clock className="w-4 h-4 text-[#FFD36A] shrink-0" aria-hidden="true" />
                 <span>{GBP_CONFIG.HOURS}</span>
               </p>
               <p className="flex items-center gap-2">
-                <PhoneCall className="w-4 h-4 text-amber-400 shrink-0" aria-hidden="true" />
+                <PhoneCall className="w-4 h-4 text-[#FFD36A] shrink-0" aria-hidden="true" />
                 <span>Direct Helpline &amp; WhatsApp: {GBP_CONFIG.PHONE_DISPLAY}</span>
               </p>
             </div>
@@ -61,7 +61,7 @@ export const TreatmentAppointmentCTA: React.FC<TreatmentAppointmentCTAProps> = (
                   service_category: categorySlug,
                 })
               }
-              className="w-full min-h-[48px] bg-[#16A34A] hover:bg-[#15803D] text-white font-bold text-sm sm:text-base py-3.5 px-5 rounded-xl shadow-md transition-colors flex items-center justify-center gap-2 text-center focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-300"
+              className="w-full min-h-[48px] bg-[#FF654F] hover:bg-[#E8523D] text-white font-bold text-sm sm:text-base py-3.5 px-5 rounded-2xl shadow-md transition-colors flex items-center justify-center gap-2 text-center focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFD36A]"
             >
               <MessageCircle className="w-5 h-5 shrink-0" aria-hidden="true" />
               <span>Book {treatmentName} on WhatsApp</span>
@@ -75,9 +75,9 @@ export const TreatmentAppointmentCTA: React.FC<TreatmentAppointmentCTAProps> = (
                   service_category: categorySlug,
                 })
               }
-              className="w-full min-h-[48px] bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm sm:text-base py-3.5 px-5 rounded-xl shadow-md transition-colors flex items-center justify-center gap-2 text-center focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-300"
+              className="w-full min-h-[48px] bg-white hover:bg-[#FFF8EC] text-[#087B57] font-bold text-sm sm:text-base py-3.5 px-5 rounded-2xl shadow-md transition-colors flex items-center justify-center gap-2 text-center focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFD36A]"
             >
-              <PhoneCall className="w-5 h-5 shrink-0" aria-hidden="true" />
+              <PhoneCall className="w-5 h-5 shrink-0 text-[#FF8A24]" aria-hidden="true" />
               <span>Call {GBP_CONFIG.PHONE_DISPLAY}</span>
             </a>
             <a
@@ -91,9 +91,9 @@ export const TreatmentAppointmentCTA: React.FC<TreatmentAppointmentCTAProps> = (
                   service_category: categorySlug,
                 })
               }
-              className="w-full min-h-[44px] bg-white/10 hover:bg-white/20 text-white border border-white/25 font-semibold text-sm py-3 px-5 rounded-xl transition-colors flex items-center justify-center gap-2 text-center focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
+              className="w-full min-h-[44px] bg-white/15 hover:bg-white/25 text-white border border-white/25 font-semibold text-sm py-3 px-5 rounded-2xl transition-colors flex items-center justify-center gap-2 text-center focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
             >
-              <MapPin className="w-4 h-4 shrink-0 text-amber-300" aria-hidden="true" />
+              <MapPin className="w-4 h-4 shrink-0 text-[#FFD36A]" aria-hidden="true" />
               <span>Get Google Maps Directions</span>
             </a>
           </div>

@@ -37,11 +37,23 @@
   [headers.values]
     Cache-Control = "public, max-age=3600"
 
-# Immutable long-term caching for Vite hashed static assets
+# Ensure Search Console verification file is served directly without caching issues
+[[headers]]
+  for = "/google685637734a1de471.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+    Content-Type = "text/html; charset=utf-8"
+
+# Immutable long-term caching for Vite hashed static assets & local hero images
 [[headers]]
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, stale-while-revalidate=86400"
 
 [[headers]]
   for = "/*.js"
@@ -56,19 +68,24 @@
 [[headers]]
   for = "/*.png"
   [headers.values]
-    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+    Cache-Control = "public, max-age=2592000, stale-while-revalidate=86400"
 
 [[headers]]
   for = "/*.jpg"
   [headers.values]
-    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+    Cache-Control = "public, max-age=2592000, stale-while-revalidate=86400"
 
 [[headers]]
   for = "/*.webp"
   [headers.values]
-    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+    Cache-Control = "public, max-age=2592000, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/*.avif"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, stale-while-revalidate=86400"
 
 [[headers]]
   for = "/*.svg"
   [headers.values]
-    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+    Cache-Control = "public, max-age=2592000, stale-while-revalidate=86400"

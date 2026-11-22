@@ -139,8 +139,9 @@ const SEOHead: React.FC<SEOHeadProps> = ({ routePath, isNotFound = false }) => {
         areaServed: [
           { '@type': 'Place', name: 'Chipiyana Buzurg, Ghaziabad' },
           { '@type': 'Place', name: 'Jaat Chowk, Ghaziabad' },
-          { '@type': 'Place', name: 'Shahberi' },
           { '@type': 'Place', name: 'Crossings Republik, Ghaziabad' },
+          { '@type': 'Place', name: 'ABES Engineering College area, Ghaziabad' },
+          { '@type': 'Place', name: 'Shahberi' },
           { '@type': 'Place', name: 'Noida Extension' },
           { '@type': 'Place', name: 'Greater Noida West' },
           { '@type': 'Place', name: 'Lal Kuan, Ghaziabad' },
@@ -182,8 +183,10 @@ const SEOHead: React.FC<SEOHeadProps> = ({ routePath, isNotFound = false }) => {
         provider: { '@id': GBP_CONFIG.ENTITY_ID },
         areaServed: [
           { '@type': 'Place', name: 'Chipiyana Buzurg, Ghaziabad' },
+          { '@type': 'Place', name: 'Crossings Republik, Ghaziabad' },
+          { '@type': 'Place', name: 'ABES Engineering College area, Ghaziabad' },
           { '@type': 'Place', name: 'Noida Extension' },
-          { '@type': 'Place', name: 'Greater Noida' },
+          { '@type': 'Place', name: 'Greater Noida West' },
         ],
       });
     }

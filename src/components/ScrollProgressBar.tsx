@@ -28,13 +28,13 @@ export default function ScrollProgressBar() {
 
   return (
     <div
-      className="fixed top-0 left-0 right-0 z-[100] h-1 bg-slate-200/20 pointer-events-none overflow-hidden"
+      className="fixed top-0 left-0 right-0 z-[100] h-1 bg-[#E5F5EC]/60 pointer-events-none overflow-hidden"
       role="progressbar"
       aria-label="Reading progress"
     >
       <div
         ref={barRef}
-        className="h-full w-full bg-gradient-to-r from-blue-600 via-indigo-600 to-amber-500 origin-left"
+        className="h-full w-full bg-gradient-to-r from-[#087B57] via-[#00A99D] to-[#FF8A24] origin-left"
         style={{ transform: 'scaleX(0)' }}
       />
     </div>

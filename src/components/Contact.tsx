@@ -13,7 +13,17 @@ const Contact: React.FC<ContactProps> = () => {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (typeof IntersectionObserver === 'undefined') return;
+    // On Save-Data, 2G/3G, or mobile viewports, keep map click-to-load so slow connections save ~600 KB
+    const conn = (navigator as unknown as { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
+    const isSlowConnection =
+      Boolean(conn?.saveData) ||
+      (Boolean(conn?.effectiveType) && conn?.effectiveType !== '4g');
+    const isSmallScreen = typeof window !== 'undefined' && window.innerWidth < 768;
+
+    if (isSlowConnection || isSmallScreen || typeof IntersectionObserver === 'undefined') {
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
@@ -21,7 +31,7 @@ const Contact: React.FC<ContactProps> = () => {
           observer.disconnect();
         }
       },
-      { rootMargin: '150px' }
+      { rootMargin: '120px' }
     );
 
     if (mapContainerRef.current) {
@@ -32,26 +42,32 @@ const Contact: React.FC<ContactProps> = () => {
   }, []);
 
   return (
-    <section id="contact" className="py-16 bg-white scroll-mt-20">
+    <section id="contact" className="cv-auto py-14 sm:py-16 bg-white scroll-mt-20 border-t border-[#087B57]/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12">
-          {/* Booking Card */}
+          {/* Vibrant Booking Card */}
           <div
             id="contact-booking-card"
-            className="bg-slate-50 p-6 md:p-8 rounded-3xl border border-slate-200 flex flex-col justify-center items-center text-center"
+            className="relative overflow-hidden bg-gradient-to-br from-[#E5F5EC] via-[#FFF8EC] to-[#E5F5EC] p-6 md:p-10 rounded-3xl border border-[#087B57]/15 shadow-sm flex flex-col justify-center items-center text-center"
           >
-            <div className="w-14 h-14 bg-blue-100 text-blue-700 rounded-2xl flex items-center justify-center mb-5">
+            <div aria-hidden="true" className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-[#FFD36A]/35 pointer-events-none" />
+            <div aria-hidden="true" className="absolute -bottom-10 -left-10 w-28 h-28 rounded-full bg-[#00A99D]/15 pointer-events-none" />
+
+            <div className="relative w-14 h-14 bg-gradient-to-br from-[#FF654F] to-[#FF8A24] text-white rounded-2xl flex items-center justify-center mb-5 shadow-md">
               <Calendar className="w-7 h-7" aria-hidden="true" />
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-blue-950 mb-3">
+            <p className="relative text-xs font-extrabold uppercase tracking-wider text-[#FF8A24] mb-1">
+              Open 24 Hours • Quick Confirmation
+            </p>
+            <h2 className="relative text-2xl sm:text-3xl font-extrabold text-[#087B57] mb-3">
               Book Your Dental Appointment
             </h2>
-            <p className="text-slate-600 mb-6 max-w-md text-sm md:text-base leading-relaxed">
+            <p className="relative text-[#26352F]/85 mb-6 max-w-md text-sm md:text-base leading-relaxed">
               Message us directly on WhatsApp or call{' '}
               <strong>{GBP_CONFIG.BUSINESS_NAME}</strong> to schedule your consultation with{' '}
-              <strong>{GBP_CONFIG.DOCTOR_TITLE}</strong>.
+              <strong>{GBP_CONFIG.DOCTOR_TITLE}</strong> at our Jaat Chowk, Chipiyana Buzurg clinic.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+            <div className="relative flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
               <a
                 id="contact-whatsapp-btn"
                 href={GBP_CONFIG.WHATSAPP_BOOKING_URL}
@@ -64,7 +80,7 @@ const Contact: React.FC<ContactProps> = () => {
                     interaction_label: 'book_whatsapp',
                   })
                 }
-                className="min-h-[48px] bg-[#16A34A] hover:bg-[#15803D] text-white font-bold py-3.5 px-7 rounded-xl shadow-sm transition-colors text-base flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-300"
+                className="min-h-[48px] bg-gradient-to-r from-[#FF654F] to-[#FF8A24] hover:from-[#e8533d] hover:to-[#e67617] text-white font-extrabold py-3.5 px-7 rounded-full shadow-[0_8px_20px_rgba(255,101,79,0.28)] transition-all text-base flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFD36A]"
               >
                 <MessageCircle className="w-5 h-5 shrink-0" aria-hidden="true" />
                 <span>Book on WhatsApp</span>
@@ -79,7 +95,7 @@ const Contact: React.FC<ContactProps> = () => {
                     interaction_label: 'call_clinic',
                   })
                 }
-                className="min-h-[48px] bg-blue-700 hover:bg-blue-800 text-white font-bold py-3.5 px-7 rounded-xl shadow-sm transition-colors text-base flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-300"
+                className="min-h-[48px] bg-[#087B57] hover:bg-[#066647] text-white font-extrabold py-3.5 px-7 rounded-full shadow-sm transition-colors text-base flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#00A99D]/40"
               >
                 <PhoneCall className="w-5 h-5 shrink-0" aria-hidden="true" />
                 <span>Call {GBP_CONFIG.PHONE_DISPLAY}</span>
@@ -87,38 +103,46 @@ const Contact: React.FC<ContactProps> = () => {
             </div>
           </div>
 
-          {/* Verified NAP & Lazy Directions Map */}
+          {/* Verified NAP & 2G-Friendly Directions Map */}
           <div className="flex flex-col justify-center">
-            <h2 className="text-2xl font-bold text-blue-950 mb-6">Visit Oracle Dental Clinic</h2>
+            <p className="text-xs font-extrabold uppercase tracking-wider text-[#FF8A24] mb-1">
+              Chipiyana Buzurg, Ghaziabad
+            </p>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#087B57] mb-5">
+              Visit Oracle Dental Clinic
+            </h2>
 
-            <div className="space-y-5 mb-7">
+            <div className="space-y-4 mb-6">
               <div className="flex items-start gap-4">
-                <div className="w-11 h-11 bg-blue-100 text-blue-700 rounded-xl flex items-center justify-center shrink-0">
+                <div className="w-11 h-11 bg-[#E5F5EC] text-[#087B57] rounded-2xl flex items-center justify-center shrink-0">
                   <MapPin className="w-5 h-5" aria-hidden="true" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-slate-900">Verified Clinic Address</h3>
-                  <p className="text-slate-600 mt-1 leading-relaxed text-sm">{GBP_CONFIG.ADDRESS}</p>
+                  <h3 className="font-bold text-[#26352F]">Verified Clinic Address</h3>
+                  <p className="text-[#26352F]/80 mt-0.5 leading-relaxed text-sm">{GBP_CONFIG.ADDRESS}</p>
+                  <p className="text-xs text-[#087B57] font-medium mt-1">
+                    Conveniently reachable for patients from Chipiyana Buzurg, Jaat Chowk, Crossings Republik, ABES Engineering College area, Shahberi, Noida Extension, Greater Noida West &amp; Lal Kuan.
+                  </p>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="w-11 h-11 bg-blue-100 text-blue-700 rounded-xl flex items-center justify-center shrink-0">
+                <div className="w-11 h-11 bg-[#FFF8EC] text-[#FF8A24] rounded-2xl flex items-center justify-center shrink-0 border border-[#FF8A24]/20">
                   <Clock className="w-5 h-5" aria-hidden="true" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-slate-900">Opening Hours</h3>
-                  <p className="text-slate-600 mt-1 text-sm leading-relaxed">{GBP_CONFIG.HOURS}</p>
+                  <h3 className="font-bold text-[#26352F]">Opening Hours</h3>
+                  <p className="text-[#26352F]/80 mt-0.5 text-sm leading-relaxed">{GBP_CONFIG.HOURS}</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="w-11 h-11 bg-blue-100 text-blue-700 rounded-xl flex items-center justify-center shrink-0">
+                <div className="w-11 h-11 bg-[#E5F5EC] text-[#00A99D] rounded-2xl flex items-center justify-center shrink-0">
                   <PhoneCall className="w-5 h-5" aria-hidden="true" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-slate-900">Phone &amp; WhatsApp</h3>
-                  <p className="text-slate-600 mt-1 text-sm">
+                  <h3 className="font-bold text-[#26352F]">Phone &amp; WhatsApp</h3>
+                  <p className="text-[#26352F]/80 mt-0.5 text-sm">
                     <a
                       href={GBP_CONFIG.CALL_URL}
                       onClick={() =>
@@ -126,7 +150,7 @@ const Contact: React.FC<ContactProps> = () => {
                           placement: 'contact_nap_phone_link',
                         })
                       }
-                      className="font-bold text-blue-800 hover:underline"
+                      className="font-extrabold text-[#087B57] hover:text-[#FF654F] hover:underline"
                     >
                       {GBP_CONFIG.PHONE_DISPLAY}
                     </a>
@@ -135,12 +159,12 @@ const Contact: React.FC<ContactProps> = () => {
               </div>
             </div>
 
-            {/* Lazy-Loaded Google Map Embed */}
+            {/* Lazy / Click-to-Load Google Map Embed (Zero Bandwidth Waste on 2G & Mobile) */}
             <div
               id="contact-map-container"
               ref={mapContainerRef}
               onClick={() => setShowMap(true)}
-              className="w-full h-64 md:h-72 bg-slate-100 rounded-2xl overflow-hidden relative border border-slate-200 flex items-center justify-center"
+              className="w-full h-64 md:h-72 bg-[#FFF8EC] rounded-3xl overflow-hidden relative border border-[#087B57]/15 flex items-center justify-center"
             >
               {showMap ? (
                 <iframe
@@ -158,13 +182,13 @@ const Contact: React.FC<ContactProps> = () => {
                 <button
                   type="button"
                   onClick={() => setShowMap(true)}
-                  className="w-full h-full bg-slate-50 flex flex-col items-center justify-center p-4 text-center cursor-pointer"
+                  className="w-full h-full bg-gradient-to-br from-[#FFF8EC] to-[#E5F5EC] flex flex-col items-center justify-center p-4 pb-16 text-center cursor-pointer"
                 >
-                  <div className="w-12 h-12 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center mb-2">
-                    <MapPin className="w-6 h-6" aria-hidden="true" />
+                  <div className="w-12 h-12 rounded-full bg-white text-[#087B57] shadow-xs flex items-center justify-center mb-2">
+                    <MapPin className="w-6 h-6 text-[#FF654F]" aria-hidden="true" />
                   </div>
-                  <span className="font-bold text-slate-800 text-sm">Load Interactive Clinic Map</span>
-                  <span className="text-xs text-slate-500 mt-1">Saves mobile data until needed</span>
+                  <span className="font-extrabold text-[#26352F] text-sm">Tap to Load Interactive Map</span>
+                  <span className="text-xs text-[#26352F]/65 mt-1">Lightweight mode — saves mobile data until tapped</span>
                 </button>
               )}
 
@@ -181,9 +205,9 @@ const Contact: React.FC<ContactProps> = () => {
                       placement: 'contact_map_directions',
                     });
                   }}
-                  className="min-h-[44px] bg-blue-700 text-white font-bold py-2.5 px-5 rounded-full shadow-md hover:bg-blue-800 transition-colors whitespace-nowrap inline-flex items-center gap-2 border-2 border-white text-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-300"
+                  className="min-h-[44px] bg-[#087B57] text-white font-bold py-2.5 px-5 rounded-full shadow-md hover:bg-[#066647] transition-colors whitespace-nowrap inline-flex items-center gap-2 border-2 border-white text-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFD36A]"
                 >
-                  <MapPin className="w-4 h-4 shrink-0" aria-hidden="true" />
+                  <MapPin className="w-4 h-4 shrink-0 text-[#FFD36A]" aria-hidden="true" />
                   <span>Open in Google Maps</span>
                 </a>
               </div>

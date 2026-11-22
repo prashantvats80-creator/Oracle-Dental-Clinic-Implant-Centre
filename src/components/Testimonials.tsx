@@ -59,13 +59,13 @@ export const Testimonials: React.FC = () => {
   const displayedReviews = filteredReviews.slice(0, visibleCount);
 
   return (
-    <section id="testimonials" className="py-16 bg-gradient-to-b from-blue-50/70 via-white to-blue-50/50 scroll-mt-20">
+    <section id="testimonials" className="cv-auto py-14 sm:py-16 bg-[#FFF8EC] scroll-mt-20 border-t border-[#087B57]/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Google Business Profile Trust Card */}
-        <div className="bg-white rounded-3xl p-6 md:p-8 shadow-xs border border-slate-200/90 mb-10">
+        <div className="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-[#087B57]/15 mb-10">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-4 flex-col sm:flex-row text-center sm:text-left">
-              <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center border border-slate-200 shadow-xs shrink-0">
+              <div className="w-14 h-14 rounded-2xl bg-[#FFF8EC] flex items-center justify-center border border-[#FF8A24]/25 shadow-xs shrink-0">
                 <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
                   <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
@@ -76,27 +76,27 @@ export const Testimonials: React.FC = () => {
 
               <div>
                 <div className="flex items-center gap-2 justify-center sm:justify-start flex-wrap">
-                  <h3 className="text-xl font-extrabold text-blue-950">
+                  <h3 className="text-xl font-extrabold text-[#087B57]">
                     Google Business Profile
                   </h3>
-                  <span className="text-[10px] bg-emerald-100 text-emerald-800 font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider inline-flex items-center gap-1">
-                    <CheckCircle2 className="w-3 h-3 text-emerald-600" /> Verified Listing
+                  <span className="text-xs font-bold text-[#00A99D] inline-flex items-center gap-1">
+                    <CheckCircle2 className="w-3.5 h-3.5" aria-hidden="true" /> Verified Listing
                   </span>
                 </div>
-                <p className="text-slate-600 text-sm mt-0.5 font-medium">
+                <p className="text-[#26352F]/75 text-sm mt-0.5 font-medium">
                   {GBP_CONFIG.BUSINESS_NAME} • {GBP_CONFIG.SHORT_ADDRESS}
                 </p>
 
                 <div className="flex items-center gap-2 mt-2 justify-center sm:justify-start flex-wrap">
-                  <div className="flex text-amber-500" aria-label="4.9 out of 5 stars">
+                  <div className="flex text-[#FF8A24]" aria-label="4.9 out of 5 stars">
                     {[1, 2, 3, 4, 5].map((_, i) => (
                       <Star key={i} className="w-4 h-4 fill-current" aria-hidden="true" />
                     ))}
                   </div>
-                  <span className="text-lg font-black text-slate-900">{GBP_CONFIG.FALLBACK_RATING}</span>
-                  <span className="text-slate-400 text-sm">/ 5.0</span>
-                  <span className="text-slate-400">•</span>
-                  <span className="text-sm font-bold text-blue-900">View live reviews on Google Maps</span>
+                  <span className="text-lg font-black text-[#26352F]">{GBP_CONFIG.FALLBACK_RATING}</span>
+                  <span className="text-[#26352F]/50 text-sm">/ 5.0</span>
+                  <span className="text-[#26352F]/30">•</span>
+                  <span className="text-sm font-bold text-[#087B57]">View live reviews on Google Maps</span>
                 </div>
               </div>
             </div>
@@ -107,20 +107,20 @@ export const Testimonials: React.FC = () => {
                 href={GBP_CONFIG.GOOGLE_WRITE_REVIEW_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-3 px-5 rounded-xl shadow-xs transition-colors text-sm flex items-center justify-center gap-2"
+                className="min-h-[44px] bg-gradient-to-r from-[#FF654F] to-[#FF8A24] hover:from-[#e8533d] hover:to-[#e67617] text-white font-extrabold py-3 px-6 rounded-full shadow-xs transition-all text-sm flex items-center justify-center gap-2"
               >
-                <MessageSquareCode className="w-4 h-4" />
-                Write a Google Review
+                <MessageSquareCode className="w-4 h-4" aria-hidden="true" />
+                <span>Write a Google Review</span>
               </a>
               <a
                 id="read-google-reviews-btn"
                 href={GBP_CONFIG.GOOGLE_BUSINESS_PROFILE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-blue-900 hover:bg-blue-950 text-white font-bold py-3 px-5 rounded-xl shadow-xs transition-colors text-sm flex items-center justify-center gap-2 border border-blue-800"
+                className="min-h-[44px] bg-[#087B57] hover:bg-[#066647] text-white font-extrabold py-3 px-6 rounded-full shadow-xs transition-colors text-sm flex items-center justify-center gap-2"
               >
                 <span>Open Google Business Profile</span>
-                <ExternalLink className="w-4 h-4" />
+                <ExternalLink className="w-4 h-4" aria-hidden="true" />
               </a>
             </div>
           </div>
@@ -128,21 +128,21 @@ export const Testimonials: React.FC = () => {
 
         {/* Section Heading & Category Filter Tabs */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 bg-blue-100/70 text-blue-800 font-extrabold text-xs px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-2">
-            <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-            Patient Feedback Highlights
+          <div className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-[#FF8A24] mb-2">
+            <Sparkles className="w-3.5 h-3.5 text-[#FF654F]" aria-hidden="true" />
+            <span>Patient Feedback Highlights</span>
           </div>
-          <h2 className="text-3xl font-extrabold text-blue-950 mb-3">
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-[#087B57] mb-3">
             What Local Patients Say About Oracle Dental Clinic
           </h2>
-          <p className="text-slate-600 max-w-2xl mx-auto leading-relaxed text-sm md:text-base">
+          <p className="text-[#26352F]/75 max-w-2xl mx-auto leading-relaxed text-sm md:text-base">
             Feedback from families across Chipiyana Buzurg, Jaat Chowk, Shahberi, Crossings Republik,
             Noida Extension, and Lal Kuan. Read all verified, up-to-date reviews directly on our{' '}
             <a
               href={GBP_CONFIG.GOOGLE_BUSINESS_PROFILE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-700 font-semibold underline"
+              className="text-[#087B57] hover:text-[#FF654F] font-bold underline"
             >
               Google Business Profile
             </a>.
@@ -157,10 +157,10 @@ export const Testimonials: React.FC = () => {
                   setSelectedCategory(category);
                   setVisibleCount(6);
                 }}
-                className={`text-xs font-bold px-3.5 py-2 rounded-xl transition-colors cursor-pointer ${
+                className={`min-h-[40px] text-xs font-bold px-4 py-2 rounded-full transition-colors cursor-pointer ${
                   selectedCategory === category
-                    ? 'bg-blue-900 text-white shadow-xs'
-                    : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+                    ? 'bg-[#FF654F] text-white shadow-xs'
+                    : 'bg-white text-[#26352F] hover:bg-[#E5F5EC] border border-[#087B57]/15'
                 }`}
               >
                 {category}
@@ -175,45 +175,45 @@ export const Testimonials: React.FC = () => {
             <div
               key={idx}
               id={`testimonial-card-${idx}`}
-              className="bg-white p-6 rounded-2xl shadow-xs border border-slate-200/80 hover:shadow-md transition-shadow flex flex-col justify-between relative overflow-hidden"
+              className="bg-white p-6 rounded-2xl shadow-xs border border-[#087B57]/12 hover:shadow-md hover:border-[#00A99D]/50 transition-all flex flex-col justify-between relative overflow-hidden"
             >
               {review.highlight && (
-                <div className="absolute top-0 right-0 bg-blue-100 text-blue-900 text-[10px] font-extrabold px-3 py-1 rounded-bl-xl uppercase tracking-wider">
+                <div className="text-[11px] font-bold text-[#00A99D] mb-2">
                   {review.highlight}
                 </div>
               )}
 
               <div>
-                <div className="flex items-center gap-1 text-amber-500 mb-3">
+                <div className="flex items-center gap-1 text-[#FF8A24] mb-3">
                   {Array.from({ length: review.rating }).map((_, i) => (
                     <Star key={i} className="w-4 h-4 fill-current" aria-hidden="true" />
                   ))}
                 </div>
 
                 {review.treatment && (
-                  <div className="text-xs font-bold text-amber-700 mb-2">
+                  <div className="text-xs font-bold text-[#087B57] mb-2">
                     Treatment: {review.treatment}
                   </div>
                 )}
 
-                <p className="text-slate-700 text-sm leading-relaxed italic mb-5">
+                <p className="text-[#26352F]/85 text-sm leading-relaxed italic mb-5">
                   &ldquo;{review.text}&rdquo;
                 </p>
               </div>
 
-              <div className="flex items-center justify-between border-t border-slate-100 pt-3.5 mt-auto">
+              <div className="flex items-center justify-between border-t border-[#E5F5EC] pt-3.5 mt-auto">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-gradient-to-br from-blue-700 to-indigo-800 rounded-full flex items-center justify-center text-white font-extrabold text-sm">
+                  <div className="w-10 h-10 bg-gradient-to-br from-[#087B57] to-[#00A99D] rounded-full flex items-center justify-center text-white font-extrabold text-sm">
                     {review.avatarLetter}
                   </div>
                   <div>
-                    <h4 className="font-bold text-sm text-slate-900 leading-tight">{review.author}</h4>
+                    <h4 className="font-bold text-sm text-[#26352F] leading-tight">{review.author}</h4>
                     {review.location && (
-                      <div className="text-[11px] text-slate-500 font-medium">{review.location}</div>
+                      <div className="text-[11px] text-[#26352F]/60 font-medium">{review.location}</div>
                     )}
                   </div>
                 </div>
-                <span className="text-[10px] text-slate-500 font-semibold">{review.date}</span>
+                <span className="text-[10px] text-[#26352F]/55 font-semibold">{review.date}</span>
               </div>
             </div>
           ))}
@@ -224,7 +224,7 @@ export const Testimonials: React.FC = () => {
             <button
               type="button"
               onClick={() => setVisibleCount((prev) => prev + 6)}
-              className="bg-white hover:bg-slate-100 text-blue-900 font-bold px-6 py-3 rounded-xl border border-slate-300 shadow-xs text-sm transition-colors cursor-pointer"
+              className="bg-white hover:bg-[#E5F5EC] text-[#087B57] font-bold px-6 py-3 rounded-xl border border-[#087B57]/25 shadow-xs text-sm transition-colors cursor-pointer"
             >
               Show More Reviews ({filteredReviews.length - visibleCount} more)
             </button>
@@ -232,25 +232,25 @@ export const Testimonials: React.FC = () => {
         )}
 
         {/* Local Trust Card */}
-        <div className="mt-12 bg-gradient-to-br from-blue-950 via-slate-900 to-indigo-950 text-white rounded-3xl p-6 md:p-10 shadow-xl border border-blue-900/60 flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div className="mt-12 bg-gradient-to-br from-[#087B57] via-[#066647] to-[#00A99D] text-white rounded-3xl p-6 md:p-10 shadow-lg flex flex-col lg:flex-row items-center justify-between gap-8">
           <div className="max-w-2xl text-center lg:text-left">
-            <span className="bg-amber-400 text-slate-950 font-extrabold text-[10px] px-3 py-1 rounded-full uppercase tracking-wider inline-block">
+            <p className="text-[#FFD36A] font-bold text-xs uppercase tracking-wider">
               Chipiyana Buzurg • Jaat Chowk • Shahberi • Crossings Republik
-            </span>
-            <h3 className="text-2xl md:text-3xl font-extrabold mt-4 mb-3 tracking-tight">
+            </p>
+            <h3 className="text-2xl md:text-3xl font-extrabold mt-2 mb-3 tracking-tight">
               Visit {GBP_CONFIG.BUSINESS_NAME}
             </h3>
-            <p className="text-slate-300 text-sm leading-relaxed">
+            <p className="text-[#E5F5EC] text-sm leading-relaxed">
               {GBP_CONFIG.ADDRESS}. {GBP_CONFIG.HOURS}.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5 text-xs text-slate-200">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5 text-xs text-white/95">
               <div className="flex items-center gap-2.5 justify-center lg:justify-start">
-                <MapPin className="w-4 h-4 text-amber-400 shrink-0" />
+                <MapPin className="w-4 h-4 text-[#FFD36A] shrink-0" aria-hidden="true" />
                 <span>Near Dolphin Public School, Jaat Chowk</span>
               </div>
               <div className="flex items-center gap-2.5 justify-center lg:justify-start">
-                <Phone className="w-4 h-4 text-amber-400 shrink-0" />
+                <Phone className="w-4 h-4 text-[#FFD36A] shrink-0" aria-hidden="true" />
                 <a href={`tel:${GBP_CONFIG.PHONE}`} className="font-bold hover:underline">
                   Call: {GBP_CONFIG.PHONE_DISPLAY}
                 </a>
@@ -264,18 +264,18 @@ export const Testimonials: React.FC = () => {
               href={GBP_CONFIG.GOOGLE_MAPS_DIRECTIONS_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white hover:bg-slate-100 text-blue-950 font-extrabold py-3.5 px-6 rounded-xl shadow-lg transition-colors text-sm flex items-center justify-center gap-2"
+              className="min-h-[48px] bg-white hover:bg-[#FFF8EC] text-[#087B57] font-extrabold py-3.5 px-6 rounded-xl shadow-md transition-colors text-sm flex items-center justify-center gap-2"
             >
-              <MapPin className="w-4 h-4 text-blue-600" />
-              Get Directions on Maps
+              <MapPin className="w-4 h-4 text-[#FF8A24]" aria-hidden="true" />
+              <span>Get Directions on Maps</span>
             </a>
             <a
               id="trust-card-book-btn"
               href="#contact"
-              className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold py-3.5 px-6 rounded-xl shadow-lg transition-colors text-sm flex items-center justify-center gap-2"
+              className="min-h-[48px] bg-[#FF654F] hover:bg-[#E8523D] text-white font-extrabold py-3.5 px-6 rounded-xl shadow-md transition-colors text-sm flex items-center justify-center gap-2"
             >
-              <CalendarRange className="w-4 h-4" />
-              Book Consultation
+              <CalendarRange className="w-4 h-4" aria-hidden="true" />
+              <span>Book Consultation</span>
             </a>
           </div>
         </div>

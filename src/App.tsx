@@ -23,6 +23,7 @@ import {
 import { SoundProvider, useSound } from './components/SoundManager';
 import { InteractiveButton } from './components/InteractiveButton';
 import Hero from './components/Hero';
+import DoctorProfile from './components/DoctorProfile';
 import SEOHead from './components/SEOHead';
 import ScrollProgressBar from './components/ScrollProgressBar';
 import LanguageSwitcher from './components/LanguageSwitcher';
@@ -39,6 +40,7 @@ const BeforeAfter = lazy(() => import('./components/BeforeAfter'));
 const Services = lazy(() => import('./components/Services'));
 const WhyUs = lazy(() => import('./components/WhyUs'));
 const Testimonials = lazy(() => import('./components/Testimonials'));
+const YouTubeSection = lazy(() => import('./components/YouTubeSection'));
 const FAQ = lazy(() => import('./components/FAQ'));
 const Contact = lazy(() => import('./components/Contact'));
 const Footer = lazy(() => import('./components/Footer'));
@@ -281,11 +283,29 @@ function AppContent() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  useEffect(() => {
+    if (isNotFound || activeRoute === '/') return;
+    const pageEntry = ALL_DENTAL_PAGES.find((p) => p.path === activeRoute);
+    const pageGroup =
+      activeRoute === '/dental-services'
+        ? 'services_hub'
+        : pageEntry?.category === 'Location'
+        ? 'local_page'
+        : pageEntry?.category === 'Cost Guide'
+        ? 'cost_guide'
+        : 'treatment_guide';
+
+    trackClinicEvent('service_page_view', {
+      placement: 'route_navigation',
+      page_group: pageGroup,
+    });
+  }, [activeRoute, isNotFound]);
+
   const faqs = [
     {
       question: 'Where is Oracle Dental Clinic located in Chipiyana Buzurg, Ghaziabad?',
       answer:
-        'Oracle Dental Clinic & Implant Center is located at Shop No. 47, KTS Complex, Jaat Chowk, Near Dolphin Public School, Chipiyana Buzurg, Ghaziabad, Uttar Pradesh 201009. Patients regularly visit us from Jaat Chowk, Shahberi, Crossings Republik, Noida Extension, nearby Greater Noida West residential societies, and Lal Kuan.',
+        'Oracle Dental Clinic & Implant Center is located at Shop No. 47, KTS Complex, Jaat Chowk, Near Dolphin Public School, Chipiyana Buzurg, Ghaziabad, Uttar Pradesh 201009. Patients regularly visit us from Jaat Chowk, Crossings Republik, ABES Engineering College surroundings, Shahberi, Noida Extension, nearby Greater Noida West residential societies, and Lal Kuan.',
     },
     {
       question: 'What are the clinic timings and emergency consultation hours?',
@@ -579,18 +599,18 @@ function AppContent() {
     !isNotFound && activeRoute !== '/' && !PAGES_WITH_BUILT_IN_CTA.has(activeRoute);
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-950 scroll-smooth">
+    <div className="min-h-screen bg-[#FFF8EC] font-sans text-[#26352F] scroll-smooth">
       <ScrollProgressBar />
       <SEOHead routePath={activeRoute} isNotFound={isNotFound} />
 
       {/* Top Bar (Desktop) */}
-      <div className="hidden md:flex bg-slate-950 text-white text-xs py-2 px-6 justify-between items-center border-b border-slate-800 relative z-50">
+      <div className="hidden md:flex bg-[#087B57] text-white text-xs py-2 px-6 justify-between items-center border-b border-[#066647] relative z-50">
         <div className="flex items-center gap-5 font-medium">
           <span className="flex items-center gap-1.5">
-            <Clock className="w-3.5 h-3.5 text-amber-400" aria-hidden="true" /> {GBP_CONFIG.HOURS}
+            <Clock className="w-3.5 h-3.5 text-[#FFD36A]" aria-hidden="true" /> {GBP_CONFIG.HOURS}
           </span>
           <span className="flex items-center gap-1.5">
-            <MapPin className="w-3.5 h-3.5 text-amber-400" aria-hidden="true" /> Jaat Chowk, Chipiyana Buzurg, Ghaziabad
+            <MapPin className="w-3.5 h-3.5 text-[#FFD36A]" aria-hidden="true" /> Jaat Chowk, Chipiyana Buzurg, Ghaziabad
           </span>
         </div>
         <div className="flex items-center gap-4">
@@ -599,16 +619,16 @@ function AppContent() {
             href={GBP_CONFIG.CALL_URL}
             aria-label={`Call Oracle Dental Clinic at ${phoneNumberFormatted}`}
             onClick={() => trackClinicEvent('call_click', { placement: 'desktop_topbar' })}
-            className="flex items-center gap-1.5 font-bold hover:text-amber-400 transition-colors"
+            className="flex items-center gap-1.5 font-bold hover:text-[#FFD36A] transition-colors"
           >
-            <PhoneCall className="w-3.5 h-3.5 text-amber-400" aria-hidden="true" /> {phoneNumberFormatted}
+            <PhoneCall className="w-3.5 h-3.5 text-[#FFD36A]" aria-hidden="true" /> {phoneNumberFormatted}
           </a>
           <LanguageSwitcher variant="topbar" />
         </div>
       </div>
 
-      {/* Header (Crisp high-opacity surface, zero expensive backdrop-blur for low-RAM Android) */}
-      <header className="bg-white/95 shadow-xs sticky top-0 z-40 border-b border-slate-200">
+      {/* Header (Clean Warm White/Cream surface with Emerald/Teal brand & Orange active states) */}
+      <header className="bg-white/95 shadow-xs sticky top-0 z-40 border-b border-[#087B57]/12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 md:h-20">
             {/* Logo */}
@@ -621,14 +641,14 @@ function AppContent() {
               className="flex-shrink-0 flex items-center gap-2.5 group cursor-pointer"
               aria-label="Oracle Dental Clinic & Implant Center Home"
             >
-              <div className="w-10 h-10 md:w-11 md:h-11 bg-blue-700 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-xs">
+              <div className="w-10 h-10 md:w-11 md:h-11 bg-gradient-to-br from-[#087B57] to-[#00A99D] rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-xs">
                 O
               </div>
               <div className="flex flex-col">
-                <span className="font-bold text-lg md:text-xl leading-tight text-slate-950 whitespace-nowrap">
+                <span className="font-bold text-lg md:text-xl leading-tight text-[#087B57] whitespace-nowrap">
                   Oracle Dental
                 </span>
-                <span className="text-[11px] text-amber-700 font-semibold tracking-wide whitespace-nowrap">
+                <span className="text-[11px] text-[#FF8A24] font-bold tracking-wide whitespace-nowrap">
                   Clinic &amp; Implant Center
                 </span>
               </div>
@@ -643,10 +663,10 @@ function AppContent() {
                   e.preventDefault();
                   navigateToPath('/dental-services');
                 }}
-                className={`font-semibold transition-colors py-2 px-3 rounded-lg text-xs whitespace-nowrap shrink-0 border ${
+                className={`font-semibold transition-colors py-2 px-3 rounded-xl text-xs whitespace-nowrap shrink-0 border ${
                   activeRoute === '/dental-services'
-                    ? 'bg-blue-700 text-white border-blue-700'
-                    : 'bg-blue-50 text-blue-800 hover:bg-blue-100 border-blue-200'
+                    ? 'bg-[#FF8A24] text-white border-[#FF8A24]'
+                    : 'bg-[#E5F5EC] text-[#087B57] hover:bg-[#00A99D] hover:text-white border-[#087B57]/15'
                 }`}
               >
                 Dental Services
@@ -662,11 +682,11 @@ function AppContent() {
                   type="button"
                   onClick={() => setIsNavDropdownOpen(!isNavDropdownOpen)}
                   aria-expanded={isNavDropdownOpen}
-                  className="font-semibold text-xs py-2 px-3 rounded-lg bg-slate-100 text-slate-800 hover:bg-slate-200 transition-colors flex items-center gap-1 whitespace-nowrap shrink-0"
+                  className="font-bold text-xs py-2 px-3 rounded-xl bg-[#FFF8EC] text-[#26352F] border border-[#087B57]/15 hover:bg-[#E5F5EC] hover:text-[#087B57] transition-colors flex items-center gap-1 whitespace-nowrap shrink-0"
                 >
                   <span>All Pages ({TOTAL_DENTAL_PAGES_COUNT})</span>
                   <ChevronDown
-                    className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                    className={`w-3.5 h-3.5 text-[#087B57] transition-transform duration-200 ${
                       isNavDropdownOpen ? 'rotate-180' : ''
                     }`}
                     aria-hidden="true"
@@ -674,7 +694,7 @@ function AppContent() {
                 </button>
 
                 {isNavDropdownOpen && (
-                  <div className="absolute top-full left-0 w-[820px] max-w-[95vw] bg-white rounded-2xl shadow-xl border border-slate-200 p-5 mt-1 grid grid-cols-3 gap-4 z-50 max-h-[80vh] overflow-y-auto">
+                  <div className="absolute top-full left-0 w-[820px] max-w-[95vw] bg-white rounded-2xl shadow-xl border border-[#087B57]/15 p-5 mt-1 grid grid-cols-3 gap-4 z-50 max-h-[80vh] overflow-y-auto">
                     <div>
                       <h4 className="font-bold text-xs text-amber-700 mb-2 pb-1 border-b border-slate-100">
                         Treatments &amp; Locations ({treatmentPagesList.length})
@@ -754,6 +774,7 @@ function AppContent() {
               </div>
 
               {[
+                { id: 'doctor-profile', label: 'Doctor' },
                 { id: 'transformations', label: 'Results' },
                 { id: 'why-us', label: 'Why Us' },
                 { id: 'testimonials', label: 'Reviews' },
@@ -764,13 +785,15 @@ function AppContent() {
                   key={item.id}
                   href={`/#${item.id}`}
                   onClick={(e) => scrollToSection(e, item.id)}
-                  className={`text-sm font-medium transition-colors relative py-2 whitespace-nowrap shrink-0 ${
-                    activeSection === item.id ? 'text-blue-700' : 'text-slate-600 hover:text-blue-700'
+                  className={`text-sm font-semibold transition-colors relative py-2 whitespace-nowrap shrink-0 ${
+                    activeSection === item.id
+                      ? 'text-[#FF8A24]'
+                      : 'text-[#26352F]/80 hover:text-[#087B57]'
                   }`}
                 >
                   {item.label}
                   {activeSection === item.id && (
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-700 rounded-full" />
+                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#FF8A24] rounded-full" />
                   )}
                 </a>
               ))}
@@ -786,7 +809,7 @@ function AppContent() {
                     placement: 'desktop_header_book',
                   })
                 }
-                className="min-h-[40px] px-4 py-2 text-xs font-bold text-white bg-[#16A34A] hover:bg-[#15803D] rounded-lg transition-colors whitespace-nowrap shrink-0 inline-flex items-center"
+                className="min-h-[42px] px-4.5 py-2 text-xs font-extrabold text-white bg-gradient-to-r from-[#FF654F] to-[#FF8A24] hover:from-[#e8533d] hover:to-[#e67617] rounded-full shadow-xs transition-all whitespace-nowrap shrink-0 inline-flex items-center"
               >
                 Book Appointment
               </a>
@@ -794,7 +817,7 @@ function AppContent() {
               <InteractiveButton
                 id="mute-toggle-desktop"
                 onClick={toggleMute}
-                className="text-slate-500 hover:text-blue-700 p-2 rounded-full transition-colors"
+                className="text-[#26352F]/70 hover:text-[#087B57] p-2 rounded-full transition-colors"
                 aria-label={isMuted ? 'Unmute background audio' : 'Mute background audio'}
               >
                 {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
@@ -807,7 +830,7 @@ function AppContent() {
               <InteractiveButton
                 id="mute-toggle-mobile"
                 onClick={toggleMute}
-                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-slate-600 hover:text-blue-700 rounded-lg transition-colors"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-[#26352F]/75 hover:text-[#087B57] rounded-xl transition-colors"
                 aria-label={isMuted ? 'Unmute background audio' : 'Mute background audio'}
               >
                 {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
@@ -815,7 +838,7 @@ function AppContent() {
               <InteractiveButton
                 id="mobile-menu-toggle"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-slate-700 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-lg"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center bg-[#E5F5EC] text-[#087B57] hover:bg-[#087B57] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#087B57] rounded-xl transition-colors"
                 aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
                 aria-expanded={isMenuOpen}
               >
@@ -899,10 +922,10 @@ function AppContent() {
                   setIsMenuOpen(false);
                   navigateToPath('/dental-services');
                 }}
-                className="min-h-[44px] px-4 py-3 text-sm font-bold text-white bg-blue-700 rounded-xl flex items-center justify-between"
+                className="min-h-[44px] px-4 py-3 text-sm font-bold text-white bg-[#087B57] rounded-xl flex items-center justify-between"
               >
                 <span>Dental Treatments &amp; Services (9 Categories)</span>
-                <span className="text-xs font-semibold text-blue-100">Open</span>
+                <span className="text-xs font-semibold text-[#FFD36A]">Open</span>
               </a>
 
               <a
@@ -912,27 +935,27 @@ function AppContent() {
                   setIsMenuOpen(false);
                   navigateToPath('/dentist-chipiyana-buzurg-ghaziabad');
                 }}
-                className="min-h-[44px] px-4 py-3 text-sm font-bold text-amber-950 bg-amber-50 border border-amber-200 rounded-xl flex items-center justify-between"
+                className="min-h-[44px] px-4 py-3 text-sm font-bold text-[#26352F] bg-[#FFF8EC] border border-[#FF8A24]/30 rounded-xl flex items-center justify-between"
               >
                 <span className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-amber-700 shrink-0" aria-hidden="true" /> Dentist in Chipiyana Buzurg
+                  <MapPin className="w-4 h-4 text-[#FF8A24] shrink-0" aria-hidden="true" /> Dentist in Chipiyana Buzurg
                 </span>
-                <span className="text-xs font-semibold text-amber-800">24/7</span>
+                <span className="text-xs font-bold text-[#087B57]">24/7</span>
               </a>
 
               {/* Mobile Expandable All Treatments Accordion */}
-              <div className="border border-slate-200 rounded-xl overflow-hidden bg-slate-50">
+              <div className="border border-[#087B57]/15 rounded-xl overflow-hidden bg-[#FFF8EC]">
                 <button
                   onClick={() => setIsMobileTreatmentsOpen(!isMobileTreatmentsOpen)}
                   type="button"
                   aria-expanded={isMobileTreatmentsOpen}
-                  className="w-full min-h-[44px] px-4 py-3 text-sm font-bold text-slate-900 flex justify-between items-center bg-slate-100"
+                  className="w-full min-h-[44px] px-4 py-3 text-sm font-bold text-[#26352F] flex justify-between items-center bg-[#E5F5EC]"
                 >
                   <span className="truncate pr-2">
                     All Dental Pages ({TOTAL_DENTAL_PAGES_COUNT})
                   </span>
                   <ChevronDown
-                    className={`w-4 h-4 text-blue-700 shrink-0 transition-transform duration-200 ${
+                    className={`w-4 h-4 text-[#087B57] shrink-0 transition-transform duration-200 ${
                       isMobileTreatmentsOpen ? 'rotate-180' : ''
                     }`}
                     aria-hidden="true"
@@ -940,9 +963,9 @@ function AppContent() {
                 </button>
 
                 {isMobileTreatmentsOpen && (
-                  <div className="bg-white p-3 space-y-3 text-xs border-t border-slate-100">
+                  <div className="bg-white p-3 space-y-3 text-xs border-t border-[#087B57]/10">
                     <div>
-                      <span className="font-bold text-amber-700 block mb-1.5 text-xs">
+                      <span className="font-bold text-[#FF8A24] block mb-1.5 text-xs">
                         Treatments &amp; Locations ({treatmentPagesList.length})
                       </span>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
@@ -957,7 +980,7 @@ function AppContent() {
                               setIsMenuOpen(false);
                               navigateToPath(item.path);
                             }}
-                            className="p-2.5 rounded-lg bg-slate-50 hover:bg-amber-50 font-medium text-slate-800 border border-slate-100 truncate block"
+                            className="p-2.5 rounded-lg bg-[#FFF8EC] hover:bg-[#E5F5EC] font-medium text-[#26352F] border border-[#087B57]/10 truncate block"
                           >
                             {item.title}
                           </a>
@@ -965,8 +988,8 @@ function AppContent() {
                       </div>
                     </div>
 
-                    <div className="pt-2 border-t border-slate-100">
-                      <span className="font-bold text-cyan-700 block mb-1.5 text-xs">
+                    <div className="pt-2 border-t border-[#087B57]/10">
+                      <span className="font-bold text-[#00A99D] block mb-1.5 text-xs">
                         Symptoms &amp; Urgent Care ({symptomPagesList.length})
                       </span>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
@@ -981,7 +1004,7 @@ function AppContent() {
                               setIsMenuOpen(false);
                               navigateToPath(item.path);
                             }}
-                            className="p-2.5 rounded-lg bg-slate-50 hover:bg-cyan-50 font-medium text-slate-800 border border-slate-100 truncate block"
+                            className="p-2.5 rounded-lg bg-[#FFF8EC] hover:bg-[#E5F5EC] font-medium text-[#26352F] border border-[#087B57]/10 truncate block"
                           >
                             {item.title}
                           </a>
@@ -989,8 +1012,8 @@ function AppContent() {
                       </div>
                     </div>
 
-                    <div className="pt-2 border-t border-slate-100">
-                      <span className="font-bold text-emerald-700 block mb-1.5 text-xs">
+                    <div className="pt-2 border-t border-[#087B57]/10">
+                      <span className="font-bold text-[#087B57] block mb-1.5 text-xs">
                         Ghaziabad Cost Guides ({costPagesList.length})
                       </span>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
@@ -1005,7 +1028,7 @@ function AppContent() {
                               setIsMenuOpen(false);
                               navigateToPath(item.path);
                             }}
-                            className="p-2.5 rounded-lg bg-slate-50 hover:bg-emerald-50 font-medium text-slate-800 border border-slate-100 truncate block"
+                            className="p-2.5 rounded-lg bg-[#FFF8EC] hover:bg-[#E5F5EC] font-medium text-[#26352F] border border-[#087B57]/10 truncate block"
                           >
                             {item.title}
                           </a>
@@ -1017,10 +1040,12 @@ function AppContent() {
               </div>
 
               {[
+                { id: 'doctor-profile', label: 'Meet Our Doctor' },
                 { id: 'transformations', label: 'Smile Results' },
                 { id: 'services', label: 'Services Overview' },
                 { id: 'why-us', label: 'Why Choose Us' },
                 { id: 'testimonials', label: 'Patient Reviews' },
+                { id: 'youtube-videos', label: 'Dental Videos' },
                 { id: 'faq', label: 'FAQ' },
                 { id: 'contact', label: 'Contact Us' },
               ].map((item) => (
@@ -1028,10 +1053,10 @@ function AppContent() {
                   key={item.id}
                   href={`/#${item.id}`}
                   onClick={(e) => scrollToSection(e, item.id)}
-                  className={`min-h-[44px] flex items-center px-4 py-2.5 text-sm font-medium rounded-xl transition-colors ${
+                  className={`min-h-[44px] flex items-center px-4 py-2.5 text-sm font-semibold rounded-xl transition-colors ${
                     activeSection === item.id
-                      ? 'bg-blue-50 text-blue-700'
-                      : 'text-slate-700 hover:bg-slate-50 hover:text-blue-700'
+                      ? 'bg-[#E5F5EC] text-[#087B57]'
+                      : 'text-[#26352F] hover:bg-[#FFF8EC] hover:text-[#087B57]'
                   }`}
                 >
                   {item.label}
@@ -1047,9 +1072,9 @@ function AppContent() {
                   onClick={() =>
                     trackClinicEvent('appointment_cta_click', { placement: 'mobile_menu_whatsapp' })
                   }
-                  className="min-h-[44px] bg-[#16A34A] text-white font-bold text-xs rounded-xl flex items-center justify-center text-center px-3"
+                  className="min-h-[44px] bg-[#FF654F] hover:bg-[#e8533d] text-white font-bold text-xs rounded-full flex items-center justify-center text-center px-3"
                 >
-                  Book on WhatsApp
+                  Book Appointment
                 </a>
                 <a
                   id="mobile-menu-call-btn"
@@ -1057,19 +1082,19 @@ function AppContent() {
                   onClick={() =>
                     trackClinicEvent('call_click', { placement: 'mobile_menu_call' })
                   }
-                  className="min-h-[44px] bg-blue-700 text-white font-bold text-xs rounded-xl flex items-center justify-center text-center px-3"
+                  className="min-h-[44px] bg-[#087B57] hover:bg-[#066647] text-white font-bold text-xs rounded-full flex items-center justify-center text-center px-3"
                 >
                   Call {phoneNumberFormatted}
                 </a>
               </div>
 
-              <div className="flex items-center gap-6 px-4 pt-3 border-t border-slate-100">
+              <div className="flex items-center gap-6 px-4 pt-3 border-t border-[#087B57]/12">
                 <a
                   href="https://www.facebook.com/profile.php?id=100083436112014"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Oracle Dental Clinic Facebook"
-                  className="text-slate-600 hover:text-blue-600 transition-colors"
+                  className="text-[#26352F]/70 hover:text-[#087B57] transition-colors"
                 >
                   <Facebook className="w-5 h-5" />
                 </a>
@@ -1078,16 +1103,21 @@ function AppContent() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Oracle Dental Clinic Instagram"
-                  className="text-slate-600 hover:text-pink-600 transition-colors"
+                  className="text-[#26352F]/70 hover:text-[#FF654F] transition-colors"
                 >
                   <Instagram className="w-5 h-5" />
                 </a>
                 <a
-                  href="https://www.youtube.com/@OracleDentalClinic0"
+                  href="https://www.youtube.com/@oracledentalclinic0"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Oracle Dental Clinic YouTube"
-                  className="text-slate-600 hover:text-red-600 transition-colors"
+                  onClick={() =>
+                    trackClinicEvent('youtube_channel_click', {
+                      placement: 'mobile_menu_youtube_icon',
+                    })
+                  }
+                  className="text-[#26352F]/70 hover:text-[#FF0000] transition-colors"
                 >
                   <Youtube className="w-5 h-5" />
                 </a>
@@ -1115,18 +1145,21 @@ function AppContent() {
               navigateToPath={navigateToPath}
             />
 
+            {/* Dedicated Meet Our Doctor Profile Section (Preserved Original Doctor Photo) */}
+            <DoctorProfile />
+
             {/* 24/7 Emergency Banner (Direct native tel: anchor) */}
-            <section className="bg-red-700 text-white py-4 px-4 relative z-20">
+            <section className="bg-gradient-to-r from-[#FF654F] to-[#FF8A24] text-white py-5 px-4 relative z-20">
               <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="flex items-center gap-3.5">
-                  <div className="bg-white/15 p-2.5 rounded-xl shrink-0">
+                  <div className="bg-white/20 p-2.5 rounded-xl shrink-0">
                     <Activity className="w-6 h-6 text-white" aria-hidden="true" />
                   </div>
                   <div>
                     <h2 className="font-bold text-lg sm:text-xl tracking-tight">
                       Severe Tooth Pain or Dental Emergency?
                     </h2>
-                    <p className="text-red-100 text-xs sm:text-sm mt-0.5">
+                    <p className="text-[#FFF8EC] text-xs sm:text-sm mt-0.5">
                       Open 24 Hours, 7 Days at Jaat Chowk, Chipiyana Buzurg, Ghaziabad. Call before visiting for urgent care.
                     </p>
                   </div>
@@ -1138,9 +1171,9 @@ function AppContent() {
                   onClick={() =>
                     trackClinicEvent('call_click', { placement: 'homepage_emergency_banner' })
                   }
-                  className="w-full sm:w-auto min-h-[48px] bg-white text-red-700 font-bold py-3 px-7 rounded-xl shadow-md hover:bg-slate-50 transition-colors flex items-center justify-center gap-2 whitespace-nowrap shrink-0"
+                  className="w-full sm:w-auto min-h-[48px] bg-white text-[#087B57] font-bold py-3 px-7 rounded-xl shadow-md hover:bg-[#FFF8EC] transition-colors flex items-center justify-center gap-2 whitespace-nowrap shrink-0"
                 >
-                  <PhoneCall className="w-5 h-5 shrink-0" aria-hidden="true" />
+                  <PhoneCall className="w-5 h-5 shrink-0 text-[#FF654F]" aria-hidden="true" />
                   <span>Call {phoneNumberFormatted}</span>
                 </a>
               </div>
@@ -1154,6 +1187,8 @@ function AppContent() {
               <WhyUs handleWhatsApp={handleWhatsApp} />
 
               <Testimonials />
+
+              <YouTubeSection />
 
               <FAQ faqs={faqs} />
 
@@ -1180,7 +1215,7 @@ function AppContent() {
         <InteractiveButton
           id="back-to-top-btn"
           onClick={scrollToTop}
-          className="fixed bottom-24 right-4 sm:right-6 w-11 h-11 bg-slate-800 text-white rounded-full shadow-lg hover:bg-slate-700 transition-colors z-[9990] border border-white/80 flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
+          className="fixed bottom-24 right-4 sm:right-6 w-11 h-11 bg-[#087B57] text-white rounded-full shadow-lg hover:bg-[#066647] transition-colors z-[9990] border-2 border-white flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD36A]"
           aria-label="Back to top"
         >
           <ArrowUp className="w-5 h-5" aria-hidden="true" />

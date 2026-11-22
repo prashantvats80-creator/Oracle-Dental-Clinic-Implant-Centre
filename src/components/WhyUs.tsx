@@ -50,14 +50,24 @@ const WhyUs: React.FC<WhyUsProps> = () => {
     },
   ];
 
+  const tileAccents = [
+    'bg-gradient-to-br from-[#FF654F] to-[#FF8A24] text-white',
+    'bg-gradient-to-br from-[#087B57] to-[#00A99D] text-white',
+    'bg-gradient-to-br from-[#FF8A24] to-[#FFB347] text-white',
+    'bg-gradient-to-br from-[#00A99D] to-[#087B57] text-white',
+  ];
+
   return (
-    <section id="why-us" className="py-16 bg-slate-50">
+    <section id="why-us" className="cv-auto py-14 sm:py-16 bg-[#E5F5EC] border-t border-[#087B57]/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl font-bold text-blue-900 mb-4">
+          <p className="text-xs font-extrabold uppercase tracking-wider text-[#FF8A24] mb-2">
+            Trusted Local Dental Care
+          </p>
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-[#087B57] mb-4">
             Why Patients in Chipiyana Buzurg Choose Oracle Dental Clinic
           </h2>
-          <p className="text-slate-600 leading-relaxed text-sm sm:text-base">
+          <p className="text-[#26352F]/80 leading-relaxed text-sm sm:text-base">
             Led by <strong>{GBP_CONFIG.DOCTOR_TITLE}</strong>, {GBP_CONFIG.BUSINESS_NAME} combines
             clinical sterilization standards, clear patient communication, and 24-hour accessibility
             right at Jaat Chowk, Chipiyana Buzurg, Ghaziabad.
@@ -69,25 +79,29 @@ const WhyUs: React.FC<WhyUsProps> = () => {
             <div
               key={idx}
               id={`why-us-card-${idx}`}
-              className="bg-white p-6 rounded-2xl shadow-xs border border-slate-200/80 hover:shadow-md hover:border-blue-200 transition-all duration-200"
+              className="bg-white p-6 rounded-3xl shadow-xs border border-[#087B57]/12 hover:shadow-lg hover:border-[#00A99D] transition-all duration-200 hover:-translate-y-0.5"
             >
-              <div className="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center mb-4">
+              <div
+                className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-4 shadow-xs ${
+                  tileAccents[idx % tileAccents.length]
+                }`}
+              >
                 <feature.icon className="w-6 h-6" aria-hidden="true" />
               </div>
-              <h3 className="font-bold text-slate-900 mb-1.5">{feature.title}</h3>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">{feature.desc}</p>
+              <h3 className="font-extrabold text-[#26352F] mb-1.5">{feature.title}</h3>
+              <p className="text-xs sm:text-sm text-[#26352F]/75 leading-relaxed">{feature.desc}</p>
             </div>
           ))}
         </div>
 
         {/* Sterilization & 5 km Nearby Neighbourhoods Served */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 space-y-3">
-            <h3 className="text-xl font-extrabold text-blue-950 flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-emerald-600" />
-              Sterilization &amp; Clinical Hygiene Protocol
+          <div className="bg-white rounded-3xl border border-[#087B57]/12 p-6 sm:p-8 space-y-3 shadow-xs">
+            <h3 className="text-xl font-extrabold text-[#087B57] flex items-center gap-2">
+              <ShieldCheck className="w-5 h-5 text-[#00A99D]" aria-hidden="true" />
+              <span>Sterilization &amp; Clinical Hygiene Protocol</span>
             </h3>
-            <p className="text-sm text-slate-600 leading-relaxed">
+            <p className="text-sm text-[#26352F]/80 leading-relaxed">
               Every diagnostic and surgical instrument undergoes ultrasonic cleaning, sealed pouching,
               and high-pressure steam autoclave sterilization. Fresh disposable gloves, suction tips,
               needles, and chair barriers are used for each appointment to maintain a safe clinical
@@ -95,15 +109,16 @@ const WhyUs: React.FC<WhyUsProps> = () => {
             </p>
           </div>
 
-          <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 space-y-3">
-            <h3 className="text-xl font-extrabold text-blue-950 flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-blue-600" />
-              Easily Accessible Within 5 km of Chipiyana Buzurg
+          <div className="bg-white rounded-3xl border border-[#087B57]/12 p-6 sm:p-8 space-y-3 shadow-xs">
+            <h3 className="text-xl font-extrabold text-[#087B57] flex items-center gap-2">
+              <MapPin className="w-5 h-5 text-[#FF8A24]" aria-hidden="true" />
+              <span>Easily Accessible Within 5 km of Chipiyana Buzurg</span>
             </h3>
-            <p className="text-sm text-slate-600 leading-relaxed">
-              Located at <strong>{GBP_CONFIG.SHORT_ADDRESS}</strong>, our clinic serves families and
-              working professionals from <strong>Chipiyana Buzurg</strong>, <strong>Jaat Chowk</strong>,{' '}
-              <strong>Shahberi</strong>, <strong>Crossings Republik</strong>,{' '}
+            <p className="text-sm text-[#26352F]/80 leading-relaxed">
+              Located at <strong>{GBP_CONFIG.SHORT_ADDRESS}</strong>, our clinic serves families,
+              students, and working professionals from <strong>Chipiyana Buzurg</strong>,{' '}
+              <strong>Jaat Chowk</strong>, <strong>Crossings Republik</strong>,{' '}
+              <strong>ABES Engineering College surroundings</strong>, <strong>Shahberi</strong>,{' '}
               <strong>Noida Extension</strong>, nearby <strong>Greater Noida West</strong> residential
               societies, and <strong>Lal Kuan</strong>.
             </p>

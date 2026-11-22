@@ -53,7 +53,7 @@ export const FloatingAppointmentButtons: React.FC = () => {
             interaction_label: 'floating_call_icon',
           })
         }
-        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[9999] fab-safe-bottom fab-contact-btn fab-contact-call inline-flex items-center justify-center w-[54px] h-[54px] rounded-full bg-[#1D4ED8] hover:bg-[#1E40AF] text-white shadow-[0_6px_22px_rgba(29,78,216,0.5)] border-2 border-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-300 focus-visible:ring-offset-2"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[9999] fab-safe-bottom fab-contact-btn fab-contact-call inline-flex items-center justify-center w-[54px] h-[54px] rounded-full bg-[#00A99D] hover:bg-[#087B57] text-white shadow-[0_6px_22px_rgba(0,169,157,0.48)] border-2 border-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFD36A] focus-visible:ring-offset-2"
       >
         <svg
           viewBox="0 0 24 24"

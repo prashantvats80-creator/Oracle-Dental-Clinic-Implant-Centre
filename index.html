@@ -46,21 +46,32 @@
     <meta property="og:title" content="Oracle Dental Clinic | Dentist &amp; Dental Implants in Chipiyana Buzurg, Ghaziabad" />
     <meta property="og:description" content="Visit Dr. Prashant Kumar Vats (BDS) at Oracle Dental Clinic &amp; Implant Center, Jaat Chowk, Chipiyana Buzurg, Ghaziabad. Open 24 hours for dental implants, RCT, crowns, wisdom tooth &amp; emergency dental care." />
     <meta property="og:url" content="https://oracledentals.netlify.app/" />
-    <meta property="og:image" content="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" />
+    <meta property="og:image" content="https://oracledentals.netlify.app/assets/images/hero-patient.jpg" />
 
     <!-- Twitter / X Card Metadata -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Oracle Dental Clinic | Dentist &amp; Dental Implants in Chipiyana Buzurg, Ghaziabad" />
     <meta name="twitter:description" content="Visit Dr. Prashant Kumar Vats (BDS) at Oracle Dental Clinic &amp; Implant Center, Jaat Chowk, Chipiyana Buzurg, Ghaziabad. Open 24 hours for dental implants, RCT, crowns &amp; emergency care." />
-    <meta name="twitter:image" content="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" />
+    <meta name="twitter:image" content="https://oracledentals.netlify.app/assets/images/hero-patient.jpg" />
+
+    <!-- Preload Critical LCP Hero Image (Responsive WebP: ~9 KB mobile, ~18 KB tablet) -->
+    <link
+      rel="preload"
+      as="image"
+      type="image/webp"
+      href="/assets/images/hero-patient-768.webp"
+      imagesrcset="/assets/images/hero-patient-480.webp 480w, /assets/images/hero-patient-768.webp 768w, /assets/images/hero-patient-1000.webp 1000w"
+      imagesizes="(max-width: 640px) 92vw, 520px"
+      fetchpriority="high"
+    />
 
     <!-- Lean Non-Blocking Display Font Only (System UI used for instant 2G body rendering) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://i.postimg.cc" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700&display=swap" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&display=swap" media="print" onload="this.media='all'" />
     <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700&display=swap" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&display=swap" />
     </noscript>
 
     <!-- Unified Schema.org Structured Data Graph (Single Business Entity Identifier) -->
@@ -87,7 +98,7 @@
           "priceRange": "₹₹",
           "currenciesAccepted": "INR",
           "image": [
-            "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=800&q=80",
+            "https://oracledentals.netlify.app/assets/images/hero-patient.jpg",
             "https://i.postimg.cc/tCd8wLDv/Chat-GPT-Image-Apr-22-2026-08-21-13-PM.png"
           ],
           "address": {
@@ -115,19 +126,34 @@
           "areaServed": [
             { "@type": "Place", "name": "Chipiyana Buzurg, Ghaziabad" },
             { "@type": "Place", "name": "Jaat Chowk, Ghaziabad" },
-            { "@type": "Place", "name": "Shahberi" },
             { "@type": "Place", "name": "Crossings Republik, Ghaziabad" },
+            { "@type": "Place", "name": "ABES Engineering College area, Ghaziabad" },
+            { "@type": "Place", "name": "Shahberi" },
             { "@type": "Place", "name": "Noida Extension" },
             { "@type": "Place", "name": "Greater Noida West" },
             { "@type": "Place", "name": "Lal Kuan, Ghaziabad" }
           ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Dental Treatments & Services",
+            "itemListElement": [
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Dental Implants & Full Mouth Implants" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Root Canal Treatment (RCT)" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Smile Makeover, Veneers & Cosmetic Dentistry" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Zirconia Crowns & Dental Bridges" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Wisdom Tooth Extraction & Oral Surgery" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Dental Braces & Clear Aligners" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Teeth Cleaning, Whitening & Preventive Care" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "24 Hour Emergency Dental Care" } }
+            ]
+          },
           "founder": {
             "@id": "https://oracledentals.netlify.app/#dr-prashant-kumar-vats"
           },
           "sameAs": [
             "https://www.facebook.com/profile.php?id=100083436112014",
             "https://www.instagram.com/oracledentalclinic0/",
-            "https://www.youtube.com/@OracleDentalClinic0",
+            "https://www.youtube.com/@oracledentalclinic0",
             "https://share.google/3jkiHdvq2N8aYDGm0"
           ]
         },

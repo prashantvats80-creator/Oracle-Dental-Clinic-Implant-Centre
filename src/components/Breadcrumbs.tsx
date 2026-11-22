@@ -92,18 +92,18 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
 
   return (
     <nav
-      className="bg-slate-900 text-slate-300 py-2.5 px-4 sm:px-8 text-xs sm:text-sm border-b border-slate-800/80"
+      className="bg-[#066647] text-[#E5F5EC] py-2.5 px-4 sm:px-8 text-xs sm:text-sm border-b border-[#087B57]"
       aria-label="Breadcrumb"
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 overflow-x-auto">
-        <ol className="flex items-center space-x-1.5 sm:space-x-2 text-slate-300 whitespace-nowrap">
+        <ol className="flex items-center space-x-1.5 sm:space-x-2 text-[#E5F5EC] whitespace-nowrap">
           <li className="flex items-center">
             <a
               href="/"
               onClick={(e) => handleItemClick(e, '/')}
-              className="hover:text-amber-400 transition-colors flex items-center gap-1 font-medium text-slate-200"
+              className="hover:text-[#FFD36A] transition-colors flex items-center gap-1 font-medium text-white"
             >
-              <Home className="w-3.5 h-3.5 text-amber-400" aria-hidden="true" />
+              <Home className="w-3.5 h-3.5 text-[#FFD36A]" aria-hidden="true" />
               <span>Home</span>
             </a>
           </li>
@@ -114,7 +114,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
 
             return (
               <li key={index} className="flex items-center">
-                <ChevronRight className="w-3.5 h-3.5 mx-1 text-slate-500 shrink-0" aria-hidden="true" />
+                <ChevronRight className="w-3.5 h-3.5 mx-1 text-[#FFD36A]/60 shrink-0" aria-hidden="true" />
                 {isLast ? (
                   <span
                     className="text-white font-semibold truncate max-w-[220px] sm:max-w-none"
@@ -126,7 +126,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
                   <a
                     href={href}
                     onClick={(e) => handleItemClick(e, item.path)}
-                    className="hover:text-amber-400 transition-colors font-medium text-slate-300"
+                    className="hover:text-[#FFD36A] transition-colors font-medium text-[#E5F5EC]"
                   >
                     {item.label}
                   </a>
@@ -137,7 +137,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
         </ol>
 
         {badge && (
-          <span className="hidden md:inline-flex text-[11px] font-medium bg-amber-500/15 text-amber-300 px-2.5 py-0.5 rounded-full border border-amber-500/30 shrink-0">
+          <span className="hidden md:inline-flex text-[11px] font-semibold text-[#FFD36A] shrink-0">
             {badge}
           </span>
         )}

@@ -191,23 +191,36 @@ const Services: React.FC<ServicesProps> = ({ navigateToPath }) => {
 
   const totalPagesCount = allTreatmentPages.length + allSymptomPages.length + allCostPages.length;
 
+  const cardAccents = [
+    { iconBg: 'bg-gradient-to-br from-[#087B57] to-[#00A99D] text-white', topBar: 'bg-[#087B57]' },
+    { iconBg: 'bg-gradient-to-br from-[#FF8A24] to-[#FFB347] text-white', topBar: 'bg-[#FF8A24]' },
+    { iconBg: 'bg-gradient-to-br from-[#FF654F] to-[#FF8A24] text-white', topBar: 'bg-[#FF654F]' },
+    { iconBg: 'bg-gradient-to-br from-[#00A99D] to-[#087B57] text-white', topBar: 'bg-[#00A99D]' },
+  ];
+
   return (
-    <section id="services" className="py-16 bg-white">
+    <section id="services" className="cv-auto py-14 sm:py-16 bg-white border-t border-[#087B57]/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10 space-y-3">
-          <h2 className="text-3xl font-bold text-blue-950">
+          <p className="text-xs font-extrabold uppercase tracking-wider text-[#FF8A24]">
+            Chipiyana Buzurg • Jaat Chowk • Ghaziabad
+          </p>
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-[#087B57]">
             Dental Treatments in Ghaziabad, Noida Extension &amp; Greater Noida
           </h2>
-          <p className="text-slate-600 max-w-2xl mx-auto text-sm sm:text-base">
-            Explore our complete 9-category interactive services hub or jump straight into detailed
-            treatment guides at Oracle Dental Clinic &amp; Implant Center.
+          <p className="text-[#26352F]/80 max-w-2xl mx-auto text-sm sm:text-base">
+            From painless root canal treatment and dental implants to smile makeovers, zirconia crowns,
+            and clear aligners—explore our 9-category services hub or{' '}
+            <a href="#contact" className="font-bold text-[#087B57] hover:text-[#FF654F] underline underline-offset-2">
+              get directions &amp; contact our clinic
+            </a>.
           </p>
           <div className="pt-2">
             <a
               id="services-open-hub-btn"
               href="/dental-services"
               onClick={(e) => handlePageClick(e, '/dental-services')}
-              className="min-h-[44px] inline-flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white font-bold text-sm px-6 py-3 rounded-xl shadow-sm transition-colors"
+              className="min-h-[48px] inline-flex items-center gap-2 bg-gradient-to-r from-[#FF654F] to-[#FF8A24] hover:from-[#e8533d] hover:to-[#e67617] text-white font-extrabold text-sm px-7 py-3 rounded-full shadow-[0_8px_20px_rgba(255,101,79,0.28)] transition-all"
             >
               <span>Open Interactive 9-Category Dental Services Page</span>
               <ArrowRight className="w-4 h-4 shrink-0" aria-hidden="true" />
@@ -215,32 +228,34 @@ const Services: React.FC<ServicesProps> = ({ navigateToPath }) => {
           </div>
         </div>
 
-        {/* Main Services Grid with Treatment-Specific WhatsApp CTAs */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        {/* Main Services Grid with Vibrant Icon Tiles & Treatment-Specific WhatsApp CTAs */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
           {services.map((service, idx) => {
             const waUrl = getTreatmentWhatsAppUrl(service.whatsappTopic);
             const slug = service.whatsappTopic.replace(/[^a-z0-9]+/g, '_');
+            const accent = cardAccents[idx % cardAccents.length];
 
             return (
               <div
                 key={service.path}
                 id={`service-card-${idx}`}
-                className="bg-white rounded-2xl p-6 border border-slate-200 hover:border-blue-300 shadow-xs transition-colors group flex flex-col justify-between"
+                className="relative overflow-hidden bg-[#FFF8EC]/70 rounded-3xl p-6 border border-[#087B57]/12 hover:border-[#00A99D] shadow-xs hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 group flex flex-col justify-between"
               >
+                <span aria-hidden="true" className={`absolute top-0 inset-x-0 h-1 ${accent.topBar}`} />
                 <div>
-                  <div className="w-11 h-11 bg-blue-50 text-blue-700 rounded-xl flex items-center justify-center mb-4">
+                  <div className={`w-12 h-12 ${accent.iconBg} rounded-2xl flex items-center justify-center mb-4 shadow-xs`}>
                     <service.icon className="w-5 h-5" aria-hidden="true" />
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-2">
+                  <h3 className="text-xl font-extrabold text-[#26352F] mb-2">
                     <a
                       href={service.path}
                       onClick={(e) => handlePageClick(e, service.path)}
-                      className="hover:text-blue-700 transition-colors"
+                      className="hover:text-[#087B57] transition-colors"
                     >
                       {service.title}
                     </a>
                   </h3>
-                  <p className="text-slate-600 text-sm mb-5 leading-relaxed">{service.desc}</p>
+                  <p className="text-[#26352F]/80 text-sm mb-5 leading-relaxed">{service.desc}</p>
                 </div>
 
                 <div className="flex flex-col gap-2">
@@ -255,7 +270,7 @@ const Services: React.FC<ServicesProps> = ({ navigateToPath }) => {
                         service_category: slug,
                       })
                     }
-                    className="w-full min-h-[44px] bg-[#16A34A] hover:bg-[#15803D] text-white py-2.5 px-4 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1.5"
+                    className="w-full min-h-[44px] bg-[#087B57] hover:bg-[#066647] text-white py-2.5 px-4 rounded-full text-xs font-bold transition-colors flex items-center justify-center gap-1.5"
                   >
                     <MessageCircle className="w-4 h-4 shrink-0" aria-hidden="true" />
                     <span>Book {service.title} on WhatsApp</span>
@@ -263,10 +278,10 @@ const Services: React.FC<ServicesProps> = ({ navigateToPath }) => {
                   <a
                     href={service.path}
                     onClick={(e) => handlePageClick(e, service.path)}
-                    className="w-full min-h-[40px] bg-slate-100 text-slate-800 hover:bg-blue-50 hover:text-blue-700 py-2 px-4 rounded-xl text-xs font-semibold transition-colors flex items-center justify-center gap-1.5"
+                    className="w-full min-h-[42px] bg-white text-[#087B57] border border-[#087B57]/20 hover:bg-[#E5F5EC] py-2 px-4 rounded-full text-xs font-bold transition-colors flex items-center justify-center gap-1.5"
                   >
                     <span>Read {service.title} Guide</span>
-                    <ArrowRight className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+                    <ArrowRight className="w-3.5 h-3.5 shrink-0 text-[#FF8A24]" aria-hidden="true" />
                   </a>
                 </div>
               </div>
@@ -275,75 +290,75 @@ const Services: React.FC<ServicesProps> = ({ navigateToPath }) => {
         </div>
 
         {/* Complete Crawlable Internal Link Directory */}
-        <div className="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 border border-slate-800 space-y-8">
+        <div className="bg-gradient-to-br from-[#087B57] via-[#066647] to-[#008F84] text-white rounded-3xl p-6 sm:p-8 border border-[#066647] space-y-8 shadow-md">
           <div className="text-center space-y-2">
-            <p className="text-amber-400 font-semibold text-xs tracking-wide">
+            <p className="text-[#FFD36A] font-bold text-xs tracking-wide uppercase">
               Complete Dental Directory
             </p>
-            <h3 className="text-2xl font-bold text-white">
+            <h3 className="text-2xl font-extrabold text-white">
               All Dental Treatments, Symptoms &amp; Cost Guides ({totalPagesCount} Pages)
             </h3>
-            <p className="text-slate-300 text-sm max-w-xl mx-auto">
+            <p className="text-[#E5F5EC] text-sm max-w-xl mx-auto">
               Select any topic below to view clinical guidance, recovery details, and appointment options.
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-2">
-            <div className="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-4">
-              <h4 className="text-amber-400 font-bold text-sm flex items-center gap-2 border-b border-slate-700 pb-2">
-                <ShieldCheck className="w-4 h-4 text-amber-400" aria-hidden="true" />
+            <div className="bg-[#066647]/80 p-5 rounded-2xl border border-white/15 space-y-4">
+              <h4 className="text-[#FFD36A] font-bold text-sm flex items-center gap-2 border-b border-white/15 pb-2">
+                <ShieldCheck className="w-4 h-4 text-[#FFD36A]" aria-hidden="true" />
                 <span>Treatments &amp; Locations ({allTreatmentPages.length})</span>
               </h4>
-              <div className="grid grid-cols-1 gap-1.5 text-xs text-slate-200">
+              <div className="grid grid-cols-1 gap-1.5 text-xs text-white/95">
                 {allTreatmentPages.map((item) => (
                   <a
                     key={item.path}
                     href={item.path}
                     onClick={(e) => handlePageClick(e, item.path)}
-                    className="p-2 rounded-lg bg-slate-900/60 hover:bg-amber-500 hover:text-slate-950 font-medium transition-colors flex items-center justify-between group"
+                    className="p-2 rounded-lg bg-[#05523A]/70 hover:bg-[#FF8A24] hover:text-white font-medium transition-colors flex items-center justify-between group"
                   >
                     <span>{item.title}</span>
-                    <ArrowRight className="w-3 h-3 text-slate-400 group-hover:text-slate-950 shrink-0" aria-hidden="true" />
+                    <ArrowRight className="w-3 h-3 text-[#FFD36A] group-hover:text-white shrink-0" aria-hidden="true" />
                   </a>
                 ))}
               </div>
             </div>
 
-            <div className="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-4">
-              <h4 className="text-cyan-400 font-bold text-sm flex items-center gap-2 border-b border-slate-700 pb-2">
-                <HeartPulse className="w-4 h-4 text-cyan-400" aria-hidden="true" />
+            <div className="bg-[#066647]/80 p-5 rounded-2xl border border-white/15 space-y-4">
+              <h4 className="text-[#FFD36A] font-bold text-sm flex items-center gap-2 border-b border-white/15 pb-2">
+                <HeartPulse className="w-4 h-4 text-[#FFD36A]" aria-hidden="true" />
                 <span>Symptoms &amp; Concerns ({allSymptomPages.length})</span>
               </h4>
-              <div className="grid grid-cols-1 gap-1.5 text-xs text-slate-200">
+              <div className="grid grid-cols-1 gap-1.5 text-xs text-white/95">
                 {allSymptomPages.map((item) => (
                   <a
                     key={item.path}
                     href={item.path}
                     onClick={(e) => handlePageClick(e, item.path)}
-                    className="p-2 rounded-lg bg-slate-900/60 hover:bg-cyan-400 hover:text-slate-950 font-medium transition-colors flex items-center justify-between group"
+                    className="p-2 rounded-lg bg-[#05523A]/70 hover:bg-[#00A99D] hover:text-white font-medium transition-colors flex items-center justify-between group"
                   >
                     <span>{item.title}</span>
-                    <ArrowRight className="w-3 h-3 text-slate-400 group-hover:text-slate-950 shrink-0" aria-hidden="true" />
+                    <ArrowRight className="w-3 h-3 text-[#FFD36A] group-hover:text-white shrink-0" aria-hidden="true" />
                   </a>
                 ))}
               </div>
             </div>
 
-            <div className="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-4">
-              <h4 className="text-emerald-400 font-bold text-sm flex items-center gap-2 border-b border-slate-700 pb-2">
-                <Sparkles className="w-4 h-4 text-emerald-400" aria-hidden="true" />
+            <div className="bg-[#066647]/80 p-5 rounded-2xl border border-white/15 space-y-4">
+              <h4 className="text-[#FFD36A] font-bold text-sm flex items-center gap-2 border-b border-white/15 pb-2">
+                <Sparkles className="w-4 h-4 text-[#FFD36A]" aria-hidden="true" />
                 <span>Ghaziabad Cost Guides ({allCostPages.length})</span>
               </h4>
-              <div className="grid grid-cols-1 gap-1.5 text-xs text-slate-200">
+              <div className="grid grid-cols-1 gap-1.5 text-xs text-white/95">
                 {allCostPages.map((item) => (
                   <a
                     key={item.path}
                     href={item.path}
                     onClick={(e) => handlePageClick(e, item.path)}
-                    className="p-2 rounded-lg bg-slate-900/60 hover:bg-emerald-400 hover:text-slate-950 font-medium transition-colors flex items-center justify-between group"
+                    className="p-2 rounded-lg bg-[#05523A]/70 hover:bg-[#FF654F] hover:text-white font-medium transition-colors flex items-center justify-between group"
                   >
                     <span>{item.title}</span>
-                    <ArrowRight className="w-3 h-3 text-slate-400 group-hover:text-slate-950 shrink-0" aria-hidden="true" />
+                    <ArrowRight className="w-3 h-3 text-[#FFD36A] group-hover:text-white shrink-0" aria-hidden="true" />
                   </a>
                 ))}
               </div>

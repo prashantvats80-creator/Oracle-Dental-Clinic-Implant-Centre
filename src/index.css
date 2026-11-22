@@ -3,25 +3,86 @@
 @theme {
   --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-heading: "Outfit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Oracle Dental Clinic New Vibrant Brand Palette */
+  --color-brand-emerald: #087B57;
+  --color-brand-teal: #00A99D;
+  --color-brand-orange: #FF8A24;
+  --color-brand-coral: #FF654F;
+  --color-brand-yellow: #FFD36A;
+  --color-brand-cream: #FFF8EC;
+  --color-brand-mint: #E5F5EC;
+  --color-brand-charcoal: #26352F;
+
+  /* Sitewide Harmonization: Shift legacy blue & indigo utilities across all 54 pages to Emerald & Teal */
+  --color-blue-50: #E5F5EC;
+  --color-blue-100: #C8ECDC;
+  --color-blue-200: #99DEC3;
+  --color-blue-300: #5EC9A8;
+  --color-blue-400: #22B8A6;
+  --color-blue-500: #00A99D;
+  --color-blue-600: #088E68;
+  --color-blue-700: #087B57;
+  --color-blue-800: #066647;
+  --color-blue-900: #05523A;
+  --color-blue-950: #043B2A;
+
+  --color-indigo-50: #E6F8F6;
+  --color-indigo-100: #C3EFEA;
+  --color-indigo-200: #8EE1D8;
+  --color-indigo-300: #4ECFC3;
+  --color-indigo-400: #1ABBAE;
+  --color-indigo-500: #00A99D;
+  --color-indigo-600: #008F84;
+  --color-indigo-700: #06746A;
+  --color-indigo-800: #075E56;
+  --color-indigo-900: #084D46;
+  --color-indigo-950: #053530;
+
+  /* Warm Sunset Orange / Sunshine Yellow accents */
+  --color-amber-50: #FFF8EC;
+  --color-amber-100: #FFECC8;
+  --color-amber-200: #FFE09E;
+  --color-amber-300: #FFD36A;
+  --color-amber-400: #FFB347;
+  --color-amber-500: #FF8A24;
+  --color-amber-600: #E87412;
 }
 
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  background-color: #FFF8EC;
 }
 
 section {
-  scroll-margin-top: 80px;
+  scroll-margin-top: 84px;
 }
 
 body {
   font-family: var(--font-sans);
+  background-color: #FFF8EC;
+  color: #26352F;
   overflow-x: clip;
+  text-rendering: optimizeSpeed;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   text-wrap: balance;
+}
+
+/* Defer off-screen layout & paint on budget Android phones without layout shift */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 680px;
+}
+
+@media (max-width: 640px) {
+  /* Keep mobile scrolling silky smooth on low-RAM Android GPUs */
+  .hero-photo-float {
+    will-change: auto;
+  }
 }
 
 /* Lightweight Skeleton Shimmer */
@@ -32,6 +93,75 @@ h1, h2, h3, h4, h5, h6 {
 
 .animate-shimmer {
   animation: shimmer 1.8s ease-in-out infinite;
+}
+
+/* Subtle Hero & Mascot Compositor-Only Animations (Low-RAM & Mobile Friendly) */
+@keyframes hero-gentle-float {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -6px, 0) scale(1.01);
+  }
+}
+
+@keyframes mascot-gentle-bob {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+@keyframes mascot-thumb-nod {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-7deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+  75% {
+    transform: rotate(-4deg);
+  }
+}
+
+@keyframes deco-sparkle-twinkle {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translate3d(0, -5px, 0) scale(1.12);
+    opacity: 1;
+  }
+}
+
+.hero-photo-float {
+  animation: hero-gentle-float 6.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.mascot-float {
+  animation: mascot-gentle-bob 4.4s ease-in-out infinite;
+  will-change: transform;
+}
+
+.mascot-thumb-wave {
+  transform-box: fill-box;
+  transform-origin: 20% 75%;
+  animation: mascot-thumb-nod 3.4s ease-in-out infinite;
+}
+
+.hero-sparkle {
+  animation: deco-sparkle-twinkle 3.8s ease-in-out infinite;
+}
+
+.hero-sparkle-delayed {
+  animation: deco-sparkle-twinkle 4.4s ease-in-out 1.4s infinite;
 }
 
 /* Compact Floating Contact Icons: Subtle Compositor-Only Pulse Ring + Soft Glow */
@@ -118,6 +248,11 @@ details > summary::-webkit-details-marker {
   html {
     scroll-behavior: auto;
   }
+  .hero-photo-float,
+  .mascot-float,
+  .mascot-thumb-wave,
+  .hero-sparkle,
+  .hero-sparkle-delayed,
   .fab-contact-btn,
   .fab-contact-btn::before,
   .animate-shimmer,
