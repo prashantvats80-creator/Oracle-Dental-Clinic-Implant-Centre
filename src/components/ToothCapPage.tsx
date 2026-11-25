@@ -122,7 +122,7 @@ export default function ToothCapPage({ handleCall, handleWhatsApp, navigateToHom
           </p>
 
           <TreatmentImage
-            src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1000&q=80"
+            src="/assets/images/treatments/bright-smile-800.webp"
             alt="Dental crown shade matching and restorative clinical care"
             caption="Clinical restorative workflow: preparation, shade selection, and bite-balanced cementation."
             aspectRatio="16/9"

@@ -3,23 +3,118 @@ import { createPortal } from 'react-dom';
 import { GBP_CONFIG } from '../config/googleBusinessProfile';
 import { trackClinicEvent } from '../utils/analytics';
 
+const BOTPRESS_BASE_URL = 'https://vdk-viber-runtime-prod.bot.botpress.host';
+const BOTPRESS_BOT_ID = '50dd1c17-0fec-434b-b1ef-9ff0c3757ce1';
+const BOTPRESS_CSS_URL = `${BOTPRESS_BASE_URL}/edge/webchat.css`;
+const BOTPRESS_JS_URL = `${BOTPRESS_BASE_URL}/edge/webchat.js`;
+const BOTPRESS_CONFIG_URL = `${BOTPRESS_BASE_URL}/edge/bots/${BOTPRESS_BOT_ID}/config`;
+
 interface VdkEdgeWebchatInstance {
   open: () => void;
   close: () => void;
 }
 
+interface VdkEdgeWebchatGlobal {
+  mount: (config: Record<string, unknown>) => Promise<VdkEdgeWebchatInstance>;
+}
+
 declare global {
   interface Window {
+    VdkEdgeWebchat?: VdkEdgeWebchatGlobal;
     __oracleBotpressInstance?: VdkEdgeWebchatInstance;
-    __initOracleBotpress?: () => Promise<VdkEdgeWebchatInstance>;
+    __oracleBotpressPromise?: Promise<VdkEdgeWebchatInstance> | null;
   }
+}
+
+/**
+ * Loads Botpress webchat CSS and JS strictly on-demand (first click of the AI Dental Assistant button).
+ * - Zero initial CSS/JS network or main-thread work during page load.
+ * - Guaranteed single-load and single-mount across all routes.
+ * - Preserves exact official Botpress Bot ID and base URL.
+ */
+function ensureBotpressLoadedAndMounted(): Promise<VdkEdgeWebchatInstance> {
+  if (window.__oracleBotpressInstance) {
+    return Promise.resolve(window.__oracleBotpressInstance);
+  }
+  if (window.__oracleBotpressPromise) {
+    return window.__oracleBotpressPromise;
+  }
+
+  window.__oracleBotpressPromise = new Promise<VdkEdgeWebchatInstance>((resolve, reject) => {
+    // 1. Load Botpress stylesheet once
+    if (!document.getElementById('oracle-botpress-webchat-css')) {
+      const css = document.createElement('link');
+      css.id = 'oracle-botpress-webchat-css';
+      css.rel = 'stylesheet';
+      css.href = BOTPRESS_CSS_URL;
+      document.head.appendChild(css);
+    }
+
+    const mountOnce = () => {
+      if (!window.VdkEdgeWebchat || typeof window.VdkEdgeWebchat.mount !== 'function') {
+        window.__oracleBotpressPromise = null;
+        reject(new Error('VdkEdgeWebchat not available'));
+        return;
+      }
+
+      fetch(BOTPRESS_CONFIG_URL)
+        .then((res) => {
+          if (!res.ok) throw new Error(`Botpress config fetch failed: ${res.status}`);
+          return res.json();
+        })
+        .then((data: { webchat?: Record<string, unknown> }) => {
+          const webchat = data && data.webchat ? data.webchat : {};
+          return window.VdkEdgeWebchat!.mount({
+            ...webchat,
+            mode: 'bubble',
+            baseUrl: BOTPRESS_BASE_URL,
+            botId: BOTPRESS_BOT_ID,
+          });
+        })
+        .then((instance) => {
+          window.__oracleBotpressInstance = instance;
+          resolve(instance);
+        })
+        .catch((err) => {
+          window.__oracleBotpressPromise = null;
+          reject(err);
+        });
+    };
+
+    // 2. Load Botpress script once
+    if (window.VdkEdgeWebchat && typeof window.VdkEdgeWebchat.mount === 'function') {
+      mountOnce();
+      return;
+    }
+
+    let script = document.getElementById('oracle-botpress-webchat-script') as HTMLScriptElement | null;
+    if (!script) {
+      script = document.createElement('script');
+      script.id = 'oracle-botpress-webchat-script';
+      script.src = BOTPRESS_JS_URL;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+
+    script.addEventListener('load', mountOnce, { once: true });
+    script.addEventListener(
+      'error',
+      () => {
+        window.__oracleBotpressPromise = null;
+        reject(new Error('Failed to load Botpress webchat script'));
+      },
+      { once: true }
+    );
+  });
+
+  return window.__oracleBotpressPromise;
 }
 
 /**
  * Global Floating Action Buttons (Portaled to document.body)
  * - Appears on EVERY route (homepage, /dental-services, all treatment/local/cost pages, and 404).
  * - Fixed on the right side in exact vertical order:
- *   TOP: AI Dental Assistant button -> opens existing Botpress VdkEdgeWebchat instance
+ *   TOP: AI Dental Assistant button -> loads & opens Botpress VdkEdgeWebchat on-demand
  *   MIDDLE: Existing Call button -> tel:+917011961515 (preserved unchanged)
  *   BOTTOM: Existing WhatsApp button -> https://wa.me/917011961515 (preserved unchanged)
  */
@@ -41,16 +136,14 @@ export const FloatingAppointmentButtons: React.FC = () => {
       return;
     }
 
-    if (typeof window.__initOracleBotpress === 'function') {
-      setIsOpeningAssistant(true);
-      try {
-        const instance = await window.__initOracleBotpress();
-        instance.open();
-      } catch {
-        // Keep UI resilient if Botpress host is temporarily unreachable
-      } finally {
-        setIsOpeningAssistant(false);
-      }
+    setIsOpeningAssistant(true);
+    try {
+      const instance = await ensureBotpressLoadedAndMounted();
+      instance.open();
+    } catch {
+      // Keep UI resilient if Botpress host is temporarily unreachable
+    } finally {
+      setIsOpeningAssistant(false);
     }
   };
 
@@ -59,13 +152,13 @@ export const FloatingAppointmentButtons: React.FC = () => {
       id="global-floating-action-stack"
       className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[9999] fab-safe-bottom flex flex-col items-center gap-3"
     >
-      {/* TOP: AI Dental Assistant Button -> Opens Existing Botpress Chatbot */}
+      {/* TOP: AI Dental Assistant Button -> Loads & Opens Botpress Chatbot On-Demand */}
       <div className="relative group flex items-center">
         <span
           role="tooltip"
           className="pointer-events-none hidden sm:inline-flex items-center whitespace-nowrap absolute right-[64px] top-1/2 -translate-y-1/2 bg-[#0F172A] text-white text-xs font-semibold px-3 py-1.5 rounded-lg shadow-md opacity-0 translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 group-focus-within:opacity-100 group-focus-within:translate-x-0 transition-all duration-150"
         >
-          AI Dental Assistant
+          {isOpeningAssistant ? 'Opening AI Assistant…' : 'AI Dental Assistant'}
         </span>
         <button
           id="global-floating-ai-assistant"
@@ -73,6 +166,7 @@ export const FloatingAppointmentButtons: React.FC = () => {
           onClick={handleOpenAiAssistant}
           disabled={isOpeningAssistant}
           aria-label="Open AI Dental Assistant"
+          aria-busy={isOpeningAssistant}
           title="AI Dental Assistant"
           className="relative fab-contact-btn fab-contact-ai inline-flex items-center justify-center w-[54px] h-[54px] rounded-full bg-[#0284C7] hover:bg-[#0369A1] text-white shadow-[0_6px_22px_rgba(2,132,199,0.48)] border-2 border-white cursor-pointer focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-300 focus-visible:ring-offset-2 disabled:opacity-80"
         >
@@ -87,6 +181,7 @@ export const FloatingAppointmentButtons: React.FC = () => {
             strokeLinejoin="round"
             aria-hidden="true"
             focusable="false"
+            className={isOpeningAssistant ? 'animate-pulse' : undefined}
           >
             <path d="M12 3v3" />
             <circle cx="12" cy="2.5" r="1" fill="currentColor" stroke="none" />

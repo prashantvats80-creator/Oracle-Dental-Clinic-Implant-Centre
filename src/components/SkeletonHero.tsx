@@ -2,7 +2,7 @@ import React from 'react';
 
 export const SkeletonHero: React.FC = () => {
   return (
-    <div className="relative bg-gradient-to-br from-slate-900 via-blue-950 to-slate-950 text-white min-h-[460px] py-12 px-4 sm:px-8 overflow-hidden flex flex-col justify-center">
+    <div className="relative bg-gradient-to-br from-slate-900 via-blue-950 to-slate-950 text-white min-h-screen py-12 px-4 sm:px-8 overflow-hidden flex flex-col justify-start">
       <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer pointer-events-none" />
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-center relative z-10">
         <div className="md:col-span-7 space-y-5">

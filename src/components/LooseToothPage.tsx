@@ -36,7 +36,7 @@ export default function LooseToothPage({ handleCall, handleWhatsApp, navigateToH
         <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-2xs space-y-6">
           <h2 className="text-2xl font-extrabold text-slate-900">Periodontal Support & Tooth Stabilization</h2>
           <p className="text-slate-600 text-sm leading-relaxed">
-            Tooth mobility is often caused by advanced periodontitis bone loss or dental trauma. Treatment involves deep <button onClick={() => navigateToPath('/gum-disease-treatment')} className="text-blue-600 underline font-bold">Scaling & Root Planing</button> or composite splinting. If non-restorable, fixed <button onClick={() => navigateToPath('/dental-implants')} className="text-blue-600 underline font-bold">Dental Implants</button> restore full function.
+            Tooth mobility is often caused by advanced periodontitis bone loss or dental trauma. Treatment involves deep <button onClick={() => navigateToPath('/periodontal-gum-treatment-ghaziabad')} className="text-blue-600 underline font-bold">Scaling &amp; Root Planing</button> or composite splinting. If non-restorable, fixed <button onClick={() => navigateToPath('/dental-implants')} className="text-blue-600 underline font-bold">Dental Implants</button> restore full function.
           </p>
 
           <TreatmentImage

@@ -3,12 +3,27 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import {defineConfig} from 'vite';
 
+import type {Plugin} from 'vite';
+
+function nonBlockingCssPlugin(): Plugin {
+  return {
+    name: 'oracle-non-blocking-css',
+    apply: 'build',
+    transformIndexHtml(html) {
+      return html.replace(
+        /<link rel="stylesheet"([^>]*?)href="([^"]+\.css)"([^>]*)>/g,
+        '<link rel="preload" as="style"$1href="$2"$3 onload="this.onload=null;this.rel=\'stylesheet\'">\n    <noscript><link rel="stylesheet"$1href="$2"$3></noscript>'
+      );
+    },
+  };
+}
+
 export default defineConfig(({mode}) => {
   const isProd = mode === 'production';
 
   return {
     base: process.env.VITE_BASE_PATH || '/',
-    plugins: [react(), tailwindcss()],
+    plugins: [react(), tailwindcss(), nonBlockingCssPlugin()],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
@@ -39,9 +54,6 @@ export default defineConfig(({mode}) => {
               }
               if (/[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/.test(id)) {
                 return 'vendor-react';
-              }
-              if (id.includes('motion') || id.includes('framer-motion')) {
-                return 'vendor-motion';
               }
               return 'vendor-misc';
             }

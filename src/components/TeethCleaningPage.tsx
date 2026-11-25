@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   PhoneCall, 
   MessageCircle, 
@@ -28,11 +28,9 @@ import {
   ShieldAlert,
   FileText
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
-import { preloadImages } from '../utils/imagePreloader';
 
 interface TeethCleaningPageProps {
   handleCall: () => void;
@@ -50,13 +48,6 @@ export default function TeethCleaningPage({
   navigateToPath
 }: TeethCleaningPageProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-
-  useEffect(() => {
-    preloadImages([
-      "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=80"
-    ]);
-  }, []);
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
@@ -370,13 +361,13 @@ export default function TeethCleaningPage({
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-4">
               <TreatmentImage
-                src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=1000&q=80"
+                src="/assets/images/treatments/dental-tools-800.webp"
                 alt="Educational illustration of plaque biofilm and hard calculus accumulation along tooth surfaces"
                 caption="Educational diagram: Plaque biofilm and hard tartar accumulation along the gum margin causing gingival redness."
                 aspectRatio="4/3"
               />
               <TreatmentImage
-                src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80"
+                src="/assets/images/treatments/dental-exam-800.webp"
                 alt="Educational diagram illustrating professional dental ultrasonic scaling and plaque removal"
                 caption="Educational diagram: Professional ultrasonic scaling tip gently vibrating away hardened tartar deposits."
                 aspectRatio="4/3"
@@ -815,19 +806,13 @@ export default function TeethCleaningPage({
                   )}
                 </button>
                 
-                <AnimatePresence>
-                  {openFaq === index && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
+                                  {openFaq === index && (
+                    <div
                       className="border-t border-slate-200 bg-white p-4 text-xs sm:text-sm text-slate-600 leading-relaxed"
                     >
                       {faq.a}
-                    </motion.div>
+                    </div>
                   )}
-                </AnimatePresence>
               </div>
             ))}
           </div>

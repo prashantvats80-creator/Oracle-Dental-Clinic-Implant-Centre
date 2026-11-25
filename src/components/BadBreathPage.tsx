@@ -39,7 +39,7 @@ export default function BadBreathPage({ handleCall, handleWhatsApp, navigateToHo
           </p>
 
           <TreatmentImage
-            src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=1000&q=80"
+            src="/assets/images/treatments/dental-tools-800.webp"
             alt="Educational diagram showing plaque biofilm, calculus accumulation, and halitosis bacterial causes"
             caption="Educational diagram: Plaque biofilm and anaerobic bacterial reservoirs causing oral halitosis."
             aspectRatio="16/9"

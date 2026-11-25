@@ -13,7 +13,6 @@ import {
   AlertCircle,
   Activity
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
@@ -193,7 +192,7 @@ export default function TeethCleaningCostPage({
 
           <div className="pt-2">
             <TreatmentImage 
-              src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80"
+              src="/assets/images/treatments/dental-exam-800.webp"
               alt="Professional ultrasonic scaling treatment cleaning teeth"
               caption="Ultrasonic scaling uses gentle vibrations and cooling irrigation to safely remove hardened tartar without scratching enamel."
             />
@@ -302,18 +301,11 @@ export default function TeethCleaningCostPage({
               Full Teeth Cleaning Guide <ArrowRight className="w-3.5 h-3.5" />
             </a>
             <a 
-              href="/gum-disease-treatment" 
-              onClick={(e) => handleLinkClick(e, '/gum-disease-treatment')}
+              href="/periodontal-gum-treatment-ghaziabad" 
+              onClick={(e) => handleLinkClick(e, '/periodontal-gum-treatment-ghaziabad')}
               className="text-cyan-400 hover:text-cyan-300 flex items-center gap-1.5"
             >
-              Gum Disease & Periodontitis <ArrowRight className="w-3.5 h-3.5" />
-            </a>
-            <a 
-              href="/bleeding-gums" 
-              onClick={(e) => handleLinkClick(e, '/bleeding-gums')}
-              className="text-blue-300 hover:text-white flex items-center gap-1.5"
-            >
-              Bleeding Gums Care <ArrowRight className="w-3.5 h-3.5" />
+              Gum &amp; Periodontal Care (Bleeding, Swollen Gums) <ArrowRight className="w-3.5 h-3.5" />
             </a>
             <a 
               href="/tooth-sensitivity" 
@@ -347,18 +339,13 @@ export default function TeethCleaningCostPage({
                   <span className="font-bold text-slate-900 text-xs sm:text-sm">{faq.q}</span>
                   <ChevronDown className={`w-4 h-4 text-blue-600 shrink-0 transition-transform duration-200 ${openFaq === idx ? 'rotate-180' : ''}`} />
                 </button>
-                <AnimatePresence initial={false}>
-                  {openFaq === idx && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
+                                  {openFaq === idx && (
+                    <div
                       className="overflow-hidden bg-slate-50/70 border-t border-slate-100 p-6 text-slate-600 text-xs sm:text-sm leading-relaxed"
                     >
                       {faq.a}
-                    </motion.div>
+                    </div>
                   )}
-                </AnimatePresence>
               </div>
             ))}
           </div>

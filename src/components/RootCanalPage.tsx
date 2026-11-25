@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   PhoneCall, 
   MessageCircle, 
@@ -21,11 +21,9 @@ import {
   Layers,
   FileText
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
-import { preloadImages } from '../utils/imagePreloader';
 import { GBP_CONFIG } from '../config/googleBusinessProfile';
 
 interface RootCanalPageProps {
@@ -44,14 +42,6 @@ export default function RootCanalPage({
   navigateToPath
 }: RootCanalPageProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-
-  useEffect(() => {
-    preloadImages([
-      "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=80"
-    ]);
-  }, []);
 
   const faqs = [
     {
@@ -277,7 +267,7 @@ export default function RootCanalPage({
 
             <div className="md:col-span-5 space-y-4">
               <TreatmentImage
-                src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=1000&q=80"
+                src="/assets/images/treatments/dental-tools-800.webp"
                 alt="Educational diagram illustrating dental pulp infection and deep decay requiring root canal treatment"
                 caption="Educational diagram showing healthy tooth structure vs deep decay penetrating the pulp chamber."
                 aspectRatio="4/3"
@@ -915,19 +905,13 @@ export default function RootCanalPage({
                   )}
                 </button>
 
-                <AnimatePresence>
-                  {openFaq === index && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
+                                  {openFaq === index && (
+                    <div
                       className="border-t border-slate-100 px-4 sm:px-5 py-4 text-slate-600 text-sm leading-relaxed bg-slate-50/50"
                     >
                       {faq.answer}
-                    </motion.div>
+                    </div>
                   )}
-                </AnimatePresence>
               </div>
             ))}
           </div>

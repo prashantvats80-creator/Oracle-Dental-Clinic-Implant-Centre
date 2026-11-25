@@ -38,7 +38,7 @@ const Footer: React.FC<FooterProps> = ({ navigateToPath }) => {
               Shahberi, Noida Extension, Greater Noida West, and Lal Kuan.
             </p>
             <div className="pt-1">
-              <h4 className="text-[#FFD36A] font-semibold text-xs mb-2">Connect With Us</h4>
+              <h2 className="text-[#FFD36A] font-semibold text-xs mb-2">Connect With Us</h2>
               <div className="flex items-center gap-2.5">
                 <a
                   href="https://www.facebook.com/profile.php?id=100083436112014"
@@ -92,9 +92,9 @@ const Footer: React.FC<FooterProps> = ({ navigateToPath }) => {
 
           {/* Column 2: Priority Dental Treatments */}
           <div>
-            <h4 className="text-[#FFD36A] font-bold mb-3 text-xs tracking-wide border-b border-white/15 pb-2">
+            <h2 className="text-[#FFD36A] font-bold mb-3 text-xs tracking-wide border-b border-white/15 pb-2">
               Priority Treatments
-            </h4>
+            </h2>
             <ul className="space-y-1.5 text-xs">
               <li>
                 <a
@@ -124,15 +124,13 @@ const Footer: React.FC<FooterProps> = ({ navigateToPath }) => {
 
           {/* Column 3: Local & Condition Guides */}
           <div>
-            <h4 className="text-[#FFD36A] font-bold mb-3 text-xs tracking-wide border-b border-white/15 pb-2">
+            <h2 className="text-[#FFD36A] font-bold mb-3 text-xs tracking-wide border-b border-white/15 pb-2">
               Symptoms, Costs &amp; Local Care
-            </h4>
+            </h2>
             <ul className="space-y-1.5 text-xs">
-              <li><a href="/dentist-chipiyana-buzurg-ghaziabad" onClick={(e) => handleLinkClick(e, '/dentist-chipiyana-buzurg-ghaziabad')} className="hover:text-[#FFD36A] font-semibold transition-colors">Dentist in Chipiyana Buzurg</a></li>
-              <li><a href="/dentist-ghaziabad" onClick={(e) => handleLinkClick(e, '/dentist-ghaziabad')} className="hover:text-[#FFD36A] transition-colors">Dentist in Ghaziabad</a></li>
-              <li><a href="/dental-clinic-ghaziabad" onClick={(e) => handleLinkClick(e, '/dental-clinic-ghaziabad')} className="hover:text-[#FFD36A] transition-colors">Dental Clinic in Ghaziabad</a></li>
-              <li><a href="/dentist-near-me" onClick={(e) => handleLinkClick(e, '/dentist-near-me')} className="hover:text-[#FFD36A] transition-colors">Dentist Near Me</a></li>
-              <li><a href="/emergency-dentist" onClick={(e) => handleLinkClick(e, '/emergency-dentist')} className="text-[#FFD36A] hover:text-white font-semibold transition-colors">Emergency Dental Care</a></li>
+              <li><a href="/dentist-chipiyana-buzurg-ghaziabad" onClick={(e) => handleLinkClick(e, '/dentist-chipiyana-buzurg-ghaziabad')} className="hover:text-[#FFD36A] font-semibold transition-colors">Dentist in Chipiyana Buzurg, Ghaziabad</a></li>
+              <li><a href="/periodontal-gum-treatment-ghaziabad" onClick={(e) => handleLinkClick(e, '/periodontal-gum-treatment-ghaziabad')} className="hover:text-[#FFD36A] transition-colors">Gum &amp; Periodontal Treatment</a></li>
+              <li><a href="/emergency-dentist-ghaziabad" onClick={(e) => handleLinkClick(e, '/emergency-dentist-ghaziabad')} className="text-[#FFD36A] hover:text-white font-semibold transition-colors">Emergency Dentist in Ghaziabad</a></li>
               <li><a href="/tooth-cap" onClick={(e) => handleLinkClick(e, '/tooth-cap')} className="hover:text-[#FFD36A] transition-colors">Tooth Cap &amp; Crowns</a></li>
               <li><a href="/dental-bridges" onClick={(e) => handleLinkClick(e, '/dental-bridges')} className="hover:text-[#FFD36A] transition-colors">Fixed Dental Bridges</a></li>
               <li><a href="/dentures" onClick={(e) => handleLinkClick(e, '/dentures')} className="hover:text-[#FFD36A] transition-colors">Complete &amp; Partial Dentures</a></li>
@@ -147,13 +145,25 @@ const Footer: React.FC<FooterProps> = ({ navigateToPath }) => {
 
           {/* Column 4: Verified NAP & Contact */}
           <div className="space-y-3">
-            <h4 className="text-[#FFD36A] font-bold mb-3 text-xs tracking-wide border-b border-white/15 pb-2">
+            <h2 className="text-[#FFD36A] font-bold mb-3 text-xs tracking-wide border-b border-white/15 pb-2">
               Verified Clinic Details
-            </h4>
+            </h2>
             <ul className="space-y-2.5 text-xs">
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-[#FFD36A]" aria-hidden="true" />
-                <span>{GBP_CONFIG.ADDRESS}</span>
+                <a
+                  href={GBP_CONFIG.GOOGLE_MAPS_DIRECTIONS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() =>
+                    trackClinicEvent('directions_click', {
+                      placement: 'footer_address_link',
+                    })
+                  }
+                  className="hover:text-[#FFD36A] hover:underline transition-colors"
+                >
+                  {GBP_CONFIG.ADDRESS}
+                </a>
               </li>
               <li className="flex items-center gap-2">
                 <PhoneCall className="w-4 h-4 text-[#FFD36A] shrink-0" aria-hidden="true" />

@@ -5,25 +5,49 @@ export default function ScrollProgressBar() {
 
   useEffect(() => {
     let ticking = false;
+    let maxScroll = 0;
+
+    const recalcMaxScroll = () => {
+      maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    };
+
     const updateProgress = () => {
-      if (!barRef.current) return;
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = docHeight > 0 ? Math.min(Math.max(scrollTop / docHeight, 0), 1) : 0;
-      barRef.current.style.transform = `scaleX(${progress})`;
       ticking = false;
+      if (!barRef.current) return;
+      if (maxScroll <= 0) {
+        recalcMaxScroll();
+      }
+      const progress = maxScroll > 0 ? Math.min(Math.max(window.scrollY / maxScroll, 0), 1) : 0;
+      barRef.current.style.transform = `scaleX(${progress})`;
     };
 
     const onScroll = () => {
       if (!ticking) {
-        window.requestAnimationFrame(updateProgress);
         ticking = true;
+        window.requestAnimationFrame(updateProgress);
       }
     };
 
+    const onResize = () => {
+      maxScroll = 0;
+    };
+
     window.addEventListener('scroll', onScroll, { passive: true });
-    updateProgress();
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener('resize', onResize, { passive: true });
+
+    let ro: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== 'undefined') {
+      ro = new ResizeObserver(() => {
+        maxScroll = 0;
+      });
+      ro.observe(document.documentElement);
+    }
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onResize);
+      ro?.disconnect();
+    };
   }, []);
 
   return (

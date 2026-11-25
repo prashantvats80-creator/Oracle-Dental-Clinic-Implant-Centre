@@ -15,7 +15,6 @@ import {
   Layers,
   Star
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
@@ -203,7 +202,7 @@ export default function SmileMakeoverGhaziabadPage({
 
           <div className="pt-2">
             <TreatmentImage 
-              src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1000&q=80"
+              src="/assets/images/treatments/bright-smile-800.webp"
               alt="Cosmetic smile makeover demonstration and dental aesthetic model"
               caption="Individualized smile designs consider lip line, incisal display, and gingival symmetry for stunning natural results."
             />
@@ -303,18 +302,13 @@ export default function SmileMakeoverGhaziabadPage({
                   <span className="font-bold text-slate-900 text-xs sm:text-sm">{faq.q}</span>
                   <ChevronDown className={`w-4 h-4 text-purple-600 shrink-0 transition-transform duration-200 ${openFaq === idx ? 'rotate-180' : ''}`} />
                 </button>
-                <AnimatePresence initial={false}>
-                  {openFaq === idx && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
+                                  {openFaq === idx && (
+                    <div
                       className="overflow-hidden bg-slate-50/70 border-t border-slate-100 p-6 text-slate-600 text-xs sm:text-sm leading-relaxed"
                     >
                       {faq.a}
-                    </motion.div>
+                    </div>
                   )}
-                </AnimatePresence>
               </div>
             ))}
           </div>

@@ -12,7 +12,6 @@ import {
   Layers,
   Award
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
@@ -114,13 +113,11 @@ export default function MissingTeethPage({
                   <span>Q{index + 1}: {faq.q}</span>
                   {openFaq === index ? <ChevronUp className="w-5 h-5 text-blue-600" /> : <ChevronDown className="w-5 h-5 text-slate-400" />}
                 </button>
-                <AnimatePresence>
-                  {openFaq === index && (
-                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="border-t border-slate-200 p-4 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                                  {openFaq === index && (
+                    <div className="border-t border-slate-200 p-4 text-xs sm:text-sm text-slate-600 leading-relaxed">
                       {faq.a}
-                    </motion.div>
+                    </div>
                   )}
-                </AnimatePresence>
               </div>
             ))}
           </div>

@@ -9,7 +9,6 @@ import {
   Coins,
   ReceiptText
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
 import { InteractiveButton } from './InteractiveButton';
 import { Breadcrumbs } from './Breadcrumbs';
 
@@ -126,7 +125,7 @@ export default function DentalTreatmentCostPage({
                   <td className="p-4 font-bold text-slate-900">Doctor Consultation</td>
                   <td className="p-4 text-emerald-700 font-bold">₹200 (Verified)</td>
                   <td className="p-4">Clinical visual examination, diagnosis & individualized treatment plan.</td>
-                  <td className="p-4"><a href="/dentist-ghaziabad" onClick={(e) => handleLinkClick(e, '/dentist-ghaziabad')} className="text-blue-700 font-semibold hover:underline">Clinic Details</a></td>
+                  <td className="p-4"><a href="/dentist-chipiyana-buzurg-ghaziabad" onClick={(e) => handleLinkClick(e, '/dentist-chipiyana-buzurg-ghaziabad')} className="text-blue-700 font-semibold hover:underline">Clinic Details</a></td>
                 </tr>
                 <tr>
                   <td className="p-4 font-bold text-slate-900">Root Canal Treatment (RCT)</td>
@@ -195,18 +194,13 @@ export default function DentalTreatmentCostPage({
                   <span className="font-bold text-slate-900 text-sm">{faq.q}</span>
                   <ChevronDown className={`w-4 h-4 text-blue-600 shrink-0 transition-transform ${openFaq === idx ? 'rotate-180' : ''}`} />
                 </button>
-                <AnimatePresence initial={false}>
-                  {openFaq === idx && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
+                                  {openFaq === idx && (
+                    <div
                       className="overflow-hidden bg-slate-50/70 border-t border-slate-100 p-6 text-slate-600 text-xs sm:text-sm leading-relaxed"
                     >
                       {faq.a}
-                    </motion.div>
+                    </div>
                   )}
-                </AnimatePresence>
               </div>
             ))}
           </div>

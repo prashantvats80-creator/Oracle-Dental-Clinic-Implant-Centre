@@ -33,14 +33,14 @@ const DoctorProfile: React.FC = () => {
                 <picture>
                   <source
                     type="image/webp"
-                    srcSet="/assets/images/dr-prashant-vats-400.webp 400w, /assets/images/dr-prashant-vats-768.webp 768w"
+                    srcSet="/assets/images/dr-prashant-vats-400.webp 400w, /assets/images/dr-prashant-vats-768.webp 456w"
                     sizes="(max-width: 640px) 85vw, 384px"
                   />
                   <img
                     src="/assets/images/dr-prashant-vats.jpg"
                     alt="Dr. Prashant Kumar Vats, BDS, MIDA – Dental Surgeon & Implantologist at Oracle Dental Clinic & Implant Center"
-                    width="384"
-                    height="420"
+                    width="400"
+                    height="702"
                     className="w-full h-72 sm:h-96 object-cover object-top block"
                     loading="lazy"
                     decoding="async"
@@ -102,7 +102,19 @@ const DoctorProfile: React.FC = () => {
               <div className="space-y-2 text-xs sm:text-sm text-[#26352F]/85 pt-1 border-t border-[#E5F5EC]">
                 <p className="flex items-start gap-2 pt-3">
                   <MapPin className="w-4 h-4 text-[#FF654F] mt-0.5 shrink-0" aria-hidden="true" />
-                  <span>{GBP_CONFIG.ADDRESS}</span>
+                  <a
+                    href={GBP_CONFIG.GOOGLE_MAPS_DIRECTIONS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() =>
+                      trackClinicEvent('directions_click', {
+                        placement: 'doctor_profile_address_link',
+                      })
+                    }
+                    className="hover:text-[#087B57] hover:underline transition-colors"
+                  >
+                    {GBP_CONFIG.ADDRESS}
+                  </a>
                 </p>
                 <p className="flex items-center gap-2">
                   <Clock className="w-4 h-4 text-[#00A99D] shrink-0" aria-hidden="true" />

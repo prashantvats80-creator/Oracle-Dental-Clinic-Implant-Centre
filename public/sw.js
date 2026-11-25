@@ -1,6 +1,6 @@
 // Oracle Dental Clinic Service Worker - Mobile Performance & Offline Strategy
-const CACHE_STATIC = 'oracle-dental-static-v4';
-const CACHE_IMAGES = 'oracle-dental-images-v4';
+const CACHE_STATIC = 'oracle-dental-static-v5';
+const CACHE_IMAGES = 'oracle-dental-images-v5';
 
 const CORE_ASSETS = [
   './',
@@ -8,7 +8,7 @@ const CORE_ASSETS = [
   './404.html',
   './robots.txt',
   './sitemap.xml',
-  'https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&display=swap'
+  './assets/fonts/outfit-latin.woff2'
 ];
 
 self.addEventListener('install', (event) => {
@@ -75,10 +75,8 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 2. Hashed Vite production assets & Google Fonts -> Cache-First
+  // 2. Hashed Vite production assets & self-hosted WOFF2 fonts -> Cache-First
   if (
-    url.hostname.includes('fonts.gstatic.com') ||
-    url.hostname.includes('fonts.googleapis.com') ||
     (url.pathname.includes('/assets/') && (url.pathname.endsWith('.css') || url.pathname.endsWith('.js'))) ||
     url.pathname.endsWith('.woff2')
   ) {
@@ -97,10 +95,9 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 3. Clinic Images -> Stale-While-Revalidate
+  // 3. Clinic Images (AVIF/WebP/JPEG/SVG) -> Stale-While-Revalidate
   if (
-    url.hostname.includes('images.unsplash.com') ||
-    url.pathname.match(/\.(png|jpg|jpeg|svg|webp|gif)$/i)
+    url.pathname.match(/\.(png|jpg|jpeg|svg|webp|avif|gif)$/i)
   ) {
     event.respondWith(
       caches.open(CACHE_IMAGES).then((cache) => {

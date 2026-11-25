@@ -1,17 +1,7 @@
 import React, { useState } from 'react';
 import { Star, MessageSquareCode, ExternalLink, MapPin, Phone, CalendarRange, CheckCircle2, Sparkles } from 'lucide-react';
 import { GBP_CONFIG } from '../config/googleBusinessProfile';
-
-interface TestimonialReview {
-  author: string;
-  avatarLetter: string;
-  rating: number;
-  date: string;
-  text: string;
-  highlight?: string;
-  treatment?: string;
-  location?: string;
-}
+import { PATIENT_REVIEW_HIGHLIGHTS, type PatientReviewHighlight } from '../data/patientReviews';
 
 const CATEGORIES = [
   'All Reviews',
@@ -24,7 +14,7 @@ const CATEGORIES = [
 ];
 
 export const Testimonials: React.FC = () => {
-  const [reviews] = useState<TestimonialReview[]>(GBP_CONFIG.STATIC_REVIEWS);
+  const [reviews] = useState<PatientReviewHighlight[]>(PATIENT_REVIEW_HIGHLIGHTS);
   const [selectedCategory, setSelectedCategory] = useState('All Reviews');
   const [visibleCount, setVisibleCount] = useState(6);
 
@@ -76,9 +66,9 @@ export const Testimonials: React.FC = () => {
 
               <div>
                 <div className="flex items-center gap-2 justify-center sm:justify-start flex-wrap">
-                  <h3 className="text-xl font-extrabold text-[#087B57]">
+                  <h2 className="text-xl font-extrabold text-[#087B57]">
                     Google Business Profile
-                  </h3>
+                  </h2>
                   <span className="text-xs font-bold text-[#00A99D] inline-flex items-center gap-1">
                     <CheckCircle2 className="w-3.5 h-3.5" aria-hidden="true" /> Verified Listing
                   </span>
@@ -207,7 +197,7 @@ export const Testimonials: React.FC = () => {
                     {review.avatarLetter}
                   </div>
                   <div>
-                    <h4 className="font-bold text-sm text-[#26352F] leading-tight">{review.author}</h4>
+                    <h3 className="font-bold text-sm text-[#26352F] leading-tight">{review.author}</h3>
                     {review.location && (
                       <div className="text-[11px] text-[#26352F]/60 font-medium">{review.location}</div>
                     )}

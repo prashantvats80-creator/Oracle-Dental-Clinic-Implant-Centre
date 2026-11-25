@@ -149,17 +149,12 @@ const Services: React.FC<ServicesProps> = ({ navigateToPath }) => {
     { title: 'Dental Bridges', path: '/dental-bridges' },
     { title: 'Dentures', path: '/dentures' },
     { title: 'Kids Dentist', path: '/kids-dentist' },
-    { title: 'Emergency Dental Care', path: '/emergency-dentist' },
-    { title: 'Emergency Dentist Ghaziabad', path: '/emergency-dentist-ghaziabad' },
-    { title: 'Dentist in Chipiyana Buzurg', path: '/dentist-chipiyana-buzurg-ghaziabad' },
-    { title: 'Dentist in Ghaziabad', path: '/dentist-ghaziabad' },
-    { title: 'Dental Clinic in Ghaziabad', path: '/dental-clinic-ghaziabad' },
-    { title: 'Dentist Near Me', path: '/dentist-near-me' },
+    { title: 'Emergency Dentist in Ghaziabad', path: '/emergency-dentist-ghaziabad' },
+    { title: 'Dentist & Dental Clinic in Chipiyana, Ghaziabad', path: '/dentist-chipiyana-buzurg-ghaziabad' },
   ];
 
   const allSymptomPages = [
     { title: 'Tooth Pain Treatment', path: '/tooth-pain-treatment' },
-    { title: 'Bleeding Gums Care', path: '/bleeding-gums' },
     { title: 'Tooth Sensitivity Relief', path: '/tooth-sensitivity' },
     { title: 'Bad Breath Treatment', path: '/bad-breath-treatment' },
     { title: 'Loose Tooth Treatment', path: '/loose-tooth-treatment' },
@@ -168,11 +163,8 @@ const Services: React.FC<ServicesProps> = ({ navigateToPath }) => {
     { title: 'Black / Dark Tooth Care', path: '/black-tooth' },
     { title: 'Missing Teeth Options', path: '/missing-teeth' },
     { title: 'Cavity Treatment', path: '/cavity-treatment' },
-    { title: 'Gum Disease Treatment', path: '/gum-disease-treatment' },
-    { title: 'Swollen Gums Care', path: '/swollen-gums' },
-    { title: 'Gum Recession Care', path: '/gum-recession' },
     { title: 'Dental Abscess Treatment', path: '/dental-abscess-treatment' },
-    { title: 'Periodontal Gum Treatment', path: '/periodontal-gum-treatment-ghaziabad' },
+    { title: 'Gum & Periodontal Treatment (Bleeding, Swollen, Recession)', path: '/periodontal-gum-treatment-ghaziabad' },
   ];
 
   const allCostPages = [

@@ -101,8 +101,8 @@ const BeforeAfter: React.FC = () => {
                     src={item.singleImg}
                     alt={`${item.title} – Oracle Dental Clinic Chipiyana Buzurg`}
                     width="640"
-                    height="360"
-                    className="w-full h-auto object-contain aspect-video"
+                    height="427"
+                    className="w-full h-auto object-cover aspect-[3/2] block"
                     loading="lazy"
                     decoding="async"
                   />

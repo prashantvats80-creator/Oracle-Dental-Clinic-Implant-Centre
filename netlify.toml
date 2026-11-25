@@ -7,23 +7,86 @@
 [build.environment]
   NODE_VERSION = "20"
 
-# SPA fallback rewrite so direct hits and refreshes on all routes serve index.html
+# Permanent 301 Redirects for Consolidated Pages (must precede SPA fallback)
+# Group A: Local Dentist / Dental Clinic
+[[redirects]]
+  from = "/dentist-near-me"
+  to = "/dentist-chipiyana-buzurg-ghaziabad"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/dentist-ghaziabad"
+  to = "/dentist-chipiyana-buzurg-ghaziabad"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/dental-clinic-ghaziabad"
+  to = "/dentist-chipiyana-buzurg-ghaziabad"
+  status = 301
+  force = true
+
+# Group B: Gum & Periodontal Treatment
+[[redirects]]
+  from = "/gum-disease-treatment"
+  to = "/periodontal-gum-treatment-ghaziabad"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/bleeding-gums"
+  to = "/periodontal-gum-treatment-ghaziabad"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/swollen-gums"
+  to = "/periodontal-gum-treatment-ghaziabad"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/gum-recession"
+  to = "/periodontal-gum-treatment-ghaziabad"
+  status = 301
+  force = true
+
+# Group C: Emergency Dentist
+[[redirects]]
+  from = "/emergency-dentist"
+  to = "/emergency-dentist-ghaziabad"
+  status = 301
+  force = true
+
+# SPA fallback rewrite so direct hits and refreshes on all active routes serve index.html
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-# Global security & HTML caching headers
+# Global security & non-immutable HTML caching headers
 [[headers]]
   for = "/*"
   [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "SAMEORIGIN"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "geolocation=(), microphone=(), camera=()"
 
 [[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
   for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/sw.js"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
@@ -44,34 +107,25 @@
     Cache-Control = "public, max-age=3600"
     Content-Type = "text/html; charset=utf-8"
 
-# Immutable long-term caching for Vite hashed static assets & local hero images
+# Immutable 1-year caching for Vite content-hashed JS & CSS assets
 [[headers]]
-  for = "/assets/*"
+  for = "/assets/js/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+[[headers]]
+  for = "/assets/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# 30-day + stale-while-revalidate caching for self-hosted WebP/AVIF/JPEG images
 [[headers]]
   for = "/assets/images/*"
-  [headers.values]
-    Cache-Control = "public, max-age=2592000, stale-while-revalidate=86400"
-
-[[headers]]
-  for = "/*.js"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/*.css"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/*.png"
-  [headers.values]
-    Cache-Control = "public, max-age=2592000, stale-while-revalidate=86400"
-
-[[headers]]
-  for = "/*.jpg"
   [headers.values]
     Cache-Control = "public, max-age=2592000, stale-while-revalidate=86400"
 
@@ -82,6 +136,11 @@
 
 [[headers]]
   for = "/*.avif"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/*.jpg"
   [headers.values]
     Cache-Control = "public, max-age=2592000, stale-while-revalidate=86400"
 

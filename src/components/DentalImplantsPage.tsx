@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   PhoneCall, 
   MessageCircle, 
@@ -23,11 +23,9 @@ import {
   Check,
   X
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
-import { preloadImages } from '../utils/imagePreloader';
 import { GBP_CONFIG } from '../config/googleBusinessProfile';
 
 interface DentalImplantsPageProps {
@@ -46,14 +44,6 @@ export default function DentalImplantsPage({
   navigateToPath
 }: DentalImplantsPageProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-
-  useEffect(() => {
-    preloadImages([
-      "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1000&q=80",
-      "https://oracledentals.netlify.app/assets/images/case-03.webp",
-      "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=1000&q=80"
-    ]);
-  }, []);
 
   const faqs = [
     {
@@ -339,7 +329,7 @@ export default function DentalImplantsPage({
 
             <div className="md:col-span-5 space-y-4">
               <TreatmentImage
-                src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1000&q=80"
+                src="/assets/images/treatments/bright-smile-800.webp"
                 alt="Educational illustration showing dental implant components including titanium fixture, abutment connector, and prosthetic crown"
                 caption="Educational illustration showing the 3 main parts of a dental implant: titanium post, abutment, and custom crown."
                 aspectRatio="4/3"
@@ -410,7 +400,7 @@ export default function DentalImplantsPage({
 
           <div className="mt-8 max-w-4xl mx-auto">
             <TreatmentImage
-              src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80"
+              src="/assets/images/treatments/dental-exam-800.webp"
               alt="Educational diagram comparing single missing tooth replacement with a fixed dental implant"
               caption="Educational diagram: Missing tooth replacement using a standalone dental implant vs traditional tooth-supported bridges."
               aspectRatio="16/9"
@@ -967,19 +957,13 @@ export default function DentalImplantsPage({
                   )}
                 </button>
 
-                <AnimatePresence>
-                  {openFaq === index && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
+                                  {openFaq === index && (
+                    <div
                       className="border-t border-slate-100 px-4 sm:px-5 py-4 text-slate-600 text-sm leading-relaxed bg-slate-50/50"
                     >
                       {faq.answer}
-                    </motion.div>
+                    </div>
                   )}
-                </AnimatePresence>
               </div>
             ))}
           </div>

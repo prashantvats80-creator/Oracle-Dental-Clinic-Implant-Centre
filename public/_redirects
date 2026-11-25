@@ -1,1 +1,25 @@
-/*    /index.html   200
+# Permanent 301 Redirects for Consolidated Pages (Evaluated before SPA fallback)
+# Group A: Local Dentist / Dental Clinic -> /dentist-chipiyana-buzurg-ghaziabad
+/dentist-near-me /dentist-chipiyana-buzurg-ghaziabad 301!
+/dentist-near-me/ /dentist-chipiyana-buzurg-ghaziabad 301!
+/dentist-ghaziabad /dentist-chipiyana-buzurg-ghaziabad 301!
+/dentist-ghaziabad/ /dentist-chipiyana-buzurg-ghaziabad 301!
+/dental-clinic-ghaziabad /dentist-chipiyana-buzurg-ghaziabad 301!
+/dental-clinic-ghaziabad/ /dentist-chipiyana-buzurg-ghaziabad 301!
+
+# Group B: Gum & Periodontal Treatment -> /periodontal-gum-treatment-ghaziabad
+/gum-disease-treatment /periodontal-gum-treatment-ghaziabad 301!
+/gum-disease-treatment/ /periodontal-gum-treatment-ghaziabad 301!
+/bleeding-gums /periodontal-gum-treatment-ghaziabad 301!
+/bleeding-gums/ /periodontal-gum-treatment-ghaziabad 301!
+/swollen-gums /periodontal-gum-treatment-ghaziabad 301!
+/swollen-gums/ /periodontal-gum-treatment-ghaziabad 301!
+/gum-recession /periodontal-gum-treatment-ghaziabad 301!
+/gum-recession/ /periodontal-gum-treatment-ghaziabad 301!
+
+# Group C: Emergency Dentist -> /emergency-dentist-ghaziabad
+/emergency-dentist /emergency-dentist-ghaziabad 301!
+/emergency-dentist/ /emergency-dentist-ghaziabad 301!
+
+# SPA fallback rewrite for active canonical routes
+/* /index.html 200

@@ -10,7 +10,6 @@ import {
   ShieldCheck,
   Stethoscope
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
@@ -67,7 +66,7 @@ export default function DentalAbscessPage({
       <Breadcrumbs
         items={[
           { label: 'Dental Care in Ghaziabad', path: '/#services' },
-          { label: 'Emergency Dental Care', path: '/emergency-dentist' },
+          { label: 'Emergency Dentist in Ghaziabad', path: '/emergency-dentist-ghaziabad' },
           { label: 'Dental Abscess Treatment', path: '/dental-abscess-treatment' }
         ]}
         navigateToHome={navigateToHome}
@@ -162,8 +161,8 @@ export default function DentalAbscessPage({
             <a href="/tooth-extraction" onClick={(e) => handleLinkClick(e, '/tooth-extraction')} className="p-3 bg-white rounded-xl border border-slate-200 hover:underline flex justify-between items-center">
               Tooth Extraction <ArrowRight className="w-3.5 h-3.5" />
             </a>
-            <a href="/emergency-dentist" onClick={(e) => handleLinkClick(e, '/emergency-dentist')} className="p-3 bg-white rounded-xl border border-slate-200 hover:underline flex justify-between items-center">
-              Emergency Dentist <ArrowRight className="w-3.5 h-3.5" />
+            <a href="/emergency-dentist-ghaziabad" onClick={(e) => handleLinkClick(e, '/emergency-dentist-ghaziabad')} className="p-3 bg-white rounded-xl border border-slate-200 hover:underline flex justify-between items-center">
+              Emergency Dentist in Ghaziabad <ArrowRight className="w-3.5 h-3.5" />
             </a>
           </div>
         </section>
@@ -183,18 +182,13 @@ export default function DentalAbscessPage({
                   <span className="font-bold text-slate-900 text-sm">{faq.q}</span>
                   <ChevronDown className={`w-4 h-4 text-blue-600 shrink-0 transition-transform ${openFaq === idx ? 'rotate-180' : ''}`} />
                 </button>
-                <AnimatePresence initial={false}>
-                  {openFaq === idx && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
+                                  {openFaq === idx && (
+                    <div
                       className="overflow-hidden bg-slate-50/70 border-t border-slate-100 p-6 text-slate-600 text-xs sm:text-sm leading-relaxed"
                     >
                       {faq.a}
-                    </motion.div>
+                    </div>
                   )}
-                </AnimatePresence>
               </div>
             ))}
           </div>

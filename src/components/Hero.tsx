@@ -288,10 +288,20 @@ const Hero: React.FC<HeroProps> = ({ navigateToPath }) => {
                 <span>{GBP_CONFIG.HOURS}</span>
               </span>
               <span className="hidden sm:inline text-[#087B57]/30" aria-hidden="true">·</span>
-              <span className="inline-flex items-center gap-1.5">
+              <a
+                href={GBP_CONFIG.GOOGLE_MAPS_DIRECTIONS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackClinicEvent('directions_click', {
+                    placement: 'hero_address_link',
+                  })
+                }
+                className="inline-flex items-center gap-1.5 hover:text-[#087B57] hover:underline transition-colors"
+              >
                 <MapPin className="w-3.5 h-3.5 text-[#FF654F] shrink-0" aria-hidden="true" />
                 <span>Jaat Chowk, Near Dolphin Public School, Chipiyana Buzurg</span>
-              </span>
+              </a>
             </div>
           </div>
 
@@ -333,6 +343,11 @@ const Hero: React.FC<HeroProps> = ({ navigateToPath }) => {
               {/* Main Smiling Woman in Dental Chair Photo (Ultra-Light Responsive WebP + JPEG Fallback) */}
               <div className="hero-photo-float relative z-10 rounded-[2rem] sm:rounded-[2.25rem] overflow-hidden border-4 border-white shadow-[0_20px_44px_rgba(8,123,87,0.24)] bg-[#E5F5EC]">
                 <picture>
+                  <source
+                    type="image/avif"
+                    srcSet={`${imgPrefix}hero-patient-480.avif 480w, ${imgPrefix}hero-patient-768.avif 768w, ${imgPrefix}hero-patient-1000.avif 1000w`}
+                    sizes="(max-width: 640px) 92vw, 520px"
+                  />
                   <source
                     type="image/webp"
                     srcSet={`${imgPrefix}hero-patient-480.webp 480w, ${imgPrefix}hero-patient-768.webp 768w, ${imgPrefix}hero-patient-1000.webp 1000w`}

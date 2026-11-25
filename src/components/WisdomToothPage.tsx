@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   PhoneCall, 
   MessageCircle, 
@@ -24,11 +24,9 @@ import {
   X,
   FileText
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
-import { preloadImages } from '../utils/imagePreloader';
 
 interface WisdomToothPageProps {
   handleCall: () => void;
@@ -46,13 +44,6 @@ export default function WisdomToothPage({
   navigateToPath
 }: WisdomToothPageProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-
-  useEffect(() => {
-    preloadImages([
-      "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80",
-      "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=80"
-    ]);
-  }, []);
 
   const faqs = [
     {
@@ -326,7 +317,7 @@ export default function WisdomToothPage({
 
             <div className="md:col-span-5 space-y-4">
               <TreatmentImage
-                src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80"
+                src="/assets/images/treatments/dental-exam-800.webp"
                 alt="Educational illustration comparing normal erupting wisdom tooth with an impacted third molar"
                 caption="Educational diagram: Fully erupted normal tooth vs partially impacted third molar angled against second molar."
                 aspectRatio="4/3"
@@ -459,7 +450,7 @@ export default function WisdomToothPage({
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
             <TreatmentImage
-              src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=1000&q=80"
+              src="/assets/images/treatments/dental-tools-800.webp"
               alt="Diagram showing different clinical types of wisdom tooth impactions in the lower jaw"
               caption="Educational diagram: Clinical classifications of wisdom tooth impaction (Mesial, Horizontal, Vertical, Distal)."
               aspectRatio="4/3"
@@ -843,19 +834,13 @@ export default function WisdomToothPage({
                   )}
                 </button>
 
-                <AnimatePresence>
-                  {openFaq === index && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
+                                  {openFaq === index && (
+                    <div
                       className="border-t border-slate-100 px-4 sm:px-5 py-4 text-slate-600 text-sm leading-relaxed bg-slate-50/50"
                     >
                       {faq.answer}
-                    </motion.div>
+                    </div>
                   )}
-                </AnimatePresence>
               </div>
             ))}
           </div>

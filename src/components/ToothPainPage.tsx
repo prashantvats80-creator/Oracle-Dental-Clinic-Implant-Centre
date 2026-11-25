@@ -21,7 +21,6 @@ import {
   AlertCircle,
   Check
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
@@ -130,13 +129,13 @@ export default function ToothPainPage({
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-4">
               <TreatmentImage
-                src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=1000&q=80"
+                src="/assets/images/treatments/dental-tools-800.webp"
                 alt="Educational diagram illustrating deep cavity decay causing nerve pulp inflammation and toothache"
                 caption="Educational diagram: Deep enamel decay reaching inner pulp nerve causing throbbing tooth pain."
                 aspectRatio="4/3"
               />
               <TreatmentImage
-                src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=80"
+                src="/assets/images/treatments/dental-chair-800.webp"
                 alt="Educational illustration showing professional clinical examination for toothache diagnosis"
                 caption="Educational illustration: Clinical diagnostic examination and X-ray evaluation to identify pain root causes."
                 aspectRatio="4/3"
@@ -234,13 +233,11 @@ export default function ToothPainPage({
                   <span>Q{index + 1}: {faq.q}</span>
                   {openFaq === index ? <ChevronUp className="w-5 h-5 text-blue-600" /> : <ChevronDown className="w-5 h-5 text-slate-400" />}
                 </button>
-                <AnimatePresence>
-                  {openFaq === index && (
-                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="border-t border-slate-200 p-4 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                                  {openFaq === index && (
+                    <div className="border-t border-slate-200 p-4 text-xs sm:text-sm text-slate-600 leading-relaxed">
                       {faq.a}
-                    </motion.div>
+                    </div>
                   )}
-                </AnimatePresence>
               </div>
             ))}
           </div>

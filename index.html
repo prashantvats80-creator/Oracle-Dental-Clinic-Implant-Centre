@@ -14,28 +14,48 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-    <!-- Google Tag Manager (GTM-P8XCSB9P) -->
-    <script>
-      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-P8XCSB9P');
-    </script>
-    <!-- End Google Tag Manager -->
-
-    <!-- Google tag (gtag.js) - Direct GA4 (G-57S4LGPZ65) & existing Google Ads (AW-16678614351) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-57S4LGPZ65"></script>
+    <!-- Privacy-Safe User-First Deferred Google Tag Loader (Single GTM-P8XCSB9P managing GA4 G-57S4LGPZ65 + Google Ads AW-16678614351, Zero Duplicate Tags) -->
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag(){window.dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-57S4LGPZ65');
       gtag('config', 'AW-16678614351');
+      (function(w, d) {
+        var loaded = false;
+        var events = ['pointerdown', 'keydown', 'scroll', 'touchstart'];
+        function loadGoogleTags() {
+          if (loaded) return;
+          loaded = true;
+          events.forEach(function(evt) { w.removeEventListener(evt, loadGoogleTags); });
+          // Load GTM-P8XCSB9P once (verified container loads both GA4 G-57S4LGPZ65 & Google Ads AW-16678614351)
+          w.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+          var gtm = d.createElement('script');
+          gtm.async = true;
+          gtm.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-P8XCSB9P';
+          d.head.appendChild(gtm);
+        }
+        events.forEach(function(evt) {
+          w.addEventListener(evt, loadGoogleTags, { passive: true, once: true });
+        });
+        function scheduleIdleLoad() {
+          w.setTimeout(function() {
+            if ('requestIdleCallback' in w) {
+              w.requestIdleCallback(loadGoogleTags, { timeout: 2500 });
+            } else {
+              loadGoogleTags();
+            }
+          }, 6500);
+        }
+        if (d.readyState === 'complete') {
+          scheduleIdleLoad();
+        } else {
+          w.addEventListener('load', scheduleIdleLoad, { once: true });
+        }
+      })(window, document);
     </script>
 
-    <title>Oracle Dental Clinic | Dentist &amp; Dental Implants in Chipiyana Buzurg, Ghaziabad</title>
-    <meta name="description" content="Visit Dr. Prashant Kumar Vats (BDS, MIDA) at Oracle Dental Clinic &amp; Implant Center, Jaat Chowk, Chipiyana Buzurg, Ghaziabad. Open Daily: 9:00 AM – 9:00 PM for dental implants, RCT, crowns, wisdom tooth &amp; emergency dental care." />
+    <title>Oracle Dental Clinic | Dentist in Chipiyana, Ghaziabad</title>
+    <meta name="description" content="Visit Dr. Prashant Kumar Vats (BDS, MIDA) at Oracle Dental Clinic, Jaat Chowk, Chipiyana Buzurg, Ghaziabad. Implants, RCT, crowns &amp; daily 9 AM–9 PM care." />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <link rel="canonical" href="https://oracledentals.netlify.app/" />
 
@@ -43,41 +63,67 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_IN" />
     <meta property="og:site_name" content="Oracle Dental Clinic &amp; Implant Center" />
-    <meta property="og:title" content="Oracle Dental Clinic | Dentist &amp; Dental Implants in Chipiyana Buzurg, Ghaziabad" />
-    <meta property="og:description" content="Visit Dr. Prashant Kumar Vats (BDS, MIDA) at Oracle Dental Clinic &amp; Implant Center, Jaat Chowk, Chipiyana Buzurg, Ghaziabad. Open Daily: 9:00 AM – 9:00 PM for dental implants, RCT, crowns, wisdom tooth &amp; emergency dental care." />
+    <meta property="og:title" content="Oracle Dental Clinic | Dentist in Chipiyana, Ghaziabad" />
+    <meta property="og:description" content="Visit Dr. Prashant Kumar Vats (BDS, MIDA) at Oracle Dental Clinic, Jaat Chowk, Chipiyana Buzurg, Ghaziabad. Implants, RCT, crowns &amp; daily 9 AM–9 PM care." />
     <meta property="og:url" content="https://oracledentals.netlify.app/" />
     <meta property="og:image" content="https://oracledentals.netlify.app/assets/images/hero-patient.jpg" />
 
     <!-- Twitter / X Card Metadata -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Oracle Dental Clinic | Dentist &amp; Dental Implants in Chipiyana Buzurg, Ghaziabad" />
-    <meta name="twitter:description" content="Visit Dr. Prashant Kumar Vats (BDS, MIDA) at Oracle Dental Clinic &amp; Implant Center, Jaat Chowk, Chipiyana Buzurg, Ghaziabad. Open Daily: 9:00 AM – 9:00 PM for dental implants, RCT, crowns &amp; emergency care." />
+    <meta name="twitter:title" content="Oracle Dental Clinic | Dentist in Chipiyana, Ghaziabad" />
+    <meta name="twitter:description" content="Visit Dr. Prashant Kumar Vats (BDS, MIDA) at Oracle Dental Clinic, Jaat Chowk, Chipiyana Buzurg, Ghaziabad. Implants, RCT, crowns &amp; daily 9 AM–9 PM care." />
     <meta name="twitter:image" content="https://oracledentals.netlify.app/assets/images/hero-patient.jpg" />
 
-    <!-- Preload Critical LCP Hero Image (Responsive WebP: ~9 KB mobile, ~18 KB tablet) -->
-    <link
-      rel="preload"
-      as="image"
-      type="image/webp"
-      href="/assets/images/hero-patient-768.webp"
-      imagesrcset="/assets/images/hero-patient-480.webp 480w, /assets/images/hero-patient-768.webp 768w, /assets/images/hero-patient-1000.webp 1000w"
-      imagesizes="(max-width: 640px) 92vw, 520px"
-      fetchpriority="high"
-    />
+    <!-- Preload Critical LCP Hero Image ONLY on Homepage (Avoids Wasted Download on 46 Subpages) -->
+    <script>
+      (function(d, l) {
+        var p = l.pathname;
+        if (p === '/' || p === '' || p === '/index.html') {
+          var link = d.createElement('link');
+          link.rel = 'preload';
+          link.as = 'image';
+          link.type = 'image/avif';
+          link.href = '/assets/images/hero-patient-768.avif';
+          link.imageSrcset = '/assets/images/hero-patient-480.avif 480w, /assets/images/hero-patient-768.avif 768w, /assets/images/hero-patient-1000.avif 1000w';
+          link.imageSizes = '(max-width: 640px) 92vw, 520px';
+          link.setAttribute('fetchpriority', 'high');
+          d.head.appendChild(link);
+        }
+      })(document, window.location);
+    </script>
 
-    <!-- Lean Non-Blocking Display Font Only (System UI used for instant 2G body rendering) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&display=swap" media="print" onload="this.media='all'" />
-    <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&display=swap" />
-    </noscript>
+    <!-- Self-Hosted Variable Display Font (Zero External DNS/TLS, font-display: swap) -->
+    <link rel="preload" href="/assets/fonts/outfit-latin.woff2" as="font" type="font/woff2" crossorigin />
 
-    <!-- Official Botpress AI Dental Assistant Stylesheet (Non-Render-Blocking, Loaded Once) -->
-    <link rel="stylesheet" href="https://vdk-viber-runtime-prod.bot.botpress.host/edge/webchat.css" media="print" onload="this.media='all'" />
-    <noscript>
-      <link rel="stylesheet" href="https://vdk-viber-runtime-prod.bot.botpress.host/edge/webchat.css" />
-    </noscript>
+    <!-- Minimal Inline Critical Above-the-Fold CSS (Eliminates Render-Blocking Stylesheet with Zero FOUC & Zero CLS) -->
+    <style id="critical-css">
+      @font-face{font-family:"Outfit";font-style:normal;font-weight:600 800;font-display:swap;src:url("/assets/fonts/outfit-latin.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+      *,*::before,*::after{box-sizing:border-box}
+      html{background:#FFF8EC;-webkit-text-size-adjust:100%}
+      body{margin:0;background:#FFF8EC;color:#26352F;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;overflow-x:clip}
+      h1,h2,h3,h4,h5,h6{font-family:"Outfit",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;margin:0}
+      p{margin:0}
+      a{text-decoration:none;color:inherit}
+      #initial-lcp-shell{min-height:100vh;background:#FFF8EC;color:#26352F}
+      #initial-lcp-shell .crit-topbar{display:none;background:#087B57;color:#fff;font-size:.75rem;padding:.5rem 1.5rem;justify-content:space-between;align-items:center;border-bottom:1px solid #066647}
+      #initial-lcp-shell header{background:rgba(255,255,255,.95);position:sticky;top:0;z-index:40;border-bottom:1px solid rgba(8,123,87,.12)}
+      #initial-lcp-shell .crit-hdr-in{max-width:80rem;margin:0 auto;padding:0 1rem;height:4rem;display:flex;justify-content:space-between;align-items:center}
+      #initial-lcp-shell .crit-brand{display:flex;align-items:center;gap:.625rem}
+      #initial-lcp-shell .crit-logo{width:2.5rem;height:2.5rem;border-radius:.75rem;background:linear-gradient(135deg,#087B57,#00A99D);color:#fff;font-weight:700;font-size:1.25rem;display:flex;align-items:center;justify-content:center}
+      #initial-lcp-shell .crit-hero{background:linear-gradient(180deg,#FFF8EC,#FFF8EC,rgba(255,242,219,.7));padding:1.5rem 1rem 3rem}
+      #initial-lcp-shell .crit-grid{max-width:80rem;margin:0 auto;display:grid;grid-template-columns:1fr;gap:2rem;align-items:center}
+      #initial-lcp-shell .crit-copy{text-align:center;display:flex;flex-direction:column;gap:1rem}
+      #initial-lcp-shell h1{font-size:2.15rem;font-weight:800;line-height:1.06;letter-spacing:-.025em;color:#087B57}
+      #initial-lcp-shell .crit-grad{background:linear-gradient(90deg,#FF654F,#FF8A24);-webkit-background-clip:text;background-clip:text;color:transparent}
+      #initial-lcp-shell .crit-btns{display:flex;flex-direction:column;gap:.75rem;padding-top:.25rem}
+      #initial-lcp-shell .crit-cta-p{min-height:52px;padding:.875rem 2rem;border-radius:9999px;background:linear-gradient(90deg,#FF654F,#FF8A24);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+      #initial-lcp-shell .crit-cta-s{min-height:52px;padding:.875rem 1.75rem;border-radius:9999px;background:#fff;color:#087B57;border:2px solid rgba(8,123,87,.3);font-weight:800;display:flex;align-items:center;justify-content:center}
+      #initial-lcp-shell .crit-media{max-width:460px;width:100%;margin:0 auto;border-radius:2rem;overflow:hidden;border:4px solid #fff;background:#E5F5EC}
+      #initial-lcp-shell img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;display:block}
+      @media(min-width:640px){#initial-lcp-shell h1{font-size:3rem}#initial-lcp-shell .crit-btns{flex-direction:row;justify-content:center}}
+      @media(min-width:768px){#initial-lcp-shell .crit-topbar{display:flex}#initial-lcp-shell .crit-hdr-in{height:5rem;padding:0 1.5rem}}
+      @media(min-width:1024px){#initial-lcp-shell .crit-grid{grid-template-columns:repeat(12,minmax(0,1fr))}#initial-lcp-shell .crit-copy{grid-column:span 6/span 6;text-align:left}#initial-lcp-shell .crit-btns{justify-content:flex-start}#initial-lcp-shell .crit-col-r{grid-column:span 6/span 6}#initial-lcp-shell h1{font-size:3.75rem}#initial-lcp-shell .crit-media{max-width:520px}}
+    </style>
 
     <!-- Unified Schema.org Structured Data Graph (Single Business Entity Identifier) -->
     <script type="application/ld+json" id="oracle-dental-schema-graph">
@@ -183,119 +229,79 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P8XCSB9P" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-
-    <!-- Official Botpress AI Dental Assistant Webchat (Single Load & Single Initialization) -->
-    <script
-      id="oracle-botpress-webchat-script"
-      src="https://vdk-viber-runtime-prod.bot.botpress.host/edge/webchat.js"
-      defer
-    ></script>
+    <div id="root">
+      <!-- Zero-CLS Pre-Hydration Homepage Hero Shell for Instant Mobile LCP (Removed Immediately on Non-Home Routes & Replaced Seamlessly by React) -->
+      <div id="initial-lcp-shell" class="min-h-screen bg-[#FFF8EC] font-sans text-[#26352F]">
+        <div class="crit-topbar hidden md:flex bg-[#087B57] text-white text-xs py-2 px-6 justify-between items-center border-b border-[#066647]">
+          <div class="flex items-center gap-5 font-medium">
+            <span>Open Daily: 9:00 AM – 9:00 PM</span>
+            <span>Jaat Chowk, Chipiyana Buzurg, Ghaziabad</span>
+          </div>
+          <a href="tel:+917011961515" class="font-bold">+91 7011961515</a>
+        </div>
+        <header class="bg-white/95 shadow-xs sticky top-0 z-40 border-b border-[#087B57]/12">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="crit-hdr-in flex justify-between items-center h-16 md:h-20">
+              <a href="/" class="crit-brand flex-shrink-0 flex items-center gap-2.5" aria-label="Oracle Dental Clinic &amp; Implant Center Home">
+                <div class="crit-logo w-10 h-10 md:w-11 md:h-11 bg-gradient-to-br from-[#087B57] to-[#00A99D] rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-xs">O</div>
+                <div class="flex flex-col">
+                  <span class="font-bold text-lg md:text-xl leading-tight text-[#087B57] whitespace-nowrap">Oracle Dental</span>
+                  <span class="text-[11px] text-[#FF8A24] font-bold tracking-wide whitespace-nowrap">Clinic &amp; Implant Center</span>
+                </div>
+              </a>
+              <a href="tel:+917011961515" class="min-h-[42px] px-4 py-2 text-xs font-extrabold text-white bg-gradient-to-r from-[#FF654F] to-[#FF8A24] rounded-full inline-flex items-center">Call +91 7011961515</a>
+            </div>
+          </div>
+        </header>
+        <main>
+          <section class="crit-hero relative bg-gradient-to-b from-[#FFF8EC] via-[#FFF8EC] to-[#FFF2DB]/70 text-[#26352F] overflow-hidden">
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12 sm:pt-9 sm:pb-16 md:pt-12 md:pb-20">
+              <div class="crit-grid grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="crit-copy lg:col-span-6 text-center lg:text-left space-y-4 sm:space-y-5">
+                  <div class="flex flex-wrap items-center justify-center lg:justify-start gap-x-2.5 gap-y-1 text-xs sm:text-sm font-semibold">
+                    <span class="inline-flex items-center gap-1.5 text-[#087B57]">Oracle Dental Clinic &amp; Implant Center</span>
+                    <span aria-hidden="true" class="text-[#FF8A24]">·</span>
+                    <span class="text-[#26352F]/80">Chipiyana Buzurg, Ghaziabad</span>
+                  </div>
+                  <h1 class="text-[2.15rem] sm:text-5xl lg:text-[3.75rem] font-extrabold tracking-tight leading-[1.06] text-[#087B57]">
+                    Healthy Smile. <span class="crit-grad bg-gradient-to-r from-[#FF654F] to-[#FF8A24] bg-clip-text text-transparent">Happier You!</span>
+                  </h1>
+                  <p class="text-lg sm:text-2xl font-extrabold text-[#26352F] leading-snug">Expert Dental Care for the Whole Family</p>
+                  <p class="text-xs sm:text-base font-bold text-[#00A99D] tracking-wide">Modern Treatment • Advanced Technology • Gentle Care</p>
+                  <p class="text-sm sm:text-base text-[#26352F]/85 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                    Trusted dentist in Chipiyana Buzurg near Jaat Chowk, Ghaziabad for dental implants, root canal treatment (RCT), zirconia crowns, smile makeovers, braces, clear aligners, and emergency dental care (Open Daily: 9:00 AM – 9:00 PM).
+                  </p>
+                  <div class="crit-btns flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-1">
+                    <a href="https://wa.me/917011961515?text=Hello%20Oracle%20Dental%20Clinic%2C%20I%20want%20to%20book%20a%20dental%20appointment." target="_blank" rel="noopener noreferrer" class="crit-cta-p w-full sm:w-auto min-h-[52px] bg-gradient-to-r from-[#FF654F] to-[#FF8A24] text-white font-extrabold text-base py-3.5 px-8 rounded-full flex items-center justify-center">Book Appointment</a>
+                    <a href="tel:+917011961515" class="crit-cta-s w-full sm:w-auto min-h-[52px] bg-white text-[#087B57] border-2 border-[#087B57]/30 font-extrabold text-base py-3.5 px-7 rounded-full flex items-center justify-center">Call +91 7011961515</a>
+                  </div>
+                </div>
+                <div class="crit-col-r lg:col-span-6 relative flex justify-center items-center pt-2 pb-6 sm:py-6">
+                  <div class="relative w-full max-w-[460px] lg:max-w-[520px] mx-auto">
+                    <div class="crit-media relative z-10 rounded-[2rem] sm:rounded-[2.25rem] overflow-hidden border-4 border-white shadow-[0_20px_44px_rgba(8,123,87,0.24)] bg-[#E5F5EC]">
+                      <picture>
+                        <source type="image/avif" srcset="/assets/images/hero-patient-480.avif 480w, /assets/images/hero-patient-768.avif 768w, /assets/images/hero-patient-1000.avif 1000w" sizes="(max-width: 640px) 92vw, 520px" />
+                        <source type="image/webp" srcset="/assets/images/hero-patient-480.webp 480w, /assets/images/hero-patient-768.webp 768w, /assets/images/hero-patient-1000.webp 1000w" sizes="(max-width: 640px) 92vw, 520px" />
+                        <img src="/assets/images/hero-patient.jpg" alt="Smiling young woman seated comfortably in a dental chair during a cheerful checkup" width="1000" height="667" class="w-full h-auto aspect-[3/2] object-cover object-center block" loading="eager" decoding="async" fetchpriority="high" />
+                      </picture>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
     <script>
-      (function () {
-        var BOTPRESS_BASE_URL = 'https://vdk-viber-runtime-prod.bot.botpress.host';
-        var BOTPRESS_BOT_ID = '50dd1c17-0fec-434b-b1ef-9ff0c3757ce1';
-        var BOTPRESS_CONFIG_URL = BOTPRESS_BASE_URL + '/edge/bots/' + BOTPRESS_BOT_ID + '/config';
-        var scriptEl = document.getElementById('oracle-botpress-webchat-script');
-        var scriptFailed = false;
-
-        if (scriptEl) {
-          scriptEl.addEventListener(
-            'error',
-            function () {
-              scriptFailed = true;
-            },
-            { once: true }
-          );
-        }
-
-        window.__initOracleBotpress = function () {
-          if (window.__oracleBotpressInstance) {
-            return Promise.resolve(window.__oracleBotpressInstance);
-          }
-          if (window.__oracleBotpressPromise) {
-            return window.__oracleBotpressPromise;
-          }
-          if (scriptFailed) {
-            return Promise.reject(new Error('Botpress webchat script failed to load'));
-          }
-
-          window.__oracleBotpressPromise = new Promise(function (resolve, reject) {
-            function mountOnce() {
-              if (!window.VdkEdgeWebchat || typeof window.VdkEdgeWebchat.mount !== 'function') {
-                window.__oracleBotpressPromise = null;
-                reject(new Error('VdkEdgeWebchat not available'));
-                return;
-              }
-
-              fetch(BOTPRESS_CONFIG_URL)
-                .then(function (res) {
-                  if (!res.ok) throw new Error('Botpress config fetch failed: ' + res.status);
-                  return res.json();
-                })
-                .then(function (data) {
-                  var webchat = data && data.webchat ? data.webchat : {};
-                  return window.VdkEdgeWebchat.mount(
-                    Object.assign({}, webchat, {
-                      mode: 'bubble',
-                      baseUrl: BOTPRESS_BASE_URL,
-                      botId: BOTPRESS_BOT_ID,
-                    })
-                  );
-                })
-                .then(function (instance) {
-                  window.__oracleBotpressInstance = instance;
-                  resolve(instance);
-                })
-                .catch(function (err) {
-                  window.__oracleBotpressPromise = null;
-                  reject(err);
-                });
-            }
-
-            if (window.VdkEdgeWebchat && typeof window.VdkEdgeWebchat.mount === 'function') {
-              mountOnce();
-            } else if (scriptEl) {
-              scriptEl.addEventListener('load', mountOnce, { once: true });
-              scriptEl.addEventListener(
-                'error',
-                function () {
-                  window.__oracleBotpressPromise = null;
-                  reject(new Error('Failed to load Botpress webchat script'));
-                },
-                { once: true }
-              );
-            } else {
-              window.__oracleBotpressPromise = null;
-              reject(new Error('Botpress script element missing'));
-            }
-          });
-
-          return window.__oracleBotpressPromise;
-        };
-
-        function scheduleBotpressInit() {
-          if ('requestIdleCallback' in window) {
-            window.requestIdleCallback(
-              function () {
-                window.__initOracleBotpress().catch(function () {});
-              },
-              { timeout: 2500 }
-            );
-          } else {
-            window.setTimeout(function () {
-              window.__initOracleBotpress().catch(function () {});
-            }, 1500);
-          }
-        }
-
-        if (document.readyState === 'complete') {
-          scheduleBotpressInit();
-        } else {
-          window.addEventListener('load', scheduleBotpressInit, { once: true });
+      (function() {
+        var p = window.location.pathname;
+        if (p !== '/' && p !== '' && p !== '/index.html') {
+          var shell = document.getElementById('initial-lcp-shell');
+          if (shell) shell.remove();
         }
       })();
     </script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -72,7 +72,7 @@ export default function KidsDentistPage({ handleCall, handleWhatsApp, navigateTo
             </div>
 
             <TreatmentImage
-              src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80"
+              src="/assets/images/treatments/dental-exam-800.webp"
               alt="Friendly child dental examination and preventive oral care"
               caption="Educational illustration: Friendly, stress-free pediatric dental examination and milk tooth evaluation."
               aspectRatio="4/3"
@@ -87,7 +87,7 @@ export default function KidsDentistPage({ handleCall, handleWhatsApp, navigateTo
           </p>
 
           <TreatmentImage
-            src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1000&q=80"
+            src="/assets/images/treatments/bright-smile-800.webp"
             alt="Educational illustration showing children brushing techniques and cavity prevention"
             caption="Educational diagram: Proper children's brushing techniques and preventive sealant protection."
             aspectRatio="16/9"

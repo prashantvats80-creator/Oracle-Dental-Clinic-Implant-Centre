@@ -23,19 +23,20 @@ import {
 import { SoundProvider, useSound } from './components/SoundManager';
 import { InteractiveButton } from './components/InteractiveButton';
 import Hero from './components/Hero';
-import DoctorProfile from './components/DoctorProfile';
 import SEOHead from './components/SEOHead';
 import ScrollProgressBar from './components/ScrollProgressBar';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import FloatingAppointmentButtons from './components/FloatingAppointmentButtons';
-import TreatmentAppointmentCTA from './components/TreatmentAppointmentCTA';
 import { GBP_CONFIG, getTreatmentWhatsAppUrl } from './config/googleBusinessProfile';
 import { ROUTE_SEO_MAP, NOT_FOUND_SEO } from './config/seoData';
-import { preloadAllTopRoutes, preloadRoute } from './utils/routePreloader';
+import { preloadRoute } from './utils/routePreloader';
 import { trackClinicEvent } from './utils/analytics';
 import SkeletonHero from './components/SkeletonHero';
 import { SkeletonCardGrid } from './components/SkeletonCard';
+import DeferredSection from './components/DeferredSection';
 
+const DoctorProfile = lazy(() => import('./components/DoctorProfile'));
+const TreatmentAppointmentCTA = lazy(() => import('./components/TreatmentAppointmentCTA'));
 const BeforeAfter = lazy(() => import('./components/BeforeAfter'));
 const Services = lazy(() => import('./components/Services'));
 const WhyUs = lazy(() => import('./components/WhyUs'));
@@ -60,7 +61,6 @@ const WisdomToothPage = lazy(() => import('./components/WisdomToothPage'));
 const TeethWhiteningPage = lazy(() => import('./components/TeethWhiteningPage'));
 const TeethCleaningPage = lazy(() => import('./components/TeethCleaningPage'));
 const ToothPainPage = lazy(() => import('./components/ToothPainPage'));
-const BleedingGumsPage = lazy(() => import('./components/BleedingGumsPage'));
 const ToothSensitivityPage = lazy(() => import('./components/ToothSensitivityPage'));
 const BadBreathPage = lazy(() => import('./components/BadBreathPage'));
 const LooseToothPage = lazy(() => import('./components/LooseToothPage'));
@@ -69,19 +69,12 @@ const ChippedToothPage = lazy(() => import('./components/ChippedToothPage'));
 const BlackToothPage = lazy(() => import('./components/BlackToothPage'));
 const MissingTeethPage = lazy(() => import('./components/MissingTeethPage'));
 const CavityTreatmentPage = lazy(() => import('./components/CavityTreatmentPage'));
-const GumDiseasePage = lazy(() => import('./components/GumDiseasePage'));
-const SwollenGumsPage = lazy(() => import('./components/SwollenGumsPage'));
-const GumRecessionPage = lazy(() => import('./components/GumRecessionPage'));
 const ToothCapPage = lazy(() => import('./components/ToothCapPage'));
 const ToothExtractionPage = lazy(() => import('./components/ToothExtractionPage'));
-const EmergencyDentistPage = lazy(() => import('./components/EmergencyDentistPage'));
 const KidsDentistPage = lazy(() => import('./components/KidsDentistPage'));
 const DentalFillingsPage = lazy(() => import('./components/DentalFillingsPage'));
 const DentalBridgesPage = lazy(() => import('./components/DentalBridgesPage'));
 const DenturesPage = lazy(() => import('./components/DenturesPage'));
-const DentistGhaziabadPage = lazy(() => import('./components/DentistGhaziabadPage'));
-const DentalClinicGhaziabadPage = lazy(() => import('./components/DentalClinicGhaziabadPage'));
-const DentistNearMePage = lazy(() => import('./components/DentistNearMePage'));
 const DentalTreatmentCostPage = lazy(() => import('./components/DentalTreatmentCostPage'));
 const DentalImplantCostPage = lazy(() => import('./components/DentalImplantCostPage'));
 const RootCanalCostPage = lazy(() => import('./components/RootCanalCostPage'));
@@ -100,6 +93,18 @@ const EmergencyDentistGhaziabadPage = lazy(() => import('./components/EmergencyD
 const ImmediateDentalImplantPage = lazy(() => import('./components/ImmediateDentalImplantPage'));
 const SmileMakeoverGhaziabadPage = lazy(() => import('./components/SmileMakeoverGhaziabadPage'));
 const PrivacyPolicyPage = lazy(() => import('./components/PrivacyPolicyPage'));
+
+// Client-side fallback mirror of Netlify 301 redirects (used during local dev or direct history transitions)
+const CONSOLIDATED_REDIRECTS: Record<string, string> = {
+  '/dentist-near-me': '/dentist-chipiyana-buzurg-ghaziabad',
+  '/dentist-ghaziabad': '/dentist-chipiyana-buzurg-ghaziabad',
+  '/dental-clinic-ghaziabad': '/dentist-chipiyana-buzurg-ghaziabad',
+  '/gum-disease-treatment': '/periodontal-gum-treatment-ghaziabad',
+  '/bleeding-gums': '/periodontal-gum-treatment-ghaziabad',
+  '/swollen-gums': '/periodontal-gum-treatment-ghaziabad',
+  '/gum-recession': '/periodontal-gum-treatment-ghaziabad',
+  '/emergency-dentist': '/emergency-dentist-ghaziabad',
+};
 
 const ALL_DENTAL_PAGES = [
   // Key Treatments, Cosmetic & Locations (26)
@@ -122,17 +127,12 @@ const ALL_DENTAL_PAGES = [
   { title: 'Dental Bridges', path: '/dental-bridges', category: 'Treatment', keywords: 'fixed bridge missing teeth ceramic' },
   { title: 'Dentures', path: '/dentures', category: 'Treatment', keywords: 'false teeth complete partial acrylic flexible' },
   { title: 'Kids Dentist', path: '/kids-dentist', category: 'Treatment', keywords: 'pediatric children dental care child tooth fluoride sealants' },
-  { title: 'Emergency Dental Care', path: '/emergency-dentist', category: 'Treatment', keywords: 'urgent toothache trauma swelling emergency dentist 9 am 9 pm' },
   { title: 'Dental Implant After Tooth Extraction', path: '/dental-implant-after-tooth-extraction', category: 'Treatment', keywords: 'immediate implant same day extraction socket bone graft' },
-  { title: 'Dentist in Chipiyana Buzurg', path: '/dentist-chipiyana-buzurg-ghaziabad', category: 'Location', keywords: 'chipiyana clinic local branch jaat chowk dolphin public school' },
-  { title: 'Dentist in Ghaziabad', path: '/dentist-ghaziabad', category: 'Location', keywords: 'ghaziabad dental clinic dr prashant kumar vats bds' },
-  { title: 'Dental Clinic in Ghaziabad', path: '/dental-clinic-ghaziabad', category: 'Location', keywords: 'ghaziabad center facility kts complex' },
-  { title: 'Dentist Near Me', path: '/dentist-near-me', category: 'Location', keywords: 'nearby dentist clinic close to me directions crossings republik shahberi' },
+  { title: 'Dentist & Dental Clinic in Chipiyana, Ghaziabad', path: '/dentist-chipiyana-buzurg-ghaziabad', category: 'Location', keywords: 'dentist near me ghaziabad dental clinic chipiyana buzurg jaat chowk dolphin public school crossings republik noida extension greater noida west shahberi' },
   { title: 'Impacted Wisdom Tooth', path: '/impacted-wisdom-tooth', category: 'Treatment', keywords: 'horizontal wisdom tooth surgery pain swelling pericoronitis' },
 
-  // Symptoms, Conditions & Urgent Care (16)
+  // Symptoms, Conditions & Urgent Care (12)
   { title: 'Tooth Pain Treatment', path: '/tooth-pain-treatment', category: 'Symptom', keywords: 'toothache throbbing sharp pain relief ache' },
-  { title: 'Bleeding Gums Care', path: '/bleeding-gums', category: 'Symptom', keywords: 'gingivitis blood brushing red gums tender' },
   { title: 'Tooth Sensitivity Relief', path: '/tooth-sensitivity', category: 'Symptom', keywords: 'sensitive teeth hot cold sweet tingling enamel' },
   { title: 'Bad Breath Treatment', path: '/bad-breath-treatment', category: 'Symptom', keywords: 'halitosis mouth odor smell tongue bacteria' },
   { title: 'Loose Tooth Care', path: '/loose-tooth-treatment', category: 'Symptom', keywords: 'mobile shaky wobbly tooth bone loss periodontitis' },
@@ -141,12 +141,9 @@ const ALL_DENTAL_PAGES = [
   { title: 'Black / Dark Tooth Care', path: '/black-tooth', category: 'Symptom', keywords: 'discolored dark dead tooth stain pulp trauma' },
   { title: 'Missing Teeth Options', path: '/missing-teeth', category: 'Symptom', keywords: 'gap missing tooth replace implant bridge' },
   { title: 'Cavity Treatment', path: '/cavity-treatment', category: 'Symptom', keywords: 'caries hole tooth decay filling restoration' },
-  { title: 'Gum Disease Care', path: '/gum-disease-treatment', category: 'Symptom', keywords: 'periodontitis pockets bone loss scaling root planing' },
-  { title: 'Swollen Gums Care', path: '/swollen-gums', category: 'Symptom', keywords: 'puffy inflamed gums abscess infection tenderness' },
-  { title: 'Gum Recession Care', path: '/gum-recession', category: 'Symptom', keywords: 'receding gums exposed roots sensitivity grafting' },
   { title: 'Dental Abscess Treatment', path: '/dental-abscess-treatment', category: 'Urgent Care', keywords: 'pus swelling infection dental abscess emergency face' },
-  { title: 'Periodontal Gum Treatment', path: '/periodontal-gum-treatment-ghaziabad', category: 'Specialized', keywords: 'deep cleaning scaling root planing bone loss pockets' },
-  { title: 'Emergency Dentist in Ghaziabad', path: '/emergency-dentist-ghaziabad', category: 'Urgent Care', keywords: 'urgent toothache emergency clinic daily 9 am 9 pm pain swelling relief' },
+  { title: 'Gum & Periodontal Treatment', path: '/periodontal-gum-treatment-ghaziabad', category: 'Specialized', keywords: 'gum disease bleeding gums swollen gums gum recession gingivitis periodontitis deep cleaning scaling root planing bone loss pockets' },
+  { title: 'Emergency Dentist in Ghaziabad', path: '/emergency-dentist-ghaziabad', category: 'Urgent Care', keywords: 'emergency dentist urgent toothache emergency clinic daily 9 am 9 pm pain swelling broken tooth trauma relief' },
 
   // Cost Guides (11)
   { title: 'Dental Treatment Cost', path: '/dental-treatment-cost-ghaziabad', category: 'Cost Guide', keywords: 'cost price charges fee estimates consultation' },
@@ -202,6 +199,9 @@ function AppContent() {
   const [isNavDropdownOpen, setIsNavDropdownOpen] = useState(false);
   const [isMobileTreatmentsOpen, setIsMobileTreatmentsOpen] = useState(false);
   const [mobileSearchQuery, setMobileSearchQuery] = useState('');
+  const [forceMountSections, setForceMountSections] = useState(
+    () => typeof window !== 'undefined' && window.location.hash.length > 1
+  );
 
   useEffect(() => {
     if (!isMenuOpen) {
@@ -224,7 +224,6 @@ function AppContent() {
   useEffect(() => {
     const handlePopState = () => setCurrentPath(window.location.pathname);
     window.addEventListener('popstate', handlePopState);
-    preloadAllTopRoutes();
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
@@ -258,6 +257,9 @@ function AppContent() {
     if (clean === '/' || clean === '' || clean === '/index.html') {
       return { route: '/', isNotFound: false };
     }
+    if (CONSOLIDATED_REDIRECTS[clean]) {
+      return { route: CONSOLIDATED_REDIRECTS[clean], isNotFound: false };
+    }
     for (const route of KNOWN_ROUTES) {
       if (clean === route || clean.endsWith(route)) {
         return { route, isNotFound: false };
@@ -267,6 +269,18 @@ function AppContent() {
   };
 
   const { route: activeRoute, isNotFound } = resolveRoute(currentPath);
+
+  useEffect(() => {
+    const clean =
+      currentPath.endsWith('/') && currentPath.length > 1 ? currentPath.slice(0, -1) : currentPath;
+    const redirectTarget = CONSOLIDATED_REDIRECTS[clean];
+    if (redirectTarget) {
+      const base = getBasePath();
+      const fullPath = base ? base + redirectTarget : redirectTarget;
+      window.history.replaceState({}, '', fullPath);
+      setCurrentPath(redirectTarget);
+    }
+  }, [currentPath]);
 
   const navigateToPath = (path: string) => {
     const base = getBasePath();
@@ -303,78 +317,62 @@ function AppContent() {
     });
   }, [activeRoute, isNotFound]);
 
-  const faqs = [
-    {
-      question: 'Where is Oracle Dental Clinic located in Chipiyana Buzurg, Ghaziabad?',
-      answer:
-        'Oracle Dental Clinic & Implant Center is located at Shop No. 47, KTS Complex, Jaat Chowk, Near Dolphin Public School, Chipiyana Buzurg, Ghaziabad, Uttar Pradesh 201009. Patients regularly visit us from Jaat Chowk, Crossings Republik, ABES Engineering College surroundings, Shahberi, Noida Extension, nearby Greater Noida West residential societies, and Lal Kuan.',
-    },
-    {
-      question: 'What are the clinic timings and emergency consultation hours?',
-      answer:
-        'Oracle Dental Clinic & Implant Center is Open Daily: 9:00 AM – 9:00 PM (Monday to Sunday). For urgent toothache, swelling, or prompt dental consultations, call or WhatsApp +91 7011961515 before visiting so the clinic can coordinate immediate care.',
-    },
-    {
-      question: 'How much does a dental implant cost in Ghaziabad?',
-      answer:
-        'Dental implant cost depends on the implant system selected, crown material (such as zirconia or ceramic), number of teeth replaced, and whether bone grafting or sinus lift procedures are needed. During your consultation with Dr. Prashant Kumar Vats (BDS, MIDA), a clinical exam and diagnostic scan are reviewed before sharing a transparent written estimate.',
-    },
-    {
-      question: 'Does root canal treatment (RCT) hurt and how many visits are needed?',
-      answer:
-        'Root canal treatment is performed under local anesthesia to keep you comfortable while removing infected pulp tissue. Depending on tooth anatomy and infection severity, RCT may be completed in one visit or across two to three sittings. Mild post-procedure tenderness for a couple of days is common and manageable with prescribed care.',
-    },
-    {
-      question: 'When is wisdom tooth extraction recommended?',
-      answer:
-        'Wisdom tooth removal is evaluated when a third molar is impacted, causes recurring gum swelling (pericoronitis), traps food, damages the neighboring molar, or creates persistent jaw discomfort. Dr. Prashant Kumar Vats (BDS, MIDA) reviews clinical findings and X-rays before recommending extraction.',
-    },
-    {
-      question: 'What is the difference between dental braces and clear aligners?',
-      answer:
-        'Fixed metal or ceramic braces use brackets and archwires and are well suited for mild to complex bite or crowding corrections. Clear aligners are removable, transparent trays worn 20–22 hours daily and are often chosen by adults and teens for discreet alignment and easier brushing. Suitability depends on your orthodontic assessment.',
-    },
-    {
-      question: 'Do you offer full mouth dental implants and smile makeovers?',
-      answer:
-        'Yes. We provide single, multiple, and full-arch implant restorations (including All-on-4 and All-on-6 protocols) as well as cosmetic dentistry options including dental veneers, zirconia crowns, E-max crowns, teeth whitening, composite bonding, and complete smile makeover planning.',
-    },
-    {
-      question: 'How can I book an appointment with Dr. Prashant Kumar Vats (BDS, MIDA)?',
-      answer:
-        'You can book directly by calling +91 7011961515 or tapping the WhatsApp contact icon on any page. Walk-in consultations are also welcome at Shop No. 47, KTS Complex, Jaat Chowk, Chipiyana Buzurg, Ghaziabad.',
-    },
-  ];
 
   useEffect(() => {
     let ticking = false;
+    let lastShown = false;
+
     const handleScroll = () => {
       if (!ticking) {
-        window.requestAnimationFrame(() => {
-          setShowBackToTop(window.scrollY > 400);
-
-          const sections = ['transformations', 'services', 'why-us', 'testimonials', 'faq', 'contact'];
-          let current = '';
-          for (const section of sections) {
-            const element = document.getElementById(section);
-            if (element) {
-              const rect = element.getBoundingClientRect();
-              if (rect.top <= window.innerHeight / 3 && rect.bottom >= 100) {
-                current = section;
-              }
-            }
-          }
-          setActiveSection(current);
-          ticking = false;
-        });
         ticking = true;
+        window.requestAnimationFrame(() => {
+          ticking = false;
+          const nextShown = window.scrollY > 400;
+          if (nextShown !== lastShown) {
+            lastShown = nextShown;
+            setShowBackToTop(nextShown);
+          }
+        });
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (activeRoute !== '/' || typeof IntersectionObserver === 'undefined') {
+      setActiveSection('');
+      return;
+    }
+
+    let observer: IntersectionObserver | null = null;
+    const sectionIds = ['doctor-profile', 'transformations', 'services', 'why-us', 'testimonials', 'faq', 'contact'];
+
+    const attachObserver = () => {
+      observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting && entry.target.id) {
+              setActiveSection(entry.target.id);
+            }
+          }
+        },
+        { rootMargin: '-25% 0px -55% 0px', threshold: 0.01 }
+      );
+
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+      }
+    };
+
+    const timer = window.setTimeout(attachObserver, 900);
+    return () => {
+      window.clearTimeout(timer);
+      observer?.disconnect();
+    };
+  }, [activeRoute, forceMountSections]);
 
   const scrollToTop = () => {
     if (activeRoute !== '/' || isNotFound) {
@@ -386,6 +384,7 @@ function AppContent() {
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
+    setForceMountSections(true);
     if (activeRoute !== '/' || isNotFound) {
       const base = getBasePath();
       const targetHash = (base ? base : '') + '/#' + id;
@@ -395,7 +394,7 @@ function AppContent() {
       setTimeout(() => {
         const el = document.getElementById(id);
         if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 120);
+      }, 180);
       return;
     }
 
@@ -404,10 +403,12 @@ function AppContent() {
       setTimeout(() => {
         const el = document.getElementById(id);
         if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 200);
+      }, 220);
     } else {
-      const element = document.getElementById(id);
-      if (element) element.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) element.scrollIntoView({ behavior: 'smooth' });
+      }, 60);
     }
   };
 
@@ -478,8 +479,6 @@ function AppContent() {
         return <WisdomToothPage {...sharedPageProps} />;
       case '/tooth-pain-treatment':
         return <ToothPainPage {...sharedPageProps} />;
-      case '/bleeding-gums':
-        return <BleedingGumsPage {...sharedPageProps} />;
       case '/tooth-sensitivity':
         return <ToothSensitivityPage {...sharedPageProps} />;
       case '/bad-breath-treatment':
@@ -496,18 +495,10 @@ function AppContent() {
         return <MissingTeethPage {...sharedPageProps} />;
       case '/cavity-treatment':
         return <CavityTreatmentPage {...sharedPageProps} />;
-      case '/gum-disease-treatment':
-        return <GumDiseasePage {...sharedPageProps} />;
-      case '/swollen-gums':
-        return <SwollenGumsPage {...sharedPageProps} />;
-      case '/gum-recession':
-        return <GumRecessionPage {...sharedPageProps} />;
       case '/tooth-cap':
         return <ToothCapPage {...sharedPageProps} />;
       case '/tooth-extraction':
         return <ToothExtractionPage {...sharedPageProps} />;
-      case '/emergency-dentist':
-        return <EmergencyDentistPage {...sharedPageProps} />;
       case '/kids-dentist':
         return <KidsDentistPage {...sharedPageProps} />;
       case '/dental-fillings':
@@ -538,12 +529,6 @@ function AppContent() {
         return <RootCanalPage {...sharedPageProps} />;
       case '/dentist-chipiyana-buzurg-ghaziabad':
         return <ChipiyanaLandingPage {...sharedPageProps} />;
-      case '/dentist-ghaziabad':
-        return <DentistGhaziabadPage {...sharedPageProps} />;
-      case '/dental-clinic-ghaziabad':
-        return <DentalClinicGhaziabadPage {...sharedPageProps} />;
-      case '/dentist-near-me':
-        return <DentistNearMePage {...sharedPageProps} />;
       case '/dental-treatment-cost-ghaziabad':
         return <DentalTreatmentCostPage {...sharedPageProps} />;
       case '/dental-implant-cost-ghaziabad':
@@ -698,9 +683,9 @@ function AppContent() {
                 {isNavDropdownOpen && (
                   <div className="absolute top-full left-0 w-[820px] max-w-[95vw] bg-white rounded-2xl shadow-xl border border-[#087B57]/15 p-5 mt-1 grid grid-cols-3 gap-4 z-50 max-h-[80vh] overflow-y-auto">
                     <div>
-                      <h4 className="font-bold text-xs text-amber-700 mb-2 pb-1 border-b border-slate-100">
+                      <p className="font-bold text-xs text-amber-700 mb-2 pb-1 border-b border-slate-100">
                         Treatments &amp; Locations ({treatmentPagesList.length})
-                      </h4>
+                      </p>
                       <ul className="space-y-1 text-xs text-slate-700">
                         {treatmentPagesList.map((item) => (
                           <li key={item.path}>
@@ -723,9 +708,9 @@ function AppContent() {
                     </div>
 
                     <div>
-                      <h4 className="font-bold text-xs text-cyan-700 mb-2 pb-1 border-b border-slate-100">
+                      <p className="font-bold text-xs text-cyan-700 mb-2 pb-1 border-b border-slate-100">
                         Symptoms &amp; Urgent Care ({symptomPagesList.length})
-                      </h4>
+                      </p>
                       <ul className="space-y-1 text-xs text-slate-700">
                         {symptomPagesList.map((item) => (
                           <li key={item.path}>
@@ -748,9 +733,9 @@ function AppContent() {
                     </div>
 
                     <div>
-                      <h4 className="font-bold text-xs text-emerald-700 mb-2 pb-1 border-b border-slate-100">
+                      <p className="font-bold text-xs text-emerald-700 mb-2 pb-1 border-b border-slate-100">
                         Cost Guides ({costPagesList.length})
-                      </h4>
+                      </p>
                       <ul className="space-y-1 text-xs text-slate-700">
                         {costPagesList.map((item) => (
                           <li key={item.path}>
@@ -1129,7 +1114,7 @@ function AppContent() {
         )}
       </header>
 
-      <main id="main-content">
+      <main id="main-content" className="min-h-screen">
         {activeSubpage ? (
           <Suspense fallback={<SkeletonHero />}>
             {activeSubpage}
@@ -1147,8 +1132,19 @@ function AppContent() {
               navigateToPath={navigateToPath}
             />
 
-            {/* Dedicated Meet Our Doctor Profile Section (Preserved Original Doctor Photo) */}
-            <DoctorProfile />
+            {/* Dedicated Meet Our Doctor Profile Section (Deferred below the fold for instant mobile hydration) */}
+            <DeferredSection
+              id="doctor-profile"
+              minHeight={540}
+              rootMargin="320px 0px"
+              forceMount={forceMountSections}
+              idleDelayMs={5500}
+              bgClassName="bg-[#E5F5EC]"
+            >
+              <Suspense fallback={<div className="min-h-[540px] bg-[#E5F5EC]" />}>
+                <DoctorProfile />
+              </Suspense>
+            </DeferredSection>
 
             {/* Emergency Banner (Direct native tel: anchor) */}
             <section className="bg-gradient-to-r from-[#FF654F] to-[#FF8A24] text-white py-5 px-4 relative z-20">
@@ -1181,33 +1177,116 @@ function AppContent() {
               </div>
             </section>
 
-            <Suspense fallback={<SkeletonCardGrid count={6} />}>
-              <BeforeAfter />
+            <DeferredSection
+              id="transformations"
+              minHeight={680}
+              rootMargin="360px 0px"
+              forceMount={forceMountSections}
+              idleDelayMs={6500}
+              bgClassName="bg-[#FFF8EC]"
+            >
+              <Suspense fallback={<SkeletonCardGrid count={6} />}>
+                <BeforeAfter />
+              </Suspense>
+            </DeferredSection>
 
-              <Services handleWhatsApp={handleWhatsApp} navigateToPath={navigateToPath} />
+            <DeferredSection
+              id="services"
+              minHeight={720}
+              rootMargin="380px 0px"
+              forceMount={forceMountSections}
+              idleDelayMs={6800}
+              bgClassName="bg-[#FFF8EC]"
+            >
+              <Suspense fallback={<SkeletonCardGrid count={6} />}>
+                <Services handleWhatsApp={handleWhatsApp} navigateToPath={navigateToPath} />
+              </Suspense>
+            </DeferredSection>
 
-              <WhyUs handleWhatsApp={handleWhatsApp} />
+            <DeferredSection
+              id="why-us"
+              minHeight={560}
+              rootMargin="380px 0px"
+              forceMount={forceMountSections}
+              idleDelayMs={7100}
+              bgClassName="bg-[#E5F5EC]"
+            >
+              <Suspense fallback={<div className="min-h-[560px] bg-[#E5F5EC]" />}>
+                <WhyUs handleWhatsApp={handleWhatsApp} />
+              </Suspense>
+            </DeferredSection>
 
-              <Testimonials />
+            <DeferredSection
+              id="testimonials"
+              minHeight={540}
+              rootMargin="380px 0px"
+              forceMount={forceMountSections}
+              idleDelayMs={7400}
+              bgClassName="bg-[#FFF8EC]"
+            >
+              <Suspense fallback={<div className="min-h-[540px] bg-[#FFF8EC]" />}>
+                <Testimonials />
+              </Suspense>
+            </DeferredSection>
 
-              <YouTubeSection />
+            <DeferredSection
+              id="youtube-videos"
+              minHeight={460}
+              rootMargin="380px 0px"
+              forceMount={forceMountSections}
+              idleDelayMs={7700}
+              bgClassName="bg-[#FFF8EC]"
+            >
+              <Suspense fallback={<div className="min-h-[460px] bg-[#FFF8EC]" />}>
+                <YouTubeSection />
+              </Suspense>
+            </DeferredSection>
 
-              <FAQ faqs={faqs} />
+            <DeferredSection
+              id="faq"
+              minHeight={520}
+              rootMargin="380px 0px"
+              forceMount={forceMountSections}
+              idleDelayMs={8000}
+              bgClassName="bg-[#E5F5EC]"
+            >
+              <Suspense fallback={<div className="min-h-[520px] bg-[#E5F5EC]" />}>
+                <FAQ />
+              </Suspense>
+            </DeferredSection>
 
-              <Contact handleWhatsApp={handleWhatsApp} handleDirections={handleDirections} />
-            </Suspense>
+            <DeferredSection
+              id="contact"
+              minHeight={560}
+              rootMargin="380px 0px"
+              forceMount={forceMountSections}
+              idleDelayMs={8300}
+              bgClassName="bg-[#FFF8EC]"
+            >
+              <Suspense fallback={<div className="min-h-[560px] bg-[#FFF8EC]" />}>
+                <Contact handleWhatsApp={handleWhatsApp} handleDirections={handleDirections} />
+              </Suspense>
+            </DeferredSection>
           </>
         )}
       </main>
 
-      <Suspense fallback={null}>
-        <Footer
-          phoneNumber={phoneNumber}
-          handleWhatsApp={handleWhatsApp}
-          scrollToSection={scrollToSection}
-          navigateToPath={navigateToPath}
-        />
-      </Suspense>
+      <DeferredSection
+        minHeight={480}
+        rootMargin="150px 0px"
+        forceMount={forceMountSections}
+        idleDelayMs={8600}
+        bgClassName="bg-[#053528]"
+      >
+        <Suspense fallback={<div className="min-h-[480px] bg-[#053528]" />}>
+          <Footer
+            phoneNumber={phoneNumber}
+            handleWhatsApp={handleWhatsApp}
+            scrollToSection={scrollToSection}
+            navigateToPath={navigateToPath}
+          />
+        </Suspense>
+      </DeferredSection>
 
       {/* Global Right-Side Floating Stack (TOP: AI Assistant, MIDDLE: Call, BOTTOM: WhatsApp) */}
       <FloatingAppointmentButtons />

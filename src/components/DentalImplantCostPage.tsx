@@ -9,7 +9,6 @@ import {
   Layers,
   HelpCircle
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
@@ -130,7 +129,7 @@ export default function DentalImplantCostPage({
 
             <div className="lg:col-span-5">
               <TreatmentImage
-                src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1000&q=80"
+                src="/assets/images/treatments/bright-smile-800.webp"
                 alt="Dental implant treatment tools and precision operatory in Ghaziabad"
                 caption="Precision implant dentistry: Restoring natural aesthetics and bone foundation."
                 aspectRatio="4/3"
@@ -212,18 +211,13 @@ export default function DentalImplantCostPage({
                   <span className="font-bold text-slate-900 text-sm">{faq.q}</span>
                   <ChevronDown className={`w-4 h-4 text-blue-600 shrink-0 transition-transform ${openFaq === idx ? 'rotate-180' : ''}`} />
                 </button>
-                <AnimatePresence initial={false}>
-                  {openFaq === idx && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
+                                  {openFaq === idx && (
+                    <div
                       className="overflow-hidden bg-slate-50/70 border-t border-slate-100 p-6 text-slate-600 text-xs sm:text-sm leading-relaxed"
                     >
                       {faq.a}
-                    </motion.div>
+                    </div>
                   )}
-                </AnimatePresence>
               </div>
             ))}
           </div>

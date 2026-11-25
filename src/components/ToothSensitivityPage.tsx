@@ -14,7 +14,6 @@ import {
   ShieldCheck,
   Activity
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
@@ -92,7 +91,7 @@ export default function ToothSensitivityPage({
           <div className="lg:col-span-5 bg-slate-900/90 border border-slate-800 p-6 rounded-3xl space-y-4">
             <h3 className="text-white font-bold text-lg">What Causes Sensitivity?</h3>
             <TreatmentImage
-              src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1000&q=80"
+              src="/assets/images/treatments/bright-smile-800.webp"
               alt="Educational diagram showing exposed dentin tubules, gum recession and hot cold tooth sensitivity triggers"
               caption="Educational diagram: Exposed dentin tubules transmitting temperature stimuli to nerve pulp."
               aspectRatio="4/3"
@@ -146,13 +145,11 @@ export default function ToothSensitivityPage({
                   <span>Q{index + 1}: {faq.q}</span>
                   {openFaq === index ? <ChevronUp className="w-5 h-5 text-blue-600" /> : <ChevronDown className="w-5 h-5 text-slate-400" />}
                 </button>
-                <AnimatePresence>
-                  {openFaq === index && (
-                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="border-t border-slate-200 p-4 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                                  {openFaq === index && (
+                    <div className="border-t border-slate-200 p-4 text-xs sm:text-sm text-slate-600 leading-relaxed">
                       {faq.a}
-                    </motion.div>
+                    </div>
                   )}
-                </AnimatePresence>
               </div>
             ))}
           </div>

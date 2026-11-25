@@ -11,7 +11,6 @@ import {
   ChevronUp,
   ShieldCheck
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
@@ -89,7 +88,7 @@ export default function CavityTreatmentPage({
           <div className="lg:col-span-5 bg-slate-900/90 border border-slate-800 p-6 rounded-3xl space-y-4">
             <h3 className="text-white font-bold text-lg">Cavity Progression Stages</h3>
             <TreatmentImage
-              src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=80"
+              src="/assets/images/treatments/dental-chair-800.webp"
               alt="Educational diagram showing progression of tooth decay from enamel into dentin and pulp"
               caption="Educational diagram: Cavity decay progression from superficial enamel demineralization to deep dentin involvement."
               aspectRatio="4/3"
@@ -129,13 +128,11 @@ export default function CavityTreatmentPage({
                   <span>Q{index + 1}: {faq.q}</span>
                   {openFaq === index ? <ChevronUp className="w-5 h-5 text-blue-600" /> : <ChevronDown className="w-5 h-5 text-slate-400" />}
                 </button>
-                <AnimatePresence>
-                  {openFaq === index && (
-                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="border-t border-slate-200 p-4 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                                  {openFaq === index && (
+                    <div className="border-t border-slate-200 p-4 text-xs sm:text-sm text-slate-600 leading-relaxed">
                       {faq.a}
-                    </motion.div>
+                    </div>
                   )}
-                </AnimatePresence>
               </div>
             ))}
           </div>

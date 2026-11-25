@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { Calendar, MessageCircle, MapPin, Clock, PhoneCall } from 'lucide-react';
 import { GBP_CONFIG } from '../config/googleBusinessProfile';
 import { trackClinicEvent } from '../utils/analytics';
@@ -10,36 +10,6 @@ interface ContactProps {
 
 const Contact: React.FC<ContactProps> = () => {
   const [showMap, setShowMap] = useState(false);
-  const mapContainerRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    // On Save-Data, 2G/3G, or mobile viewports, keep map click-to-load so slow connections save ~600 KB
-    const conn = (navigator as unknown as { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
-    const isSlowConnection =
-      Boolean(conn?.saveData) ||
-      (Boolean(conn?.effectiveType) && conn?.effectiveType !== '4g');
-    const isSmallScreen = typeof window !== 'undefined' && window.innerWidth < 768;
-
-    if (isSlowConnection || isSmallScreen || typeof IntersectionObserver === 'undefined') {
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setShowMap(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: '120px' }
-    );
-
-    if (mapContainerRef.current) {
-      observer.observe(mapContainerRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <section id="contact" className="cv-auto py-14 sm:py-16 bg-white scroll-mt-20 border-t border-[#087B57]/10">
@@ -119,7 +89,19 @@ const Contact: React.FC<ContactProps> = () => {
                 </div>
                 <div>
                   <h3 className="font-bold text-[#26352F]">Verified Clinic Address</h3>
-                  <p className="text-[#26352F]/80 mt-0.5 leading-relaxed text-sm">{GBP_CONFIG.ADDRESS}</p>
+                  <a
+                    href={GBP_CONFIG.GOOGLE_MAPS_DIRECTIONS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() =>
+                      trackClinicEvent('directions_click', {
+                        placement: 'contact_nap_address_link',
+                      })
+                    }
+                    className="block text-[#26352F]/85 hover:text-[#087B57] hover:underline mt-0.5 leading-relaxed text-sm transition-colors"
+                  >
+                    {GBP_CONFIG.ADDRESS}
+                  </a>
                   <p className="text-xs text-[#087B57] font-medium mt-1">
                     Conveniently reachable for patients from Chipiyana Buzurg, Jaat Chowk, Crossings Republik, ABES Engineering College area, Shahberi, Noida Extension, Greater Noida West &amp; Lal Kuan.
                   </p>
@@ -159,11 +141,9 @@ const Contact: React.FC<ContactProps> = () => {
               </div>
             </div>
 
-            {/* Lazy / Click-to-Load Google Map Embed (Zero Bandwidth Waste on 2G & Mobile) */}
+            {/* Click-to-Load Google Map Embed (Zero Third-Party Map JS Until Requested) */}
             <div
               id="contact-map-container"
-              ref={mapContainerRef}
-              onClick={() => setShowMap(true)}
               className="w-full h-64 md:h-72 bg-[#FFF8EC] rounded-3xl overflow-hidden relative border border-[#087B57]/15 flex items-center justify-center"
             >
               {showMap ? (

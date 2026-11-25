@@ -233,12 +233,17 @@ export default function DentalServicesPage({
                             ) : (
                               <img
                                 src={service.image}
+                                srcSet={
+                                  service.image.endsWith('-800.webp')
+                                    ? `${service.image.replace('-800.webp', '-400.webp')} 400w, ${service.image} 800w`
+                                    : undefined
+                                }
+                                sizes="(max-width: 640px) 92vw, (max-width: 1024px) 48vw, 560px"
                                 alt={service.imageAlt}
                                 width="640"
                                 height="360"
                                 loading="lazy"
                                 decoding="async"
-                                referrerPolicy="no-referrer"
                                 onError={() =>
                                   setFailedImages((prev) => ({ ...prev, [service.id]: true }))
                                 }
