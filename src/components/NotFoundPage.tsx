@@ -16,7 +16,7 @@ export default function NotFoundPage({ navigateToPath }: NotFoundPageProps) {
     { label: 'Smile Makeover & Cosmetic Dentistry', path: '/cosmetic-dentistry' },
     { label: 'Zirconia Crowns', path: '/zirconia-crowns' },
     { label: 'Clear Aligners & Braces', path: '/clear-aligners' },
-    { label: '24/7 Emergency Dentist', path: '/emergency-dentist' },
+    { label: 'Emergency Dentist (9 AM–9 PM)', path: '/emergency-dentist' },
   ];
 
   return (

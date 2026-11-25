@@ -94,7 +94,7 @@ export default function DentalFillingsPage({ handleCall, handleWhatsApp, navigat
             </div>
 
             <TreatmentImage
-              src="https://i.postimg.cc/VkyshHw1/Chat-GPT-Image-Jun-23-2026-08-42-13-PM.png"
+              src="/assets/images/case-11.webp"
               alt="Tooth-colored composite dental restoration"
               caption="Composite resin fillings blend naturally with surrounding tooth enamel."
               aspectRatio="4/3"

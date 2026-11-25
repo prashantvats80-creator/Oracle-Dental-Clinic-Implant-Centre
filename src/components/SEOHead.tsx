@@ -98,7 +98,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({ routePath, isNotFound = false }) => {
         publisher: { '@id': GBP_CONFIG.ENTITY_ID },
       },
       {
-        '@type': ['Dentist', 'LocalBusiness', 'MedicalBusiness'],
+        '@type': ['Dentist', 'LocalBusiness', 'MedicalBusiness', 'Organization'],
         '@id': GBP_CONFIG.ENTITY_ID,
         name: GBP_CONFIG.BUSINESS_NAME,
         url: `${GBP_CONFIG.SITE_URL}/`,
@@ -132,8 +132,8 @@ const SEOHead: React.FC<SEOHeadProps> = ({ routePath, isNotFound = false }) => {
               'Saturday',
               'Sunday',
             ],
-            opens: '00:00',
-            closes: '23:59',
+            opens: '09:00',
+            closes: '21:00',
           },
         ],
         areaServed: [
@@ -155,7 +155,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({ routePath, isNotFound = false }) => {
         name: GBP_CONFIG.DOCTOR_NAME,
         honorificPrefix: 'Dr.',
         honorificSuffix: GBP_CONFIG.DOCTOR_QUALIFICATION,
-        jobTitle: 'Dental Surgeon',
+        jobTitle: GBP_CONFIG.DOCTOR_ROLE,
         image: GBP_CONFIG.DOCTOR_IMAGE,
         worksFor: { '@id': GBP_CONFIG.ENTITY_ID },
       },
@@ -200,7 +200,21 @@ const SEOHead: React.FC<SEOHeadProps> = ({ routePath, isNotFound = false }) => {
           item: `${GBP_CONFIG.SITE_URL}/`,
         },
       ];
-      if (seo.path !== '/dental-services') {
+      if (seo.path === '/dental-services') {
+        breadcrumbItems.push({
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Dental Treatments & Services',
+          item: canonicalUrl,
+        });
+      } else if (seo.path === '/privacy-policy') {
+        breadcrumbItems.push({
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Privacy Policy',
+          item: canonicalUrl,
+        });
+      } else {
         breadcrumbItems.push({
           '@type': 'ListItem',
           position: 2,
@@ -211,13 +225,6 @@ const SEOHead: React.FC<SEOHeadProps> = ({ routePath, isNotFound = false }) => {
           '@type': 'ListItem',
           position: 3,
           name: seo.serviceName || seo.title,
-          item: canonicalUrl,
-        });
-      } else {
-        breadcrumbItems.push({
-          '@type': 'ListItem',
-          position: 2,
-          name: 'Dental Treatments & Services',
           item: canonicalUrl,
         });
       }

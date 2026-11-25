@@ -320,8 +320,14 @@
   </url>
   <url>
     <loc>https://oracledentals.netlify.app/teeth-whitening-cost-ghaziabad</loc>
-    <lastmod>2026-11-20</lastmod>
+    <lastmod>2026-11-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://oracledentals.netlify.app/privacy-policy</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
   </url>
 </urlset>

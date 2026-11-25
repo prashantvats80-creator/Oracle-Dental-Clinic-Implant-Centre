@@ -72,7 +72,7 @@ export default function DentistGhaziabadPage({
     },
     {
       q: "What are your daily clinic hours?",
-      a: "We are open daily Monday through Sunday with Open 24 Hours, 7 Days (Monday – Sunday). Evening slots allow working professionals and families to visit after office or school hours."
+      a: "We are Open Daily: 9:00 AM – 9:00 PM (Monday – Sunday). Evening slots up to 9:00 PM allow working professionals and families to visit after office or school hours."
     },
     {
       q: "Do I need an appointment before visiting, or can walk-in patients be accommodated?",
@@ -194,7 +194,7 @@ export default function DentistGhaziabadPage({
                 </div>
                 <div className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-100">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Convenient Hours:</strong> Open 24 Hours, 7 Days (Monday – Sunday) for routine and urgent visits.</span>
+                  <span><strong>Convenient Hours:</strong> Open Daily: 9:00 AM – 9:00 PM (Monday – Sunday) for routine and urgent visits.</span>
                 </div>
                 <div className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-100">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />

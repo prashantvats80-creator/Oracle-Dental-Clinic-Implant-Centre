@@ -72,7 +72,7 @@ export default function DenturesPage({ handleCall, handleWhatsApp, navigateToHom
             </div>
 
             <TreatmentImage
-              src="https://i.postimg.cc/GhqXp6MY/Chat-GPT-Image-Jun-23-2026-07-55-08-PM.png"
+              src="/assets/images/case-05.webp"
               alt="Educational illustration showing complete and partial removable dentures"
               caption="Educational diagram: Precision complete denture fitting over gum ridge tissue."
               aspectRatio="4/3"
@@ -87,7 +87,7 @@ export default function DenturesPage({ handleCall, handleWhatsApp, navigateToHom
           </p>
 
           <TreatmentImage
-            src="https://i.postimg.cc/QMR4356D/Chat-GPT-Image-Jun-23-2026-07-50-45-PM.png"
+            src="/assets/images/case-04.webp"
             alt="Educational illustration showing implant-retained overdenture attachment"
             caption="Educational illustration: Implant-retained overdenture snapping securely onto locator implants."
             aspectRatio="16/9"

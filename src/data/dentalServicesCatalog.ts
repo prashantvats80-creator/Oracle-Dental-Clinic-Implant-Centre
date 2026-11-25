@@ -782,14 +782,14 @@ export const DENTAL_SERVICE_CATEGORIES: DentalServiceCategory[] = [
         id: 'toothache-infection-swelling-emergency',
         title: 'Toothache Consultation, Dental Infection, Swollen Gums & Broken Tooth Emergencies',
         whatsappTopic: 'emergency dental care and toothache relief',
-        shortDescription: 'Prompt 24/7 clinical evaluation and stabilization for acute tooth pain, facial or gum swelling, abscesses, and dental trauma.',
+        shortDescription: 'Prompt same-day clinical evaluation and stabilization (Open Daily: 9:00 AM – 9:00 PM) for acute tooth pain, facial or gum swelling, abscesses, and dental trauma.',
         image: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&fm=webp&w=640&q=75',
         imageAlt: '24-hour emergency dental care for toothache, swelling and broken teeth in Ghaziabad',
         whatItIs: 'Emergency dental care rapidly diagnoses the exact source of acute pain, infection, gum abscess, or sudden tooth fracture and delivers immediate stabilization—such as drainage, nerve-calming access dressing, temporary bonding, or targeted medication.',
         whoMayNeedIt: 'Anyone suffering severe throbbing toothache, sudden facial or gum swelling, pus discharge, knocked-out or chipped teeth from an accident, or a dislodged crown.',
         commonConcerns: 'Finding a reliable dentist late at night or on Sundays, controlling infection safely, and saving a traumatized tooth.',
         process: [
-          'Call +91 7011961515 ahead so urgent triage is coordinated smoothly (Open 24 Hours, 7 Days).',
+          'Call +91 7011961515 ahead so urgent triage is coordinated smoothly (Open Daily: 9:00 AM – 9:00 PM).',
           'Focused clinical exam and digital X-ray to pinpoint the source of pain or abscess.',
           'Immediate relief step (sedative dressing, emergency RCT opening, abscess drainage, splinting, or smoothing sharp edges).',
           'Clear follow-up plan to complete definitive restorative treatment once acute symptoms settle.'
@@ -809,7 +809,7 @@ export const DENTAL_SERVICE_CATEGORIES: DentalServiceCategory[] = [
           'Attend your follow-up appointment so the stabilized tooth is permanently restored.'
         ],
         faqs: [
-          { q: 'Is Oracle Dental Clinic open for late-night dental emergencies?', a: 'Yes, Oracle Dental Clinic & Implant Center is listed as Open 24 Hours, 7 Days. Please call +91 7011961515 before heading in for urgent late-night triage.' },
+          { q: 'Is Oracle Dental Clinic open for late-night dental emergencies?', a: 'Yes, Oracle Dental Clinic & Implant Center is listed as Open Daily: 9:00 AM – 9:00 PM. Please call +91 7011961515 before heading in for urgent late-night triage.' },
           { q: 'What should I do if a permanent tooth is knocked out?', a: 'Hold the tooth by the white crown (never the root), rinse gently without scrubbing, place it in cold milk or saline, and reach the clinic immediately.' }
         ],
         deepGuidePath: '/emergency-dentist'

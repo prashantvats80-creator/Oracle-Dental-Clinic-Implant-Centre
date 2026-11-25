@@ -9,7 +9,7 @@ interface SoundContextType {
 const SoundContext = createContext<SoundContextType | undefined>(undefined);
 
 export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const [hasStarted, setHasStarted] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -25,39 +25,53 @@ export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.muted = isMuted;
+      if (isMuted) {
+        audioRef.current.pause();
+      }
     }
   }, [isMuted]);
 
   const startMusic = async () => {
-    if (hasStarted) return;
-    
+    if (hasStarted && audioRef.current) {
+      try {
+        audioRef.current.muted = false;
+        await audioRef.current.play();
+      } catch {
+        // Ignore browser autoplay restrictions
+      }
+      return;
+    }
+
     try {
-      // Lazy initialization of the Audio element on first call
       if (!audioRef.current) {
         const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3');
         audio.loop = true;
-        audio.volume = 0.3;
-        audio.muted = isMuted;
+        audio.volume = 0.25;
+        audio.muted = false;
         audioRef.current = audio;
       }
-      
+
       const playPromise = audioRef.current.play();
       if (playPromise !== undefined) {
         await playPromise;
         setHasStarted(true);
-        console.log("Music started successfully");
       }
-    } catch (error) {
-      console.error("Music playback failed:", error);
-      // Keep hasStarted as false so it can retry
+    } catch {
+      // Keep audio opt-in if playback is blocked
     }
   };
 
   const toggleMute = () => {
-    if (!hasStarted && audioRef.current) {
-      startMusic();
-    }
-    setIsMuted(prev => !prev);
+    setIsMuted((prev) => {
+      const nextMuted = !prev;
+      if (!nextMuted) {
+        void startMusic();
+      } else if (audioRef.current) {
+        audioRef.current.muted = true;
+        audioRef.current.pause();
+      }
+      return nextMuted;
+    });
   };
 
   return (

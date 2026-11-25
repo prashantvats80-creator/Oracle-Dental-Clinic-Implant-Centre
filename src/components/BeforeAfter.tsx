@@ -7,67 +7,67 @@ const BeforeAfter: React.FC = () => {
       id: 0,
       title: 'Teeth Whitening – Brighter Smile',
       description: 'In-office clinical teeth whitening to lighten surface stains.',
-      singleImg: 'https://i.postimg.cc/FsZjZccD/Chat-GPT-Image-Jun-23-2026-07-40-02-PM.png',
+      singleImg: '/assets/images/case-01.webp',
     },
     {
       id: 1,
       title: 'Teeth Whitening – Stain Reduction',
       description: 'Supervised whitening following thorough ultrasonic scaling.',
-      singleImg: 'https://i.postimg.cc/FHT82Ytw/Chat-GPT-Image-Jun-23-2026-07-42-37-PM.png',
+      singleImg: '/assets/images/case-02.webp',
     },
     {
       id: 2,
       title: 'Dental Implants – Single Tooth',
       description: 'Single-tooth titanium implant with custom shade-matched crown.',
-      singleImg: 'https://i.postimg.cc/K88srmK7/Chat-GPT-Image-Jun-23-2026-07-48-17-PM.png',
+      singleImg: '/assets/images/case-03.webp',
     },
     {
       id: 3,
       title: 'Dental Implants – Gap Restoration',
       description: 'Natural-looking replacement blending comfortably with adjacent teeth.',
-      singleImg: 'https://i.postimg.cc/QMR4356D/Chat-GPT-Image-Jun-23-2026-07-50-45-PM.png',
+      singleImg: '/assets/images/case-04.webp',
     },
     {
       id: 4,
       title: 'Dental Implants – Bite Function',
       description: 'Restoring chewing comfort with implant-supported prosthetics.',
-      singleImg: 'https://i.postimg.cc/GhqXp6MY/Chat-GPT-Image-Jun-23-2026-07-55-08-PM.png',
+      singleImg: '/assets/images/case-05.webp',
     },
     {
       id: 5,
       title: 'Dental Implants – Smile Rehabilitation',
       description: 'Functional and aesthetic rehabilitation for missing teeth.',
-      singleImg: 'https://i.postimg.cc/k5tsfG7F/Chat-GPT-Image-Jun-23-2026-08-00-40-PM.png',
+      singleImg: '/assets/images/case-06.webp',
     },
     {
       id: 6,
       title: 'Smile Design & Veneers',
       description: 'Refining tooth shape and smile harmony with conservative restorations.',
-      singleImg: 'https://i.postimg.cc/2S3dHyCP/Chat-GPT-Image-Jun-23-2026-08-09-59-PM.png',
+      singleImg: '/assets/images/case-07.webp',
     },
     {
       id: 7,
       title: 'Orthodontic Alignment',
       description: 'Progressive alignment of crowded and spaced teeth.',
-      singleImg: 'https://i.postimg.cc/Zqd8SQBw/Chat-GPT-Image-Jun-23-2026-08-17-03-PM.png',
+      singleImg: '/assets/images/case-08.webp',
     },
     {
       id: 8,
       title: 'Restorative Dental Care',
       description: 'Rebuilding damaged teeth for comfort and durability.',
-      singleImg: 'https://i.postimg.cc/fL7Y30vY/Chat-GPT-Image-Jun-23-2026-08-31-58-PM.png',
+      singleImg: '/assets/images/case-09.webp',
     },
     {
       id: 9,
       title: 'Full Mouth Rehabilitation',
       description: 'Comprehensive bite and arch restoration planned in stages.',
-      singleImg: 'https://i.postimg.cc/gcT2V2Bw/Chat-GPT-Image-Jun-23-2026-08-38-15-PM.png',
+      singleImg: '/assets/images/case-10.webp',
     },
     {
       id: 10,
       title: 'Cosmetic Composite Restoration',
       description: 'Repairing chips and minor gaps with tooth-colored composite.',
-      singleImg: 'https://i.postimg.cc/VkyshHw1/Chat-GPT-Image-Jun-23-2026-08-42-13-PM.png',
+      singleImg: '/assets/images/case-11.webp',
     },
   ];
 
@@ -105,7 +105,6 @@ const BeforeAfter: React.FC = () => {
                     className="w-full h-auto object-contain aspect-video"
                     loading="lazy"
                     decoding="async"
-                    referrerPolicy="no-referrer"
                   />
                 </div>
               </div>

@@ -64,7 +64,7 @@ export default function DentalClinicGhaziabadPage({
     },
     {
       q: "What are the clinic's operational timings?",
-      a: "We operate daily Monday through Sunday with Open 24 Hours, 7 Days (Monday – Sunday), accommodating working individuals and school schedules."
+      a: "We operate daily Monday through Sunday, Open Daily: 9:00 AM – 9:00 PM, accommodating working individuals and school schedules."
     },
     {
       q: "How can I book an appointment at Oracle Dental Clinic?",
@@ -286,7 +286,7 @@ export default function DentalClinicGhaziabadPage({
 
             <div className="lg:col-span-5 bg-white p-6 rounded-2xl border border-slate-200 space-y-3">
               <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block">Quick Contact & Timings</span>
-              <p className="text-xs text-slate-700"><strong>Daily Hours:</strong> Open 24 Hours, 7 Days (Mon–Sun)</p>
+              <p className="text-xs text-slate-700"><strong>Daily Hours:</strong> Open Daily: 9:00 AM – 9:00 PM (Mon–Sun)</p>
               <p className="text-xs text-slate-700"><strong>Direct Helpline:</strong> 7011961515</p>
               <InteractiveButton
                 id="clinic-ghz-map-btn-2"

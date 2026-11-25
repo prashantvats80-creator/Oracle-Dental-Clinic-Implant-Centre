@@ -169,7 +169,7 @@ export default function TeethCleaningPage({
                   <p className="font-semibold text-amber-300 flex items-center gap-1">
                     <Clock className="w-3.5 h-3.5" /> Clinic Timings:
                   </p>
-                  <p>Open 24 Hours, 7 Days</p>
+                  <p>Open Daily: 9:00 AM – 9:00 PM</p>
                   <p>(Monday – Sunday)</p>
                 </div>
 
@@ -458,13 +458,13 @@ export default function TeethCleaningPage({
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
               <TreatmentImage
-                src="https://i.postimg.cc/FsZjZccD/Chat-GPT-Image-Jun-23-2026-07-40-02-PM.png"
+                src="/assets/images/case-01.webp"
                 alt="Diagram showing gingivitis inflammation and preventative periodontal scaling care"
                 caption="Educational diagram: Gingivitis inflammation stages and periodontal prevention through scaling."
                 aspectRatio="4/3"
               />
               <TreatmentImage
-                src="https://i.postimg.cc/FHT82Ytw/Chat-GPT-Image-Jun-23-2026-07-42-37-PM.png"
+                src="/assets/images/case-02.webp"
                 alt="Educational comparison showing differences between dental scaling cleaning and cosmetic whitening"
                 caption="Educational illustration: Clinical distinction between dental scaling (tartar removal) and whitening."
                 aspectRatio="4/3"
@@ -770,7 +770,7 @@ export default function TeethCleaningPage({
               <Clock className="w-6 h-6 text-blue-400" />
               <h3 className="font-bold text-white text-base">Convenient Daily Hours</h3>
               <p className="text-xs text-slate-300 leading-relaxed">
-                Open 24 Hours, 7 Days (Monday – Sunday).
+                Open Daily: 9:00 AM – 9:00 PM (Monday – Sunday).
               </p>
             </div>
           </div>
@@ -1007,6 +1007,6 @@ const faqsList = [
   },
   {
     q: "Do I need an appointment for teeth cleaning?",
-    a: "While walk-ins are welcomed 24 hours a day, 7 days a week, booking an appointment via call or WhatsApp ensures zero waiting time."
+    a: "While walk-ins are welcomed daily from 9:00 AM to 9:00 PM (Monday – Sunday), booking an appointment via call or WhatsApp ensures minimal waiting time."
   }
 ];

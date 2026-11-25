@@ -25,7 +25,7 @@ interface HeroProps {
 const HERO_FEATURES = [
   {
     title: 'Trusted & Professional',
-    desc: 'Evidence-based dental care and honest guidance led by Dr. Prashant Kumar Vats, BDS.',
+    desc: 'Evidence-based dental care and honest guidance led by Dr. Prashant Kumar Vats, BDS, MIDA.',
     icon: ShieldCheck,
     iconBg: 'bg-gradient-to-br from-[#087B57] to-[#00A99D] text-white shadow-[0_6px_14px_rgba(8,123,87,0.22)]',
     topBar: 'bg-[#087B57]',
@@ -49,7 +49,7 @@ const HERO_FEATURES = [
   },
   {
     title: 'Family-Friendly Dentistry',
-    desc: 'Warm, welcoming dental care for children, adults, and seniors—open 24 hours in Chipiyana Buzurg.',
+    desc: 'Warm, welcoming dental care for children, adults, and seniors—Open Daily: 9:00 AM – 9:00 PM in Chipiyana Buzurg.',
     icon: Users,
     iconBg: 'bg-gradient-to-br from-[#00A99D] to-[#087B57] text-white shadow-[0_6px_14px_rgba(0,169,157,0.24)]',
     topBar: 'bg-[#00A99D]',
@@ -206,8 +206,8 @@ const Hero: React.FC<HeroProps> = ({ navigateToPath }) => {
 
             <p className="text-sm sm:text-base text-[#26352F]/85 max-w-xl mx-auto lg:mx-0 leading-relaxed">
               {language === 'hi'
-                ? 'डॉ. प्रशांत कुमार वत्स (BDS) द्वारा डेंटल इम्प्लांट, रूट कैनाल (RCT), अकल दाढ़ सर्जरी, ज़िरकोनिया क्राउन, स्माइल मेकओवर और 24 घंटे दंत देखभाल।'
-                : 'Trusted dentist in Chipiyana Buzurg near Jaat Chowk, Ghaziabad for dental implants, root canal treatment (RCT), zirconia crowns, smile makeovers, braces, clear aligners, and 24-hour emergency dental care.'}
+                ? 'डॉ. प्रशांत कुमार वत्स (BDS, MIDA) द्वारा डेंटल इम्प्लांट, रूट कैनाल (RCT), अकल दाढ़ सर्जरी, ज़िरकोनिया क्राउन, स्माइल मेकओवर और दैनिक दंत देखभाल (सुबह 9 से रात 9 बजे तक)।'
+                : 'Trusted dentist in Chipiyana Buzurg near Jaat Chowk, Ghaziabad for dental implants, root canal treatment (RCT), zirconia crowns, smile makeovers, braces, clear aligners, and emergency dental care (Open Daily: 9:00 AM – 9:00 PM).'}
             </p>
 
             {/* Primary & Secondary Native Anchor CTAs */}

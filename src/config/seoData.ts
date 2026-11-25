@@ -16,7 +16,7 @@ export const ROUTE_SEO_MAP: Record<string, RouteSEOConfig> = {
   '/': {
     path: '/',
     title: 'Oracle Dental Clinic | Dentist & Dental Implants in Chipiyana Buzurg, Ghaziabad',
-    description: 'Visit Dr. Prashant Kumar Vats (BDS) at Oracle Dental Clinic & Implant Center, Jaat Chowk, Chipiyana Buzurg, Ghaziabad. Open 24 hours for dental implants, RCT, crowns, wisdom tooth & emergency dental care.',
+    description: 'Visit Dr. Prashant Kumar Vats (BDS, MIDA) at Oracle Dental Clinic & Implant Center, Jaat Chowk, Chipiyana Buzurg, Ghaziabad. Open Daily: 9:00 AM – 9:00 PM for dental implants, RCT, crowns, wisdom tooth & emergency dental care.',
     serviceName: 'Comprehensive Dental Care & Implant Dentistry',
     serviceType: 'General, Implant, Cosmetic & Emergency Dentistry',
     schemaType: 'Service',
@@ -32,7 +32,7 @@ export const ROUTE_SEO_MAP: Record<string, RouteSEOConfig> = {
   '/dental-implants': {
     path: '/dental-implants',
     title: 'Dental Implants in Chipiyana Buzurg, Ghaziabad | Oracle Dental Clinic',
-    description: 'Single-tooth, multiple & implant-supported dental implants in Chipiyana Buzurg, Ghaziabad by Dr. Prashant Kumar Vats (BDS). Transparent evaluation & staged care near Crossings Republik & Noida Extension.',
+    description: 'Single-tooth, multiple & implant-supported dental implants in Chipiyana Buzurg, Ghaziabad by Dr. Prashant Kumar Vats (BDS, MIDA). Transparent evaluation & staged care near Crossings Republik & Noida Extension.',
     serviceName: 'Dental Implants',
     serviceType: 'Implantology',
     schemaType: 'MedicalProcedure',
@@ -88,7 +88,7 @@ export const ROUTE_SEO_MAP: Record<string, RouteSEOConfig> = {
   '/wisdom-tooth-extraction': {
     path: '/wisdom-tooth-extraction',
     title: 'Wisdom Tooth Extraction in Ghaziabad | Impacted Tooth Removal | Oracle Dental',
-    description: 'Safe wisdom tooth extraction and surgical removal of impacted third molars in Chipiyana Buzurg, Ghaziabad by Dr. Prashant Kumar Vats, BDS. Open 24 hours for urgent pain.',
+    description: 'Safe wisdom tooth extraction and surgical removal of impacted third molars in Chipiyana Buzurg, Ghaziabad by Dr. Prashant Kumar Vats, BDS. Open Daily: 9:00 AM – 9:00 PM for urgent pain.',
     serviceName: 'Wisdom Tooth Extraction',
     serviceType: 'Oral Surgery',
     schemaType: 'MedicalProcedure',
@@ -175,16 +175,16 @@ export const ROUTE_SEO_MAP: Record<string, RouteSEOConfig> = {
   },
   '/emergency-dentist': {
     path: '/emergency-dentist',
-    title: '24 Hour Emergency Dentist in Chipiyana Buzurg, Ghaziabad | Oracle Dental',
-    description: 'Open 24 hours for urgent toothaches, facial swelling, broken teeth, and dental abscesses at Jaat Chowk, Chipiyana Buzurg, Ghaziabad. Call +91 7011961515.',
-    serviceName: '24/7 Emergency Dental Care',
+    title: 'Emergency Dentist in Chipiyana Buzurg, Ghaziabad | Oracle Dental Clinic',
+    description: 'Open Daily: 9:00 AM – 9:00 PM for urgent toothaches, facial swelling, broken teeth, and dental abscesses at Jaat Chowk, Chipiyana Buzurg, Ghaziabad. Call +91 7011961515.',
+    serviceName: 'Emergency Dental Care (Daily 9 AM–9 PM)',
     serviceType: 'Emergency Dentistry',
     schemaType: 'Service',
   },
   '/emergency-dentist-ghaziabad': {
     path: '/emergency-dentist-ghaziabad',
-    title: 'Emergency Dentist in Ghaziabad (24 Hours) | Urgent Tooth Pain Relief',
-    description: 'Urgent dental care available 24 hours in Chipiyana Buzurg, Ghaziabad for sudden tooth pain, swelling, abscesses, and dental trauma. Call +91 7011961515.',
+    title: 'Emergency Dentist in Ghaziabad | Urgent Tooth Pain Relief | Oracle Dental',
+    description: 'Urgent dental care available daily 9:00 AM – 9:00 PM in Chipiyana Buzurg, Ghaziabad for sudden tooth pain, swelling, abscesses, and dental trauma. Call +91 7011961515.',
     serviceName: 'Emergency Dental Services Ghaziabad',
     serviceType: 'Emergency Dentistry',
     schemaType: 'Service',
@@ -192,7 +192,7 @@ export const ROUTE_SEO_MAP: Record<string, RouteSEOConfig> = {
   '/dentist-chipiyana-buzurg-ghaziabad': {
     path: '/dentist-chipiyana-buzurg-ghaziabad',
     title: 'Dentist in Chipiyana Buzurg, Ghaziabad | Oracle Dental Clinic & Implant Center',
-    description: 'Trusted neighborhood dentist at Shop No. 47, KTS Complex, Jaat Chowk, Near Dolphin Public School, Chipiyana Buzurg, Ghaziabad. Open 24 hours.',
+    description: 'Trusted neighborhood dentist at Shop No. 47, KTS Complex, Jaat Chowk, Near Dolphin Public School, Chipiyana Buzurg, Ghaziabad. Open Daily: 9:00 AM – 9:00 PM.',
     serviceName: 'General & Family Dentistry in Chipiyana Buzurg',
     serviceType: 'Dental Clinic',
     schemaType: 'Service',
@@ -200,7 +200,7 @@ export const ROUTE_SEO_MAP: Record<string, RouteSEOConfig> = {
   '/dentist-ghaziabad': {
     path: '/dentist-ghaziabad',
     title: 'Dentist in Ghaziabad | Dr. Prashant Kumar Vats (BDS) | Oracle Dental Clinic',
-    description: 'Consult Dr. Prashant Kumar Vats, BDS at Oracle Dental Clinic in Chipiyana Buzurg, Ghaziabad for implants, RCT, crowns, cosmetic care, and 24-hour emergency dentistry.',
+    description: 'Consult Dr. Prashant Kumar Vats, BDS at Oracle Dental Clinic in Chipiyana Buzurg, Ghaziabad for implants, RCT, crowns, cosmetic care, and emergency dentistry (Open Daily: 9:00 AM – 9:00 PM).',
     serviceName: 'Dentist Services in Ghaziabad',
     serviceType: 'General & Implant Dentistry',
     schemaType: 'Service',
@@ -208,7 +208,7 @@ export const ROUTE_SEO_MAP: Record<string, RouteSEOConfig> = {
   '/dental-clinic-ghaziabad': {
     path: '/dental-clinic-ghaziabad',
     title: 'Dental Clinic in Ghaziabad | Chipiyana Buzurg & Crossings Republik Area',
-    description: 'Modern, sterilized dental clinic at Jaat Chowk, Chipiyana Buzurg serving Crossings Republik, Shahberi, Lal Kuan & Noida Extension. Open 24 hours.',
+    description: 'Modern, sterilized dental clinic at Jaat Chowk, Chipiyana Buzurg serving Crossings Republik, Shahberi, Lal Kuan & Noida Extension. Open Daily: 9:00 AM – 9:00 PM.',
     serviceName: 'Dental Clinic Services',
     serviceType: 'Dental Clinic',
     schemaType: 'Service',
@@ -216,7 +216,7 @@ export const ROUTE_SEO_MAP: Record<string, RouteSEOConfig> = {
   '/dentist-near-me': {
     path: '/dentist-near-me',
     title: 'Dentist Near Me in Chipiyana Buzurg, Shahberi & Crossings Republik | Oracle Dental',
-    description: 'Looking for a dentist near Jaat Chowk, Chipiyana Buzurg, Shahberi, Crossings Republik or Lal Kuan? Visit Oracle Dental Clinic open 24 hours. Call +91 7011961515.',
+    description: 'Looking for a dentist near Jaat Chowk, Chipiyana Buzurg, Shahberi, Crossings Republik or Lal Kuan? Visit Oracle Dental Clinic, Open Daily: 9:00 AM – 9:00 PM. Call +91 7011961515.',
     serviceName: 'Local Neighborhood Dental Care',
     serviceType: 'Dental Clinic',
     schemaType: 'Service',
@@ -240,7 +240,7 @@ export const ROUTE_SEO_MAP: Record<string, RouteSEOConfig> = {
   '/tooth-pain-treatment': {
     path: '/tooth-pain-treatment',
     title: 'Tooth Pain Treatment in Chipiyana Buzurg, Ghaziabad | Urgent Relief',
-    description: 'Accurate diagnosis and treatment for severe toothaches, cavity pain, gum infections, and sensitivity at Oracle Dental Clinic, Ghaziabad. Open 24 hours.',
+    description: 'Accurate diagnosis and treatment for severe toothaches, cavity pain, gum infections, and sensitivity at Oracle Dental Clinic, Ghaziabad. Open Daily: 9:00 AM – 9:00 PM.',
     serviceName: 'Tooth Pain Diagnosis & Treatment',
     serviceType: 'Emergency & Restorative Dentistry',
     schemaType: 'MedicalTherapy',
@@ -343,8 +343,8 @@ export const ROUTE_SEO_MAP: Record<string, RouteSEOConfig> = {
   },
   '/dental-abscess-treatment': {
     path: '/dental-abscess-treatment',
-    title: 'Dental Abscess & Pus Infection Treatment in Ghaziabad | 24/7 Care',
-    description: 'Urgent dental abscess drainage, infection control, and root canal or extraction care available 24 hours at Oracle Dental Clinic, Chipiyana Buzurg, Ghaziabad.',
+    title: 'Dental Abscess & Pus Infection Treatment in Ghaziabad | Emergency Care',
+    description: 'Urgent dental abscess drainage, infection control, and root canal or extraction care available daily 9:00 AM – 9:00 PM at Oracle Dental Clinic, Chipiyana Buzurg, Ghaziabad.',
     serviceName: 'Dental Abscess & Infection Treatment',
     serviceType: 'Emergency Dentistry',
     schemaType: 'MedicalProcedure',
@@ -444,6 +444,11 @@ export const ROUTE_SEO_MAP: Record<string, RouteSEOConfig> = {
     serviceName: 'Teeth Whitening Cost Guide',
     serviceType: 'Cosmetic Dentistry',
     schemaType: 'Service',
+  },
+  '/privacy-policy': {
+    path: '/privacy-policy',
+    title: 'Privacy Policy | Oracle Dental Clinic & Implant Center, Ghaziabad',
+    description: 'Read how Oracle Dental Clinic & Implant Center handles website analytics, WhatsApp enquiries, AI Dental Assistant interactions, and patient privacy.',
   },
 };
 

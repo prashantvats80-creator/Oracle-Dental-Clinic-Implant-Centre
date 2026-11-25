@@ -50,7 +50,7 @@ export default function DentalImplantsPage({
   useEffect(() => {
     preloadImages([
       "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1000&q=80",
-      "https://i.postimg.cc/K88srmK7/Chat-GPT-Image-Jun-23-2026-07-48-17-PM.png",
+      "https://oracledentals.netlify.app/assets/images/case-03.webp",
       "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=1000&q=80"
     ]);
   }, []);
@@ -239,7 +239,7 @@ export default function DentalImplantsPage({
               </div>
               <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex flex-col col-span-2 sm:col-span-1">
                 <span className="text-slate-400 text-xs">Clinic Hours</span>
-                <span className="text-cyan-300 font-bold text-xs">Open 24 Hours, 7 Days</span>
+                <span className="text-cyan-300 font-bold text-xs">Open Daily: 9:00 AM – 9:00 PM</span>
               </div>
             </div>
 
@@ -301,7 +301,7 @@ export default function DentalImplantsPage({
                 <div className="flex items-start gap-2.5">
                   <Clock className="w-4 h-4 text-emerald-400 mt-1 flex-shrink-0" />
                   <p className="text-xs text-slate-300">
-                    Open 24 Hours, 7 Days (Mon–Sun)
+                    Open Daily: 9:00 AM – 9:00 PM (Mon–Sun)
                   </p>
                 </div>
               </div>
@@ -525,13 +525,13 @@ export default function DentalImplantsPage({
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
             <TreatmentImage
-              src="https://i.postimg.cc/K88srmK7/Chat-GPT-Image-Jun-23-2026-07-48-17-PM.png"
+              src="/assets/images/case-03.webp"
               alt="Educational diagram illustrating bone integration and osseointegration of a dental implant post in jawbone"
               caption="Educational diagram: Biological osseointegration where jawbone fuses around titanium implant post."
               aspectRatio="4/3"
             />
             <TreatmentImage
-              src="https://i.postimg.cc/QMR4356D/Chat-GPT-Image-Jun-23-2026-07-50-45-PM.png"
+              src="/assets/images/case-04.webp"
               alt="Educational illustration showing multi-unit implant-supported bridge and full-arch rehabilitation concept"
               caption="Educational illustration: Multi-unit implant bridge anchoring multiple missing teeth securely."
               aspectRatio="4/3"
@@ -921,7 +921,7 @@ export default function DentalImplantsPage({
             },
             {
               title: "Flexible Working Hours",
-              desc: "Open 24 Hours, 7 Days (Monday – Sunday) for scheduled and urgent visits."
+              desc: "Open Daily: 9:00 AM – 9:00 PM (Monday – Sunday) for scheduled and urgent visits."
             },
             {
               title: "Patient-Centered Planning",

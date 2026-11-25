@@ -149,7 +149,7 @@ const Services: React.FC<ServicesProps> = ({ navigateToPath }) => {
     { title: 'Dental Bridges', path: '/dental-bridges' },
     { title: 'Dentures', path: '/dentures' },
     { title: 'Kids Dentist', path: '/kids-dentist' },
-    { title: '24 Hour Emergency Dentist', path: '/emergency-dentist' },
+    { title: 'Emergency Dental Care', path: '/emergency-dentist' },
     { title: 'Emergency Dentist Ghaziabad', path: '/emergency-dentist-ghaziabad' },
     { title: 'Dentist in Chipiyana Buzurg', path: '/dentist-chipiyana-buzurg-ghaziabad' },
     { title: 'Dentist in Ghaziabad', path: '/dentist-ghaziabad' },

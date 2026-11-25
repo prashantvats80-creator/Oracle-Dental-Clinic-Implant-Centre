@@ -59,6 +59,7 @@ const routeImports: Record<string, () => Promise<unknown>> = {
   '/emergency-dentist-ghaziabad': () => import('../components/EmergencyDentistGhaziabadPage'),
   '/dental-implant-after-tooth-extraction': () => import('../components/ImmediateDentalImplantPage'),
   '/smile-makeover-ghaziabad': () => import('../components/SmileMakeoverGhaziabadPage'),
+  '/privacy-policy': () => import('../components/PrivacyPolicyPage'),
 };
 
 export function preloadRoute(path: string): void {
@@ -74,20 +75,6 @@ export function preloadRoute(path: string): void {
 }
 
 export function preloadAllTopRoutes(): void {
-  // Respect Save-Data and slow connections on mobile so initial Lighthouse & 3G/4G loads stay ultra-fast
-  if (typeof navigator !== 'undefined') {
-    const conn = (navigator as unknown as { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
-    if (conn?.saveData || (conn?.effectiveType && conn.effectiveType !== '4g')) {
-      return;
-    }
-  }
-  // Only warm top routes lazily well after initial load is complete
-  const topRoutes = ['/dental-implants', '/root-canal-treatment', '/wisdom-tooth-extraction'];
-  setTimeout(() => {
-    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
-      window.requestIdleCallback(() => {
-        topRoutes.forEach((r) => preloadRoute(r));
-      });
-    }
-  }, 5000);
+  // On-demand hover/touch preloading via preloadRoute() keeps initial mobile bandwidth lean
+  // without speculatively downloading heavy animation chunks on idle homepage visits.
 }

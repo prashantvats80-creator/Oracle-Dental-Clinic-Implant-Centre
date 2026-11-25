@@ -278,5 +278,5 @@ const faqsList = [
   { q: "Can gum disease cause toothache?", a: "Yes. Deep gum pockets or bone loss can cause dull aching, tenderness on biting, and sensitivity." },
   { q: "Will I need a root canal if my tooth hurts?", a: "Not necessarily. If decay is shallow, a filling may suffice. Root canal is recommended only if the nerve is infected or inflamed." },
   { q: "Where is Oracle Dental Clinic located?", a: "At Shop No. 47, KTS Complex, near Dolphin Public School, Jaat Chowk, Chipiyana Buzurg, Ghaziabad." },
-  { q: "What are the clinic timings?", a: "Oracle Dental Clinic is open daily 24 Hours, 7 Days (Monday – Sunday)." }
+  { q: "What are the clinic timings?", a: "Oracle Dental Clinic is Open Daily: 9:00 AM – 9:00 PM (Monday – Sunday)." }
 ];

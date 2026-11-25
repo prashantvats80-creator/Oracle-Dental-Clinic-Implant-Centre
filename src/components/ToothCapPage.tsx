@@ -107,7 +107,7 @@ export default function ToothCapPage({ handleCall, handleWhatsApp, navigateToHom
             </div>
 
             <TreatmentImage
-              src="https://i.postimg.cc/gcT2V2Bw/Chat-GPT-Image-Jun-23-2026-08-38-15-PM.png"
+              src="/assets/images/case-10.webp"
               alt="Illustration of a dental crown covering a weakened tooth"
               caption="Educational illustration: Dental crown (tooth cap) fitting precisely over a prepared tooth."
               aspectRatio="4/3"

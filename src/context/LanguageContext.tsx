@@ -15,8 +15,8 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 const translations: Record<string, Record<Language, string>> = {
   // Top bar & Header
   'clinic_hours': {
-    en: 'Open 24 Hours, 7 Days (Mon–Sun)',
-    hi: 'सोम-रवि: सुबह 10-2, शाम 5-9 बजे'
+    en: 'Open Daily: 9:00 AM – 9:00 PM',
+    hi: 'रोज़ाना: सुबह 9:00 से रात 9:00 बजे तक'
   },
   'location_ghaziabad': {
     en: 'Chipiyana Buzurg, Ghaziabad',

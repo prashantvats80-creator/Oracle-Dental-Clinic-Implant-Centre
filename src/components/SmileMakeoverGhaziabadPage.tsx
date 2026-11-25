@@ -347,7 +347,7 @@ export default function SmileMakeoverGhaziabadPage({
           </div>
 
           <div className="pt-4 flex flex-wrap justify-center items-center gap-6 text-xs text-purple-200">
-            <span className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-amber-400" /> Open 24 Hours, 7 Days (Mon–Sun)</span>
+            <span className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-amber-400" /> Open Daily: 9:00 AM – 9:00 PM (Mon–Sun)</span>
             <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4 text-amber-400" /> Shop No. 47, KTS Complex, Jaat Chowk, Near Dolphin Public School, Chipiyana Buzurg, Ghaziabad</span>
           </div>
           <div className="flex flex-wrap justify-center gap-2 pt-4">

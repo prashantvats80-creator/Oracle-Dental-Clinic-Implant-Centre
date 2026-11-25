@@ -132,7 +132,7 @@ export default function RootCanalPage({
     },
     {
       question: "How can I book a root canal consultation at Oracle Dental Clinic?",
-      answer: "You can book a consultation by calling 7011961515, messaging via WhatsApp, or visiting the clinic 24 hours a day, 7 days a week."
+      answer: "You can book a consultation by calling +91 7011961515, messaging via WhatsApp, or visiting the clinic (Open Daily: 9:00 AM – 9:00 PM, Monday – Sunday)."
     }
   ];
 
@@ -177,7 +177,7 @@ export default function RootCanalPage({
               </div>
               <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex flex-col col-span-2 sm:col-span-1">
                 <span className="text-slate-400 text-xs">Clinic Hours</span>
-                <span className="text-cyan-300 font-bold text-xs">Open 24 Hours, 7 Days</span>
+                <span className="text-cyan-300 font-bold text-xs">Open Daily: 9:00 AM – 9:00 PM</span>
               </div>
             </div>
 
@@ -239,7 +239,7 @@ export default function RootCanalPage({
                 <div className="flex items-start gap-2.5">
                   <Clock className="w-4 h-4 text-emerald-400 mt-1 flex-shrink-0" />
                   <p className="text-xs text-slate-300">
-                    Open 24 Hours, 7 Days (Mon–Sun)
+                    Open Daily: 9:00 AM – 9:00 PM (Mon–Sun)
                   </p>
                 </div>
               </div>
@@ -476,13 +476,13 @@ export default function RootCanalPage({
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
             <TreatmentImage
-              src="https://i.postimg.cc/fL7Y30vY/Chat-GPT-Image-Jun-23-2026-08-31-58-PM.png"
+              src="/assets/images/case-09.webp"
               alt="Step-by-step root canal treatment procedure illustration showing cleaning, shaping, and sealing"
               caption="Educational illustration: Step-by-step root canal cleaning, anti-bacterial shaping, and gutta-percha canal sealing."
               aspectRatio="4/3"
             />
             <TreatmentImage
-              src="https://i.postimg.cc/gcT2V2Bw/Chat-GPT-Image-Jun-23-2026-08-38-15-PM.png"
+              src="/assets/images/case-10.webp"
               alt="Educational diagram showing dental crown placement over a root canal treated tooth for structural strength"
               caption="Educational diagram: Dental crown placed over a root-canal treated tooth to restore structural durability."
               aspectRatio="4/3"
@@ -869,7 +869,7 @@ export default function RootCanalPage({
             },
             {
               title: "Flexible Working Hours",
-              desc: "Open 24 Hours, 7 Days (Monday – Sunday) for scheduled and urgent visits."
+              desc: "Open Daily: 9:00 AM – 9:00 PM (Monday – Sunday) for scheduled and urgent visits."
             },
             {
               title: "Tooth Preservation Focus",

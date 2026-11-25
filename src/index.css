@@ -207,6 +207,14 @@ h1, h2, h3, h4, h5, h6 {
   animation: fab-soft-pulse 3.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
 
+.fab-contact-ai {
+  animation-delay: 0.8s;
+}
+
+.fab-contact-ai::before {
+  animation-delay: 0.8s;
+}
+
 .fab-contact-call {
   animation-delay: 1.6s;
 }
@@ -221,6 +229,22 @@ h1, h2, h3, h4, h5, h6 {
 
 .fab-contact-btn:active {
   transform: scale(0.94);
+}
+
+/* Botpress VdkEdgeWebchat: Hide duplicate default launcher bubble; keep built-in close button visible */
+.vdk-edge.vdk-edge-mode-bubble .vdk-edge-launcher {
+  display: none !important;
+}
+
+.vdk-edge.vdk-edge-mode-bubble .vdk-edge-close {
+  display: inline-flex !important;
+}
+
+@media (min-width: 481px) {
+  .vdk-edge.vdk-edge-mode-bubble {
+    right: 88px;
+    bottom: 24px;
+  }
 }
 
 /* Safe-area bottom offset for notched mobile browsers */

@@ -30,22 +30,28 @@ const DoctorProfile: React.FC = () => {
                 className="absolute -bottom-6 -left-6 w-24 h-24 rounded-full bg-[#FF8A24]/30 pointer-events-none"
               />
               <div className="relative w-full max-w-xs sm:max-w-sm rounded-3xl overflow-hidden border-4 border-white shadow-xl bg-[#FFF8EC]">
-                <img
-                  src={GBP_CONFIG.DOCTOR_IMAGE}
-                  alt="Dr. Prashant Kumar Vats, Dental Surgeon (BDS) at Oracle Dental Clinic & Implant Center"
-                  width="384"
-                  height="420"
-                  className="w-full h-72 sm:h-96 object-cover object-top block"
-                  referrerPolicy="no-referrer"
-                  loading="lazy"
-                  decoding="async"
-                />
+                <picture>
+                  <source
+                    type="image/webp"
+                    srcSet="/assets/images/dr-prashant-vats-400.webp 400w, /assets/images/dr-prashant-vats-768.webp 768w"
+                    sizes="(max-width: 640px) 85vw, 384px"
+                  />
+                  <img
+                    src="/assets/images/dr-prashant-vats.jpg"
+                    alt="Dr. Prashant Kumar Vats, BDS, MIDA – Dental Surgeon & Implantologist at Oracle Dental Clinic & Implant Center"
+                    width="384"
+                    height="420"
+                    className="w-full h-72 sm:h-96 object-cover object-top block"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
                 <div className="bg-white px-5 py-3.5 text-center border-t-2 border-[#FFD36A]">
                   <p className="font-extrabold text-base text-[#087B57] leading-tight">
                     {GBP_CONFIG.DOCTOR_NAME}
                   </p>
                   <p className="text-xs font-bold text-[#FF654F] mt-0.5">
-                    Dental Surgeon | {GBP_CONFIG.DOCTOR_QUALIFICATION}
+                    {GBP_CONFIG.DOCTOR_ROLE} | {GBP_CONFIG.DOCTOR_QUALIFICATION}
                   </p>
                 </div>
               </div>
@@ -66,7 +72,7 @@ const DoctorProfile: React.FC = () => {
                   {GBP_CONFIG.DOCTOR_NAME}
                 </h2>
                 <p className="text-base sm:text-lg font-extrabold text-[#087B57] mt-1">
-                  Dental Surgeon | {GBP_CONFIG.DOCTOR_QUALIFICATION}
+                  {GBP_CONFIG.DOCTOR_ROLE} | {GBP_CONFIG.DOCTOR_QUALIFICATION}
                 </p>
               </div>
 

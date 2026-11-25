@@ -132,7 +132,7 @@ const Footer: React.FC<FooterProps> = ({ navigateToPath }) => {
               <li><a href="/dentist-ghaziabad" onClick={(e) => handleLinkClick(e, '/dentist-ghaziabad')} className="hover:text-[#FFD36A] transition-colors">Dentist in Ghaziabad</a></li>
               <li><a href="/dental-clinic-ghaziabad" onClick={(e) => handleLinkClick(e, '/dental-clinic-ghaziabad')} className="hover:text-[#FFD36A] transition-colors">Dental Clinic in Ghaziabad</a></li>
               <li><a href="/dentist-near-me" onClick={(e) => handleLinkClick(e, '/dentist-near-me')} className="hover:text-[#FFD36A] transition-colors">Dentist Near Me</a></li>
-              <li><a href="/emergency-dentist" onClick={(e) => handleLinkClick(e, '/emergency-dentist')} className="text-[#FFD36A] hover:text-white font-semibold transition-colors">24 Hour Emergency Dentist</a></li>
+              <li><a href="/emergency-dentist" onClick={(e) => handleLinkClick(e, '/emergency-dentist')} className="text-[#FFD36A] hover:text-white font-semibold transition-colors">Emergency Dental Care</a></li>
               <li><a href="/tooth-cap" onClick={(e) => handleLinkClick(e, '/tooth-cap')} className="hover:text-[#FFD36A] transition-colors">Tooth Cap &amp; Crowns</a></li>
               <li><a href="/dental-bridges" onClick={(e) => handleLinkClick(e, '/dental-bridges')} className="hover:text-[#FFD36A] transition-colors">Fixed Dental Bridges</a></li>
               <li><a href="/dentures" onClick={(e) => handleLinkClick(e, '/dentures')} className="hover:text-[#FFD36A] transition-colors">Complete &amp; Partial Dentures</a></li>
@@ -225,10 +225,27 @@ const Footer: React.FC<FooterProps> = ({ navigateToPath }) => {
           </div>
         </div>
 
-        <div className="border-t border-white/15 mt-8 pt-6 text-center text-xs text-[#E5F5EC]/75">
+        <div className="border-t border-white/15 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#E5F5EC]/80">
           <p>
             &copy; {new Date().getFullYear()} {GBP_CONFIG.BUSINESS_NAME}. All rights reserved.
           </p>
+          <div className="flex items-center gap-4">
+            <a
+              href="/dental-services"
+              onClick={(e) => handleLinkClick(e, '/dental-services')}
+              className="hover:text-[#FFD36A] transition-colors underline-offset-4 hover:underline"
+            >
+              All Dental Services
+            </a>
+            <span aria-hidden="true" className="text-white/30">·</span>
+            <a
+              href="/privacy-policy"
+              onClick={(e) => handleLinkClick(e, '/privacy-policy')}
+              className="hover:text-[#FFD36A] transition-colors underline-offset-4 hover:underline"
+            >
+              Privacy Policy
+            </a>
+          </div>
         </div>
       </div>
     </footer>

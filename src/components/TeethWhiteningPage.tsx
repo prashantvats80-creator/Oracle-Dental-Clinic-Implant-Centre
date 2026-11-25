@@ -238,7 +238,7 @@ export default function TeethWhiteningPage({
               </div>
               <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex flex-col col-span-2 sm:col-span-1">
                 <span className="text-slate-400 text-xs">Clinic Hours</span>
-                <span className="text-cyan-300 font-bold text-xs">Open 24 Hours, 7 Days</span>
+                <span className="text-cyan-300 font-bold text-xs">Open Daily: 9:00 AM – 9:00 PM</span>
               </div>
             </div>
 
@@ -300,7 +300,7 @@ export default function TeethWhiteningPage({
                 <div className="flex items-start gap-2.5">
                   <Clock className="w-4 h-4 text-emerald-400 mt-1 flex-shrink-0" />
                   <p className="text-xs text-slate-300">
-                    Open 24 Hours, 7 Days (Mon–Sun)
+                    Open Daily: 9:00 AM – 9:00 PM (Mon–Sun)
                   </p>
                 </div>
               </div>
@@ -338,7 +338,7 @@ export default function TeethWhiteningPage({
 
             <div className="md:col-span-5 space-y-4">
               <TreatmentImage
-                src="https://i.postimg.cc/FsZjZccD/Chat-GPT-Image-Jun-23-2026-07-40-02-PM.png"
+                src="/assets/images/case-01.webp"
                 alt="Educational illustration showing extrinsic enamel surface staining and intrinsic dentin discoloration"
                 caption="Educational illustration: Extrinsic surface enamel stains vs intrinsic dentin shade variations."
                 aspectRatio="4/3"
@@ -486,7 +486,7 @@ export default function TeethWhiteningPage({
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
           <TreatmentImage
-            src="https://i.postimg.cc/FHT82Ytw/Chat-GPT-Image-Jun-23-2026-07-42-37-PM.png"
+            src="/assets/images/case-02.webp"
             alt="Educational diagram showing professional in-office teeth whitening treatment application"
             caption="Educational diagram: Professional in-office whitening procedure with protective gingival barrier."
             aspectRatio="4/3"
@@ -800,7 +800,7 @@ export default function TeethWhiteningPage({
             },
             {
               title: "Flexible Working Hours",
-              desc: "Open 24 Hours, 7 Days (Monday – Sunday) for scheduled and urgent visits."
+              desc: "Open Daily: 9:00 AM – 9:00 PM (Monday – Sunday) for scheduled and urgent visits."
             },
             {
               title: "Comprehensive Dental Care",

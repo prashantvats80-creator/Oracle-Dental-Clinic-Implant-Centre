@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Home, ChevronRight } from 'lucide-react';
-import { GBP_CONFIG } from '../config/googleBusinessProfile';
 
 export interface BreadcrumbItem {
   label: string;
@@ -20,59 +19,6 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   navigateToPath,
   badge,
 }) => {
-  const origin = GBP_CONFIG.SITE_URL;
-
-  const resolveItemUrl = (path?: string) => {
-    if (!path) {
-      return `${origin}/`;
-    }
-    if (path.startsWith('http://') || path.startsWith('https://')) {
-      return path;
-    }
-    const cleanPath = path.startsWith('/') ? path : `/${path}`;
-    return `${origin}${cleanPath}`;
-  };
-
-  useEffect(() => {
-    const schemaList = [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: `${origin}/`,
-      },
-      ...items.map((item, idx) => ({
-        '@type': 'ListItem',
-        position: idx + 2,
-        name: item.label,
-        item: resolveItemUrl(item.path),
-      })),
-    ];
-
-    const jsonLdData = {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: schemaList,
-    };
-
-    const scriptId = 'breadcrumb-jsonld';
-    let script = document.getElementById(scriptId) as HTMLScriptElement | null;
-    if (!script) {
-      script = document.createElement('script');
-      script.id = scriptId;
-      script.type = 'application/ld+json';
-      document.head.appendChild(script);
-    }
-    script.text = JSON.stringify(jsonLdData);
-
-    return () => {
-      const existingScript = document.getElementById(scriptId);
-      if (existingScript) {
-        existingScript.remove();
-      }
-    };
-  }, [items, origin]);
-
   const handleItemClick = (e: React.MouseEvent, path?: string) => {
     e.preventDefault();
     if (!path || path === '/') {

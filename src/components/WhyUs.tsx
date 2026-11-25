@@ -24,8 +24,8 @@ const WhyUs: React.FC<WhyUsProps> = () => {
       icon: ShieldCheck,
     },
     {
-      title: 'Open 24 Hours, 7 Days',
-      desc: 'Available day and night for scheduled dental visits and urgent toothache emergencies.',
+      title: 'Open Daily: 9:00 AM – 9:00 PM',
+      desc: 'Available all 7 days a week from 9:00 AM to 9:00 PM for scheduled dental visits and prompt care.',
       icon: Clock,
     },
     {
@@ -69,7 +69,7 @@ const WhyUs: React.FC<WhyUsProps> = () => {
           </h2>
           <p className="text-[#26352F]/80 leading-relaxed text-sm sm:text-base">
             Led by <strong>{GBP_CONFIG.DOCTOR_TITLE}</strong>, {GBP_CONFIG.BUSINESS_NAME} combines
-            clinical sterilization standards, clear patient communication, and 24-hour accessibility
+            clinical sterilization standards, clear patient communication, and daily 9:00 AM – 9:00 PM accessibility
             right at Jaat Chowk, Chipiyana Buzurg, Ghaziabad.
           </p>
         </div>

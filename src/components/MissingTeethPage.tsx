@@ -90,7 +90,7 @@ export default function MissingTeethPage({
           <div className="lg:col-span-5 bg-slate-900/90 border border-slate-800 p-6 rounded-3xl space-y-4">
             <h3 className="text-white font-bold text-lg">Main Replacement Options</h3>
             <TreatmentImage
-              src="https://i.postimg.cc/K88srmK7/Chat-GPT-Image-Jun-23-2026-07-48-17-PM.png"
+              src="/assets/images/case-03.webp"
               alt="Educational illustration comparing missing teeth replacement options including implants bridges and dentures"
               caption="Educational diagram: Missing tooth replacement options comparing implants, fixed bridges, and dentures."
               aspectRatio="4/3"

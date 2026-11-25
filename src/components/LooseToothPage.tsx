@@ -40,7 +40,7 @@ export default function LooseToothPage({ handleCall, handleWhatsApp, navigateToH
           </p>
 
           <TreatmentImage
-            src="https://i.postimg.cc/GhqXp6MY/Chat-GPT-Image-Jun-23-2026-07-55-08-PM.png"
+            src="/assets/images/case-05.webp"
             alt="Educational diagram showing periodontal bone loss and tooth mobility stabilization options"
             caption="Educational diagram: Periodontal support evaluation and tooth stabilization concepts."
             aspectRatio="16/9"

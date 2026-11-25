@@ -346,7 +346,7 @@ export default function EmergencyDentistGhaziabadPage({
           </div>
 
           <div className="pt-4 flex flex-wrap justify-center items-center gap-6 text-xs text-red-200">
-            <span className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-amber-400" /> Open 24 Hours, 7 Days (Mon–Sun)</span>
+            <span className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-amber-400" /> Open Daily: 9:00 AM – 9:00 PM (Mon–Sun)</span>
             <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4 text-amber-400" /> KTS Complex, Jaat Chowk, Chipiyana Buzurg</span>
           </div>
         </section>

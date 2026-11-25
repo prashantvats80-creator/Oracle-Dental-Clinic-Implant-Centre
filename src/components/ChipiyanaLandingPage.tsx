@@ -126,7 +126,7 @@ export default function ChipiyanaLandingPage({
     },
     {
       question: "What are the clinic timings?",
-      answer: "The clinic is open all 7 days of the week with 24 hours a day, 7 days a week (Monday to Sunday)."
+      answer: "Oracle Dental Clinic is Open Daily: 9:00 AM – 9:00 PM (Monday to Sunday)."
     },
     {
       question: "How can I book an appointment?",
@@ -177,7 +177,7 @@ export default function ChipiyanaLandingPage({
               </div>
               <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex flex-col col-span-2 sm:col-span-1">
                 <span className="text-slate-400 text-xs">Clinic Timings</span>
-                <span className="text-cyan-300 font-bold text-xs sm:text-xs">Open 24 Hours, 7 Days</span>
+                <span className="text-cyan-300 font-bold text-xs sm:text-xs">Open Daily: 9:00 AM – 9:00 PM</span>
               </div>
             </div>
 
@@ -239,7 +239,7 @@ export default function ChipiyanaLandingPage({
                 <div className="flex items-start gap-2.5">
                   <Clock className="w-4 h-4 text-emerald-400 mt-1 flex-shrink-0" />
                   <p className="text-xs text-slate-300">
-                    Open 24 Hours, 7 Days (Mon–Sun)
+                    Open Daily: 9:00 AM – 9:00 PM (Mon–Sun)
                   </p>
                 </div>
               </div>
@@ -307,7 +307,7 @@ export default function ChipiyanaLandingPage({
               },
               {
                 title: "Convenient Morning & Evening Timings",
-                desc: "Open all days 24 Hours, 7 Days (Monday – Sunday) to fit your daily schedule."
+                desc: "Open Daily: 9:00 AM – 9:00 PM (Monday – Sunday) to fit your daily schedule."
               },
               {
                 title: "Individualized Treatment Planning",
@@ -485,7 +485,7 @@ export default function ChipiyanaLandingPage({
 
               <p className="flex items-center gap-3">
                 <Clock className="w-5 h-5 text-emerald-400 flex-shrink-0" />
-                <span><strong>Timings:</strong> Open 24 Hours, 7 Days (Monday – Sunday)</span>
+                <span><strong>Timings:</strong> Open Daily: 9:00 AM – 9:00 PM (Monday – Sunday)</span>
               </p>
 
               <p className="flex items-center gap-3">

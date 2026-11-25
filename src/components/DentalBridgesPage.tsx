@@ -72,7 +72,7 @@ export default function DentalBridgesPage({ handleCall, handleWhatsApp, navigate
             </div>
 
             <TreatmentImage
-              src="https://i.postimg.cc/QMR4356D/Chat-GPT-Image-Jun-23-2026-07-50-45-PM.png"
+              src="/assets/images/case-04.webp"
               alt="Educational illustration showing conventional dental bridge anchored on supporting teeth"
               caption="Educational diagram: Fixed dental bridge anchoring artificial replacement tooth over missing space."
               aspectRatio="4/3"
@@ -87,7 +87,7 @@ export default function DentalBridgesPage({ handleCall, handleWhatsApp, navigate
           </p>
 
           <TreatmentImage
-            src="https://i.postimg.cc/K88srmK7/Chat-GPT-Image-Jun-23-2026-07-48-17-PM.png"
+            src="/assets/images/case-03.webp"
             alt="Educational illustration comparing conventional bridge with implant supported replacement"
             caption="Educational comparison: Conventional tooth-supported bridge vs standalone dental implant replacement."
             aspectRatio="16/9"

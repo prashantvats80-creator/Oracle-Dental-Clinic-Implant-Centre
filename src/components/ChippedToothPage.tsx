@@ -40,7 +40,7 @@ export default function ChippedToothPage({ handleCall, handleWhatsApp, navigateT
           </p>
 
           <TreatmentImage
-            src="https://i.postimg.cc/2S3dHyCP/Chat-GPT-Image-Jun-23-2026-08-09-59-PM.png"
+            src="/assets/images/case-07.webp"
             alt="Educational illustration showing chipped tooth enamel and composite bonding restoration"
             caption="Educational illustration: Seamless front tooth composite bonding restoration."
             aspectRatio="16/9"

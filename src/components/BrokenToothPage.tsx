@@ -40,7 +40,7 @@ export default function BrokenToothPage({ handleCall, handleWhatsApp, navigateTo
           </p>
 
           <TreatmentImage
-            src="https://i.postimg.cc/VkyshHw1/Chat-GPT-Image-Jun-23-2026-08-42-13-PM.png"
+            src="/assets/images/case-11.webp"
             alt="Educational diagram showing tooth fracture classification and crown restoration options"
             caption="Educational diagram: Cracked enamel restoration using protective dental crown or bonding."
             aspectRatio="16/9"

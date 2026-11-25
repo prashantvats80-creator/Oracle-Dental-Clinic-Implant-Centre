@@ -59,7 +59,7 @@ export default function DentistNearMePage({
     },
     {
       q: "Can I get an immediate appointment if I am nearby and in pain?",
-      a: "Yes. We accommodate emergency walk-in patients 24 hours a day, 7 days a week. You can also call 7011961515 while on your way so our team is prepared."
+      a: "Yes. We accommodate emergency walk-in patients during clinic hours (Open Daily: 9:00 AM – 9:00 PM, Monday – Sunday). You can also call +91 7011961515 while on your way so our team is prepared."
     },
     {
       q: "What is the consultation fee for nearby patients?",

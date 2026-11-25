@@ -177,7 +177,7 @@ export default function WisdomToothPage({
     },
     {
       question: "How can I book a wisdom tooth consultation?",
-      answer: "You can book a consultation by calling +91 7011961515, messaging on WhatsApp, or visiting Oracle Dental Clinic & Implant Center (Open 24 Hours, 7 Days, Monday–Sunday)."
+      answer: "You can book a consultation by calling +91 7011961515, messaging on WhatsApp, or visiting Oracle Dental Clinic & Implant Center (Open Daily: 9:00 AM – 9:00 PM, Monday–Sunday)."
     },
     {
       question: "Do I need an X-ray before wisdom tooth extraction?",
@@ -226,7 +226,7 @@ export default function WisdomToothPage({
               </div>
               <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex flex-col col-span-2 sm:col-span-1">
                 <span className="text-slate-400 text-xs">Clinic Hours</span>
-                <span className="text-cyan-300 font-bold text-xs">Open 24 Hours, 7 Days</span>
+                <span className="text-cyan-300 font-bold text-xs">Open Daily: 9:00 AM – 9:00 PM</span>
               </div>
             </div>
 
@@ -288,7 +288,7 @@ export default function WisdomToothPage({
                 <div className="flex items-start gap-2.5">
                   <Clock className="w-4 h-4 text-emerald-400 mt-1 flex-shrink-0" />
                   <p className="text-xs text-slate-300">
-                    Open 24 Hours, 7 Days (Mon–Sun)
+                    Open Daily: 9:00 AM – 9:00 PM (Mon–Sun)
                   </p>
                 </div>
               </div>
@@ -465,7 +465,7 @@ export default function WisdomToothPage({
               aspectRatio="4/3"
             />
             <TreatmentImage
-              src="https://i.postimg.cc/Zqd8SQBw/Chat-GPT-Image-Jun-23-2026-08-17-03-PM.png"
+              src="/assets/images/case-08.webp"
               alt="Educational OPG X-ray illustration showing an impacted lower wisdom tooth position"
               caption="Educational OPG X-ray view: Radiographic evaluation of an impacted mandibular 3rd molar."
               aspectRatio="4/3"
@@ -574,7 +574,7 @@ export default function WisdomToothPage({
 
           <div className="mt-8 max-w-3xl mx-auto">
             <TreatmentImage
-              src="https://i.postimg.cc/VkyshHw1/Chat-GPT-Image-Jun-23-2026-08-42-13-PM.png"
+              src="/assets/images/case-11.webp"
               alt="Educational illustration of surgical wisdom tooth extraction procedure and socket healing"
               caption="Educational illustration: Surgical wisdom tooth extraction and socket blood clot preservation protocol."
               aspectRatio="16/9"
@@ -797,7 +797,7 @@ export default function WisdomToothPage({
             },
             {
               title: "Flexible Working Hours",
-              desc: "Open 24 Hours, 7 Days (Monday – Sunday) for scheduled and urgent visits."
+              desc: "Open Daily: 9:00 AM – 9:00 PM (Monday – Sunday) for scheduled and urgent visits."
             },
             {
               title: "Structured Aftercare Support",

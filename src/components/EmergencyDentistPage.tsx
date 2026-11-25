@@ -24,7 +24,7 @@ export default function EmergencyDentistPage({ handleCall, handleWhatsApp, navig
         ]}
         navigateToHome={navigateToHome}
         navigateToPath={navigateToPath}
-        badge="24/7 Urgent Care"
+        badge="Urgent Dental Care (9 AM – 9 PM)"
       />
 
       <section className="bg-gradient-to-br from-slate-950 via-rose-950 to-slate-900 text-white pt-12 pb-16 px-4">
@@ -88,7 +88,7 @@ export default function EmergencyDentistPage({ handleCall, handleWhatsApp, navig
           </p>
 
           <TreatmentImage
-            src="https://i.postimg.cc/fL7Y30vY/Chat-GPT-Image-Jun-23-2026-08-31-58-PM.png"
+            src="/assets/images/case-09.webp"
             alt="Educational illustration showing emergency root canal access and pain relief"
             caption="Educational diagram: Emergency endodontic access relieving pressure inside an infected pulp chamber."
             aspectRatio="16/9"

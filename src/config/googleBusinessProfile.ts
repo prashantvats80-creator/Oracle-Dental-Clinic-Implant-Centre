@@ -9,8 +9,9 @@ export const GBP_CONFIG = {
 
   // Verified Doctor Credentials
   DOCTOR_NAME: "Dr. Prashant Kumar Vats",
-  DOCTOR_QUALIFICATION: "BDS",
-  DOCTOR_TITLE: "Dr. Prashant Kumar Vats, BDS",
+  DOCTOR_QUALIFICATION: "BDS, MIDA",
+  DOCTOR_ROLE: "Dental Surgeon & Implantologist",
+  DOCTOR_TITLE: "Dr. Prashant Kumar Vats, BDS, MIDA",
 
   // Canonical Production Website URL
   SITE_URL: "https://oracledentals.netlify.app",
@@ -38,8 +39,8 @@ export const GBP_CONFIG = {
   WHATSAPP_BOOKING_URL: "https://wa.me/917011961515?text=Hello%20Oracle%20Dental%20Clinic%2C%20I%20want%20to%20book%20a%20dental%20appointment.",
 
   // Exact verified Google Business Profile Opening Hours
-  HOURS: "Open 24 Hours, 7 Days (Monday – Sunday)",
-  HOURS_SHORT: "Open 24 Hours (Mon–Sun)",
+  HOURS: "Open Daily: 9:00 AM – 9:00 PM",
+  HOURS_SHORT: "Open Daily: 9:00 AM – 9:00 PM",
 
   // Official Google Business Profile & Directions Links
   GOOGLE_BUSINESS_PROFILE_URL: "https://share.google/3jkiHdvq2N8aYDGm0",
@@ -69,8 +70,8 @@ export const GBP_CONFIG = {
   FALLBACK_RATING: 4.9,
   FALLBACK_REVIEW_COUNT: 493,
 
-  // Official Clinic Images (Preserved originals)
-  DOCTOR_IMAGE: "https://i.postimg.cc/tCd8wLDv/Chat-GPT-Image-Apr-22-2026-08-21-13-PM.png",
+  // Official Clinic Images (Self-hosted compressed WebP/JPEG versions of original photographs)
+  DOCTOR_IMAGE: "https://oracledentals.netlify.app/assets/images/dr-prashant-vats.jpg",
   CLINIC_HERO_IMAGE: "https://oracledentals.netlify.app/assets/images/hero-patient.jpg",
 
   // Social Profiles

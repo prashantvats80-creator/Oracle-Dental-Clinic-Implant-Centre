@@ -57,7 +57,7 @@ const Contact: React.FC<ContactProps> = () => {
               <Calendar className="w-7 h-7" aria-hidden="true" />
             </div>
             <p className="relative text-xs font-extrabold uppercase tracking-wider text-[#FF8A24] mb-1">
-              Open 24 Hours • Quick Confirmation
+              Open Daily: 9:00 AM – 9:00 PM • Quick Confirmation
             </p>
             <h2 className="relative text-2xl sm:text-3xl font-extrabold text-[#087B57] mb-3">
               Book Your Dental Appointment

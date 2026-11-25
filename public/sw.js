@@ -1,6 +1,6 @@
-// Oracle Dental Clinic Service Worker - 2G Performance & Offline Strategy
-const CACHE_STATIC = 'oracle-dental-static-v3';
-const CACHE_IMAGES = 'oracle-dental-images-v3';
+// Oracle Dental Clinic Service Worker - Mobile Performance & Offline Strategy
+const CACHE_STATIC = 'oracle-dental-static-v4';
+const CACHE_IMAGES = 'oracle-dental-images-v4';
 
 const CORE_ASSETS = [
   './',
@@ -8,7 +8,7 @@ const CORE_ASSETS = [
   './404.html',
   './robots.txt',
   './sitemap.xml',
-  'https://fonts.googleapis.com/css2?family=Outfit:wght@600;700&display=swap'
+  'https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&display=swap'
 ];
 
 self.addEventListener('install', (event) => {
@@ -42,8 +42,15 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(event.request.url);
 
-  // Never cache Vite dev modules or source files
-  if (url.pathname.startsWith('/src/') || url.pathname.startsWith('/@') || url.pathname.includes('node_modules')) {
+  // Never cache Vite dev modules, source files, analytics, or live chat APIs
+  if (
+    url.pathname.startsWith('/src/') ||
+    url.pathname.startsWith('/@') ||
+    url.pathname.includes('node_modules') ||
+    url.hostname.includes('googletagmanager.com') ||
+    url.hostname.includes('google-analytics.com') ||
+    url.hostname.includes('botpress.host')
+  ) {
     return;
   }
 
@@ -93,7 +100,6 @@ self.addEventListener('fetch', (event) => {
   // 3. Clinic Images -> Stale-While-Revalidate
   if (
     url.hostname.includes('images.unsplash.com') ||
-    url.hostname.includes('i.postimg.cc') ||
     url.pathname.match(/\.(png|jpg|jpeg|svg|webp|gif)$/i)
   ) {
     event.respondWith(

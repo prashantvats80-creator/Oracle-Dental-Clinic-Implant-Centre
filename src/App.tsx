@@ -99,6 +99,7 @@ const TeethWhiteningCostPage = lazy(() => import('./components/TeethWhiteningCos
 const EmergencyDentistGhaziabadPage = lazy(() => import('./components/EmergencyDentistGhaziabadPage'));
 const ImmediateDentalImplantPage = lazy(() => import('./components/ImmediateDentalImplantPage'));
 const SmileMakeoverGhaziabadPage = lazy(() => import('./components/SmileMakeoverGhaziabadPage'));
+const PrivacyPolicyPage = lazy(() => import('./components/PrivacyPolicyPage'));
 
 const ALL_DENTAL_PAGES = [
   // Key Treatments, Cosmetic & Locations (26)
@@ -121,7 +122,7 @@ const ALL_DENTAL_PAGES = [
   { title: 'Dental Bridges', path: '/dental-bridges', category: 'Treatment', keywords: 'fixed bridge missing teeth ceramic' },
   { title: 'Dentures', path: '/dentures', category: 'Treatment', keywords: 'false teeth complete partial acrylic flexible' },
   { title: 'Kids Dentist', path: '/kids-dentist', category: 'Treatment', keywords: 'pediatric children dental care child tooth fluoride sealants' },
-  { title: 'Emergency Dentist (24/7)', path: '/emergency-dentist', category: 'Treatment', keywords: 'urgent toothache trauma swelling 24/7 24 hour dentist' },
+  { title: 'Emergency Dental Care', path: '/emergency-dentist', category: 'Treatment', keywords: 'urgent toothache trauma swelling emergency dentist 9 am 9 pm' },
   { title: 'Dental Implant After Tooth Extraction', path: '/dental-implant-after-tooth-extraction', category: 'Treatment', keywords: 'immediate implant same day extraction socket bone graft' },
   { title: 'Dentist in Chipiyana Buzurg', path: '/dentist-chipiyana-buzurg-ghaziabad', category: 'Location', keywords: 'chipiyana clinic local branch jaat chowk dolphin public school' },
   { title: 'Dentist in Ghaziabad', path: '/dentist-ghaziabad', category: 'Location', keywords: 'ghaziabad dental clinic dr prashant kumar vats bds' },
@@ -145,7 +146,7 @@ const ALL_DENTAL_PAGES = [
   { title: 'Gum Recession Care', path: '/gum-recession', category: 'Symptom', keywords: 'receding gums exposed roots sensitivity grafting' },
   { title: 'Dental Abscess Treatment', path: '/dental-abscess-treatment', category: 'Urgent Care', keywords: 'pus swelling infection dental abscess emergency face' },
   { title: 'Periodontal Gum Treatment', path: '/periodontal-gum-treatment-ghaziabad', category: 'Specialized', keywords: 'deep cleaning scaling root planing bone loss pockets' },
-  { title: 'Emergency Dentist in Ghaziabad', path: '/emergency-dentist-ghaziabad', category: 'Urgent Care', keywords: 'urgent toothache emergency clinic 24/7 pain swelling relief' },
+  { title: 'Emergency Dentist in Ghaziabad', path: '/emergency-dentist-ghaziabad', category: 'Urgent Care', keywords: 'urgent toothache emergency clinic daily 9 am 9 pm pain swelling relief' },
 
   // Cost Guides (11)
   { title: 'Dental Treatment Cost', path: '/dental-treatment-cost-ghaziabad', category: 'Cost Guide', keywords: 'cost price charges fee estimates consultation' },
@@ -161,9 +162,9 @@ const ALL_DENTAL_PAGES = [
   { title: 'Teeth Whitening Cost', path: '/teeth-whitening-cost-ghaziabad', category: 'Cost Guide', keywords: 'teeth bleaching whitening laser in office price cost' }
 ];
 
-const KNOWN_ROUTES = ALL_DENTAL_PAGES.map((p) => p.path);
+const KNOWN_ROUTES = [...ALL_DENTAL_PAGES.map((p) => p.path), '/privacy-policy'];
 
-// Routes that already render <TreatmentAppointmentCTA /> internally
+// Routes that already render <TreatmentAppointmentCTA /> internally (or legal pages)
 const PAGES_WITH_BUILT_IN_CTA = new Set([
   '/',
   '/dental-services',
@@ -176,6 +177,7 @@ const PAGES_WITH_BUILT_IN_CTA = new Set([
   '/tooth-cap',
   '/dental-fillings',
   '/tooth-extraction',
+  '/privacy-policy',
 ]);
 
 const TOTAL_DENTAL_PAGES_COUNT = ALL_DENTAL_PAGES.length;
@@ -192,7 +194,7 @@ export default function App() {
 }
 
 function AppContent() {
-  const { isMuted, toggleMute, startMusic } = useSound();
+  const { isMuted, toggleMute } = useSound();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [activeSection, setActiveSection] = useState('');
@@ -310,12 +312,12 @@ function AppContent() {
     {
       question: 'What are the clinic timings and emergency consultation hours?',
       answer:
-        'Oracle Dental Clinic & Implant Center is listed as Open 24 Hours, 7 Days (Monday to Sunday). For late-night or urgent toothache, swelling, or dental trauma, call or WhatsApp +91 7011961515 before visiting so the clinic can coordinate immediate care.',
+        'Oracle Dental Clinic & Implant Center is Open Daily: 9:00 AM – 9:00 PM (Monday to Sunday). For urgent toothache, swelling, or prompt dental consultations, call or WhatsApp +91 7011961515 before visiting so the clinic can coordinate immediate care.',
     },
     {
       question: 'How much does a dental implant cost in Ghaziabad?',
       answer:
-        'Dental implant cost depends on the implant system selected, crown material (such as zirconia or ceramic), number of teeth replaced, and whether bone grafting or sinus lift procedures are needed. During your consultation with Dr. Prashant Kumar Vats (BDS), a clinical exam and diagnostic scan are reviewed before sharing a transparent written estimate.',
+        'Dental implant cost depends on the implant system selected, crown material (such as zirconia or ceramic), number of teeth replaced, and whether bone grafting or sinus lift procedures are needed. During your consultation with Dr. Prashant Kumar Vats (BDS, MIDA), a clinical exam and diagnostic scan are reviewed before sharing a transparent written estimate.',
     },
     {
       question: 'Does root canal treatment (RCT) hurt and how many visits are needed?',
@@ -325,7 +327,7 @@ function AppContent() {
     {
       question: 'When is wisdom tooth extraction recommended?',
       answer:
-        'Wisdom tooth removal is evaluated when a third molar is impacted, causes recurring gum swelling (pericoronitis), traps food, damages the neighboring molar, or creates persistent jaw discomfort. Dr. Prashant Kumar Vats (BDS) reviews clinical findings and X-rays before recommending extraction.',
+        'Wisdom tooth removal is evaluated when a third molar is impacted, causes recurring gum swelling (pericoronitis), traps food, damages the neighboring molar, or creates persistent jaw discomfort. Dr. Prashant Kumar Vats (BDS, MIDA) reviews clinical findings and X-rays before recommending extraction.',
     },
     {
       question: 'What is the difference between dental braces and clear aligners?',
@@ -338,24 +340,11 @@ function AppContent() {
         'Yes. We provide single, multiple, and full-arch implant restorations (including All-on-4 and All-on-6 protocols) as well as cosmetic dentistry options including dental veneers, zirconia crowns, E-max crowns, teeth whitening, composite bonding, and complete smile makeover planning.',
     },
     {
-      question: 'How can I book an appointment with Dr. Prashant Kumar Vats (BDS)?',
+      question: 'How can I book an appointment with Dr. Prashant Kumar Vats (BDS, MIDA)?',
       answer:
         'You can book directly by calling +91 7011961515 or tapping the WhatsApp contact icon on any page. Walk-in consultations are also welcome at Shop No. 47, KTS Complex, Jaat Chowk, Chipiyana Buzurg, Ghaziabad.',
     },
   ];
-
-  useEffect(() => {
-    const handleFirstInteraction = () => {
-      startMusic();
-      const events = ['click', 'touchstart', 'mousedown', 'pointerdown'];
-      events.forEach((e) => window.removeEventListener(e, handleFirstInteraction));
-    };
-    const events = ['click', 'touchstart', 'mousedown', 'pointerdown'];
-    events.forEach((e) => window.addEventListener(e, handleFirstInteraction, { passive: true }));
-    return () => {
-      events.forEach((e) => window.removeEventListener(e, handleFirstInteraction));
-    };
-  }, [startMusic]);
 
   useEffect(() => {
     let ticking = false;
@@ -589,6 +578,13 @@ function AppContent() {
         return <ImmediateDentalImplantPage {...sharedPageProps} />;
       case '/smile-makeover-ghaziabad':
         return <SmileMakeoverGhaziabadPage {...sharedPageProps} />;
+      case '/privacy-policy':
+        return (
+          <PrivacyPolicyPage
+            navigateToHome={() => navigateToPath('/')}
+            navigateToPath={navigateToPath}
+          />
+        );
       default:
         return null;
     }
@@ -600,6 +596,12 @@ function AppContent() {
 
   return (
     <div className="min-h-screen bg-[#FFF8EC] font-sans text-[#26352F] scroll-smooth">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[10000] focus:bg-[#087B57] focus:text-white focus:px-4 focus:py-2.5 focus:rounded-xl focus:font-bold focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#FFD36A]"
+      >
+        Skip to main content
+      </a>
       <ScrollProgressBar />
       <SEOHead routePath={activeRoute} isNotFound={isNotFound} />
 
@@ -940,7 +942,7 @@ function AppContent() {
                 <span className="flex items-center gap-2">
                   <MapPin className="w-4 h-4 text-[#FF8A24] shrink-0" aria-hidden="true" /> Dentist in Chipiyana Buzurg
                 </span>
-                <span className="text-xs font-bold text-[#087B57]">24/7</span>
+                <span className="text-xs font-bold text-[#087B57]">9 AM–9 PM</span>
               </a>
 
               {/* Mobile Expandable All Treatments Accordion */}
@@ -1127,7 +1129,7 @@ function AppContent() {
         )}
       </header>
 
-      <main>
+      <main id="main-content">
         {activeSubpage ? (
           <Suspense fallback={<SkeletonHero />}>
             {activeSubpage}
@@ -1148,7 +1150,7 @@ function AppContent() {
             {/* Dedicated Meet Our Doctor Profile Section (Preserved Original Doctor Photo) */}
             <DoctorProfile />
 
-            {/* 24/7 Emergency Banner (Direct native tel: anchor) */}
+            {/* Emergency Banner (Direct native tel: anchor) */}
             <section className="bg-gradient-to-r from-[#FF654F] to-[#FF8A24] text-white py-5 px-4 relative z-20">
               <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="flex items-center gap-3.5">
@@ -1160,7 +1162,7 @@ function AppContent() {
                       Severe Tooth Pain or Dental Emergency?
                     </h2>
                     <p className="text-[#FFF8EC] text-xs sm:text-sm mt-0.5">
-                      Open 24 Hours, 7 Days at Jaat Chowk, Chipiyana Buzurg, Ghaziabad. Call before visiting for urgent care.
+                      Open Daily: 9:00 AM – 9:00 PM at Jaat Chowk, Chipiyana Buzurg, Ghaziabad. Call before visiting for prompt care.
                     </p>
                   </div>
                 </div>
@@ -1207,15 +1209,15 @@ function AppContent() {
         />
       </Suspense>
 
-      {/* Global Icon-Only Floating Contact Buttons (WhatsApp Bottom-Left, Call Bottom-Right) */}
+      {/* Global Right-Side Floating Stack (TOP: AI Assistant, MIDDLE: Call, BOTTOM: WhatsApp) */}
       <FloatingAppointmentButtons />
 
-      {/* Back to Top Button (Positioned cleanly above the bottom-right Call icon with zero overlap) */}
+      {/* Back to Top Button (Positioned bottom-left with zero overlap against right-side floating buttons) */}
       {showBackToTop && (
         <InteractiveButton
           id="back-to-top-btn"
           onClick={scrollToTop}
-          className="fixed bottom-24 right-4 sm:right-6 w-11 h-11 bg-[#087B57] text-white rounded-full shadow-lg hover:bg-[#066647] transition-colors z-[9990] border-2 border-white flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD36A]"
+          className="fixed bottom-4 left-4 sm:bottom-6 sm:left-6 fab-safe-bottom w-11 h-11 bg-[#087B57] text-white rounded-full shadow-lg hover:bg-[#066647] transition-colors z-[9990] border-2 border-white flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFD36A]"
           aria-label="Back to top"
         >
           <ArrowUp className="w-5 h-5" aria-hidden="true" />
