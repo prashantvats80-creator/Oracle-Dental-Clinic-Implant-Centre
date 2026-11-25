@@ -79,8 +79,8 @@ export default function SmileMakeoverGhaziabadPage({
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed selection:bg-purple-100 selection:text-purple-900">
       <Breadcrumbs
         items={[
-          { label: 'Dental Care in Ghaziabad', path: '/#services' },
-          { label: 'Cosmetic Dentistry', path: '/teeth-whitening' },
+          { label: 'Dental Services', path: '/dental-services' },
+          { label: 'Cosmetic Dentistry', path: '/cosmetic-dentistry' },
           { label: 'Smile Makeover in Ghaziabad', path: '/smile-makeover-ghaziabad' }
         ]}
         navigateToHome={navigateToHome}

@@ -62,7 +62,7 @@ export default function RootCanalCostPage({
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed selection:bg-blue-100 selection:text-blue-900">
       <Breadcrumbs
         items={[
-          { label: 'Dental Care in Ghaziabad', path: '/#services' },
+          { label: 'Dental Care in Ghaziabad', path: '/dental-services' },
           { label: 'Root Canal Treatment', path: '/root-canal-treatment' },
           { label: 'Root Canal Cost in Ghaziabad', path: '/root-canal-cost-ghaziabad' }
         ]}
@@ -147,8 +147,23 @@ export default function RootCanalCostPage({
             <a href="/tooth-cap" onClick={(e) => handleLinkClick(e, '/tooth-cap')} className="hover:underline flex items-center gap-1">
               Crowns After RCT <ArrowRight className="w-3 h-3" />
             </a>
+            <a href="/tooth-cap-cost-ghaziabad" onClick={(e) => handleLinkClick(e, '/tooth-cap-cost-ghaziabad')} className="hover:underline flex items-center gap-1">
+              Tooth Cap Cost in Ghaziabad <ArrowRight className="w-3 h-3" />
+            </a>
+            <a href="/zirconia-crowns" onClick={(e) => handleLinkClick(e, '/zirconia-crowns')} className="hover:underline flex items-center gap-1">
+              Zirconia Crowns <ArrowRight className="w-3 h-3" />
+            </a>
             <a href="/tooth-pain-treatment" onClick={(e) => handleLinkClick(e, '/tooth-pain-treatment')} className="hover:underline flex items-center gap-1">
               Tooth Pain Diagnosis <ArrowRight className="w-3 h-3" />
+            </a>
+            <a href="/cavity-treatment" onClick={(e) => handleLinkClick(e, '/cavity-treatment')} className="hover:underline flex items-center gap-1">
+              Cavity Treatment <ArrowRight className="w-3 h-3" />
+            </a>
+            <a href="/black-tooth" onClick={(e) => handleLinkClick(e, '/black-tooth')} className="hover:underline flex items-center gap-1">
+              Black Tooth Evaluation <ArrowRight className="w-3 h-3" />
+            </a>
+            <a href="/dental-treatment-cost-ghaziabad" onClick={(e) => handleLinkClick(e, '/dental-treatment-cost-ghaziabad')} className="hover:underline flex items-center gap-1">
+              All Dental Treatment Costs <ArrowRight className="w-3 h-3" />
             </a>
           </div>
         </section>

@@ -78,7 +78,7 @@ export default function ImmediateDentalImplantPage({
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed selection:bg-blue-100 selection:text-blue-900">
       <Breadcrumbs
         items={[
-          { label: 'Dental Care in Ghaziabad', path: '/#services' },
+          { label: 'Dental Treatments', path: '/dental-services' },
           { label: 'Dental Implants', path: '/dental-implants' },
           { label: 'Dental Implant After Tooth Extraction', path: '/dental-implant-after-tooth-extraction' }
         ]}
@@ -261,7 +261,7 @@ export default function ImmediateDentalImplantPage({
             </div>
           </div>
 
-          <div className="pt-4 flex flex-wrap gap-4 text-xs font-bold border-t border-slate-800 pt-4">
+          <div className="pt-4 flex flex-wrap gap-4 text-xs font-bold border-t border-slate-800">
             <a 
               href="/dental-implants" 
               onClick={(e) => handleLinkClick(e, '/dental-implants')}
@@ -275,6 +275,27 @@ export default function ImmediateDentalImplantPage({
               className="text-cyan-400 hover:text-cyan-300 flex items-center gap-1.5"
             >
               Dental Implant Cost in Ghaziabad <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+            <a 
+              href="/full-mouth-dental-implants" 
+              onClick={(e) => handleLinkClick(e, '/full-mouth-dental-implants')}
+              className="text-emerald-300 hover:text-white flex items-center gap-1.5"
+            >
+              Full Mouth Dental Implants <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+            <a 
+              href="/missing-teeth" 
+              onClick={(e) => handleLinkClick(e, '/missing-teeth')}
+              className="text-amber-200 hover:text-white flex items-center gap-1.5"
+            >
+              Missing Teeth Replacement <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+            <a 
+              href="/tooth-extraction" 
+              onClick={(e) => handleLinkClick(e, '/tooth-extraction')}
+              className="text-blue-200 hover:text-white flex items-center gap-1.5"
+            >
+              Tooth Extraction Guide <ArrowRight className="w-3.5 h-3.5" />
             </a>
             <a 
               href="/tooth-extraction-cost-ghaziabad" 

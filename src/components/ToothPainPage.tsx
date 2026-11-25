@@ -24,6 +24,7 @@ import {
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
+import { RelatedGuidesSection } from './RelatedGuidesSection';
 
 interface ToothPainPageProps {
   handleCall: () => void;
@@ -48,8 +49,8 @@ export default function ToothPainPage({
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed">
       <Breadcrumbs
         items={[
-          { label: 'Dental Symptoms', path: '/#symptoms' },
-          { label: 'Tooth Pain Relief', path: '/tooth-pain' }
+          { label: 'Dental Services', path: '/dental-services' },
+          { label: 'Tooth Pain Treatment', path: '/tooth-pain-treatment' }
         ]}
         navigateToHome={navigateToHome}
         navigateToPath={navigateToPath}
@@ -98,9 +99,9 @@ export default function ToothPainPage({
 
           {/* EMERGENCY WARNING BOX */}
           <div className="lg:col-span-5 bg-rose-950/80 border border-rose-800/80 p-6 rounded-3xl space-y-4">
-            <h3 className="text-white font-bold text-lg flex items-center gap-2 text-rose-300">
+            <h2 className="text-white font-bold text-lg flex items-center gap-2 text-rose-300">
               <ShieldAlert className="w-5 h-5 text-rose-400" /> Emergency Warning Signs
-            </h3>
+            </h2>
             <p className="text-xs text-rose-200 leading-relaxed">
               Seek immediate medical/dental attention if your tooth pain is accompanied by any of the following critical red flags:
             </p>
@@ -207,10 +208,10 @@ export default function ToothPainPage({
             <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-3">
               <h3 className="font-bold text-slate-900 text-lg">Targeted Treatment Options</h3>
               <ul className="space-y-1.5 text-xs text-slate-600">
-                <li>• <strong className="text-slate-800">Dental Fillings:</strong> For early to moderate cavities without nerve involvement (<button onClick={() => navigateToPath('/dental-fillings')} className="text-blue-600 underline">Dental Fillings</button>).</li>
-                <li>• <strong className="text-slate-800">Root Canal Treatment:</strong> Removes infected nerve tissue while saving the natural tooth (<button onClick={() => navigateToPath('/root-canal-treatment')} className="text-blue-600 underline">Root Canal Treatment</button>).</li>
-                <li>• <strong className="text-slate-800">Tooth Cap / Crown:</strong> Restores fractured or heavily decayed teeth (<button onClick={() => navigateToPath('/tooth-cap')} className="text-blue-600 underline">Tooth Cap</button>).</li>
-                <li>• <strong className="text-slate-800">Tooth Extraction:</strong> When a tooth is non-restorable due to severe fracture or destruction (<button onClick={() => navigateToPath('/tooth-extraction')} className="text-blue-600 underline">Tooth Extraction</button>).</li>
+                <li>• <strong className="text-slate-800">Dental Fillings:</strong> For early to moderate cavities without nerve involvement (<a href="/dental-fillings" onClick={(e) => { e.preventDefault(); navigateToPath('/dental-fillings'); }} className="text-blue-600 underline">Dental Fillings</a>).</li>
+                <li>• <strong className="text-slate-800">Root Canal Treatment:</strong> Removes infected nerve tissue while saving the natural tooth (<a href="/root-canal-treatment" onClick={(e) => { e.preventDefault(); navigateToPath('/root-canal-treatment'); }} className="text-blue-600 underline">Root Canal Treatment</a>).</li>
+                <li>• <strong className="text-slate-800">Tooth Cap / Crown:</strong> Restores fractured or heavily decayed teeth (<a href="/tooth-cap" onClick={(e) => { e.preventDefault(); navigateToPath('/tooth-cap'); }} className="text-blue-600 underline">Tooth Cap</a>).</li>
+                <li>• <strong className="text-slate-800">Tooth Extraction:</strong> When a tooth is non-restorable due to severe fracture or destruction (<a href="/tooth-extraction" onClick={(e) => { e.preventDefault(); navigateToPath('/tooth-extraction'); }} className="text-blue-600 underline">Tooth Extraction</a>).</li>
               </ul>
             </div>
           </div>
@@ -244,10 +245,25 @@ export default function ToothPainPage({
         </div>
       </section>
 
+      <div className="max-w-5xl mx-auto px-4 pb-12">
+        <RelatedGuidesSection
+          title="Related Toothache, Root Canal & Urgent Care Guides"
+          navigateToPath={navigateToPath}
+          links={[
+            { path: '/root-canal-treatment', label: 'Root Canal Treatment (RCT)', description: 'Relieve nerve pain and save infected natural teeth.', tag: 'Treatment' },
+            { path: '/root-canal-cost-ghaziabad', label: 'Root Canal Cost in Ghaziabad', description: 'Transparent breakdown of RCT charges and crown factors.', tag: 'Cost Guide' },
+            { path: '/cavity-treatment', label: 'Cavity Treatment', description: 'Stop dental caries before decay reaches the inner pulp.', tag: 'Symptom' },
+            { path: '/black-tooth', label: 'Black / Dark Tooth Care', description: 'Diagnose darkened teeth linked to deep decay or nerve necrosis.', tag: 'Symptom' },
+            { path: '/emergency-dentist-ghaziabad', label: 'Emergency Dentist in Ghaziabad', description: 'Same-day urgent care daily 9:00 AM – 9:00 PM at Jaat Chowk.', tag: 'Urgent Care' },
+            { path: '/zirconia-crowns', label: 'Zirconia Crowns', description: 'Durable metal-free crowns to protect restored teeth.', tag: 'Treatment' },
+          ]}
+        />
+      </div>
+
       {/* FOOTER CTA */}
       <section className="bg-slate-950 text-white py-10 px-4 border-t border-slate-800 text-center">
         <div className="max-w-4xl mx-auto space-y-4">
-          <h3 className="text-xl font-bold">Get Evaluated at Oracle Dental Clinic</h3>
+          <h2 className="text-xl font-bold">Get Evaluated at Oracle Dental Clinic</h2>
           <p className="text-xs text-slate-400">Jaat Chowk, Chipiyana Buzurg, Ghaziabad. Consultation fee ₹200.</p>
           <div className="flex justify-center gap-3">
             <InteractiveButton id="tp-f-call" onClick={handleCall} className="bg-amber-500 text-slate-950 font-black py-3 px-6 rounded-xl text-sm">

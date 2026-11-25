@@ -24,6 +24,7 @@ import {
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
+import { RelatedGuidesSection } from './RelatedGuidesSection';
 import { GBP_CONFIG } from '../config/googleBusinessProfile';
 
 interface RootCanalPageProps {
@@ -131,7 +132,7 @@ export default function RootCanalPage({
       {/* Semantic Breadcrumb Navigation */}
       <Breadcrumbs
         items={[
-          { label: 'Dental Treatments', path: '/#services' },
+          { label: 'Dental Treatments', path: '/dental-services' },
           { label: 'Root Canal Treatment', path: '/root-canal-treatment' }
         ]}
         navigateToHome={navigateToHome}
@@ -205,7 +206,7 @@ export default function RootCanalPage({
                   O
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-white">Oracle Dental Clinic</h3>
+                  <h2 className="text-lg font-bold text-white">Oracle Dental Clinic</h2>
                   <p className="text-xs text-cyan-400 font-medium">Root Canal & General Dentistry</p>
                 </div>
               </div>
@@ -918,11 +919,78 @@ export default function RootCanalPage({
         </div>
       </section>
 
+      {/* Related Root Canal & Tooth-Saving Cluster */}
+      <div className="bg-slate-50 border-t border-slate-200 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <RelatedGuidesSection
+            title="Related Root Canal, Toothache &amp; Crown Guides"
+            subtitle="Explore RCT pricing, deep cavity symptoms, black tooth evaluation, and protective dental crowns in Ghaziabad."
+            navigateToPath={navigateToPath}
+            links={[
+              {
+                path: '/root-canal-cost-ghaziabad',
+                label: 'Root Canal Cost in Ghaziabad',
+                description: 'Front tooth, premolar, molar RCT pricing factors, retreatment, and crown options.',
+                tag: 'Cost Guide'
+              },
+              {
+                path: '/tooth-pain-treatment',
+                label: 'Tooth Pain Treatment',
+                description: 'Diagnosis and relief for throbbing toothaches, night pain, and chewing discomfort.',
+                tag: 'Symptom Guide'
+              },
+              {
+                path: '/cavity-treatment',
+                label: 'Cavity & Tooth Decay Treatment',
+                description: 'When a filling suffices versus when deep decay requires endodontic root canal therapy.',
+                tag: 'Endodontics'
+              },
+              {
+                path: '/black-tooth',
+                label: 'Black Tooth Causes & Treatment',
+                description: 'Clinical care for darkened, decayed, or traumatized non-vital teeth.',
+                tag: 'Symptom Guide'
+              },
+              {
+                path: '/zirconia-crowns',
+                label: 'Zirconia Crowns After RCT',
+                description: 'Durable metal-free crowns recommended to protect root-canal-treated molars.',
+                tag: 'Crown Care'
+              },
+              {
+                path: '/tooth-cap',
+                label: 'Tooth Cap & Dental Crowns',
+                description: 'Compare PFM, ceramic, and zirconia caps for fractured or post-RCT teeth.',
+                tag: 'Crown Care'
+              },
+              {
+                path: '/tooth-cap-cost-ghaziabad',
+                label: 'Tooth Cap Cost in Ghaziabad',
+                description: 'Transparent guide to dental crown and cap material costs in Ghaziabad.',
+                tag: 'Cost Guide'
+              },
+              {
+                path: '/dental-fillings',
+                label: 'Tooth-Colored Dental Fillings',
+                description: 'Composite restorations for early cavities and post-RCT core buildups.',
+                tag: 'Restorative'
+              },
+              {
+                path: '/tooth-sensitivity',
+                label: 'Tooth Sensitivity Treatment',
+                description: 'Identify whether lingering hot/cold sensitivity indicates enamel wear or nerve inflammation.',
+                tag: 'Symptom Guide'
+              }
+            ]}
+          />
+        </div>
+      </div>
+
       {/* Contextual Internal Link Footer CTA */}
       <section className="py-12 bg-white border-t border-slate-200 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 bg-gradient-to-r from-blue-900 to-indigo-900 text-white p-8 rounded-3xl shadow-xl">
           <div className="space-y-2 text-center md:text-left">
-            <h3 className="text-xl sm:text-2xl font-bold">Have Toothache or Need Dental Advice?</h3>
+            <h2 className="text-xl sm:text-2xl font-bold">Have Toothache or Need Dental Advice?</h2>
             <p className="text-slate-300 text-sm">Schedule a consultation at Oracle Dental Clinic with Dr. Prashant Kumar Vats, BDS.</p>
           </div>
 
@@ -935,40 +1003,45 @@ export default function RootCanalPage({
               Call +91 7011961515
             </InteractiveButton>
 
-            <button
-              onClick={() => navigateToPath('/zirconia-crowns')}
+            <a
+              href="/zirconia-crowns"
+              onClick={(e) => { e.preventDefault(); navigateToPath('/zirconia-crowns'); }}
               className="bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-6 rounded-xl border border-white/20 text-sm transition-colors"
             >
               Zirconia Crowns After RCT
-            </button>
+            </a>
 
-            <button
-              onClick={() => navigateToPath('/tooth-cap')}
+            <a
+              href="/tooth-cap"
+              onClick={(e) => { e.preventDefault(); navigateToPath('/tooth-cap'); }}
               className="bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-6 rounded-xl border border-white/20 text-sm transition-colors"
             >
               Tooth Cap &amp; Crowns
-            </button>
+            </a>
 
-            <button
-              onClick={() => navigateToPath('/dental-fillings')}
+            <a
+              href="/dental-fillings"
+              onClick={(e) => { e.preventDefault(); navigateToPath('/dental-fillings'); }}
               className="bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-6 rounded-xl border border-white/20 text-sm transition-colors"
             >
               Dental Fillings
-            </button>
+            </a>
 
-            <button
-              onClick={() => navigateToPath('/dentist-chipiyana-buzurg-ghaziabad')}
+            <a
+              href="/dentist-chipiyana-buzurg-ghaziabad"
+              onClick={(e) => { e.preventDefault(); navigateToPath('/dentist-chipiyana-buzurg-ghaziabad'); }}
               className="bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-6 rounded-xl border border-white/20 text-sm transition-colors"
             >
               Visit Chipiyana Local Page
-            </button>
+            </a>
 
-            <button
-              onClick={navigateToHome}
+            <a
+              href="/"
+              onClick={(e) => { e.preventDefault(); navigateToHome(); }}
               className="bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-6 rounded-xl border border-white/20 text-sm transition-colors"
             >
               Back to Main Website
-            </button>
+            </a>
           </div>
         </div>
       </section>

@@ -3,6 +3,7 @@ import { PhoneCall, MessageCircle, CheckCircle2 } from 'lucide-react';
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
+import { RelatedGuidesSection } from './RelatedGuidesSection';
 
 interface Props { 
   handleCall: () => void; 
@@ -19,7 +20,7 @@ export default function DentalBridgesPage({ handleCall, handleWhatsApp, navigate
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed">
       <Breadcrumbs
         items={[
-          { label: 'Dental Treatments', path: '/#services' },
+          { label: 'Dental Services', path: '/dental-services' },
           { label: 'Fixed Dental Bridges', path: '/dental-bridges' }
         ]}
         navigateToHome={navigateToHome}
@@ -83,7 +84,9 @@ export default function DentalBridgesPage({ handleCall, handleWhatsApp, navigate
         <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-2xs space-y-6">
           <h2 className="text-2xl font-extrabold text-slate-900">Dental Bridge vs. Dental Implant</h2>
           <p className="text-slate-600 text-sm leading-relaxed">
-            While conventional bridges rely on adjacent natural teeth for support, <button onClick={() => navigateToPath('/dental-implants')} className="text-blue-600 underline font-bold">Dental Implants</button> replace the root independently without needing to alter neighboring healthy enamel. For transparent unit calculations, material choices (Zirconia vs. PFM), and pricing factors, view our dedicated <button onClick={() => navigateToPath('/dental-bridge-cost-ghaziabad')} className="text-blue-600 underline font-bold">Dental Bridge Cost in Ghaziabad Guide</button>.
+            While conventional bridges rely on adjacent natural teeth for support,{' '}
+            <a href="/dental-implants" onClick={(e) => { e.preventDefault(); navigateToPath('/dental-implants'); }} className="text-blue-600 underline font-bold">Dental Implants</a> replace the root independently without needing to alter neighboring healthy enamel. For transparent unit calculations, material choices (Zirconia vs. PFM), and pricing factors, view our dedicated{' '}
+            <a href="/dental-bridge-cost-ghaziabad" onClick={(e) => { e.preventDefault(); navigateToPath('/dental-bridge-cost-ghaziabad'); }} className="text-blue-600 underline font-bold">Dental Bridge Cost in Ghaziabad Guide</a>.
           </p>
 
           <TreatmentImage
@@ -93,6 +96,19 @@ export default function DentalBridgesPage({ handleCall, handleWhatsApp, navigate
             aspectRatio="16/9"
           />
         </div>
+
+        <RelatedGuidesSection
+          title="Related Tooth Replacement & Bridge Cost Guides"
+          navigateToPath={navigateToPath}
+          links={[
+            { path: '/dental-bridge-cost-ghaziabad', label: 'Dental Bridge Cost in Ghaziabad', description: 'Compare PFM vs. Zirconia bridge units and pricing factors.', tag: 'Cost Guide' },
+            { path: '/missing-teeth', label: 'Missing Teeth Replacement Options', description: 'Compare implants, bridges, and dentures for single or multiple gaps.', tag: 'Symptom' },
+            { path: '/dental-implants', label: 'Dental Implants in Ghaziabad', description: 'Standalone titanium root replacement without grinding healthy teeth.', tag: 'Treatment' },
+            { path: '/dental-implant-cost-ghaziabad', label: 'Dental Implant Cost in Ghaziabad', description: 'Understand single and multi-tooth implant pricing.', tag: 'Cost Guide' },
+            { path: '/zirconia-crowns', label: 'Zirconia Crowns', description: 'High-strength metal-free ceramic crowns and bridge frameworks.', tag: 'Treatment' },
+            { path: '/dentures', label: 'Complete & Partial Dentures', description: 'Removable prosthetic solutions for multiple missing teeth.', tag: 'Treatment' },
+          ]}
+        />
       </section>
     </div>
   );

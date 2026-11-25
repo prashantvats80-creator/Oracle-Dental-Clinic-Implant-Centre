@@ -3,6 +3,7 @@ import { PhoneCall, MessageCircle } from 'lucide-react';
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
+import { RelatedGuidesSection } from './RelatedGuidesSection';
 
 interface Props { handleCall: () => void; handleWhatsApp: () => void; handleDirections: () => void; navigateToHome: () => void; navigateToPath: (p: string) => void; }
 
@@ -13,7 +14,7 @@ export default function BrokenToothPage({ handleCall, handleWhatsApp, navigateTo
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed">
       <Breadcrumbs
         items={[
-          { label: 'Dental Symptoms', path: '/#symptoms' },
+          { label: 'Dental Services', path: '/dental-services' },
           { label: 'Broken Tooth Repair', path: '/broken-tooth-treatment' }
         ]}
         navigateToHome={navigateToHome}
@@ -36,7 +37,10 @@ export default function BrokenToothPage({ handleCall, handleWhatsApp, navigateTo
         <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-2xs space-y-6">
           <h2 className="text-2xl font-extrabold text-slate-900">Restoration Options for Broken Teeth</h2>
           <p className="text-slate-600 text-sm leading-relaxed">
-            Depending on fracture depth, broken teeth can be saved with composite bonding, protective <button onClick={() => navigateToPath('/tooth-cap')} className="text-blue-600 underline font-bold">Tooth Caps</button>, or <button onClick={() => navigateToPath('/root-canal-treatment')} className="text-blue-600 underline font-bold">Root Canal Treatment</button> if nerve pulp is exposed.
+            Depending on fracture depth, broken teeth can be saved with composite bonding, protective{' '}
+            <a href="/tooth-cap" onClick={(e) => { e.preventDefault(); navigateToPath('/tooth-cap'); }} className="text-blue-600 underline font-bold">Tooth Caps</a>, or{' '}
+            <a href="/root-canal-treatment" onClick={(e) => { e.preventDefault(); navigateToPath('/root-canal-treatment'); }} className="text-blue-600 underline font-bold">Root Canal Treatment</a> if nerve pulp is exposed. If an injured tooth has turned dark or grey following trauma, see our{' '}
+            <a href="/black-tooth" onClick={(e) => { e.preventDefault(); navigateToPath('/black-tooth'); }} className="text-blue-600 underline font-bold">Black Tooth Care Guide</a>.
           </p>
 
           <TreatmentImage
@@ -46,6 +50,19 @@ export default function BrokenToothPage({ handleCall, handleWhatsApp, navigateTo
             aspectRatio="16/9"
           />
         </div>
+
+        <RelatedGuidesSection
+          title="Related Tooth Fracture & Restorative Guides"
+          navigateToPath={navigateToPath}
+          links={[
+            { path: '/black-tooth', label: 'Black / Dark Tooth Care', description: 'Evaluate dark discoloration from dental trauma or internal nerve damage.', tag: 'Symptom' },
+            { path: '/chipped-tooth', label: 'Chipped Tooth Repair', description: 'Single-visit composite edge bonding for minor enamel chips.', tag: 'Symptom' },
+            { path: '/root-canal-treatment', label: 'Root Canal Treatment (RCT)', description: 'Save fractured teeth with exposed pulp nerves painlessly.', tag: 'Treatment' },
+            { path: '/zirconia-crowns', label: 'Zirconia Crowns', description: 'High-strength metal-free caps to protect broken teeth.', tag: 'Treatment' },
+            { path: '/tooth-cap-cost-ghaziabad', label: 'Tooth Cap Cost in Ghaziabad', description: 'Compare PFM, ceramic, and zirconia dental crown options.', tag: 'Cost Guide' },
+            { path: '/emergency-dentist-ghaziabad', label: 'Emergency Dentist in Ghaziabad', description: 'Prompt urgent care daily 9:00 AM – 9:00 PM for dental trauma.', tag: 'Urgent Care' },
+          ]}
+        />
       </section>
     </div>
   );

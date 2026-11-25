@@ -64,7 +64,7 @@ export default function DentalImplantCostPage({
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed selection:bg-blue-100 selection:text-blue-900">
       <Breadcrumbs
         items={[
-          { label: 'Dental Care in Ghaziabad', path: '/#services' },
+          { label: 'Dental Care in Ghaziabad', path: '/dental-services' },
           { label: 'Dental Implants', path: '/dental-implants' },
           { label: 'Dental Implant Cost in Ghaziabad', path: '/dental-implant-cost-ghaziabad' }
         ]}
@@ -180,9 +180,15 @@ export default function DentalImplantCostPage({
           <p className="text-slate-600 text-xs sm:text-sm">
             Explore alternative solutions depending on your clinical needs and preferences:
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-2 text-xs font-bold text-blue-700">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pt-2 text-xs font-bold text-blue-700">
             <a href="/dental-implants" onClick={(e) => handleLinkClick(e, '/dental-implants')} className="p-3 bg-white rounded-xl border border-slate-200 hover:underline flex justify-between items-center">
               Dental Implants Guide <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+            <a href="/full-mouth-dental-implants" onClick={(e) => handleLinkClick(e, '/full-mouth-dental-implants')} className="p-3 bg-white rounded-xl border border-slate-200 hover:underline flex justify-between items-center">
+              Full Mouth Dental Implants <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+            <a href="/dental-implant-after-tooth-extraction" onClick={(e) => handleLinkClick(e, '/dental-implant-after-tooth-extraction')} className="p-3 bg-white rounded-xl border border-slate-200 hover:underline flex justify-between items-center">
+              Immediate Post-Extraction Implants <ArrowRight className="w-3.5 h-3.5" />
             </a>
             <a href="/missing-teeth" onClick={(e) => handleLinkClick(e, '/missing-teeth')} className="p-3 bg-white rounded-xl border border-slate-200 hover:underline flex justify-between items-center">
               Missing Teeth Overview <ArrowRight className="w-3.5 h-3.5" />
@@ -190,8 +196,20 @@ export default function DentalImplantCostPage({
             <a href="/dental-bridges" onClick={(e) => handleLinkClick(e, '/dental-bridges')} className="p-3 bg-white rounded-xl border border-slate-200 hover:underline flex justify-between items-center">
               Fixed Dental Bridges <ArrowRight className="w-3.5 h-3.5" />
             </a>
+            <a href="/dental-bridge-cost-ghaziabad" onClick={(e) => handleLinkClick(e, '/dental-bridge-cost-ghaziabad')} className="p-3 bg-white rounded-xl border border-slate-200 hover:underline flex justify-between items-center">
+              Dental Bridge Cost Guide <ArrowRight className="w-3.5 h-3.5" />
+            </a>
             <a href="/dentures" onClick={(e) => handleLinkClick(e, '/dentures')} className="p-3 bg-white rounded-xl border border-slate-200 hover:underline flex justify-between items-center">
               Complete Dentures <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+            <a href="/dentures-cost-ghaziabad" onClick={(e) => handleLinkClick(e, '/dentures-cost-ghaziabad')} className="p-3 bg-white rounded-xl border border-slate-200 hover:underline flex justify-between items-center">
+              Dentures Cost in Ghaziabad <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+            <a href="/zirconia-crowns" onClick={(e) => handleLinkClick(e, '/zirconia-crowns')} className="p-3 bg-white rounded-xl border border-slate-200 hover:underline flex justify-between items-center">
+              Zirconia Implant Crowns <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+            <a href="/dental-treatment-cost-ghaziabad" onClick={(e) => handleLinkClick(e, '/dental-treatment-cost-ghaziabad')} className="p-3 bg-white rounded-xl border border-slate-200 hover:underline flex justify-between items-center">
+              All Dental Treatment Costs <ArrowRight className="w-3.5 h-3.5" />
             </a>
           </div>
         </section>

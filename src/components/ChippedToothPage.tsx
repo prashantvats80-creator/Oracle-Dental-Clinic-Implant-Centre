@@ -3,6 +3,7 @@ import { PhoneCall, MessageCircle } from 'lucide-react';
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
+import { RelatedGuidesSection } from './RelatedGuidesSection';
 
 interface Props { handleCall: () => void; handleWhatsApp: () => void; handleDirections: () => void; navigateToHome: () => void; navigateToPath: (p: string) => void; }
 
@@ -13,7 +14,7 @@ export default function ChippedToothPage({ handleCall, handleWhatsApp, navigateT
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed">
       <Breadcrumbs
         items={[
-          { label: 'Dental Symptoms', path: '/#symptoms' },
+          { label: 'Dental Services', path: '/dental-services' },
           { label: 'Chipped Tooth Repair', path: '/chipped-tooth' }
         ]}
         navigateToHome={navigateToHome}
@@ -36,7 +37,8 @@ export default function ChippedToothPage({ handleCall, handleWhatsApp, navigateT
         <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-2xs space-y-6">
           <h2 className="text-2xl font-extrabold text-slate-900">Composite Bonding for Chipped Teeth</h2>
           <p className="text-slate-600 text-sm leading-relaxed">
-            Chipped front enamel edges can be rebuilt in a single visit using shade-matched <button onClick={() => navigateToPath('/dental-fillings')} className="text-blue-600 underline font-bold">Composite Resin Bonding</button> to restore smooth aesthetics.
+            Chipped front enamel edges can be rebuilt in a single visit using shade-matched{' '}
+            <a href="/dental-fillings" onClick={(e) => { e.preventDefault(); navigateToPath('/dental-fillings'); }} className="text-blue-600 underline font-bold">Composite Resin Bonding</a> to restore smooth aesthetics.
           </p>
 
           <TreatmentImage
@@ -46,6 +48,19 @@ export default function ChippedToothPage({ handleCall, handleWhatsApp, navigateT
             aspectRatio="16/9"
           />
         </div>
+
+        <RelatedGuidesSection
+          title="Related Aesthetic & Restorative Guides"
+          navigateToPath={navigateToPath}
+          links={[
+            { path: '/dental-veneers', label: 'Dental Veneers', description: 'Porcelain and composite veneers for worn or chipped front teeth.', tag: 'Cosmetic' },
+            { path: '/cosmetic-dentistry', label: 'Cosmetic Dentistry', description: 'Conservative edge bonding, gap closure, and smile design.', tag: 'Cosmetic' },
+            { path: '/smile-makeover-ghaziabad', label: 'Smile Makeover in Ghaziabad', description: 'Comprehensive smile enhancement tailored to facial harmony.', tag: 'Cosmetic' },
+            { path: '/broken-tooth-treatment', label: 'Broken Tooth Repair', description: 'Crown and root canal options for deeper tooth fractures.', tag: 'Symptom' },
+            { path: '/dental-fillings', label: 'Dental Fillings', description: 'Tooth-colored composite resin repairs for enamel defects.', tag: 'Treatment' },
+            { path: '/tooth-filling-cost-ghaziabad', label: 'Tooth Filling Cost in Ghaziabad', description: 'Pricing factors for composite bonding and fillings.', tag: 'Cost Guide' },
+          ]}
+        />
       </section>
     </div>
   );

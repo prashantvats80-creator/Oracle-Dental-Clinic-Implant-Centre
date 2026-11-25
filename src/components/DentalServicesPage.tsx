@@ -16,6 +16,85 @@ import TreatmentAppointmentCTA from './TreatmentAppointmentCTA';
 import { GBP_CONFIG, getTreatmentWhatsAppUrl } from '../config/googleBusinessProfile';
 import { DENTAL_SERVICE_CATEGORIES, DentalServiceItem } from '../data/dentalServicesCatalog';
 import { trackClinicEvent } from '../utils/analytics';
+import { preloadRoute } from '../utils/routePreloader';
+
+const SERVICES_HUB_DIRECTORY = [
+  {
+    heading: 'Dental Implants & Tooth Replacement',
+    links: [
+      { label: 'Dental Implants in Ghaziabad', path: '/dental-implants' },
+      { label: 'Dental Implant Cost in Ghaziabad', path: '/dental-implant-cost-ghaziabad' },
+      { label: 'Full Mouth Dental Implants', path: '/full-mouth-dental-implants' },
+      { label: 'Dental Implant After Tooth Extraction', path: '/dental-implant-after-tooth-extraction' },
+      { label: 'Missing Teeth Replacement Options', path: '/missing-teeth' },
+      { label: 'Fixed Dental Bridges', path: '/dental-bridges' },
+      { label: 'Dental Bridge Cost in Ghaziabad', path: '/dental-bridge-cost-ghaziabad' },
+      { label: 'Complete & Partial Dentures', path: '/dentures' },
+      { label: 'Dentures Cost in Ghaziabad', path: '/dentures-cost-ghaziabad' },
+    ],
+  },
+  {
+    heading: 'Root Canal, Cavities & Tooth Restoration',
+    links: [
+      { label: 'Root Canal Treatment (RCT)', path: '/root-canal-treatment' },
+      { label: 'Root Canal Cost in Ghaziabad', path: '/root-canal-cost-ghaziabad' },
+      { label: 'Tooth Pain Treatment', path: '/tooth-pain-treatment' },
+      { label: 'Dental Cavity Treatment', path: '/cavity-treatment' },
+      { label: 'Black / Dark Tooth Care', path: '/black-tooth' },
+      { label: 'Tooth-Colored Dental Fillings', path: '/dental-fillings' },
+      { label: 'Tooth Filling Cost in Ghaziabad', path: '/tooth-filling-cost-ghaziabad' },
+      { label: 'Broken Tooth Repair', path: '/broken-tooth-treatment' },
+      { label: 'Chipped Tooth Repair', path: '/chipped-tooth' },
+      { label: 'Tooth Sensitivity Relief', path: '/tooth-sensitivity' },
+    ],
+  },
+  {
+    heading: 'Cosmetic Dentistry, Crowns & Orthodontics',
+    links: [
+      { label: 'Cosmetic Dentistry', path: '/cosmetic-dentistry' },
+      { label: 'Smile Makeover in Ghaziabad', path: '/smile-makeover-ghaziabad' },
+      { label: 'Dental Veneers', path: '/dental-veneers' },
+      { label: 'Teeth Whitening', path: '/teeth-whitening' },
+      { label: 'Teeth Whitening Cost in Ghaziabad', path: '/teeth-whitening-cost-ghaziabad' },
+      { label: 'Zirconia Crowns', path: '/zirconia-crowns' },
+      { label: 'Tooth Cap / Dental Crown', path: '/tooth-cap' },
+      { label: 'Tooth Cap Cost in Ghaziabad', path: '/tooth-cap-cost-ghaziabad' },
+      { label: 'Clear Aligners', path: '/clear-aligners' },
+      { label: 'Dental Braces', path: '/dental-braces' },
+    ],
+  },
+  {
+    heading: 'Cleaning, Gum Care & Pediatric Dentistry',
+    links: [
+      { label: 'Teeth Cleaning & Scaling', path: '/teeth-cleaning' },
+      { label: 'Teeth Cleaning Cost in Ghaziabad', path: '/teeth-cleaning-cost-ghaziabad' },
+      { label: 'Periodontal & Gum Treatment', path: '/periodontal-gum-treatment-ghaziabad' },
+      { label: 'Bad Breath Treatment', path: '/bad-breath-treatment' },
+      { label: 'Loose Tooth Treatment', path: '/loose-tooth-treatment' },
+      { label: 'Kids Dentist & Pediatric Care', path: '/kids-dentist' },
+    ],
+  },
+  {
+    heading: 'Oral Surgery, Extractions & Urgent Care',
+    links: [
+      { label: 'Wisdom Tooth Extraction', path: '/wisdom-tooth-extraction' },
+      { label: 'Wisdom Tooth Extraction Cost', path: '/wisdom-tooth-extraction-cost-ghaziabad' },
+      { label: 'Impacted Wisdom Tooth Care', path: '/impacted-wisdom-tooth' },
+      { label: 'Tooth Extraction', path: '/tooth-extraction' },
+      { label: 'Tooth Extraction Cost in Ghaziabad', path: '/tooth-extraction-cost-ghaziabad' },
+      { label: 'Dental Abscess Treatment', path: '/dental-abscess-treatment' },
+      { label: 'Emergency Dentist in Ghaziabad', path: '/emergency-dentist-ghaziabad' },
+    ],
+  },
+  {
+    heading: 'Local Clinic & Complete Fee Guide',
+    links: [
+      { label: 'Dentist in Chipiyana Buzurg, Ghaziabad', path: '/dentist-chipiyana-buzurg-ghaziabad' },
+      { label: 'Complete Dental Treatment Cost Guide', path: '/dental-treatment-cost-ghaziabad' },
+      { label: 'Privacy Policy', path: '/privacy-policy' },
+    ],
+  },
+];
 
 interface DentalServicesPageProps {
   handleCall?: () => void;
@@ -418,12 +497,78 @@ export default function DentalServicesPage({
                         </div>
                       </div>
                     </details>
+                    {service.deepGuidePath && (
+                      <div className="px-5 sm:px-6 py-3 bg-[#FFF8EC]/70 border-t border-[#087B57]/10 flex items-center justify-between gap-2">
+                        <span className="text-xs text-[#26352F]/75">Dedicated clinical page</span>
+                        <a
+                          href={service.deepGuidePath}
+                          onMouseEnter={() => preloadRoute(service.deepGuidePath!)}
+                          onTouchStart={() => preloadRoute(service.deepGuidePath!)}
+                          onClick={(e) => handleLinkClick(e, service.deepGuidePath!)}
+                          className="text-xs sm:text-sm font-bold text-[#087B57] hover:text-[#FF654F] inline-flex items-center gap-1 transition-colors"
+                        >
+                          <span>Read {service.title.split('(')[0].trim()} Guide</span>
+                          <ArrowRight className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+                        </a>
+                      </div>
+                    )}
                   </article>
                 );
               })}
             </div>
           </section>
         ))}
+
+        {/* Categorized Complete Treatment, Symptom & Cost Directory */}
+        <section
+          id="all-clinical-guides"
+          aria-labelledby="all-clinical-guides-heading"
+          className="cv-auto bg-white rounded-3xl border border-[#087B57]/12 shadow-xs p-6 sm:p-8 space-y-6"
+        >
+          <div className="space-y-1.5">
+            <h2
+              id="all-clinical-guides-heading"
+              className="text-2xl sm:text-3xl font-extrabold text-[#087B57]"
+            >
+              Complete Treatment, Symptom &amp; Cost Guide Directory
+            </h2>
+            <p className="text-sm text-[#26352F]/80 max-w-3xl">
+              Jump directly to any treatment guide, dental symptom overview, or Ghaziabad pricing page
+              at Oracle Dental Clinic &amp; Implant Center.
+            </p>
+          </div>
+
+          <nav aria-label="Categorized dental services, symptoms, and cost guides">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {SERVICES_HUB_DIRECTORY.map((group) => (
+                <div
+                  key={group.heading}
+                  className="bg-[#FFF8EC]/70 rounded-2xl border border-[#087B57]/12 p-5 space-y-3"
+                >
+                  <h3 className="text-base font-extrabold text-[#087B57] border-b border-[#087B57]/12 pb-2">
+                    {group.heading}
+                  </h3>
+                  <ul className="space-y-1.5 text-sm">
+                    {group.links.map((item) => (
+                      <li key={item.path}>
+                        <a
+                          href={item.path}
+                          onMouseEnter={() => preloadRoute(item.path)}
+                          onTouchStart={() => preloadRoute(item.path)}
+                          onClick={(e) => handleLinkClick(e, item.path)}
+                          className="text-[#26352F] hover:text-[#087B57] hover:underline underline-offset-2 font-medium inline-flex items-center gap-1.5 transition-colors"
+                        >
+                          <ArrowRight className="w-3.5 h-3.5 text-[#FF8A24] shrink-0" aria-hidden="true" />
+                          <span>{item.label}</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </nav>
+        </section>
 
         {/* Honest Location & Service Area Transparency Note */}
         <section className="bg-white rounded-3xl border border-[#087B57]/12 shadow-xs p-6 sm:p-8 space-y-3">

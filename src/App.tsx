@@ -23,6 +23,7 @@ import {
 import { SoundProvider, useSound } from './components/SoundManager';
 import { InteractiveButton } from './components/InteractiveButton';
 import Hero from './components/Hero';
+import ExploreTreatmentsSection from './components/ExploreTreatmentsSection';
 import SEOHead from './components/SEOHead';
 import ScrollProgressBar from './components/ScrollProgressBar';
 import LanguageSwitcher from './components/LanguageSwitcher';
@@ -1131,6 +1132,8 @@ function AppContent() {
               handleWhatsApp={handleWhatsApp}
               navigateToPath={navigateToPath}
             />
+
+            <ExploreTreatmentsSection navigateToPath={navigateToPath} />
 
             {/* Dedicated Meet Our Doctor Profile Section (Deferred below the fold for instant mobile hydration) */}
             <DeferredSection

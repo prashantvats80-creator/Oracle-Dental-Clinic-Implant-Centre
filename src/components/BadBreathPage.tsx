@@ -2,6 +2,7 @@ import React from 'react';
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
+import { RelatedGuidesSection } from './RelatedGuidesSection';
 
 interface Props { handleCall: () => void; handleWhatsApp: () => void; handleDirections: () => void; navigateToHome: () => void; navigateToPath: (p: string) => void; }
 
@@ -12,7 +13,7 @@ export default function BadBreathPage({ handleCall, handleWhatsApp, navigateToHo
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed">
       <Breadcrumbs
         items={[
-          { label: 'Dental Symptoms', path: '/#symptoms' },
+          { label: 'Dental Services', path: '/dental-services' },
           { label: 'Bad Breath Treatment', path: '/bad-breath-treatment' }
         ]}
         navigateToHome={navigateToHome}
@@ -35,7 +36,8 @@ export default function BadBreathPage({ handleCall, handleWhatsApp, navigateToHo
         <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-2xs space-y-6">
           <h2 className="text-2xl font-extrabold text-slate-900">Oral Causes of Chronic Halitosis</h2>
           <p className="text-slate-600 text-sm leading-relaxed">
-            Over 85% of bad breath originates from volatile sulfur compounds (VSCs) produced by anaerobic oral bacteria hiding in calculus, deep gum pockets, or tongue coatings. Professional <button onClick={() => navigateToPath('/teeth-cleaning')} className="text-blue-600 underline font-bold">Dental Scaling</button> eliminates deep plaque reservoirs.
+            Over 85% of bad breath originates from volatile sulfur compounds (VSCs) produced by anaerobic oral bacteria hiding in calculus, deep gum pockets, or tongue coatings. Professional{' '}
+            <a href="/teeth-cleaning" onClick={(e) => { e.preventDefault(); navigateToPath('/teeth-cleaning'); }} className="text-blue-600 underline font-bold">Dental Scaling</a> eliminates deep plaque reservoirs.
           </p>
 
           <TreatmentImage
@@ -45,6 +47,19 @@ export default function BadBreathPage({ handleCall, handleWhatsApp, navigateToHo
             aspectRatio="16/9"
           />
         </div>
+
+        <RelatedGuidesSection
+          title="Related Cleaning, Gum Health & Oral Hygiene Guides"
+          navigateToPath={navigateToPath}
+          links={[
+            { path: '/teeth-cleaning', label: 'Teeth Cleaning & Ultrasonic Scaling', description: 'Clear hardened tartar and bacterial deposits causing oral odor.', tag: 'Treatment' },
+            { path: '/teeth-cleaning-cost-ghaziabad', label: 'Teeth Cleaning Cost in Ghaziabad', description: 'Transparent scaling and polishing pricing factors.', tag: 'Cost Guide' },
+            { path: '/periodontal-gum-treatment-ghaziabad', label: 'Periodontal & Gum Treatment', description: 'Deep gum pocket therapy for bleeding gums and periodontitis.', tag: 'Treatment' },
+            { path: '/cavity-treatment', label: 'Cavity Treatment', description: 'Treat trapped food decay contributing to chronic bad breath.', tag: 'Symptom' },
+            { path: '/tooth-sensitivity', label: 'Tooth Sensitivity Relief', description: 'Address gum recession and enamel wear comfortably.', tag: 'Symptom' },
+            { path: '/dental-services', label: 'All Dental Services', description: 'Browse preventive, restorative, and cosmetic dental treatments.', tag: 'Services Hub' },
+          ]}
+        />
       </section>
     </div>
   );

@@ -27,6 +27,7 @@ import {
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
+import { RelatedGuidesSection } from './RelatedGuidesSection';
 
 interface TeethWhiteningPageProps {
   handleCall: () => void;
@@ -193,7 +194,7 @@ export default function TeethWhiteningPage({
       {/* Semantic Breadcrumb Navigation */}
       <Breadcrumbs
         items={[
-          { label: 'Dental Treatments', path: '/#services' },
+          { label: 'Dental Treatments', path: '/dental-services' },
           { label: 'Teeth Whitening', path: '/teeth-whitening' }
         ]}
         navigateToHome={navigateToHome}
@@ -267,7 +268,7 @@ export default function TeethWhiteningPage({
                   O
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-white">Oracle Dental Clinic</h3>
+                  <h2 className="text-lg font-bold text-white">Oracle Dental Clinic</h2>
                   <p className="text-xs text-amber-400 font-medium">Cosmetic & General Dentistry</p>
                 </div>
               </div>
@@ -602,12 +603,13 @@ export default function TeethWhiteningPage({
               <p className="text-slate-600 text-sm">
                 For non-vital teeth that have undergone root canal treatment, a specialized procedure called <em>internal bleaching</em> can place whitening agents directly inside the pulp chamber to restore a natural shade.
               </p>
-              <button 
-                onClick={() => navigateToPath('/root-canal-treatment')}
-                className="text-xs font-bold text-blue-600 hover:underline pt-2 block"
+              <a
+                href="/root-canal-treatment"
+                onClick={(e) => { e.preventDefault(); navigateToPath('/root-canal-treatment'); }}
+                className="text-xs font-bold text-blue-600 hover:underline pt-2 inline-block"
               >
                 Learn more about Root Canal Treatment →
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -850,11 +852,60 @@ export default function TeethWhiteningPage({
         </div>
       </section>
 
+      {/* Related Cosmetic Dentistry Cluster */}
+      <div className="bg-slate-50 border-t border-slate-200 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <RelatedGuidesSection
+            title="Related Cosmetic Dentistry &amp; Whitening Guides"
+            subtitle="Explore teeth whitening pricing, veneers, smile makeovers, pre-whitening scaling, and metal-free zirconia crowns in Ghaziabad."
+            navigateToPath={navigateToPath}
+            links={[
+              {
+                path: '/teeth-whitening-cost-ghaziabad',
+                label: 'Teeth Whitening Cost in Ghaziabad',
+                description: 'In-office clinical bleaching vs supervised take-home whitening tray cost guide.',
+                tag: 'Cost Guide'
+              },
+              {
+                path: '/cosmetic-dentistry',
+                label: 'Cosmetic Dentistry Hub',
+                description: 'Comprehensive guide to aesthetic dental treatments for stains, chips, and gaps.',
+                tag: 'Cosmetic Cluster'
+              },
+              {
+                path: '/smile-makeover-ghaziabad',
+                label: 'Smile Makeover in Ghaziabad',
+                description: 'Combined aesthetic planning using whitening, veneers, bonding, and crowns.',
+                tag: 'Cosmetic Cluster'
+              },
+              {
+                path: '/dental-veneers',
+                label: 'Dental Veneers',
+                description: 'Porcelain and composite veneers for severe intrinsic stains or tooth shape changes.',
+                tag: 'Cosmetic Cluster'
+              },
+              {
+                path: '/teeth-cleaning',
+                label: 'Teeth Cleaning & Scaling',
+                description: 'Remove surface tartar and plaque before brightening your natural enamel shade.',
+                tag: 'Pre-Whitening'
+              },
+              {
+                path: '/zirconia-crowns',
+                label: 'Zirconia Crowns',
+                description: 'Natural tooth-colored crowns for heavily restored or discolored single teeth.',
+                tag: 'Crown Care'
+              }
+            ]}
+          />
+        </div>
+      </div>
+
       {/* CTA Footer */}
       <section className="py-12 bg-white border-t border-slate-200 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 bg-gradient-to-r from-blue-900 to-indigo-900 text-white p-8 rounded-3xl shadow-xl">
           <div className="space-y-2 text-center md:text-left">
-            <h3 className="text-xl sm:text-2xl font-bold">Ready to Brighten Your Smile?</h3>
+            <h2 className="text-xl sm:text-2xl font-bold">Ready to Brighten Your Smile?</h2>
             <p className="text-slate-300 text-sm">Schedule a teeth whitening consultation at Oracle Dental Clinic with Dr. Prashant Kumar Vats, BDS.</p>
           </div>
 
@@ -867,26 +918,29 @@ export default function TeethWhiteningPage({
               Call +91 7011961515
             </InteractiveButton>
 
-            <button
-              onClick={() => navigateToPath('/wisdom-tooth-extraction')}
+            <a
+              href="/wisdom-tooth-extraction"
+              onClick={(e) => { e.preventDefault(); navigateToPath('/wisdom-tooth-extraction'); }}
               className="bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-6 rounded-xl border border-white/20 text-sm transition-colors"
             >
               Wisdom Tooth Page
-            </button>
+            </a>
 
-            <button
-              onClick={() => navigateToPath('/dental-implants')}
+            <a
+              href="/dental-implants"
+              onClick={(e) => { e.preventDefault(); navigateToPath('/dental-implants'); }}
               className="bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-6 rounded-xl border border-white/20 text-sm transition-colors"
             >
               Dental Implants Page
-            </button>
+            </a>
 
-            <button
-              onClick={navigateToHome}
+            <a
+              href="/"
+              onClick={(e) => { e.preventDefault(); navigateToHome(); }}
               className="bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-6 rounded-xl border border-white/20 text-sm transition-colors"
             >
               Back to Main Website
-            </button>
+            </a>
           </div>
         </div>
       </section>

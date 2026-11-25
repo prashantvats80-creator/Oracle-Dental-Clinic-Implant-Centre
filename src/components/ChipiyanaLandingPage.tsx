@@ -827,13 +827,16 @@ export default function ChipiyanaLandingPage({
               WhatsApp Booking
             </InteractiveButton>
 
-            <button
-              type="button"
-              onClick={navigateToHome}
+            <a
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                navigateToHome();
+              }}
               className="bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-6 rounded-xl border border-white/20 text-sm transition-colors"
             >
               Back to Homepage
-            </button>
+            </a>
           </div>
         </div>
       </section>

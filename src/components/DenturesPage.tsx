@@ -3,6 +3,7 @@ import { PhoneCall, MessageCircle, CheckCircle2 } from 'lucide-react';
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
+import { RelatedGuidesSection } from './RelatedGuidesSection';
 
 interface Props { 
   handleCall: () => void; 
@@ -19,7 +20,7 @@ export default function DenturesPage({ handleCall, handleWhatsApp, navigateToHom
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed">
       <Breadcrumbs
         items={[
-          { label: 'Dental Treatments', path: '/#services' },
+          { label: 'Dental Services', path: '/dental-services' },
           { label: 'Complete & Partial Dentures', path: '/dentures' }
         ]}
         navigateToHome={navigateToHome}
@@ -83,7 +84,8 @@ export default function DenturesPage({ handleCall, handleWhatsApp, navigateToHom
         <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-2xs space-y-6">
           <h2 className="text-2xl font-extrabold text-slate-900">Implant-Supported Overdentures</h2>
           <p className="text-slate-600 text-sm leading-relaxed">
-            For patients struggling with loose lower dentures, <button onClick={() => navigateToPath('/dental-implants')} className="text-blue-600 underline font-bold">Implant Overdentures</button> snap firmly onto 2–4 locator implant posts, eliminating slipping and sore spots.
+            For patients struggling with loose lower dentures,{' '}
+            <a href="/dental-implants" onClick={(e) => { e.preventDefault(); navigateToPath('/dental-implants'); }} className="text-blue-600 underline font-bold">Implant Overdentures</a> snap firmly onto 2–4 locator implant posts, eliminating slipping and sore spots.
           </p>
 
           <TreatmentImage
@@ -98,14 +100,28 @@ export default function DenturesPage({ handleCall, handleWhatsApp, navigateToHom
             <p className="text-slate-700 text-xs sm:text-sm leading-relaxed">
               Explore transparent complete and partial denture pricing, flexible Valplast options, cast metal frameworks, and implant overdentures with clear consultation fees (₹200) under Dr. Prashant Kumar Vats, BDS.
             </p>
-            <button
-              onClick={() => navigateToPath('/dentures-cost-ghaziabad')}
+            <a
+              href="/dentures-cost-ghaziabad"
+              onClick={(e) => { e.preventDefault(); navigateToPath('/dentures-cost-ghaziabad'); }}
               className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition-all shadow-xs"
             >
               View Detailed Dentures Cost Guide →
-            </button>
+            </a>
           </div>
         </div>
+
+        <RelatedGuidesSection
+          title="Related Denture Cost & Fixed Replacement Guides"
+          navigateToPath={navigateToPath}
+          links={[
+            { path: '/dentures-cost-ghaziabad', label: 'Dentures Cost in Ghaziabad', description: 'Compare acrylic, flexible Valplast, BPS, and overdenture pricing.', tag: 'Cost Guide' },
+            { path: '/missing-teeth', label: 'Missing Teeth Replacement Options', description: 'Compare removable dentures against fixed bridges and implants.', tag: 'Symptom' },
+            { path: '/full-mouth-dental-implants', label: 'Full Mouth Dental Implants', description: 'Fixed All-on-4 and All-on-6 full-arch teeth replacement.', tag: 'Treatment' },
+            { path: '/dental-implants', label: 'Dental Implants in Ghaziabad', description: 'Permanent titanium implant solutions for enhanced chewing stability.', tag: 'Treatment' },
+            { path: '/dental-bridges', label: 'Fixed Dental Bridges', description: 'Fixed ceramic replacements for localized missing teeth gaps.', tag: 'Treatment' },
+            { path: '/dental-bridge-cost-ghaziabad', label: 'Dental Bridge Cost in Ghaziabad', description: 'Unit-based pricing factors for PFM and Zirconia dental bridges.', tag: 'Cost Guide' },
+          ]}
+        />
       </section>
     </div>
   );

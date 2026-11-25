@@ -77,7 +77,7 @@ export default function TeethCleaningCostPage({
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed selection:bg-blue-100 selection:text-blue-900">
       <Breadcrumbs
         items={[
-          { label: 'Dental Care in Ghaziabad', path: '/#services' },
+          { label: 'Dental Care in Ghaziabad', path: '/dental-services' },
           { label: 'Teeth Cleaning & Scaling', path: '/teeth-cleaning' },
           { label: 'Teeth Cleaning Cost in Ghaziabad', path: '/teeth-cleaning-cost-ghaziabad' }
         ]}
@@ -308,11 +308,32 @@ export default function TeethCleaningCostPage({
               Gum &amp; Periodontal Care (Bleeding, Swollen Gums) <ArrowRight className="w-3.5 h-3.5" />
             </a>
             <a 
+              href="/bad-breath-treatment" 
+              onClick={(e) => handleLinkClick(e, '/bad-breath-treatment')}
+              className="text-emerald-300 hover:text-emerald-200 flex items-center gap-1.5"
+            >
+              Bad Breath Treatment <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+            <a 
+              href="/teeth-whitening-cost-ghaziabad" 
+              onClick={(e) => handleLinkClick(e, '/teeth-whitening-cost-ghaziabad')}
+              className="text-blue-300 hover:text-white flex items-center gap-1.5"
+            >
+              Teeth Whitening Cost <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+            <a 
               href="/tooth-sensitivity" 
               onClick={(e) => handleLinkClick(e, '/tooth-sensitivity')}
               className="text-slate-300 hover:text-white flex items-center gap-1.5"
             >
               Tooth Sensitivity Relief <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+            <a 
+              href="/dental-treatment-cost-ghaziabad" 
+              onClick={(e) => handleLinkClick(e, '/dental-treatment-cost-ghaziabad')}
+              className="text-slate-300 hover:text-white flex items-center gap-1.5"
+            >
+              All Dental Treatment Costs <ArrowRight className="w-3.5 h-3.5" />
             </a>
           </div>
         </section>

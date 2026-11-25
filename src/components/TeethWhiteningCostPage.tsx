@@ -78,7 +78,7 @@ export default function TeethWhiteningCostPage({
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed selection:bg-blue-100 selection:text-blue-900">
       <Breadcrumbs
         items={[
-          { label: 'Dental Care in Ghaziabad', path: '/#services' },
+          { label: 'Dental Care in Ghaziabad', path: '/dental-services' },
           { label: 'Teeth Whitening', path: '/teeth-whitening' },
           { label: 'Teeth Whitening Cost in Ghaziabad', path: '/teeth-whitening-cost-ghaziabad' }
         ]}
@@ -268,6 +268,27 @@ export default function TeethWhiteningCostPage({
               className="text-amber-400 hover:text-amber-300 flex items-center gap-1.5"
             >
               Teeth Whitening Overview <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+            <a 
+              href="/cosmetic-dentistry" 
+              onClick={(e) => handleLinkClick(e, '/cosmetic-dentistry')}
+              className="text-emerald-300 hover:text-emerald-200 flex items-center gap-1.5"
+            >
+              Cosmetic Dentistry Hub <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+            <a 
+              href="/smile-makeover-ghaziabad" 
+              onClick={(e) => handleLinkClick(e, '/smile-makeover-ghaziabad')}
+              className="text-emerald-300 hover:text-emerald-200 flex items-center gap-1.5"
+            >
+              Smile Makeover in Ghaziabad <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+            <a 
+              href="/dental-veneers" 
+              onClick={(e) => handleLinkClick(e, '/dental-veneers')}
+              className="text-cyan-400 hover:text-cyan-300 flex items-center gap-1.5"
+            >
+              Dental Veneers <ArrowRight className="w-3.5 h-3.5" />
             </a>
             <a 
               href="/teeth-cleaning-cost-ghaziabad" 

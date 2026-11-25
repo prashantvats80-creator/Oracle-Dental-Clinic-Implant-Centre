@@ -3,6 +3,7 @@ import { PhoneCall, MessageCircle, CheckCircle2 } from 'lucide-react';
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
+import { RelatedGuidesSection } from './RelatedGuidesSection';
 
 interface Props { 
   handleCall: () => void; 
@@ -19,7 +20,7 @@ export default function KidsDentistPage({ handleCall, handleWhatsApp, navigateTo
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed">
       <Breadcrumbs
         items={[
-          { label: 'Specialized Services', path: '/#services' },
+          { label: 'Dental Services', path: '/dental-services' },
           { label: 'Kids & Pediatric Dentistry', path: '/kids-dentist' }
         ]}
         navigateToHome={navigateToHome}
@@ -66,7 +67,7 @@ export default function KidsDentistPage({ handleCall, handleWhatsApp, navigateTo
                 </div>
                 <div className="flex items-start gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 mt-1 flex-shrink-0" />
-                  <span><strong>Tooth-Colored <button onClick={() => navigateToPath('/dental-fillings')} className="text-blue-600 underline font-bold">Fillings</button>:</strong> Gentle treatment for milk tooth cavities</span>
+                  <span><strong>Tooth-Colored <a href="/dental-fillings" onClick={(e) => { e.preventDefault(); navigateToPath('/dental-fillings'); }} className="text-blue-600 underline font-bold">Fillings</a>:</strong> Gentle treatment for milk tooth cavities</span>
                 </div>
               </div>
             </div>
@@ -93,6 +94,19 @@ export default function KidsDentistPage({ handleCall, handleWhatsApp, navigateTo
             aspectRatio="16/9"
           />
         </div>
+
+        <RelatedGuidesSection
+          title="Related Pediatric, Preventive & Orthodontic Guides"
+          navigateToPath={navigateToPath}
+          links={[
+            { path: '/cavity-treatment', label: 'Cavity Treatment', description: 'Early painless decay care to protect developing teeth.', tag: 'Symptom' },
+            { path: '/dental-fillings', label: 'Dental Fillings', description: 'Tooth-colored fillings for milk tooth and permanent tooth cavities.', tag: 'Treatment' },
+            { path: '/teeth-cleaning', label: 'Teeth Cleaning & Scaling', description: 'Preventive hygiene checkups and gentle plaque removal.', tag: 'Treatment' },
+            { path: '/dental-braces', label: 'Dental Braces', description: 'Orthodontic evaluation for growing teens and misaligned bites.', tag: 'Orthodontics' },
+            { path: '/tooth-pain-treatment', label: 'Tooth Pain Treatment', description: 'Prompt examination if your child develops toothache or swelling.', tag: 'Symptom' },
+            { path: '/dental-services', label: 'All Dental Services', description: 'Explore full family dentistry services in Chipiyana Buzurg.', tag: 'Services Hub' },
+          ]}
+        />
       </section>
     </div>
   );

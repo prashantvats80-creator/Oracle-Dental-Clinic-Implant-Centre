@@ -15,6 +15,7 @@ import {
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
+import { RelatedGuidesSection } from './RelatedGuidesSection';
 
 interface MissingTeethPageProps {
   handleCall: () => void;
@@ -39,8 +40,8 @@ export default function MissingTeethPage({
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed">
       <Breadcrumbs
         items={[
-          { label: 'Dental Symptoms', path: '/#symptoms' },
-          { label: 'Missing Teeth Replacement', path: '/missing-teeth-replacement' }
+          { label: 'Dental Services', path: '/dental-services' },
+          { label: 'Missing Teeth Replacement', path: '/missing-teeth' }
         ]}
         navigateToHome={navigateToHome}
         navigateToPath={navigateToPath}
@@ -87,7 +88,7 @@ export default function MissingTeethPage({
           </div>
 
           <div className="lg:col-span-5 bg-slate-900/90 border border-slate-800 p-6 rounded-3xl space-y-4">
-            <h3 className="text-white font-bold text-lg">Main Replacement Options</h3>
+            <h2 className="text-white font-bold text-lg">Main Replacement Options</h2>
             <TreatmentImage
               src="/assets/images/case-03.webp"
               alt="Educational illustration comparing missing teeth replacement options including implants bridges and dentures"
@@ -95,9 +96,9 @@ export default function MissingTeethPage({
               aspectRatio="4/3"
             />
             <ul className="space-y-2.5 text-xs text-slate-300">
-              <li className="flex items-start gap-2"><CheckCircle2 className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" /> <strong>Dental Implants:</strong> Titanium post anchored in jawbone to support single crown or bridge (<button onClick={() => navigateToPath('/dental-implants')} className="text-blue-400 underline">Dental Implants</button>).</li>
-              <li className="flex items-start gap-2"><CheckCircle2 className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" /> <strong>Fixed Dental Bridge:</strong> Anchored to adjacent natural teeth to span the missing gap (<button onClick={() => navigateToPath('/dental-bridges')} className="text-blue-400 underline">Dental Bridges</button>).</li>
-              <li className="flex items-start gap-2"><CheckCircle2 className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" /> <strong>Removable Dentures:</strong> Partial or full dentures for multiple or all missing teeth (<button onClick={() => navigateToPath('/dentures')} className="text-blue-400 underline">Dentures</button>).</li>
+              <li className="flex items-start gap-2"><CheckCircle2 className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" /> <span><strong>Dental Implants:</strong> Titanium post anchored in jawbone to support single crown or bridge (<a href="/dental-implants" onClick={(e) => { e.preventDefault(); navigateToPath('/dental-implants'); }} className="text-blue-400 underline">Dental Implants</a>).</span></li>
+              <li className="flex items-start gap-2"><CheckCircle2 className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" /> <span><strong>Fixed Dental Bridge:</strong> Anchored to adjacent natural teeth to span the missing gap (<a href="/dental-bridges" onClick={(e) => { e.preventDefault(); navigateToPath('/dental-bridges'); }} className="text-blue-400 underline">Dental Bridges</a>).</span></li>
+              <li className="flex items-start gap-2"><CheckCircle2 className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" /> <span><strong>Removable Dentures:</strong> Partial or full dentures for multiple or all missing teeth (<a href="/dentures" onClick={(e) => { e.preventDefault(); navigateToPath('/dentures'); }} className="text-blue-400 underline">Dentures</a>).</span></li>
             </ul>
           </div>
         </div>
@@ -124,9 +125,24 @@ export default function MissingTeethPage({
         </div>
       </section>
 
+      <div className="max-w-5xl mx-auto px-4 pb-12">
+        <RelatedGuidesSection
+          title="Compare Tooth Replacement Treatments & Cost Guides"
+          navigateToPath={navigateToPath}
+          links={[
+            { path: '/dental-implants', label: 'Dental Implants in Ghaziabad', description: 'Standalone titanium tooth replacement without grinding adjacent teeth.', tag: 'Treatment' },
+            { path: '/dental-implant-cost-ghaziabad', label: 'Dental Implant Cost in Ghaziabad', description: 'Pricing factors for single implants, abutments, and crowns.', tag: 'Cost Guide' },
+            { path: '/full-mouth-dental-implants', label: 'Full Mouth Dental Implants', description: 'Fixed All-on-4 and All-on-6 arch rehabilitation options.', tag: 'Treatment' },
+            { path: '/dental-bridge-cost-ghaziabad', label: 'Dental Bridge Cost in Ghaziabad', description: 'Compare PFM vs. Zirconia fixed dental bridge pricing factors.', tag: 'Cost Guide' },
+            { path: '/dentures-cost-ghaziabad', label: 'Dentures Cost in Ghaziabad', description: 'Cost guide for acrylic, flexible, BPS, and implant-supported dentures.', tag: 'Cost Guide' },
+            { path: '/zirconia-crowns', label: 'Zirconia Crowns', description: 'Metal-free ceramic restorations for implants and natural teeth.', tag: 'Treatment' },
+          ]}
+        />
+      </div>
+
       <section className="bg-slate-950 text-white py-10 px-4 border-t border-slate-800 text-center">
         <div className="max-w-4xl mx-auto space-y-4">
-          <h3 className="text-xl font-bold">Schedule Your Tooth Replacement Consultation</h3>
+          <h2 className="text-xl font-bold">Schedule Your Tooth Replacement Consultation</h2>
           <p className="text-xs text-slate-400">Jaat Chowk, Chipiyana Buzurg, Ghaziabad. Consultation fee ₹200.</p>
           <div className="flex justify-center gap-3">
             <InteractiveButton id="mt-f-call" onClick={handleCall} className="bg-amber-500 text-slate-950 font-black py-3 px-6 rounded-xl text-sm">Call +91 7011961515</InteractiveButton>

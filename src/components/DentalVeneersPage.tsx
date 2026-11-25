@@ -134,8 +134,9 @@ export default function DentalVeneersPage({
             <p className="text-sm text-slate-600">
               Veneers offer natural translucency and conservative front-tooth enhancement. However,
               teeth with large fillings, heavy root-canal wear, or severe bite misalignment may be better
-              served by <button type="button" onClick={() => navigateToPath('/zirconia-crowns')} className="text-blue-700 underline font-semibold">zirconia crowns</button> or{' '}
-              <button type="button" onClick={() => navigateToPath('/clear-aligners')} className="text-blue-700 underline font-semibold">clear aligners</button>.
+              served by{' '}
+              <a href="/zirconia-crowns" onClick={(e) => { e.preventDefault(); navigateToPath('/zirconia-crowns'); }} className="text-blue-700 underline font-semibold">zirconia crowns</a> or{' '}
+              <a href="/clear-aligners" onClick={(e) => { e.preventDefault(); navigateToPath('/clear-aligners'); }} className="text-blue-700 underline font-semibold">clear aligners</a>.
             </p>
           </div>
           <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 space-y-3">
@@ -159,6 +160,7 @@ export default function DentalVeneersPage({
               { label: 'Smile Makeover in Ghaziabad', path: '/smile-makeover-ghaziabad' },
               { label: 'Cosmetic Dentistry Overview', path: '/cosmetic-dentistry' },
               { label: 'Professional Teeth Whitening', path: '/teeth-whitening' },
+              { label: 'Teeth Whitening Cost in Ghaziabad', path: '/teeth-whitening-cost-ghaziabad' },
               { label: 'Zirconia Dental Crowns', path: '/zirconia-crowns' },
               { label: 'Clear Aligners', path: '/clear-aligners' },
               { label: 'Chipped Tooth Repair', path: '/chipped-tooth' },

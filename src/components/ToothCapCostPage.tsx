@@ -63,7 +63,7 @@ export default function ToothCapCostPage({
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed selection:bg-blue-100 selection:text-blue-900">
       <Breadcrumbs
         items={[
-          { label: 'Dental Care in Ghaziabad', path: '/#services' },
+          { label: 'Dental Services', path: '/dental-services' },
           { label: 'Tooth Caps & Crowns', path: '/tooth-cap' },
           { label: 'Tooth Cap Cost in Ghaziabad', path: '/tooth-cap-cost-ghaziabad' }
         ]}
@@ -148,11 +148,20 @@ export default function ToothCapCostPage({
             <a href="/tooth-cap" onClick={(e) => handleLinkClick(e, '/tooth-cap')} className="hover:underline flex items-center gap-1">
               Full Tooth Cap Guide <ArrowRight className="w-3 h-3" />
             </a>
+            <a href="/zirconia-crowns" onClick={(e) => handleLinkClick(e, '/zirconia-crowns')} className="hover:underline flex items-center gap-1">
+              Zirconia Crowns in Ghaziabad <ArrowRight className="w-3 h-3" />
+            </a>
+            <a href="/root-canal-treatment" onClick={(e) => handleLinkClick(e, '/root-canal-treatment')} className="hover:underline flex items-center gap-1">
+              Root Canal Treatment <ArrowRight className="w-3 h-3" />
+            </a>
             <a href="/dental-fillings" onClick={(e) => handleLinkClick(e, '/dental-fillings')} className="hover:underline flex items-center gap-1">
               Composite Fillings <ArrowRight className="w-3 h-3" />
             </a>
             <a href="/broken-tooth-treatment" onClick={(e) => handleLinkClick(e, '/broken-tooth-treatment')} className="hover:underline flex items-center gap-1">
               Broken Tooth Repair <ArrowRight className="w-3 h-3" />
+            </a>
+            <a href="/dental-treatment-cost-ghaziabad" onClick={(e) => handleLinkClick(e, '/dental-treatment-cost-ghaziabad')} className="hover:underline flex items-center gap-1">
+              All Dental Treatment Costs <ArrowRight className="w-3 h-3" />
             </a>
           </div>
         </section>

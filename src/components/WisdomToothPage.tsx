@@ -27,6 +27,7 @@ import {
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
+import { RelatedGuidesSection } from './RelatedGuidesSection';
 
 interface WisdomToothPageProps {
   handleCall: () => void;
@@ -181,7 +182,7 @@ export default function WisdomToothPage({
       {/* Semantic Breadcrumb Navigation */}
       <Breadcrumbs
         items={[
-          { label: 'Dental Treatments', path: '/#services' },
+          { label: 'Dental Treatments', path: '/dental-services' },
           { label: 'Wisdom Tooth Extraction', path: '/wisdom-tooth-extraction' }
         ]}
         navigateToHome={navigateToHome}
@@ -255,7 +256,7 @@ export default function WisdomToothPage({
                   O
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-white">Oracle Dental Clinic</h3>
+                  <h2 className="text-lg font-bold text-white">Oracle Dental Clinic</h2>
                   <p className="text-xs text-rose-400 font-medium">Wisdom Tooth & Surgery Care</p>
                 </div>
               </div>
@@ -680,7 +681,7 @@ export default function WisdomToothPage({
                 Consultation Fee: Initial clinical examination and wisdom tooth evaluation fee at Oracle Dental Clinic is <strong>₹200</strong>.
               </p>
               <p className="text-blue-800 text-xs">
-                For a complete breakdown covering impaction angles, OPG/CBCT scans, and recovery care, view our dedicated <button onClick={() => navigateToPath && navigateToPath('/wisdom-tooth-extraction-cost-ghaziabad')} className="text-blue-950 underline font-bold hover:text-blue-700">Wisdom Tooth Extraction Cost in Ghaziabad Guide</button>.
+                For a complete breakdown covering impaction angles, OPG/CBCT scans, and recovery care, view our dedicated <a href="/wisdom-tooth-extraction-cost-ghaziabad" onClick={(e) => { e.preventDefault(); navigateToPath('/wisdom-tooth-extraction-cost-ghaziabad'); }} className="text-blue-950 underline font-bold hover:text-blue-700">Wisdom Tooth Extraction Cost in Ghaziabad Guide</a>.
               </p>
             </div>
           </div>
@@ -847,11 +848,60 @@ export default function WisdomToothPage({
         </div>
       </section>
 
+      {/* Related Extraction & Emergency Dental Care Cluster */}
+      <div className="bg-slate-50 border-t border-slate-200 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <RelatedGuidesSection
+            title="Related Extraction, Impacted Tooth &amp; Cost Guides"
+            subtitle="Explore wisdom tooth surgical cost factors, impacted molar types, general extractions, and same-day pain care in Ghaziabad."
+            navigateToPath={navigateToPath}
+            links={[
+              {
+                path: '/wisdom-tooth-extraction-cost-ghaziabad',
+                label: 'Wisdom Tooth Extraction Cost in Ghaziabad',
+                description: 'Simple vs surgical impaction pricing factors, OPG X-ray guidance, and recovery care.',
+                tag: 'Cost Guide'
+              },
+              {
+                path: '/impacted-wisdom-tooth',
+                label: 'Impacted Wisdom Tooth Guide',
+                description: 'Mesioangular, horizontal, and pericoronitis flap infection symptoms and treatment.',
+                tag: 'Extraction Cluster'
+              },
+              {
+                path: '/tooth-extraction',
+                label: 'Tooth Extraction in Ghaziabad',
+                description: 'Atraumatic removal for severely decayed, fractured, or non-restorable teeth.',
+                tag: 'Extraction Cluster'
+              },
+              {
+                path: '/tooth-extraction-cost-ghaziabad',
+                label: 'Tooth Extraction Cost in Ghaziabad',
+                description: 'Transparent fee overview for simple and surgical tooth removals.',
+                tag: 'Cost Guide'
+              },
+              {
+                path: '/tooth-pain-treatment',
+                label: 'Tooth Pain Treatment',
+                description: 'Clinical diagnosis for jaw pain, molar pressure, and swelling.',
+                tag: 'Symptom Guide'
+              },
+              {
+                path: '/emergency-dentist-ghaziabad',
+                label: 'Emergency Dentist in Ghaziabad',
+                description: 'Prompt daily care (9 AM – 9 PM) for severe wisdom tooth swelling or acute pain.',
+                tag: 'Urgent Care'
+              }
+            ]}
+          />
+        </div>
+      </div>
+
       {/* CTA Footer */}
       <section className="py-12 bg-white border-t border-slate-200 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 bg-gradient-to-r from-blue-900 to-indigo-900 text-white p-8 rounded-3xl shadow-xl">
           <div className="space-y-2 text-center md:text-left">
-            <h3 className="text-xl sm:text-2xl font-bold">Need a Wisdom Tooth Evaluation?</h3>
+            <h2 className="text-xl sm:text-2xl font-bold">Need a Wisdom Tooth Evaluation?</h2>
             <p className="text-slate-300 text-sm">Visit Oracle Dental Clinic at KTS Complex near Jaat Chowk, Chipiyana Buzurg.</p>
           </div>
 
@@ -864,40 +914,45 @@ export default function WisdomToothPage({
               Call +91 7011961515
             </InteractiveButton>
 
-            <button
-              onClick={() => navigateToPath('/tooth-extraction')}
+            <a
+              href="/tooth-extraction"
+              onClick={(e) => { e.preventDefault(); navigateToPath('/tooth-extraction'); }}
               className="bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-6 rounded-xl border border-white/20 text-sm transition-colors"
             >
               Tooth Extraction Guide
-            </button>
+            </a>
 
-            <button
-              onClick={() => navigateToPath('/impacted-wisdom-tooth')}
+            <a
+              href="/impacted-wisdom-tooth"
+              onClick={(e) => { e.preventDefault(); navigateToPath('/impacted-wisdom-tooth'); }}
               className="bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-6 rounded-xl border border-white/20 text-sm transition-colors"
             >
               Impacted Wisdom Tooth
-            </button>
+            </a>
 
-            <button
-              onClick={() => navigateToPath('/dental-implants')}
+            <a
+              href="/dental-implants"
+              onClick={(e) => { e.preventDefault(); navigateToPath('/dental-implants'); }}
               className="bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-6 rounded-xl border border-white/20 text-sm transition-colors"
             >
               Dental Implants Page
-            </button>
+            </a>
 
-            <button
-              onClick={() => navigateToPath('/root-canal-treatment')}
+            <a
+              href="/root-canal-treatment"
+              onClick={(e) => { e.preventDefault(); navigateToPath('/root-canal-treatment'); }}
               className="bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-6 rounded-xl border border-white/20 text-sm transition-colors"
             >
               Root Canal Treatment Page
-            </button>
+            </a>
 
-            <button
-              onClick={navigateToHome}
+            <a
+              href="/"
+              onClick={(e) => { e.preventDefault(); navigateToHome(); }}
               className="bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-6 rounded-xl border border-white/20 text-sm transition-colors"
             >
               Back to Main Website
-            </button>
+            </a>
           </div>
         </div>
       </section>

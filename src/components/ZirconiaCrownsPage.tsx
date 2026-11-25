@@ -161,7 +161,10 @@ export default function ZirconiaCrownsPage({
               { label: 'Dental Implants', path: '/dental-implants' },
               { label: 'Fixed Dental Bridges', path: '/dental-bridges' },
               { label: 'Tooth Cap Overview', path: '/tooth-cap' },
+              { label: 'Cosmetic Dentistry', path: '/cosmetic-dentistry' },
               { label: 'Smile Makeover Ghaziabad', path: '/smile-makeover-ghaziabad' },
+              { label: 'Dental Veneers', path: '/dental-veneers' },
+              { label: 'Teeth Whitening', path: '/teeth-whitening' },
             ].map((link) => (
               <a
                 key={link.path}

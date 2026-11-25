@@ -3,6 +3,7 @@ import { PhoneCall, MessageCircle } from 'lucide-react';
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
+import { RelatedGuidesSection } from './RelatedGuidesSection';
 
 interface Props { handleCall: () => void; handleWhatsApp: () => void; handleDirections: () => void; navigateToHome: () => void; navigateToPath: (p: string) => void; }
 
@@ -13,7 +14,7 @@ export default function BlackToothPage({ handleCall, handleWhatsApp, navigateToH
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed">
       <Breadcrumbs
         items={[
-          { label: 'Dental Symptoms', path: '/#symptoms' },
+          { label: 'Dental Services', path: '/dental-services' },
           { label: 'Dark / Black Tooth Care', path: '/black-tooth' }
         ]}
         navigateToHome={navigateToHome}
@@ -36,7 +37,10 @@ export default function BlackToothPage({ handleCall, handleWhatsApp, navigateToH
         <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-2xs space-y-6">
           <h2 className="text-2xl font-extrabold text-slate-900">Causes & Treatment for Tooth Discoloration</h2>
           <p className="text-slate-600 text-sm leading-relaxed">
-            Dark tooth discoloration can stem from deep decay, past dental trauma, or internal pulp necrosis. Treatment ranges from <button onClick={() => navigateToPath('/dental-fillings')} className="text-blue-600 underline font-bold">Composite Fillings</button> to <button onClick={() => navigateToPath('/root-canal-treatment')} className="text-blue-600 underline font-bold">Root Canal Treatment</button> and aesthetic <button onClick={() => navigateToPath('/tooth-cap')} className="text-blue-600 underline font-bold">Tooth Caps</button>.
+            Dark tooth discoloration can stem from deep decay, past dental trauma, or internal pulp necrosis. Treatment ranges from{' '}
+            <a href="/dental-fillings" onClick={(e) => { e.preventDefault(); navigateToPath('/dental-fillings'); }} className="text-blue-600 underline font-bold">Composite Fillings</a> to{' '}
+            <a href="/root-canal-treatment" onClick={(e) => { e.preventDefault(); navigateToPath('/root-canal-treatment'); }} className="text-blue-600 underline font-bold">Root Canal Treatment</a> and aesthetic{' '}
+            <a href="/tooth-cap" onClick={(e) => { e.preventDefault(); navigateToPath('/tooth-cap'); }} className="text-blue-600 underline font-bold">Tooth Caps</a>.
           </p>
 
           <TreatmentImage
@@ -46,6 +50,19 @@ export default function BlackToothPage({ handleCall, handleWhatsApp, navigateToH
             aspectRatio="16/9"
           />
         </div>
+
+        <RelatedGuidesSection
+          title="Related Decay, Root Canal & Restoration Guides"
+          navigateToPath={navigateToPath}
+          links={[
+            { path: '/cavity-treatment', label: 'Cavity Treatment', description: 'Address dark enamel decay early before it reaches the pulp.', tag: 'Symptom' },
+            { path: '/root-canal-treatment', label: 'Root Canal Treatment (RCT)', description: 'Clear internal nerve infection in darkened or non-vital teeth.', tag: 'Treatment' },
+            { path: '/root-canal-cost-ghaziabad', label: 'Root Canal Cost in Ghaziabad', description: 'Transparent RCT pricing factors and post-treatment cap options.', tag: 'Cost Guide' },
+            { path: '/tooth-pain-treatment', label: 'Tooth Pain Treatment', description: 'Clinical evaluation if a dark tooth becomes tender or painful.', tag: 'Symptom' },
+            { path: '/broken-tooth-treatment', label: 'Broken Tooth Repair', description: 'Restore fractured teeth that darkened following dental trauma.', tag: 'Symptom' },
+            { path: '/zirconia-crowns', label: 'Zirconia Crowns', description: 'Natural-looking metal-free crowns to mask intrinsic discoloration.', tag: 'Treatment' },
+          ]}
+        />
       </section>
     </div>
   );

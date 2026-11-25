@@ -78,7 +78,7 @@ export default function WisdomToothCostPage({
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed selection:bg-blue-100 selection:text-blue-900">
       <Breadcrumbs
         items={[
-          { label: 'Dental Care in Ghaziabad', path: '/#services' },
+          { label: 'Dental Services', path: '/dental-services' },
           { label: 'Wisdom Tooth Extraction', path: '/wisdom-tooth-extraction' },
           { label: 'Wisdom Tooth Cost in Ghaziabad', path: '/wisdom-tooth-extraction-cost-ghaziabad' }
         ]}
@@ -307,11 +307,25 @@ export default function WisdomToothCostPage({
               General Tooth Extraction <ArrowRight className="w-3.5 h-3.5" />
             </a>
             <a 
+              href="/tooth-extraction-cost-ghaziabad" 
+              onClick={(e) => handleLinkClick(e, '/tooth-extraction-cost-ghaziabad')}
+              className="text-emerald-300 hover:text-white flex items-center gap-1.5"
+            >
+              Tooth Extraction Cost Guide <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+            <a 
               href="/dental-abscess-treatment" 
               onClick={(e) => handleLinkClick(e, '/dental-abscess-treatment')}
               className="text-slate-300 hover:text-white flex items-center gap-1.5"
             >
               Dental Abscess Care <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+            <a 
+              href="/dental-treatment-cost-ghaziabad" 
+              onClick={(e) => handleLinkClick(e, '/dental-treatment-cost-ghaziabad')}
+              className="text-slate-300 hover:text-white flex items-center gap-1.5"
+            >
+              All Dental Treatment Costs <ArrowRight className="w-3.5 h-3.5" />
             </a>
           </div>
         </section>

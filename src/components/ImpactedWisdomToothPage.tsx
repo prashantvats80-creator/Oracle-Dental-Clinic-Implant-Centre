@@ -64,7 +64,7 @@ export default function ImpactedWisdomToothPage({
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed selection:bg-blue-100 selection:text-blue-900">
       <Breadcrumbs
         items={[
-          { label: 'Dental Care in Ghaziabad', path: '/#services' },
+          { label: 'Dental Care in Ghaziabad', path: '/dental-services' },
           { label: 'Wisdom Tooth Removal', path: '/wisdom-tooth-extraction' },
           { label: 'Impacted Wisdom Tooth Treatment', path: '/impacted-wisdom-tooth' }
         ]}
@@ -146,11 +146,20 @@ export default function ImpactedWisdomToothPage({
             <a href="/wisdom-tooth-extraction" onClick={(e) => handleLinkClick(e, '/wisdom-tooth-extraction')} className="hover:underline flex items-center gap-1">
               General Wisdom Tooth Guide <ArrowRight className="w-3 h-3" />
             </a>
+            <a href="/wisdom-tooth-extraction-cost-ghaziabad" onClick={(e) => handleLinkClick(e, '/wisdom-tooth-extraction-cost-ghaziabad')} className="hover:underline flex items-center gap-1">
+              Wisdom Tooth Extraction Cost <ArrowRight className="w-3 h-3" />
+            </a>
             <a href="/tooth-extraction" onClick={(e) => handleLinkClick(e, '/tooth-extraction')} className="hover:underline flex items-center gap-1">
               Tooth Extraction Details <ArrowRight className="w-3 h-3" />
             </a>
+            <a href="/tooth-extraction-cost-ghaziabad" onClick={(e) => handleLinkClick(e, '/tooth-extraction-cost-ghaziabad')} className="hover:underline flex items-center gap-1">
+              Tooth Extraction Cost <ArrowRight className="w-3 h-3" />
+            </a>
             <a href="/dental-abscess-treatment" onClick={(e) => handleLinkClick(e, '/dental-abscess-treatment')} className="hover:underline flex items-center gap-1">
-              Infection & Abscess Care <ArrowRight className="w-3 h-3" />
+              Infection &amp; Abscess Care <ArrowRight className="w-3 h-3" />
+            </a>
+            <a href="/emergency-dentist-ghaziabad" onClick={(e) => handleLinkClick(e, '/emergency-dentist-ghaziabad')} className="hover:underline flex items-center gap-1">
+              Emergency Dentist in Ghaziabad <ArrowRight className="w-3 h-3" />
             </a>
           </div>
         </section>

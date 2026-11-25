@@ -34,7 +34,7 @@ export default function ToothExtractionPage({ handleCall, handleWhatsApp, naviga
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed">
       <Breadcrumbs
         items={[
-          { label: 'Dental Treatments', path: '/#services' },
+          { label: 'Dental Treatments', path: '/dental-services' },
           { label: 'Tooth Extraction', path: '/tooth-extraction' },
         ]}
         navigateToHome={navigateToHome}
@@ -121,8 +121,10 @@ export default function ToothExtractionPage({ handleCall, handleWhatsApp, naviga
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 text-sm">
             {[
               { label: 'Wisdom Tooth Extraction', path: '/wisdom-tooth-extraction' },
-              { label: 'Implant After Extraction', path: '/dental-implant-after-tooth-extraction' },
+              { label: 'Wisdom Tooth Extraction Cost', path: '/wisdom-tooth-extraction-cost-ghaziabad' },
+              { label: 'Impacted Wisdom Tooth', path: '/impacted-wisdom-tooth' },
               { label: 'Tooth Extraction Cost', path: '/tooth-extraction-cost-ghaziabad' },
+              { label: 'Implant After Extraction', path: '/dental-implant-after-tooth-extraction' },
               { label: 'Missing Teeth Options', path: '/missing-teeth' },
             ].map((l) => (
               <a

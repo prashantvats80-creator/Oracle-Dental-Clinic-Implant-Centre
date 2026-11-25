@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { InteractiveButton } from './InteractiveButton';
 import { Breadcrumbs } from './Breadcrumbs';
+import { RelatedGuidesSection } from './RelatedGuidesSection';
 
 interface DentalTreatmentCostPageProps {
   handleCall: () => void;
@@ -63,7 +64,7 @@ export default function DentalTreatmentCostPage({
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed selection:bg-blue-100 selection:text-blue-900">
       <Breadcrumbs
         items={[
-          { label: 'Dental Care in Ghaziabad', path: '/#services' },
+          { label: 'Dental Care in Ghaziabad', path: '/dental-services' },
           { label: 'Dental Treatment Cost in Ghaziabad', path: '/dental-treatment-cost-ghaziabad' }
         ]}
         navigateToHome={navigateToHome}
@@ -205,6 +206,74 @@ export default function DentalTreatmentCostPage({
             ))}
           </div>
         </section>
+        {/* All Individual Dental Cost Guides */}
+        <RelatedGuidesSection
+          title="Individual Dental Cost Guides in Ghaziabad"
+          subtitle="Review detailed procedure breakdowns and cost factors for every major dental treatment offered at Oracle Dental Clinic."
+          navigateToPath={navigateToPath}
+          links={[
+            {
+              path: '/dental-implant-cost-ghaziabad',
+              label: 'Dental Implant Cost in Ghaziabad',
+              description: 'Single implants, bone grafting, abutments, and crown material pricing factors.',
+              tag: 'Implants'
+            },
+            {
+              path: '/root-canal-cost-ghaziabad',
+              label: 'Root Canal Cost in Ghaziabad',
+              description: 'Front tooth, premolar, and multi-canal molar RCT pricing breakdown.',
+              tag: 'Endodontics'
+            },
+            {
+              path: '/tooth-cap-cost-ghaziabad',
+              label: 'Tooth Cap & Crown Cost',
+              description: 'Compare PFM, ceramic, and monolithic Zirconia crown costs.',
+              tag: 'Crowns'
+            },
+            {
+              path: '/teeth-cleaning-cost-ghaziabad',
+              label: 'Teeth Cleaning & Scaling Cost',
+              description: 'Routine ultrasonic scaling & polishing vs deep periodontal cleaning.',
+              tag: 'Hygiene'
+            },
+            {
+              path: '/teeth-whitening-cost-ghaziabad',
+              label: 'Teeth Whitening Cost in Ghaziabad',
+              description: 'In-office clinical bleaching vs custom supervised home whitening trays.',
+              tag: 'Cosmetic'
+            },
+            {
+              path: '/tooth-filling-cost-ghaziabad',
+              label: 'Tooth Filling Cost in Ghaziabad',
+              description: 'Composite tooth-colored fillings based on cavity size and depth.',
+              tag: 'Restorative'
+            },
+            {
+              path: '/tooth-extraction-cost-ghaziabad',
+              label: 'Tooth Extraction Cost in Ghaziabad',
+              description: 'Simple routine extractions vs surgical sectioning and suturing.',
+              tag: 'Oral Surgery'
+            },
+            {
+              path: '/wisdom-tooth-extraction-cost-ghaziabad',
+              label: 'Wisdom Tooth Extraction Cost',
+              description: 'Erupted vs impacted third molar surgical extraction fee factors.',
+              tag: 'Oral Surgery'
+            },
+            {
+              path: '/dental-bridge-cost-ghaziabad',
+              label: 'Dental Bridge Cost in Ghaziabad',
+              description: 'Fixed 3-unit PFM and Zirconia bridge pricing for missing teeth.',
+              tag: 'Prosthetics'
+            },
+            {
+              path: '/dentures-cost-ghaziabad',
+              label: 'Dentures Cost in Ghaziabad',
+              description: 'Complete acrylic, flexible, cast-partial, and implant-supported dentures.',
+              tag: 'Prosthetics'
+            }
+          ]}
+        />
       </main>
     </div>
   );

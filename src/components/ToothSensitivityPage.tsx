@@ -17,6 +17,7 @@ import {
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
+import { RelatedGuidesSection } from './RelatedGuidesSection';
 
 interface ToothSensitivityPageProps {
   handleCall: () => void;
@@ -41,10 +42,11 @@ export default function ToothSensitivityPage({
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed">
       <Breadcrumbs
         items={[
-          { label: 'Dental Symptoms', path: '/#symptoms' },
-          { label: 'Sensitive Teeth Treatment', path: '/sensitive-teeth-treatment' }
+          { label: 'Dental Services', path: '/dental-services' },
+          { label: 'Tooth Sensitivity Relief', path: '/tooth-sensitivity' }
         ]}
         navigateToHome={navigateToHome}
+        navigateToPath={navigateToPath}
         badge="Hypersensitivity Relief"
       />
 
@@ -89,7 +91,7 @@ export default function ToothSensitivityPage({
           </div>
 
           <div className="lg:col-span-5 bg-slate-900/90 border border-slate-800 p-6 rounded-3xl space-y-4">
-            <h3 className="text-white font-bold text-lg">What Causes Sensitivity?</h3>
+            <h2 className="text-white font-bold text-lg">What Causes Sensitivity?</h2>
             <TreatmentImage
               src="/assets/images/treatments/bright-smile-800.webp"
               alt="Educational diagram showing exposed dentin tubules, gum recession and hot cold tooth sensitivity triggers"
@@ -120,15 +122,15 @@ export default function ToothSensitivityPage({
             </div>
             <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-2">
               <h3 className="font-bold text-slate-900">Dental Cavities</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">Tooth-colored composite restoration to seal cavities and protect underlying nerve (<button onClick={() => navigateToPath('/dental-fillings')} className="text-blue-600 underline">Dental Fillings</button>).</p>
+              <p className="text-xs text-slate-600 leading-relaxed">Tooth-colored composite restoration to seal cavities and protect underlying nerve (<a href="/dental-fillings" onClick={(e) => { e.preventDefault(); navigateToPath('/dental-fillings'); }} className="text-blue-600 underline">Dental Fillings</a>).</p>
             </div>
             <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-2">
               <h3 className="font-bold text-slate-900">Gum Recession & Root Exposure</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">Periodontal care and gentle scaling to calm gum inflammation (<button onClick={() => navigateToPath('/teeth-cleaning')} className="text-blue-600 underline">Teeth Cleaning</button>).</p>
+              <p className="text-xs text-slate-600 leading-relaxed">Periodontal care and gentle scaling to calm gum inflammation (<a href="/teeth-cleaning" onClick={(e) => { e.preventDefault(); navigateToPath('/teeth-cleaning'); }} className="text-blue-600 underline">Teeth Cleaning</a>).</p>
             </div>
             <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-2">
               <h3 className="font-bold text-slate-900">Deep Nerve Involvement</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">If sensitivity turns into persistent lingering pain, root canal therapy may be needed (<button onClick={() => navigateToPath('/root-canal-treatment')} className="text-blue-600 underline">Root Canal</button>).</p>
+              <p className="text-xs text-slate-600 leading-relaxed">If sensitivity turns into persistent lingering pain, root canal therapy may be needed (<a href="/root-canal-treatment" onClick={(e) => { e.preventDefault(); navigateToPath('/root-canal-treatment'); }} className="text-blue-600 underline">Root Canal</a>).</p>
             </div>
           </div>
         </div>
@@ -156,10 +158,25 @@ export default function ToothSensitivityPage({
         </div>
       </section>
 
+      <div className="max-w-5xl mx-auto px-4 pb-12">
+        <RelatedGuidesSection
+          title="Related Sensitivity, Gum & Restorative Guides"
+          navigateToPath={navigateToPath}
+          links={[
+            { path: '/cavity-treatment', label: 'Cavity Treatment', description: 'Treat enamel decay that triggers sweet and cold sensitivity.', tag: 'Symptom' },
+            { path: '/teeth-cleaning', label: 'Teeth Cleaning & Scaling', description: 'Gentle ultrasonic scaling to calm gum recession and inflammation.', tag: 'Treatment' },
+            { path: '/periodontal-gum-treatment-ghaziabad', label: 'Gum & Periodontal Treatment', description: 'Specialized care for receding gums and exposed roots.', tag: 'Treatment' },
+            { path: '/root-canal-treatment', label: 'Root Canal Treatment (RCT)', description: 'Relieve lingering hot/cold pain caused by nerve inflammation.', tag: 'Treatment' },
+            { path: '/tooth-pain-treatment', label: 'Tooth Pain Treatment', description: 'Diagnostic care when sensitivity progresses to persistent toothache.', tag: 'Symptom' },
+            { path: '/dental-fillings', label: 'Dental Fillings', description: 'Protect exposed dentin with tooth-colored composite restorations.', tag: 'Treatment' },
+          ]}
+        />
+      </div>
+
       {/* FOOTER CTA */}
       <section className="bg-slate-950 text-white py-10 px-4 border-t border-slate-800 text-center">
         <div className="max-w-4xl mx-auto space-y-4">
-          <h3 className="text-xl font-bold">Schedule Your Sensitivity Examination</h3>
+          <h2 className="text-xl font-bold">Schedule Your Sensitivity Examination</h2>
           <p className="text-xs text-slate-400">Jaat Chowk, Chipiyana Buzurg, Ghaziabad. Consultation fee ₹200.</p>
           <div className="flex justify-center gap-3">
             <InteractiveButton id="ts-f-call" onClick={handleCall} className="bg-amber-500 text-slate-950 font-black py-3 px-6 rounded-xl text-sm">Call +91 7011961515</InteractiveButton>

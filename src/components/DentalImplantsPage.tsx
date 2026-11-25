@@ -26,6 +26,7 @@ import {
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
+import { RelatedGuidesSection } from './RelatedGuidesSection';
 import { GBP_CONFIG } from '../config/googleBusinessProfile';
 
 interface DentalImplantsPageProps {
@@ -193,7 +194,7 @@ export default function DentalImplantsPage({
       {/* Semantic Breadcrumb Navigation */}
       <Breadcrumbs
         items={[
-          { label: 'Dental Treatments', path: '/#services' },
+          { label: 'Dental Treatments', path: '/dental-services' },
           { label: 'Dental Implants', path: '/dental-implants' }
         ]}
         navigateToHome={navigateToHome}
@@ -267,7 +268,7 @@ export default function DentalImplantsPage({
                   O
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-white">Oracle Dental Clinic</h3>
+                  <h2 className="text-lg font-bold text-white">Oracle Dental Clinic</h2>
                   <p className="text-xs text-amber-400 font-medium">Dental Implant Center</p>
                 </div>
               </div>
@@ -970,11 +971,78 @@ export default function DentalImplantsPage({
         </div>
       </section>
 
+      {/* Related Dental Implant & Tooth Replacement Cluster */}
+      <div className="bg-slate-50 border-t border-slate-200 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <RelatedGuidesSection
+            title="Related Dental Implant &amp; Tooth Replacement Guides"
+            subtitle="Compare dental implant pricing, full-arch fixed restorations, immediate post-extraction implants, bridges, dentures, and zirconia crowns in Ghaziabad."
+            navigateToPath={navigateToPath}
+            links={[
+              {
+                path: '/dental-implant-cost-ghaziabad',
+                label: 'Dental Implant Cost in Ghaziabad',
+                description: 'Detailed fee factors for single implants, abutments, bone grafts, and zirconia crowns.',
+                tag: 'Cost Guide'
+              },
+              {
+                path: '/full-mouth-dental-implants',
+                label: 'Full Mouth Dental Implants',
+                description: 'All-on-4, All-on-6, and complete fixed arch rehabilitation for multiple missing teeth.',
+                tag: 'Implant Cluster'
+              },
+              {
+                path: '/dental-implant-after-tooth-extraction',
+                label: 'Dental Implant After Tooth Extraction',
+                description: 'Immediate socket placement vs delayed implant timelines after removing a tooth.',
+                tag: 'Implant Cluster'
+              },
+              {
+                path: '/missing-teeth',
+                label: 'Missing Teeth Replacement Options',
+                description: 'Compare fixed implants, dental bridges, and removable dentures for single or multiple gaps.',
+                tag: 'Symptom Guide'
+              },
+              {
+                path: '/dental-bridges',
+                label: 'Dental Bridges in Ghaziabad',
+                description: 'Fixed ceramic and zirconia bridge options when neighboring teeth support the restoration.',
+                tag: 'Replacement'
+              },
+              {
+                path: '/dental-bridge-cost-ghaziabad',
+                label: 'Dental Bridge Cost in Ghaziabad',
+                description: '3-unit PFM and Zirconia dental bridge cost breakdown and clinic consultation guide.',
+                tag: 'Cost Guide'
+              },
+              {
+                path: '/dentures',
+                label: 'Complete & Partial Dentures',
+                description: 'Removable and implant-supported denture options for comfortable chewing.',
+                tag: 'Replacement'
+              },
+              {
+                path: '/dentures-cost-ghaziabad',
+                label: 'Dentures Cost in Ghaziabad',
+                description: 'Acrylic, flexible, cast-partial, and implant-retained overdenture pricing factors.',
+                tag: 'Cost Guide'
+              },
+              {
+                path: '/zirconia-crowns',
+                label: 'Zirconia Dental Crowns',
+                description: 'Metal-free, high-strength aesthetic crowns fitted over implants and natural teeth.',
+                tag: 'Crown Care'
+              }
+            ]}
+          />
+        </div>
+      </div>
+
       {/* Internal Links & CTA Footer */}
       <section className="py-12 bg-white border-t border-slate-200 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 bg-gradient-to-r from-blue-900 to-indigo-900 text-white p-8 rounded-3xl shadow-xl">
           <div className="space-y-2 text-center md:text-left">
-            <h3 className="text-xl sm:text-2xl font-bold">Considering Dental Implants in Ghaziabad?</h3>
+            <h2 className="text-xl sm:text-2xl font-bold">Considering Dental Implants in Ghaziabad?</h2>
             <p className="text-slate-300 text-sm">Schedule an examination at Oracle Dental Clinic with Dr. Prashant Kumar Vats, BDS.</p>
           </div>
 
@@ -987,47 +1055,53 @@ export default function DentalImplantsPage({
               Call +91 7011961515
             </InteractiveButton>
 
-            <button
-              onClick={() => navigateToPath('/full-mouth-dental-implants')}
+            <a
+              href="/full-mouth-dental-implants"
+              onClick={(e) => { e.preventDefault(); navigateToPath('/full-mouth-dental-implants'); }}
               className="bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-6 rounded-xl border border-white/20 text-sm transition-colors"
             >
               Full Mouth Dental Implants
-            </button>
+            </a>
 
-            <button
-              onClick={() => navigateToPath('/missing-teeth')}
+            <a
+              href="/missing-teeth"
+              onClick={(e) => { e.preventDefault(); navigateToPath('/missing-teeth'); }}
               className="bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-6 rounded-xl border border-white/20 text-sm transition-colors"
             >
               Missing Teeth Replacement
-            </button>
+            </a>
 
-            <button
-              onClick={() => navigateToPath('/zirconia-crowns')}
+            <a
+              href="/zirconia-crowns"
+              onClick={(e) => { e.preventDefault(); navigateToPath('/zirconia-crowns'); }}
               className="bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-6 rounded-xl border border-white/20 text-sm transition-colors"
             >
               Zirconia Crowns
-            </button>
+            </a>
 
-            <button
-              onClick={() => navigateToPath('/root-canal-treatment')}
+            <a
+              href="/root-canal-treatment"
+              onClick={(e) => { e.preventDefault(); navigateToPath('/root-canal-treatment'); }}
               className="bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-6 rounded-xl border border-white/20 text-sm transition-colors"
             >
               Root Canal Treatment
-            </button>
+            </a>
 
-            <button
-              onClick={() => navigateToPath('/dentist-chipiyana-buzurg-ghaziabad')}
+            <a
+              href="/dentist-chipiyana-buzurg-ghaziabad"
+              onClick={(e) => { e.preventDefault(); navigateToPath('/dentist-chipiyana-buzurg-ghaziabad'); }}
               className="bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-6 rounded-xl border border-white/20 text-sm transition-colors"
             >
               Chipiyana Clinic Page
-            </button>
+            </a>
 
-            <button
-              onClick={navigateToHome}
+            <a
+              href="/"
+              onClick={(e) => { e.preventDefault(); navigateToHome(); }}
               className="bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-6 rounded-xl border border-white/20 text-sm transition-colors"
             >
               Back to Main Website
-            </button>
+            </a>
           </div>
         </div>
       </section>

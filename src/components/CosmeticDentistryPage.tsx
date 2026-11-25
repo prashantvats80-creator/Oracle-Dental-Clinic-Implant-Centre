@@ -43,7 +43,7 @@ export default function CosmeticDentistryPage({
     <div className="bg-slate-50 min-h-screen text-slate-800 leading-relaxed">
       <Breadcrumbs
         items={[
-          { label: 'Dental Treatments', path: '/#services' },
+          { label: 'Dental Treatments', path: '/dental-services' },
           { label: 'Cosmetic Dentistry', path: '/cosmetic-dentistry' },
         ]}
         navigateToHome={navigateToHome}
@@ -119,6 +119,11 @@ export default function CosmeticDentistryPage({
                 title: 'Professional Teeth Whitening',
                 desc: 'Clinically controlled bleaching protocols to lighten extrinsic and age-related tooth stains safely.',
                 path: '/teeth-whitening',
+              },
+              {
+                title: 'Teeth Whitening Cost in Ghaziabad',
+                desc: 'Transparent fee breakdown comparing in-clinic chairside whitening and home tray kits.',
+                path: '/teeth-whitening-cost-ghaziabad',
               },
               {
                 title: 'Front Teeth Gap Closure & Composite Bonding',

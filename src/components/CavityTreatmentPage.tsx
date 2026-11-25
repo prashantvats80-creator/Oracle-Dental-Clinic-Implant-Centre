@@ -14,6 +14,7 @@ import {
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
+import { RelatedGuidesSection } from './RelatedGuidesSection';
 
 interface CavityTreatmentPageProps {
   handleCall: () => void;
@@ -38,7 +39,7 @@ export default function CavityTreatmentPage({
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed">
       <Breadcrumbs
         items={[
-          { label: 'Dental Treatments', path: '/#services' },
+          { label: 'Dental Services', path: '/dental-services' },
           { label: 'Cavity Treatment', path: '/cavity-treatment' }
         ]}
         navigateToHome={navigateToHome}
@@ -86,7 +87,7 @@ export default function CavityTreatmentPage({
           </div>
 
           <div className="lg:col-span-5 bg-slate-900/90 border border-slate-800 p-6 rounded-3xl space-y-4">
-            <h3 className="text-white font-bold text-lg">Cavity Progression Stages</h3>
+            <h2 className="text-white font-bold text-lg">Cavity Progression Stages</h2>
             <TreatmentImage
               src="/assets/images/treatments/dental-chair-800.webp"
               alt="Educational diagram showing progression of tooth decay from enamel into dentin and pulp"
@@ -94,9 +95,9 @@ export default function CavityTreatmentPage({
               aspectRatio="4/3"
             />
             <ul className="space-y-2 text-xs text-slate-300">
-              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-blue-400" /> Enamel Demineralization: White/dark spot on tooth surface</li>
+              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-blue-400" /> Enamel Demineralization: White or dark spot (<a href="/black-tooth" onClick={(e) => { e.preventDefault(); navigateToPath('/black-tooth'); }} className="text-amber-400 underline">Black Tooth Care</a>)</li>
               <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-blue-400" /> Dentin Cavitation: Sensitivity to sweets and cold water</li>
-              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-blue-400" /> Pulp Involvement: Constant throbbing ache (<button onClick={() => navigateToPath('/root-canal-treatment')} className="text-amber-400 underline">Root Canal</button>)</li>
+              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-blue-400" /> Pulp Involvement: Constant throbbing ache (<a href="/root-canal-treatment" onClick={(e) => { e.preventDefault(); navigateToPath('/root-canal-treatment'); }} className="text-amber-400 underline">Root Canal</a>)</li>
             </ul>
           </div>
         </div>
@@ -108,11 +109,11 @@ export default function CavityTreatmentPage({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200">
               <h3 className="font-bold text-slate-900 text-sm">Dental Fillings</h3>
-              <p className="text-xs text-slate-600 mt-1">Cleans away decayed tooth structure and seals cavity with aesthetic composite resin (<button onClick={() => navigateToPath('/dental-fillings')} className="text-blue-600 underline">Dental Fillings</button>).</p>
+              <p className="text-xs text-slate-600 mt-1">Cleans away decayed tooth structure and seals cavity with aesthetic composite resin (<a href="/dental-fillings" onClick={(e) => { e.preventDefault(); navigateToPath('/dental-fillings'); }} className="text-blue-600 underline">Dental Fillings</a>).</p>
             </div>
             <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200">
               <h3 className="font-bold text-slate-900 text-sm">Dental Crown / Tooth Cap</h3>
-              <p className="text-xs text-slate-600 mt-1">Full coverage cap when a large cavity weakens the remaining tooth cusps (<button onClick={() => navigateToPath('/tooth-cap')} className="text-blue-600 underline">Tooth Cap</button>).</p>
+              <p className="text-xs text-slate-600 mt-1">Full coverage cap when a large cavity weakens the remaining tooth cusps (<a href="/tooth-cap" onClick={(e) => { e.preventDefault(); navigateToPath('/tooth-cap'); }} className="text-blue-600 underline">Tooth Cap</a>).</p>
             </div>
           </div>
         </div>
@@ -139,9 +140,24 @@ export default function CavityTreatmentPage({
         </div>
       </section>
 
+      <div className="max-w-5xl mx-auto px-4 pb-12">
+        <RelatedGuidesSection
+          title="Related Decay, Pain & Root Canal Guides"
+          navigateToPath={navigateToPath}
+          links={[
+            { path: '/black-tooth', label: 'Black / Dark Tooth Care', description: 'Evaluate dark enamel spots, deep caries, or discolored teeth early.', tag: 'Symptom' },
+            { path: '/dental-fillings', label: 'Tooth-Colored Dental Fillings', description: 'Composite and GIC restorations to seal cavities conservatively.', tag: 'Treatment' },
+            { path: '/tooth-filling-cost-ghaziabad', label: 'Tooth Filling Cost in Ghaziabad', description: 'Factors influencing composite and GIC dental filling pricing.', tag: 'Cost Guide' },
+            { path: '/root-canal-treatment', label: 'Root Canal Treatment (RCT)', description: 'Painless endodontic care when decay reaches the inner nerve.', tag: 'Treatment' },
+            { path: '/root-canal-cost-ghaziabad', label: 'Root Canal Cost in Ghaziabad', description: 'Understand molar vs. front tooth RCT pricing and crown options.', tag: 'Cost Guide' },
+            { path: '/tooth-pain-treatment', label: 'Tooth Pain Treatment', description: 'Clinical diagnosis and relief for throbbing cavity or nerve pain.', tag: 'Symptom' },
+          ]}
+        />
+      </div>
+
       <section className="bg-slate-950 text-white py-10 px-4 border-t border-slate-800 text-center">
         <div className="max-w-4xl mx-auto space-y-4">
-          <h3 className="text-xl font-bold">Schedule Your Cavity Checkup</h3>
+          <h2 className="text-xl font-bold">Schedule Your Cavity Checkup</h2>
           <p className="text-xs text-slate-400">Jaat Chowk, Chipiyana Buzurg, Ghaziabad. Consultation fee ₹200.</p>
           <div className="flex justify-center gap-3">
             <InteractiveButton id="cav-f-call" onClick={handleCall} className="bg-amber-500 text-slate-950 font-black py-3 px-6 rounded-xl text-sm">Call +91 7011961515</InteractiveButton>

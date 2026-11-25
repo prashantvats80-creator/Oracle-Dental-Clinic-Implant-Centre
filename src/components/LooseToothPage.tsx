@@ -3,6 +3,7 @@ import { PhoneCall, MessageCircle } from 'lucide-react';
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
+import { RelatedGuidesSection } from './RelatedGuidesSection';
 
 interface Props { handleCall: () => void; handleWhatsApp: () => void; handleDirections: () => void; navigateToHome: () => void; navigateToPath: (p: string) => void; }
 
@@ -13,7 +14,7 @@ export default function LooseToothPage({ handleCall, handleWhatsApp, navigateToH
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed">
       <Breadcrumbs
         items={[
-          { label: 'Dental Symptoms', path: '/#symptoms' },
+          { label: 'Dental Services', path: '/dental-services' },
           { label: 'Loose Tooth Care', path: '/loose-tooth-treatment' }
         ]}
         navigateToHome={navigateToHome}
@@ -36,7 +37,9 @@ export default function LooseToothPage({ handleCall, handleWhatsApp, navigateToH
         <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-2xs space-y-6">
           <h2 className="text-2xl font-extrabold text-slate-900">Periodontal Support & Tooth Stabilization</h2>
           <p className="text-slate-600 text-sm leading-relaxed">
-            Tooth mobility is often caused by advanced periodontitis bone loss or dental trauma. Treatment involves deep <button onClick={() => navigateToPath('/periodontal-gum-treatment-ghaziabad')} className="text-blue-600 underline font-bold">Scaling &amp; Root Planing</button> or composite splinting. If non-restorable, fixed <button onClick={() => navigateToPath('/dental-implants')} className="text-blue-600 underline font-bold">Dental Implants</button> restore full function.
+            Tooth mobility is often caused by advanced periodontitis bone loss or dental trauma. Treatment involves deep{' '}
+            <a href="/periodontal-gum-treatment-ghaziabad" onClick={(e) => { e.preventDefault(); navigateToPath('/periodontal-gum-treatment-ghaziabad'); }} className="text-blue-600 underline font-bold">Scaling &amp; Root Planing</a> or composite splinting. If non-restorable, fixed{' '}
+            <a href="/dental-implants" onClick={(e) => { e.preventDefault(); navigateToPath('/dental-implants'); }} className="text-blue-600 underline font-bold">Dental Implants</a> restore full function.
           </p>
 
           <TreatmentImage
@@ -46,6 +49,19 @@ export default function LooseToothPage({ handleCall, handleWhatsApp, navigateToH
             aspectRatio="16/9"
           />
         </div>
+
+        <RelatedGuidesSection
+          title="Related Gum Care & Tooth Replacement Guides"
+          navigateToPath={navigateToPath}
+          links={[
+            { path: '/periodontal-gum-treatment-ghaziabad', label: 'Periodontal & Gum Treatment', description: 'Treat gum pockets, bleeding gums, and periodontal bone loss.', tag: 'Treatment' },
+            { path: '/teeth-cleaning', label: 'Teeth Cleaning & Scaling', description: 'Ultrasonic tartar removal to halt gum inflammation early.', tag: 'Treatment' },
+            { path: '/missing-teeth', label: 'Missing Teeth Replacement Options', description: 'Compare implants, bridges, and dentures if a tooth cannot be saved.', tag: 'Symptom' },
+            { path: '/dental-implants', label: 'Dental Implants in Ghaziabad', description: 'Stable titanium replacements for non-restorable loose teeth.', tag: 'Treatment' },
+            { path: '/dental-implant-cost-ghaziabad', label: 'Dental Implant Cost in Ghaziabad', description: 'Pricing breakdown for implant fixtures, abutments, and crowns.', tag: 'Cost Guide' },
+            { path: '/emergency-dentist-ghaziabad', label: 'Emergency Dentist in Ghaziabad', description: 'Same-day dental evaluation for trauma-related tooth mobility.', tag: 'Urgent Care' },
+          ]}
+        />
       </section>
     </div>
   );

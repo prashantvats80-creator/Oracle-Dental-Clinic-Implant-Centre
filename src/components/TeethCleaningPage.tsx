@@ -31,6 +31,7 @@ import {
 import { InteractiveButton } from './InteractiveButton';
 import { TreatmentImage } from './TreatmentImage';
 import { Breadcrumbs } from './Breadcrumbs';
+import { RelatedGuidesSection } from './RelatedGuidesSection';
 
 interface TeethCleaningPageProps {
   handleCall: () => void;
@@ -57,7 +58,7 @@ export default function TeethCleaningPage({
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed">
       <Breadcrumbs
         items={[
-          { label: 'Dental Treatments', path: '/#services' },
+          { label: 'Dental Treatments', path: '/dental-services' },
           { label: 'Teeth Cleaning & Scaling', path: '/teeth-cleaning' }
         ]}
         navigateToHome={navigateToHome}
@@ -136,7 +137,7 @@ export default function TeethCleaningPage({
                     <Droplets className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="text-white font-bold text-lg">Book Oral Hygiene Care</h3>
+                    <h2 className="text-white font-bold text-lg">Book Oral Hygiene Care</h2>
                     <p className="text-slate-400 text-xs">Oracle Dental Clinic, Chipiyana Buzurg</p>
                   </div>
                 </div>
@@ -401,13 +402,13 @@ export default function TeethCleaningPage({
               <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
                 Teeth Cleaning vs. Teeth Whitening
               </h2>
-              <InteractiveButton 
-                id="link-to-whitening"
-                onClick={() => navigateToPath('/teeth-whitening')}
+              <a
+                href="/teeth-whitening"
+                onClick={(e) => { e.preventDefault(); navigateToPath('/teeth-whitening'); }}
                 className="text-xs font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1 underline"
               >
                 Learn about Teeth Whitening <ArrowRight className="w-3.5 h-3.5" />
-              </InteractiveButton>
+              </a>
             </div>
             <p className="text-slate-600 text-sm">
               Patients often confuse dental cleaning with cosmetic whitening. Here is how they differ fundamentally:
@@ -685,7 +686,7 @@ export default function TeethCleaningPage({
                 <span className="text-amber-400 font-bold text-xs uppercase tracking-wider block mb-1">Transparent Pricing</span>
                 <h3 className="font-extrabold text-xl text-white">Consultation Fee: ₹200</h3>
                 <p className="text-xs text-slate-300 mt-2 leading-relaxed">
-                  During your initial dental examination, Dr. Prashant Vats BDS will assess your teeth and gum health and provide an exact, transparent estimate before starting treatment. For a full breakdown, explore our <button onClick={() => navigateToPath && navigateToPath('/teeth-cleaning-cost-ghaziabad')} className="text-amber-300 underline font-bold">Teeth Cleaning Cost in Ghaziabad Guide</button>.
+                  During your initial dental examination, Dr. Prashant Vats BDS will assess your teeth and gum health and provide an exact, transparent estimate before starting treatment. For a full breakdown, explore our <a href="/teeth-cleaning-cost-ghaziabad" onClick={(e) => { e.preventDefault(); navigateToPath('/teeth-cleaning-cost-ghaziabad'); }} className="text-amber-300 underline font-bold">Teeth Cleaning Cost in Ghaziabad Guide</a>.
                 </p>
               </div>
               <InteractiveButton 
@@ -819,11 +820,60 @@ export default function TeethCleaningPage({
         </div>
       </section>
 
+      {/* Related Cleaning & Gum Care Cluster */}
+      <div className="bg-slate-50 border-t border-slate-200 py-12 px-4">
+        <div className="max-w-5xl mx-auto">
+          <RelatedGuidesSection
+            title="Related Oral Hygiene, Gum Care &amp; Whitening Guides"
+            subtitle="Explore scaling costs, periodontal gum treatment, bad breath evaluation, and cosmetic whitening options in Ghaziabad."
+            navigateToPath={navigateToPath}
+            links={[
+              {
+                path: '/teeth-cleaning-cost-ghaziabad',
+                label: 'Teeth Cleaning Cost in Ghaziabad',
+                description: 'Detailed guide to ultrasonic scaling, polishing, and deep periodontal cleaning fees.',
+                tag: 'Cost Guide'
+              },
+              {
+                path: '/periodontal-gum-treatment-ghaziabad',
+                label: 'Periodontal & Gum Treatment',
+                description: 'Clinical care for bleeding gums, gingivitis, gum pockets, and bone support.',
+                tag: 'Gum Health'
+              },
+              {
+                path: '/bad-breath-treatment',
+                label: 'Bad Breath (Halitosis) Treatment',
+                description: 'Identify plaque, tartar, gum pockets, and decay behind persistent mouth odor.',
+                tag: 'Symptom Guide'
+              },
+              {
+                path: '/teeth-whitening',
+                label: 'Professional Teeth Whitening',
+                description: 'Brighten intrinsic enamel shade after removing surface tartar with scaling.',
+                tag: 'Cosmetic Care'
+              },
+              {
+                path: '/tooth-sensitivity',
+                label: 'Tooth Sensitivity Treatment',
+                description: 'Understand gum recession, exposed dentin, and sensitivity management.',
+                tag: 'Symptom Guide'
+              },
+              {
+                path: '/dental-treatment-cost-ghaziabad',
+                label: 'All Dental Treatment Costs',
+                description: 'Complete Ghaziabad dental pricing overview and ₹200 consultation details.',
+                tag: 'Cost Hub'
+              }
+            ]}
+          />
+        </div>
+      </div>
+
       {/* FOOTER CTA BAR */}
       <section className="bg-slate-950 text-white py-12 px-4 border-t border-slate-800">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
           <div>
-            <h3 className="text-xl font-bold text-white">Schedule Your Dental Cleaning Examination</h3>
+            <h2 className="text-xl font-bold text-white">Schedule Your Dental Cleaning Examination</h2>
             <p className="text-xs text-slate-400 mt-1">Visit Oracle Dental Clinic at Jaat Chowk, Chipiyana Buzurg, Ghaziabad.</p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
