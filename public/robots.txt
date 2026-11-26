@@ -1,32 +1,70 @@
-# Oracle Dental Clinic & Implant Center — Search & AI Crawler Access Policy
+# Oracle Dental Clinic & Implant Center
+# Complete Search Engine, AI and Common Crawler Access Policy
+# Website: https://oracledentals.netlify.app/
 
-User-agent: OAI-SearchBot
-Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
+# GOOGLE SEARCH
 User-agent: Googlebot
 Allow: /
 
+# GOOGLE AI PRODUCTS
+User-agent: Google-Extended
+Allow: /
+
+# MICROSOFT BING SEARCH
 User-agent: Bingbot
 Allow: /
 
-User-agent: Applebot
+# OPENAI CHATGPT SEARCH
+User-agent: OAI-SearchBot
 Allow: /
 
-User-agent: DuckDuckBot
-Allow: /
-
-# Optional AI training/foundation crawler (kept separate from OAI-SearchBot search crawler):
+# OPENAI GPT AI TRAINING
 User-agent: GPTBot
 Allow: /
 
-# Default policy for all standard web & search crawlers:
+# ANTHROPIC CLAUDE SEARCH
+User-agent: Claude-SearchBot
+Allow: /
+
+# ANTHROPIC CLAUDE CRAWLER
+User-agent: ClaudeBot
+Allow: /
+
+# PERPLEXITY AI
+User-agent: PerplexityBot
+Allow: /
+
+# COMMON CRAWL
+User-agent: CCBot
+Allow: /
+
+# APPLE SEARCH
+User-agent: Applebot
+Allow: /
+
+# DUCKDUCKGO
+User-agent: DuckDuckBot
+Allow: /
+
+# YANDEX
+User-agent: YandexBot
+Allow: /
+
+# NAVER
+User-agent: Yeti
+Allow: /
+
+# BAIDU
+User-agent: Baiduspider
+Allow: /
+
+# INTERNET ARCHIVE
+User-agent: ia_archiver
+Allow: /
+
+# ALL OTHER STANDARD AND UNLISTED CRAWLERS
 User-agent: *
 Allow: /
 
+# XML SITEMAP
 Sitemap: https://oracledentals.netlify.app/sitemap.xml
