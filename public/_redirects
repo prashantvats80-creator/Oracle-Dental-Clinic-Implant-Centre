@@ -21,9 +21,11 @@
 /emergency-dentist /emergency-dentist-ghaziabad 301!
 /emergency-dentist/ /emergency-dentist-ghaziabad 301!
 
-# Clean Route Rewrites for 46 Active Canonical Routes (Serves dedicated pre-rendered HTML with HTTP 200)
+# Clean Route Rewrites for 47 Active Non-Homepage Canonical Routes (Serves dedicated pre-rendered HTML with HTTP 200)
 /dental-services /dental-services.html 200
 /dental-services/ /dental-services.html 200
+/dental-faqs /dental-faqs.html 200
+/dental-faqs/ /dental-faqs.html 200
 /dentist-chipiyana-buzurg-ghaziabad /dentist-chipiyana-buzurg-ghaziabad.html 200
 /dentist-chipiyana-buzurg-ghaziabad/ /dentist-chipiyana-buzurg-ghaziabad.html 200
 /dental-implants /dental-implants.html 200

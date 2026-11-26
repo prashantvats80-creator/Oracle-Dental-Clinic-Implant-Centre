@@ -49,6 +49,7 @@ const Footer = lazy(() => import('./components/Footer'));
 const NotFoundPage = lazy(() => import('./components/NotFoundPage'));
 
 const DentalServicesPage = lazy(() => import('./components/DentalServicesPage'));
+const DentalFaqsPage = lazy(() => import('./components/DentalFaqsPage'));
 const ChipiyanaLandingPage = lazy(() => import('./components/ChipiyanaLandingPage'));
 const RootCanalPage = lazy(() => import('./components/RootCanalPage'));
 const DentalImplantsPage = lazy(() => import('./components/DentalImplantsPage'));
@@ -108,8 +109,9 @@ const CONSOLIDATED_REDIRECTS: Record<string, string> = {
 };
 
 const ALL_DENTAL_PAGES = [
-  // Key Treatments, Cosmetic & Locations (26)
+  // Key Treatments, Cosmetic, Knowledge Hub & Locations (27)
   { title: 'All Dental Services (9 Categories)', path: '/dental-services', category: 'Treatment', keywords: 'all services treatments greater noida noida extension ghaziabad implants cosmetic emax fluoride sealants' },
+  { title: 'Dental FAQs & Patient Education Hub (130+ Q&As)', path: '/dental-faqs', category: 'Treatment', keywords: 'dental faqs questions answers knowledge hub implant cost india delhi ncr ghaziabad noida greater noida rct crowns veneers aligners safety recovery' },
   { title: 'Dental Implants', path: '/dental-implants', category: 'Treatment', keywords: 'teeth replacement fixture tooth implant' },
   { title: 'Full Mouth Dental Implants', path: '/full-mouth-dental-implants', category: 'Treatment', keywords: 'all on 4 all on 6 full arch implant rehabilitation' },
   { title: 'Root Canal Treatment (RCT)', path: '/root-canal-treatment', category: 'Treatment', keywords: 'rct tooth nerve pain infection re-rct endodontics' },
@@ -166,6 +168,7 @@ const KNOWN_ROUTES = [...ALL_DENTAL_PAGES.map((p) => p.path), '/privacy-policy']
 const PAGES_WITH_BUILT_IN_CTA = new Set([
   '/',
   '/dental-services',
+  '/dental-faqs',
   '/full-mouth-dental-implants',
   '/cosmetic-dentistry',
   '/dental-veneers',
@@ -476,6 +479,8 @@ function AppContent() {
     switch (activeRoute) {
       case '/dental-services':
         return <DentalServicesPage {...sharedPageProps} />;
+      case '/dental-faqs':
+        return <DentalFaqsPage {...sharedPageProps} />;
       case '/wisdom-tooth-extraction':
         return <WisdomToothPage {...sharedPageProps} />;
       case '/tooth-pain-treatment':
@@ -661,6 +666,22 @@ function AppContent() {
                 }`}
               >
                 Dental Services
+              </a>
+
+              <a
+                href="/dental-faqs"
+                onMouseEnter={() => preloadRoute('/dental-faqs')}
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigateToPath('/dental-faqs');
+                }}
+                className={`font-semibold transition-colors py-2 px-3 rounded-xl text-xs whitespace-nowrap shrink-0 border ${
+                  activeRoute === '/dental-faqs'
+                    ? 'bg-[#B84D00] text-white border-[#B84D00]'
+                    : 'bg-[#FFF8EC] text-[#087B57] hover:bg-[#087B57] hover:text-white border-[#087B57]/20'
+                }`}
+              >
+                Dental FAQs Hub
               </a>
 
               {/* Treatments & Pages Mega Dropdown */}
@@ -917,6 +938,19 @@ function AppContent() {
               >
                 <span>Dental Treatments &amp; Services (9 Categories)</span>
                 <span className="text-xs font-semibold text-[#FFD36A]">Open</span>
+              </a>
+
+              <a
+                href="/dental-faqs"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsMenuOpen(false);
+                  navigateToPath('/dental-faqs');
+                }}
+                className="min-h-[44px] px-4 py-3 text-sm font-bold text-[#087B57] bg-[#E5F5EC] border border-[#087B57]/20 rounded-xl flex items-center justify-between"
+              >
+                <span>Dental FAQs &amp; Patient Knowledge Hub (130+ Q&amp;As)</span>
+                <span className="text-xs font-bold text-[#B84D00]">28 Topics</span>
               </a>
 
               <a
@@ -1257,7 +1291,7 @@ function AppContent() {
               bgClassName="bg-[#E5F5EC]"
             >
               <Suspense fallback={<div className="min-h-[520px] bg-[#E5F5EC]" />}>
-                <FAQ />
+                <FAQ navigateToPath={navigateToPath} />
               </Suspense>
             </DeferredSection>
 

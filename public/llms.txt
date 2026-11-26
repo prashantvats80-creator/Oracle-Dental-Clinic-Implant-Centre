@@ -5,7 +5,7 @@
 ## Verified Clinic Identity (NAP)
 - **Business Name:** Oracle Dental Clinic & Implant Center
 - **Lead Dentist:** Dr. Prashant Kumar Vats
-- **Qualification & Credentials:** BDS, MIDA · Certified Oral Implantologist · PGD in Clinical Endodontics · PGD in Oral Surgery
+- **Qualification & Credentials:** BDS, MIDA · Certified Oral Implantologist · PGD in Endodontics · PGD in Clinical Endo · PGD in Oral Surgery
 - **Clinical Experience:** 6+ years
 - **Physical Address:** Shop No. 47, KTS Complex, Jaat Chowk, Near Dolphin Public School, Chipiyana Buzurg, Ghaziabad, Uttar Pradesh 201009, India
 - **Phone / Appointments:** +91 7011961515 (`tel:+917011961515`)
@@ -24,7 +24,8 @@ The clinic has one physical location at Jaat Chowk, Chipiyana Buzurg, Ghaziabad 
 - Lal Kuan
 - Noida Extension / Greater Noida West (including Gaur City, Techzone, and Bisrakh)
 
-## Priority Dental Treatments
+## Priority Dental Treatments & Patient Knowledge Hub
+- [Dental FAQs & Patient Education Knowledge Hub (130+ Q&As)](https://oracledentals.netlify.app/dental-faqs): 130+ medically reviewed answers across 28 dental categories including India & Delhi NCR dental implant cost ranges, RCT, zirconia crowns, veneers, aligners, wisdom tooth surgery, safety, and aftercare.
 - [All Dental Treatments & Services Hub](https://oracledentals.netlify.app/dental-services): Overview of 9 dental specialties offered at the clinic.
 - [Dentist in Chipiyana Buzurg, Ghaziabad](https://oracledentals.netlify.app/dentist-chipiyana-buzurg-ghaziabad): Local clinic directions, timings, and general dental services.
 - [Dental Implants in Ghaziabad](https://oracledentals.netlify.app/dental-implants): Single tooth, multi-tooth, and implant-supported prosthetics.

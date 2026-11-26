@@ -7,6 +7,7 @@ const preloadedRoutes = new Set<string>();
 
 const routeImports: Record<string, () => Promise<unknown>> = {
   '/dental-services': () => import('../components/DentalServicesPage'),
+  '/dental-faqs': () => import('../components/DentalFaqsPage'),
   '/wisdom-tooth-extraction': () => import('../components/WisdomToothPage'),
   '/tooth-pain-treatment': () => import('../components/ToothPainPage'),
   '/tooth-sensitivity': () => import('../components/ToothSensitivityPage'),

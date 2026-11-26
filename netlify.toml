@@ -56,10 +56,15 @@
   status = 301
   force = true
 
-# Clean Route Rewrites for 46 Active Canonical Routes (Serves dedicated pre-rendered HTML with HTTP 200)
+# Clean Route Rewrites for 47 Active Non-Homepage Canonical Routes (Serves dedicated pre-rendered HTML with HTTP 200)
 [[redirects]]
   from = "/dental-services"
   to = "/dental-services.html"
+  status = 200
+
+[[redirects]]
+  from = "/dental-faqs"
+  to = "/dental-faqs.html"
   status = 200
 
 [[redirects]]

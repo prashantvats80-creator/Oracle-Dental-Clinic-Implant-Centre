@@ -31,6 +31,15 @@ export const ROUTE_SEO_MAP: Record<string, RouteSEOConfig> = {
     serviceType: 'Multi-Specialty Dental Care',
     schemaType: 'Service',
   },
+  '/dental-faqs': {
+    path: '/dental-faqs',
+    title: 'Dental FAQs – Expert Answers to Common Dental Questions | Oracle Dental Clinic',
+    description:
+      '130+ expert answers on dental implants, India & Delhi NCR implant costs, RCT, zirconia crowns, veneers, aligners, wisdom teeth & recovery by Dr. Prashant Kumar Vats.',
+    serviceName: 'Dental FAQs & Patient Education Knowledge Hub',
+    serviceType: 'Patient Education & Dental Knowledge Hub',
+    schemaType: 'Service',
+  },
   '/dentist-chipiyana-buzurg-ghaziabad': {
     path: '/dentist-chipiyana-buzurg-ghaziabad',
     title: 'Best Dentist & Dental Clinic in Chipiyana Buzurg, Ghaziabad',

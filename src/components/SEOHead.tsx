@@ -210,7 +210,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({ routePath, isNotFound = false }) => {
       },
     ];
 
-    // Add Service / MedicalProcedure & BreadcrumbList Schema for every valid treatment or landing page
+    // Add Service / MedicalProcedure & Article Schema for every valid treatment or landing page
     if (!isNotFound && seo.serviceName) {
       graphNodes.push({
         '@type': seo.schemaType || 'Service',
@@ -234,6 +234,24 @@ const SEOHead: React.FC<SEOHeadProps> = ({ routePath, isNotFound = false }) => {
           { '@type': 'Place', name: 'Lal Kuan, Ghaziabad' },
         ],
       });
+
+      if (seo.path !== '/' && seo.path !== '/dental-services' && seo.path !== '/privacy-policy') {
+        graphNodes.push({
+          '@type': 'Article',
+          '@id': `${canonicalUrl}#article`,
+          headline: seo.title.split('|')[0].trim(),
+          description: seo.description,
+          url: canonicalUrl,
+          mainEntityOfPage: { '@id': `${canonicalUrl}#webpage` },
+          author: { '@id': GBP_CONFIG.PERSON_ID },
+          reviewedBy: { '@id': GBP_CONFIG.PERSON_ID },
+          publisher: { '@id': GBP_CONFIG.ENTITY_ID },
+          about: { '@id': `${canonicalUrl}#service` },
+          datePublished: '2026-11-26',
+          dateModified: '2026-11-26',
+          inLanguage: 'en-IN',
+        });
+      }
     }
 
     // Visible patient FAQs remain on-page for user utility without FAQ rich-result markup per SEO policy.

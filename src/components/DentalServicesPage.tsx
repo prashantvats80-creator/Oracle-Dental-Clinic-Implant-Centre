@@ -87,8 +87,9 @@ const SERVICES_HUB_DIRECTORY = [
     ],
   },
   {
-    heading: 'Local Clinic & Complete Fee Guide',
+    heading: 'Local Clinic, Knowledge Hub & Fee Guide',
     links: [
+      { label: 'Dental FAQs & Patient Education Hub (130+ Q&As)', path: '/dental-faqs' },
       { label: 'Dentist in Chipiyana Buzurg, Ghaziabad', path: '/dentist-chipiyana-buzurg-ghaziabad' },
       { label: 'Complete Dental Treatment Cost Guide', path: '/dental-treatment-cost-ghaziabad' },
       { label: 'Privacy Policy', path: '/privacy-policy' },

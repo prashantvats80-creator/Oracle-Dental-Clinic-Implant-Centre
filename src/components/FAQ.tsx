@@ -1,13 +1,22 @@
 import React, { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, BookOpen, ArrowRight } from 'lucide-react';
 import { HOMEPAGE_FAQS, type HomepageFAQItem } from '../data/homepageFaqs';
+import { preloadRoute } from '../utils/routePreloader';
 
 interface FAQProps {
   faqs?: HomepageFAQItem[];
+  navigateToPath?: (path: string) => void;
 }
 
-const FAQ: React.FC<FAQProps> = ({ faqs = HOMEPAGE_FAQS }) => {
+const FAQ: React.FC<FAQProps> = ({ faqs = HOMEPAGE_FAQS, navigateToPath }) => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+
+  const handleHubClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (navigateToPath) {
+      e.preventDefault();
+      navigateToPath('/dental-faqs');
+    }
+  };
 
   return (
     <section id="faq" className="cv-auto py-14 sm:py-16 bg-[#FFF8EC] border-t border-[#087B57]/10">
@@ -61,6 +70,32 @@ const FAQ: React.FC<FAQProps> = ({ faqs = HOMEPAGE_FAQS }) => {
               </div>
             );
           })}
+        </div>
+
+        {/* Direct Internal Link to the Complete 130+ Question Dental FAQs & Patient Education Knowledge Hub */}
+        <div className="mt-8 bg-white rounded-2xl border border-[#087B57]/15 p-5 sm:p-6 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="space-y-1">
+            <p className="text-xs font-extrabold uppercase tracking-wider text-[#B84D00] flex items-center gap-1.5">
+              <BookOpen className="w-3.5 h-3.5 text-[#087B57]" aria-hidden="true" />
+              <span>Dental FAQs &amp; Patient Education Hub</span>
+            </p>
+            <h3 className="text-base sm:text-lg font-extrabold text-[#26352F]">
+              Looking for detailed answers on Dental Implants, India &amp; NCR Costs, RCT, Crowns, or Recovery?
+            </h3>
+            <p className="text-xs sm:text-sm text-[#26352F]/75">
+              Browse 130+ medically reviewed questions across 28 dental categories by Dr. Prashant Kumar Vats.
+            </p>
+          </div>
+          <a
+            href="/dental-faqs"
+            onMouseEnter={() => preloadRoute('/dental-faqs')}
+            onTouchStart={() => preloadRoute('/dental-faqs')}
+            onClick={handleHubClick}
+            className="min-h-[44px] px-5 py-2.5 rounded-full bg-[#087B57] hover:bg-[#066647] text-white font-bold text-xs sm:text-sm inline-flex items-center gap-2 whitespace-nowrap shrink-0 transition-colors shadow-xs"
+          >
+            <span>Explore All 130+ Dental FAQs</span>
+            <ArrowRight className="w-4 h-4 shrink-0" aria-hidden="true" />
+          </a>
         </div>
       </div>
     </section>

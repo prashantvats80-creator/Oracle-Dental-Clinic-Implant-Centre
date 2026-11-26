@@ -6,6 +6,7 @@ import {defineConfig} from 'vite';
 import type {Plugin} from 'vite';
 import {GBP_CONFIG} from './src/config/googleBusinessProfile';
 import {ROUTE_SEO_MAP, getCanonicalUrl} from './src/config/seoData';
+import {DENTAL_KNOWLEDGE_FAQS, FAQ_CATEGORIES} from './src/data/dentalKnowledgeHubFaqs';
 
 function escapeHtmlAttr(str: string): string {
   return str
@@ -29,7 +30,7 @@ function nonBlockingCssPlugin(): Plugin {
 }
 
 /**
- * Generates static HTML entry points (dist/<slug>.html) for all 46 non-homepage canonical routes
+ * Generates static HTML entry points (dist/<slug>.html) for all 47 non-homepage canonical routes
  * so Netlify serves HTTP 200 with exact self-referencing <link rel="canonical">, unique <title>,
  * <meta name="description">, OpenGraph/Twitter cards, and route JSON-LD before JavaScript executes.
  * Using <slug>.html (not <slug>/index.html) avoids trailing-slash redirect chains on Netlify.
@@ -173,6 +174,24 @@ function staticRouteHtmlPlugin(): Plugin {
               {'@type': 'Place', name: 'Lal Kuan, Ghaziabad'},
             ],
           });
+
+          if (routePath !== '/' && routePath !== '/dental-services' && routePath !== '/privacy-policy') {
+            graphNodes.push({
+              '@type': 'Article',
+              '@id': `${canonicalUrl}#article`,
+              headline: seo.title.split('|')[0].trim(),
+              description: seo.description,
+              url: canonicalUrl,
+              mainEntityOfPage: {'@id': `${canonicalUrl}#webpage`},
+              author: {'@id': GBP_CONFIG.PERSON_ID},
+              reviewedBy: {'@id': GBP_CONFIG.PERSON_ID},
+              publisher: {'@id': GBP_CONFIG.ENTITY_ID},
+              about: {'@id': `${canonicalUrl}#service`},
+              datePublished: '2026-11-26',
+              dateModified: '2026-11-26',
+              inLanguage: 'en-IN',
+            });
+          }
         }
 
         const breadcrumbItems = [
@@ -180,6 +199,8 @@ function staticRouteHtmlPlugin(): Plugin {
         ];
         if (routePath === '/dental-services') {
           breadcrumbItems.push({'@type': 'ListItem', position: 2, name: 'Dental Treatments & Services', item: canonicalUrl});
+        } else if (routePath === '/dental-faqs') {
+          breadcrumbItems.push({'@type': 'ListItem', position: 2, name: 'Dental FAQs & Patient Education', item: canonicalUrl});
         } else if (routePath === '/privacy-policy') {
           breadcrumbItems.push({'@type': 'ListItem', position: 2, name: 'Privacy Policy', item: canonicalUrl});
         } else {
@@ -197,6 +218,34 @@ function staticRouteHtmlPlugin(): Plugin {
         const displayH1 = escapeHtmlAttr(seo.title.split('|')[0].trim());
         const serviceName = escapeHtmlAttr(seo.serviceName || displayH1);
 
+        let extraFaqCorpusHtml = '';
+        if (routePath === '/dental-faqs') {
+          const categorySections = FAQ_CATEGORIES.map((cat, catIdx) => {
+            const catFaqs = DENTAL_KNOWLEDGE_FAQS.filter((f) => f.category === cat.name);
+            const faqItemsHtml = catFaqs
+              .map(
+                (faq) => `<article id="faq-${escapeHtmlAttr(faq.id)}" style="margin-bottom:1rem;padding:1rem;border:1px solid #e2e8f0;border-radius:0.75rem;background:#fff;">
+                <h3 style="font-size:1.05rem;font-weight:700;color:#0f172a;margin:0 0 0.5rem 0;">${escapeHtmlAttr(faq.question)}</h3>
+                <p style="font-size:0.95rem;line-height:1.6;color:#334155;margin:0 0 0.5rem 0;">${escapeHtmlAttr(faq.answer)}</p>
+                <p style="font-size:0.8rem;margin:0;"><a href="${escapeHtmlAttr(faq.relatedPageUrl)}" style="color:#087B57;font-weight:600;text-decoration:underline;">Related Guide: ${escapeHtmlAttr(faq.relatedPageLabel)}</a></p>
+              </article>`
+              )
+              .join('\n');
+            return `<section id="cat-${escapeHtmlAttr(cat.slug)}" style="margin-bottom:2rem;">
+              <h2 style="font-size:1.35rem;font-weight:800;color:#087B57;margin:0 0 0.5rem 0;">${catIdx + 1}. ${escapeHtmlAttr(cat.name)}</h2>
+              <p style="font-size:0.9rem;color:#475569;margin:0 0 1rem 0;">Category Group: ${escapeHtmlAttr(cat.group)} (${catFaqs.length} clinical Q&amp;As)</p>
+              ${faqItemsHtml}
+            </section>`;
+          }).join('\n');
+
+          extraFaqCorpusHtml = `<div style="margin-top:2rem;">
+            <p style="font-size:0.875rem;background:#fff8ec;border:1px solid #ffd36a;padding:0.875rem;border-radius:0.75rem;color:#26352f;margin-bottom:1.5rem;">
+              <strong>Educational &amp; Clinical Disclaimer:</strong> Educational information only. Exact diagnosis and treatment planning require an in-person clinical examination by a qualified dentist.
+            </p>
+            ${categorySections}
+          </div>`;
+        }
+
         const subpageShell = `<div id="root">
       <header style="padding:1rem;background:#087B57;color:#fff;display:flex;justify-content:space-between;align-items:center;">
         <a href="${GBP_CONFIG.SITE_URL}/" style="color:#fff;font-weight:bold;text-decoration:none;">Oracle Dental Clinic &amp; Implant Center</a>
@@ -212,18 +261,37 @@ function staticRouteHtmlPlugin(): Plugin {
           <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:1rem;padding:1.25rem;margin-bottom:1.5rem;">
             <h2 style="font-size:1.125rem;font-weight:700;margin-top:0;margin-bottom:0.5rem;color:#0f172a;">Attending Dentist &amp; Clinical Lead</h2>
             <p style="margin:0 0 0.25rem 0;color:#1e293b;font-weight:600;">Dr. Prashant Kumar Vats, BDS, MIDA</p>
-            <p style="margin:0;color:#64748b;font-size:0.875rem;">Certified Oral Implantologist • PGD in Clinical Endodontics • PGD in Oral Surgery • 6+ Years Experience</p>
+            <p style="margin:0;color:#64748b;font-size:0.875rem;">Certified Oral Implantologist • PGD in Endodontics • PGD in Clinical Endo • PGD in Oral Surgery • 6+ Years Experience</p>
           </div>
           <div style="background:#fff8ec;border:1px solid #ffd36a;border-radius:1rem;padding:1.25rem;margin-bottom:1.5rem;">
             <h2 style="font-size:1.125rem;font-weight:700;margin-top:0;margin-bottom:0.5rem;color:#b84d00;">Clinic Location &amp; Visiting Hours</h2>
             <p style="margin:0 0 0.25rem 0;color:#26352f;">${GBP_CONFIG.ADDRESS}</p>
-            <p style="margin:0 0 0.75rem 0;color:#087b57;font-weight:700;">Open Daily: ${GBP_CONFIG.HOURS} (Mon–Sun)</p>
+            <p style="margin:0 0 0.75rem 0;color:#087b57;font-weight:700;">${GBP_CONFIG.HOURS} (Mon–Sun)</p>
             <div style="display:flex;flex-wrap:wrap;gap:0.75rem;">
               <a href="tel:${GBP_CONFIG.PHONE}" style="display:inline-block;padding:0.625rem 1.25rem;background:#087B57;color:#fff;border-radius:9999px;text-decoration:none;font-weight:700;font-size:0.875rem;">Call ${GBP_CONFIG.PHONE_DISPLAY}</a>
               <a href="${GBP_CONFIG.WHATSAPP_BOOKING_URL}" style="display:inline-block;padding:0.625rem 1.25rem;background:#0F7A40;color:#fff;border-radius:9999px;text-decoration:none;font-weight:700;font-size:0.875rem;">Book on WhatsApp</a>
               <a href="${GBP_CONFIG.GOOGLE_MAPS_DIRECTIONS_URL}" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:0.625rem 1.25rem;background:#fff;color:#087B57;border:1px solid #087B57;border-radius:9999px;text-decoration:none;font-weight:700;font-size:0.875rem;">Get Directions</a>
             </div>
           </div>
+          ${extraFaqCorpusHtml}
+          <nav aria-label="Related Dental Treatments" style="background:#fff;border:1px solid #e2e8f0;border-radius:1rem;padding:1.25rem;">
+            <h2 style="font-size:1rem;font-weight:700;margin-top:0;margin-bottom:0.75rem;color:#087B57;">Core Dental Treatments &amp; Knowledge Hub at Oracle Dental Clinic</h2>
+            <ul style="list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.5rem;font-size:0.875rem;">
+              <li><a href="/dental-faqs" style="color:#087B57;text-decoration:underline;font-weight:700;">Dental FAQs &amp; Patient Education Hub (130+ Q&amp;As)</a></li>
+              <li><a href="/dentist-chipiyana-buzurg-ghaziabad" style="color:#087B57;text-decoration:underline;">Dentist in Chipiyana Buzurg, Ghaziabad</a></li>
+              <li><a href="/dental-implants" style="color:#087B57;text-decoration:underline;">Dental Implants in Ghaziabad</a></li>
+              <li><a href="/full-mouth-dental-implants" style="color:#087B57;text-decoration:underline;">Full Mouth Dental Implants</a></li>
+              <li><a href="/root-canal-treatment" style="color:#087B57;text-decoration:underline;">Root Canal Treatment (RCT)</a></li>
+              <li><a href="/wisdom-tooth-extraction" style="color:#087B57;text-decoration:underline;">Wisdom Tooth Extraction</a></li>
+              <li><a href="/smile-makeover-ghaziabad" style="color:#087B57;text-decoration:underline;">Smile Makeover in Ghaziabad</a></li>
+              <li><a href="/cosmetic-dentistry" style="color:#087B57;text-decoration:underline;">Cosmetic Dentistry</a></li>
+              <li><a href="/dental-veneers" style="color:#087B57;text-decoration:underline;">Dental Veneers</a></li>
+              <li><a href="/zirconia-crowns" style="color:#087B57;text-decoration:underline;">Zirconia Crowns</a></li>
+              <li><a href="/teeth-whitening" style="color:#087B57;text-decoration:underline;">Teeth Whitening</a></li>
+              <li><a href="/teeth-cleaning" style="color:#087B57;text-decoration:underline;">Teeth Cleaning &amp; Scaling</a></li>
+              <li><a href="/dental-services" style="color:#087B57;text-decoration:underline;">All Dental Services Directory</a></li>
+            </ul>
+          </nav>
         </article>
       </main>
     </div>`;

@@ -14,12 +14,14 @@ export const GBP_CONFIG = {
   DOCTOR_TITLE: "Dr. Prashant Kumar Vats, BDS, MIDA",
   DOCTOR_CREDENTIALS: [
     "BDS",
+    "MIDA",
     "Certified Oral Implantologist",
-    "PGD in Clinical Endodontics",
+    "PGD in Endodontics",
+    "PGD in Clinical Endo",
     "PGD in Oral Surgery",
   ],
   DOCTOR_CREDENTIALS_SUMMARY:
-    "BDS, MIDA · Certified Oral Implantologist · PGD in Clinical Endodontics · PGD in Oral Surgery",
+    "BDS, MIDA · Certified Oral Implantologist · PGD in Endodontics · PGD in Clinical Endo · PGD in Oral Surgery",
   DOCTOR_EXPERIENCE: "6+ years of clinical experience",
 
   // Canonical Production Website URL

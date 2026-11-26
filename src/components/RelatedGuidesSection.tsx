@@ -92,6 +92,21 @@ export const RelatedGuidesSection: React.FC<RelatedGuidesSectionProps> = ({
           ))}
         </ul>
       </nav>
+
+      <div className="pt-3 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+        <span className="text-slate-600">
+          Have more questions about dental procedures, India &amp; NCR implant costs, safety, or recovery?
+        </span>
+        <a
+          href="/dental-faqs"
+          onMouseEnter={() => preloadRoute('/dental-faqs')}
+          onTouchStart={() => preloadRoute('/dental-faqs')}
+          onClick={(e) => handleLinkClick(e, '/dental-faqs')}
+          className="font-bold text-[#087B57] hover:text-[#B84D00] underline underline-offset-2 inline-flex items-center gap-1 shrink-0"
+        >
+          <span>Browse 130+ Answers in our Dental FAQs &amp; Patient Education Hub →</span>
+        </a>
+      </div>
     </section>
   );
 };

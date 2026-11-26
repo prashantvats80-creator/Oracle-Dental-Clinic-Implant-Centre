@@ -108,6 +108,15 @@ const Footer: React.FC<FooterProps> = ({ navigateToPath }) => {
                   All Dental Treatments &amp; Services Hub
                 </a>
               </li>
+              <li>
+                <a
+                  href="/dental-faqs"
+                  onClick={(e) => handleLinkClick(e, '/dental-faqs')}
+                  className="inline-flex items-center min-h-[28px] py-0.5 text-[#FFD36A] font-semibold hover:text-white transition-colors"
+                >
+                  Dental FAQs &amp; Patient Knowledge Hub
+                </a>
+              </li>
               <li><a href="/dental-implants" onClick={(e) => handleLinkClick(e, '/dental-implants')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors">Dental Implants</a></li>
               <li><a href="/full-mouth-dental-implants" onClick={(e) => handleLinkClick(e, '/full-mouth-dental-implants')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors">Full Mouth Dental Implants</a></li>
               <li><a href="/smile-makeover-ghaziabad" onClick={(e) => handleLinkClick(e, '/smile-makeover-ghaziabad')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors">Smile Makeover</a></li>
@@ -242,13 +251,21 @@ const Footer: React.FC<FooterProps> = ({ navigateToPath }) => {
           <p>
             &copy; {new Date().getFullYear()} {GBP_CONFIG.BUSINESS_NAME}. All rights reserved.
           </p>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <a
               href="/dental-services"
               onClick={(e) => handleLinkClick(e, '/dental-services')}
               className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors underline-offset-4 hover:underline"
             >
               All Dental Services
+            </a>
+            <span aria-hidden="true" className="text-white/30">·</span>
+            <a
+              href="/dental-faqs"
+              onClick={(e) => handleLinkClick(e, '/dental-faqs')}
+              className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors underline-offset-4 hover:underline"
+            >
+              Dental FAQs &amp; Knowledge Hub
             </a>
             <span aria-hidden="true" className="text-white/30">·</span>
             <a
