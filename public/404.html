@@ -9,17 +9,44 @@
       // or root / custom domain (e.g. username.github.io, custom domain, Netlify)
       var l = window.location;
       var pathSegments = l.pathname.split('/').filter(Boolean);
-      var isGitHubProject = l.hostname.endsWith('github.io') && pathSegments.length > 0;
-      var pathSegmentsToKeep = isGitHubProject ? 1 : 0;
+      var knownPrefixes = [
+        'dental-', 'dentist-', 'root-canal', 'wisdom-tooth', 'tooth-', 'teeth-',
+        'full-mouth-', 'smile-makeover', 'cosmetic-', 'zirconia-', 'clear-aligners',
+        'periodontal-', 'emergency-dentist', 'dentures', 'kids-dentist',
+        'impacted-wisdom', 'bad-breath', 'loose-tooth', 'broken-tooth',
+        'chipped-tooth', 'black-tooth', 'missing-teeth', 'cavity-treatment',
+        'gum-', 'bleeding-gums', 'swollen-gums', 'privacy-policy'
+      ];
+      var firstSeg = (pathSegments[0] || '').toLowerCase();
+      var firstIsKnownRoute = knownPrefixes.some(function(p) { return firstSeg.indexOf(p) === 0; });
+      var isGitHub = l.hostname.endsWith('github.io');
 
-      l.replace(
-        l.protocol + '//' + l.host + (l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/')) + '/?/' +
-        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
-        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
-        l.hash
-      );
+      if (isGitHub) {
+        var isGitHubProject = pathSegments.length > 0 && !firstIsKnownRoute;
+        var pathSegmentsToKeep = isGitHubProject ? 1 : 0;
+        l.replace(
+          l.protocol + '//' + l.host + (l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/')) + '/?/' +
+          l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+          (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+          l.hash
+        );
+      }
     </script>
   </head>
-  <body>
+  <body style="margin:0;padding:0;background:#FFF8EC;font-family:system-ui,-apple-system,sans-serif;color:#26352F;display:flex;align-items:center;justify-content:center;min-height:100vh;">
+    <main style="max-width:540px;margin:2rem;text-align:center;background:#fff;padding:2.5rem;border-radius:1.5rem;box-shadow:0 10px 25px rgba(0,0,0,0.06);border:1px solid rgba(8,123,87,0.15);">
+      <div style="font-size:3.5rem;font-weight:800;color:#087B57;line-height:1;margin-bottom:0.75rem;">404</div>
+      <h1 style="font-size:1.5rem;font-weight:700;color:#26352F;margin:0 0 0.75rem 0;">Page Not Found</h1>
+      <p style="font-size:1rem;color:#52645c;line-height:1.5;margin:0 0 1.75rem 0;">
+        The dental treatment or page you requested could not be found. Please return to the homepage or browse our services directory.
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;justify-content:center;">
+        <a href="/" style="display:inline-block;padding:0.75rem 1.5rem;border-radius:9999px;background:#087B57;color:#fff;text-decoration:none;font-weight:700;font-size:0.9375rem;">Return to Homepage</a>
+        <a href="/dental-services" style="display:inline-block;padding:0.75rem 1.5rem;border-radius:9999px;background:#fff;color:#087B57;border:2px solid #087B57;text-decoration:none;font-weight:700;font-size:0.9375rem;">All Treatments</a>
+      </div>
+      <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid #e5f5ec;font-size:0.875rem;color:#71827a;">
+        Need immediate help? Call <a href="tel:+917011961515" style="color:#087B57;font-weight:700;text-decoration:none;">+91 7011961515</a>
+      </div>
+    </main>
   </body>
 </html>

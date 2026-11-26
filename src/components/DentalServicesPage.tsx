@@ -175,7 +175,7 @@ export default function DentalServicesPage({
                   service_category: 'all_services',
                 })
               }
-              className="min-h-[48px] bg-[#FF654F] hover:bg-[#e8533d] text-white font-bold text-sm sm:text-base py-3 px-6 rounded-full shadow-md transition-colors inline-flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFD36A]"
+              className="min-h-[48px] bg-[#C63621] hover:bg-[#A82B18] text-white font-bold text-sm sm:text-base py-3 px-6 rounded-full shadow-md transition-colors inline-flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFD36A]"
             >
               <MessageCircle className="w-5 h-5 shrink-0" aria-hidden="true" />
               <span>Book Consultation on WhatsApp</span>
@@ -240,7 +240,7 @@ export default function DentalServicesPage({
                 onClick={() => setActiveCategoryId(category.id)}
                 className={`min-h-[40px] px-4 py-2 rounded-full text-xs sm:text-sm font-bold whitespace-nowrap shrink-0 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#087B57] ${
                   activeCategoryId === category.id
-                    ? 'bg-[#FF654F] text-white shadow-xs'
+                    ? 'bg-[#C63621] text-white shadow-xs'
                     : 'bg-[#FFF8EC] text-[#26352F] border border-[#087B57]/12 hover:bg-[#E5F5EC]'
                 }`}
               >
@@ -337,7 +337,7 @@ export default function DentalServicesPage({
                             }`}
                           >
                             <div className="space-y-2">
-                              <p className="text-xs font-bold uppercase tracking-wider text-[#FF8A24]">
+                              <p className="text-xs font-bold uppercase tracking-wider text-[#B84D00]">
                                 {category.name} · Oracle Dental Clinic
                               </p>
                               <h3 className="text-lg sm:text-xl font-extrabold text-[#26352F] leading-snug">
@@ -462,7 +462,7 @@ export default function DentalServicesPage({
                                 interaction_label: service.id,
                               })
                             }
-                            className="min-h-[44px] bg-[#FF654F] hover:bg-[#e8533d] text-white font-bold text-sm px-5 py-2.5 rounded-full transition-colors inline-flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FF654F]/40"
+                            className="min-h-[44px] bg-[#C63621] hover:bg-[#A82B18] text-white font-bold text-sm px-5 py-2.5 rounded-full transition-colors inline-flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#C63621]/40"
                           >
                             <MessageCircle className="w-4 h-4 shrink-0" aria-hidden="true" />
                             <span>WhatsApp About {service.title.split('(')[0].trim()}</span>

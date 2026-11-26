@@ -146,9 +146,9 @@ const Hero: React.FC<HeroProps> = ({ navigateToPath }) => {
                 href={GBP_CONFIG.GOOGLE_BUSINESS_PROFILE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-[#087B57] hover:text-[#FF654F] transition-colors underline-offset-2 hover:underline"
+                className="inline-flex items-center gap-1 text-[#087B57] hover:text-[#C63621] transition-colors underline-offset-2 hover:underline"
               >
-                <Star className="w-3.5 h-3.5 text-[#FF8A24] fill-current" aria-hidden="true" />
+                <Star className="w-3.5 h-3.5 text-[#B84D00] fill-current" aria-hidden="true" />
                 <span>{GBP_CONFIG.FALLBACK_RATING} Google Rating</span>
               </a>
             </div>
@@ -159,7 +159,7 @@ const Hero: React.FC<HeroProps> = ({ navigateToPath }) => {
                 <>
                   स्वस्थ मुस्कान।{' '}
                   <span className="relative inline-block">
-                    <span className="bg-gradient-to-r from-[#FF654F] to-[#FF8A24] bg-clip-text text-transparent">
+                    <span className="bg-gradient-to-r from-[#C93B25] to-[#B84D00] bg-clip-text text-transparent">
                       खुशहाल आप!
                     </span>
                   </span>
@@ -168,7 +168,7 @@ const Hero: React.FC<HeroProps> = ({ navigateToPath }) => {
                 <>
                   Healthy Smile.{' '}
                   <span className="relative inline-block">
-                    <span className="bg-gradient-to-r from-[#FF654F] to-[#FF8A24] bg-clip-text text-transparent">
+                    <span className="bg-gradient-to-r from-[#C93B25] to-[#B84D00] bg-clip-text text-transparent">
                       Happier You!
                     </span>
                     <svg
@@ -198,7 +198,7 @@ const Hero: React.FC<HeroProps> = ({ navigateToPath }) => {
             </p>
 
             {/* Supporting Text */}
-            <p className="text-xs sm:text-base font-bold text-[#00A99D] tracking-wide">
+            <p className="text-xs sm:text-base font-bold text-[#067067] tracking-wide">
               {language === 'hi'
                 ? 'आधुनिक उपचार • उन्नत तकनीक • कोमल देखभाल'
                 : 'Modern Treatment • Advanced Technology • Gentle Care'}
@@ -206,8 +206,8 @@ const Hero: React.FC<HeroProps> = ({ navigateToPath }) => {
 
             <p className="text-sm sm:text-base text-[#26352F]/85 max-w-xl mx-auto lg:mx-0 leading-relaxed">
               {language === 'hi'
-                ? 'डॉ. प्रशांत कुमार वत्स (BDS, MIDA) द्वारा डेंटल इम्प्लांट, रूट कैनाल (RCT), अकल दाढ़ सर्जरी, ज़िरकोनिया क्राउन, स्माइल मेकओवर और दैनिक दंत देखभाल (सुबह 9 से रात 9 बजे तक)।'
-                : 'Trusted dentist in Chipiyana Buzurg near Jaat Chowk, Ghaziabad for dental implants, root canal treatment (RCT), zirconia crowns, smile makeovers, braces, clear aligners, and emergency dental care (Open Daily: 9:00 AM – 9:00 PM).'}
+                ? 'यदि आप अपने नजदीक एक बेहतरीन डेंटल क्लीनिक या विशेषज्ञ डेंटिस्ट की तलाश में हैं, तो डॉ. प्रशांत कुमार वत्स (BDS, MIDA), प्रमाणित डेंटल इम्प्लांट विशेषज्ञ, से परामर्श लें। चिपियाना बुजुर्ग, क्रॉसिंग्स रिपब्लिक, नॉएडा एक्सटेंशन व गाजियाबाद के परिवारों के लिए आधुनिक दंत चिकित्सा।'
+                : 'Searching for the best dentist near me or a trusted dental clinic near me? Oracle Dental Clinic & Implant Center is recognized as a leading dental clinic in Ghaziabad and trusted dentist in Chipiyana Buzurg, welcoming patients from Crossings Republik and Noida Extension. Led by Dr. Prashant Kumar Vats (BDS, MIDA), Dental Implant Specialist, for dental implants in Ghaziabad, root canals, and smile care (Open Daily: 9:00 AM – 9:00 PM).'}
             </p>
 
             {/* Primary & Secondary Native Anchor CTAs */}
@@ -224,7 +224,7 @@ const Hero: React.FC<HeroProps> = ({ navigateToPath }) => {
                     interaction_label: 'book_appointment',
                   })
                 }
-                className="w-full sm:w-auto min-h-[52px] bg-gradient-to-r from-[#FF654F] to-[#FF8A24] hover:from-[#e8533d] hover:to-[#e67617] text-white font-extrabold text-base py-3.5 px-8 rounded-full shadow-[0_12px_26px_rgba(255,101,79,0.36)] transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center gap-2.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFD36A]"
+                className="w-full sm:w-auto min-h-[52px] bg-gradient-to-r from-[#C93B25] to-[#B84D00] hover:from-[#A92D1A] hover:to-[#963E00] text-white font-extrabold text-base py-3.5 px-8 rounded-full shadow-[0_12px_26px_rgba(201,59,37,0.34)] transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center gap-2.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFD36A]"
               >
                 <CalendarCheck2 className="w-5 h-5 shrink-0" aria-hidden="true" />
                 <span>Book Appointment</span>
@@ -233,7 +233,7 @@ const Hero: React.FC<HeroProps> = ({ navigateToPath }) => {
               <a
                 id="hero-call-btn"
                 href={GBP_CONFIG.CALL_URL}
-                aria-label={`Call Oracle Dental Clinic at ${GBP_CONFIG.PHONE_DISPLAY}`}
+                aria-label={`Call ${GBP_CONFIG.PHONE_DISPLAY} — Oracle Dental Clinic`}
                 onClick={() =>
                   trackClinicEvent('call_click', {
                     placement: 'hero_call',
@@ -242,7 +242,7 @@ const Hero: React.FC<HeroProps> = ({ navigateToPath }) => {
                 }
                 className="w-full sm:w-auto min-h-[52px] bg-white hover:bg-[#E5F5EC] text-[#087B57] border-2 border-[#087B57]/30 hover:border-[#087B57] font-extrabold text-base py-3.5 px-7 rounded-full shadow-xs transition-colors flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#00A99D]/35"
               >
-                <PhoneCall className="w-5 h-5 shrink-0 text-[#00A99D]" aria-hidden="true" />
+                <PhoneCall className="w-5 h-5 shrink-0 text-[#067067]" aria-hidden="true" />
                 <span>Call {GBP_CONFIG.PHONE_DISPLAY}</span>
               </a>
             </div>
@@ -252,7 +252,7 @@ const Hero: React.FC<HeroProps> = ({ navigateToPath }) => {
               <a
                 href="/dental-services"
                 onClick={(e) => handleLinkClick(e, '/dental-services')}
-                className="inline-flex items-center gap-1 font-bold text-[#087B57] hover:text-[#FF654F] underline underline-offset-4 transition-colors"
+                className="inline-flex items-center gap-1 font-bold text-[#087B57] hover:text-[#C63621] underline underline-offset-4 transition-colors"
               >
                 <span>All Dental Services</span>
                 <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
@@ -263,15 +263,15 @@ const Hero: React.FC<HeroProps> = ({ navigateToPath }) => {
                 onClick={(e) => handleLinkClick(e, '/dental-implants')}
                 className="hover:text-[#087B57] underline-offset-4 hover:underline transition-colors"
               >
-                Dental Implants
+                Dental Implants in Ghaziabad
               </a>
               <span aria-hidden="true" className="text-[#FF8A24]">•</span>
               <a
-                href="/smile-makeover-ghaziabad"
-                onClick={(e) => handleLinkClick(e, '/smile-makeover-ghaziabad')}
+                href="/dentist-chipiyana-buzurg-ghaziabad"
+                onClick={(e) => handleLinkClick(e, '/dentist-chipiyana-buzurg-ghaziabad')}
                 className="hover:text-[#087B57] underline-offset-4 hover:underline transition-colors"
               >
-                Smile Makeover
+                Dentist in Chipiyana Buzurg
               </a>
               <span aria-hidden="true" className="text-[#FF8A24]">•</span>
               <a

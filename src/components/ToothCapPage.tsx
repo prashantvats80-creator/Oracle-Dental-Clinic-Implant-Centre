@@ -35,7 +35,7 @@ export default function ToothCapPage({ handleCall, handleWhatsApp, navigateToHom
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed">
       <Breadcrumbs
         items={[
-          { label: 'Dental Treatments', path: '/#services' },
+          { label: 'Dental Services', path: '/dental-services' },
           { label: 'Tooth Cap & Dental Crown', path: '/tooth-cap' },
         ]}
         navigateToHome={navigateToHome}

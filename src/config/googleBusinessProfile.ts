@@ -10,8 +10,17 @@ export const GBP_CONFIG = {
   // Verified Doctor Credentials
   DOCTOR_NAME: "Dr. Prashant Kumar Vats",
   DOCTOR_QUALIFICATION: "BDS, MIDA",
-  DOCTOR_ROLE: "Dental Surgeon & Implantologist",
+  DOCTOR_ROLE: "Dental Surgeon & Certified Oral Implantologist",
   DOCTOR_TITLE: "Dr. Prashant Kumar Vats, BDS, MIDA",
+  DOCTOR_CREDENTIALS: [
+    "BDS",
+    "Certified Oral Implantologist",
+    "PGD in Clinical Endodontics",
+    "PGD in Oral Surgery",
+  ],
+  DOCTOR_CREDENTIALS_SUMMARY:
+    "BDS, MIDA · Certified Oral Implantologist · PGD in Clinical Endodontics · PGD in Oral Surgery",
+  DOCTOR_EXPERIENCE: "6+ years of clinical experience",
 
   // Canonical Production Website URL
   SITE_URL: "https://oracledentals.netlify.app",
@@ -54,15 +63,19 @@ export const GBP_CONFIG = {
     longitude: 77.4520,
   },
 
-  // Primary & Geographically Relevant 5 km Secondary Areas
+  // Primary & Geographically Relevant ~6 km Secondary Areas
   PRIMARY_AREA: "Chipiyana Buzurg, Ghaziabad",
   SECONDARY_AREAS: [
     "Jaat Chowk",
     "Crossings Republik",
     "ABES Engineering College area",
     "Shahberi",
+    "Chhapraula",
     "Noida Extension",
     "Greater Noida West",
+    "Gaur City",
+    "Techzone",
+    "Bisrakh",
     "Lal Kuan",
   ],
 

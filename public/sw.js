@@ -1,6 +1,6 @@
 // Oracle Dental Clinic Service Worker - Mobile Performance & Offline Strategy
-const CACHE_STATIC = 'oracle-dental-static-v5';
-const CACHE_IMAGES = 'oracle-dental-images-v5';
+const CACHE_STATIC = 'oracle-dental-static-v6';
+const CACHE_IMAGES = 'oracle-dental-images-v6';
 
 const CORE_ASSETS = [
   './',
@@ -54,19 +54,20 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 1. Navigation requests (HTML) -> Network-First with cached fallback
+  // 1. Navigation requests (HTML) -> Network-First with per-route cache & index.html fallback
   if (event.request.mode === 'navigate') {
     event.respondWith(
       fetch(event.request)
         .then((response) => {
           if (response.status === 200) {
             const copy = response.clone();
-            caches.open(CACHE_STATIC).then((cache) => cache.put('./index.html', copy));
+            caches.open(CACHE_STATIC).then((cache) => cache.put(event.request, copy));
           }
           return response;
         })
         .catch(() => {
-          return caches.match('./index.html')
+          return caches.match(event.request)
+            .then((res) => res || caches.match('./index.html'))
             .then((res) => res || caches.match('/index.html'))
             .then((res) => res || caches.match('./'))
             .then((res) => res || caches.match('/'));

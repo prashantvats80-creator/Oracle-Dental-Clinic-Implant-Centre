@@ -1,4 +1,4 @@
-# Permanent 301 Redirects for Consolidated Pages (Evaluated before SPA fallback)
+# Permanent 301 Redirects for Consolidated Pages (Evaluated before route rewrites)
 # Group A: Local Dentist / Dental Clinic -> /dentist-chipiyana-buzurg-ghaziabad
 /dentist-near-me /dentist-chipiyana-buzurg-ghaziabad 301!
 /dentist-near-me/ /dentist-chipiyana-buzurg-ghaziabad 301!
@@ -21,5 +21,99 @@
 /emergency-dentist /emergency-dentist-ghaziabad 301!
 /emergency-dentist/ /emergency-dentist-ghaziabad 301!
 
-# SPA fallback rewrite for active canonical routes
-/* /index.html 200
+# Clean Route Rewrites for 46 Active Canonical Routes (Serves dedicated pre-rendered HTML with HTTP 200)
+/dental-services /dental-services.html 200
+/dental-services/ /dental-services.html 200
+/dentist-chipiyana-buzurg-ghaziabad /dentist-chipiyana-buzurg-ghaziabad.html 200
+/dentist-chipiyana-buzurg-ghaziabad/ /dentist-chipiyana-buzurg-ghaziabad.html 200
+/dental-implants /dental-implants.html 200
+/dental-implants/ /dental-implants.html 200
+/full-mouth-dental-implants /full-mouth-dental-implants.html 200
+/full-mouth-dental-implants/ /full-mouth-dental-implants.html 200
+/smile-makeover-ghaziabad /smile-makeover-ghaziabad.html 200
+/smile-makeover-ghaziabad/ /smile-makeover-ghaziabad.html 200
+/cosmetic-dentistry /cosmetic-dentistry.html 200
+/cosmetic-dentistry/ /cosmetic-dentistry.html 200
+/dental-veneers /dental-veneers.html 200
+/dental-veneers/ /dental-veneers.html 200
+/zirconia-crowns /zirconia-crowns.html 200
+/zirconia-crowns/ /zirconia-crowns.html 200
+/root-canal-treatment /root-canal-treatment.html 200
+/root-canal-treatment/ /root-canal-treatment.html 200
+/wisdom-tooth-extraction /wisdom-tooth-extraction.html 200
+/wisdom-tooth-extraction/ /wisdom-tooth-extraction.html 200
+/teeth-whitening /teeth-whitening.html 200
+/teeth-whitening/ /teeth-whitening.html 200
+/teeth-cleaning /teeth-cleaning.html 200
+/teeth-cleaning/ /teeth-cleaning.html 200
+/periodontal-gum-treatment-ghaziabad /periodontal-gum-treatment-ghaziabad.html 200
+/periodontal-gum-treatment-ghaziabad/ /periodontal-gum-treatment-ghaziabad.html 200
+/emergency-dentist-ghaziabad /emergency-dentist-ghaziabad.html 200
+/emergency-dentist-ghaziabad/ /emergency-dentist-ghaziabad.html 200
+/dental-braces /dental-braces.html 200
+/dental-braces/ /dental-braces.html 200
+/clear-aligners /clear-aligners.html 200
+/clear-aligners/ /clear-aligners.html 200
+/dental-fillings /dental-fillings.html 200
+/dental-fillings/ /dental-fillings.html 200
+/tooth-extraction /tooth-extraction.html 200
+/tooth-extraction/ /tooth-extraction.html 200
+/tooth-cap /tooth-cap.html 200
+/tooth-cap/ /tooth-cap.html 200
+/dental-bridges /dental-bridges.html 200
+/dental-bridges/ /dental-bridges.html 200
+/dentures /dentures.html 200
+/dentures/ /dentures.html 200
+/kids-dentist /kids-dentist.html 200
+/kids-dentist/ /kids-dentist.html 200
+/dental-implant-after-tooth-extraction /dental-implant-after-tooth-extraction.html 200
+/dental-implant-after-tooth-extraction/ /dental-implant-after-tooth-extraction.html 200
+/impacted-wisdom-tooth /impacted-wisdom-tooth.html 200
+/impacted-wisdom-tooth/ /impacted-wisdom-tooth.html 200
+/tooth-pain-treatment /tooth-pain-treatment.html 200
+/tooth-pain-treatment/ /tooth-pain-treatment.html 200
+/tooth-sensitivity /tooth-sensitivity.html 200
+/tooth-sensitivity/ /tooth-sensitivity.html 200
+/bad-breath-treatment /bad-breath-treatment.html 200
+/bad-breath-treatment/ /bad-breath-treatment.html 200
+/loose-tooth-treatment /loose-tooth-treatment.html 200
+/loose-tooth-treatment/ /loose-tooth-treatment.html 200
+/broken-tooth-treatment /broken-tooth-treatment.html 200
+/broken-tooth-treatment/ /broken-tooth-treatment.html 200
+/chipped-tooth /chipped-tooth.html 200
+/chipped-tooth/ /chipped-tooth.html 200
+/black-tooth /black-tooth.html 200
+/black-tooth/ /black-tooth.html 200
+/missing-teeth /missing-teeth.html 200
+/missing-teeth/ /missing-teeth.html 200
+/cavity-treatment /cavity-treatment.html 200
+/cavity-treatment/ /cavity-treatment.html 200
+/dental-abscess-treatment /dental-abscess-treatment.html 200
+/dental-abscess-treatment/ /dental-abscess-treatment.html 200
+/dental-treatment-cost-ghaziabad /dental-treatment-cost-ghaziabad.html 200
+/dental-treatment-cost-ghaziabad/ /dental-treatment-cost-ghaziabad.html 200
+/dental-implant-cost-ghaziabad /dental-implant-cost-ghaziabad.html 200
+/dental-implant-cost-ghaziabad/ /dental-implant-cost-ghaziabad.html 200
+/root-canal-cost-ghaziabad /root-canal-cost-ghaziabad.html 200
+/root-canal-cost-ghaziabad/ /root-canal-cost-ghaziabad.html 200
+/tooth-cap-cost-ghaziabad /tooth-cap-cost-ghaziabad.html 200
+/tooth-cap-cost-ghaziabad/ /tooth-cap-cost-ghaziabad.html 200
+/tooth-filling-cost-ghaziabad /tooth-filling-cost-ghaziabad.html 200
+/tooth-filling-cost-ghaziabad/ /tooth-filling-cost-ghaziabad.html 200
+/teeth-cleaning-cost-ghaziabad /teeth-cleaning-cost-ghaziabad.html 200
+/teeth-cleaning-cost-ghaziabad/ /teeth-cleaning-cost-ghaziabad.html 200
+/wisdom-tooth-extraction-cost-ghaziabad /wisdom-tooth-extraction-cost-ghaziabad.html 200
+/wisdom-tooth-extraction-cost-ghaziabad/ /wisdom-tooth-extraction-cost-ghaziabad.html 200
+/tooth-extraction-cost-ghaziabad /tooth-extraction-cost-ghaziabad.html 200
+/tooth-extraction-cost-ghaziabad/ /tooth-extraction-cost-ghaziabad.html 200
+/dental-bridge-cost-ghaziabad /dental-bridge-cost-ghaziabad.html 200
+/dental-bridge-cost-ghaziabad/ /dental-bridge-cost-ghaziabad.html 200
+/dentures-cost-ghaziabad /dentures-cost-ghaziabad.html 200
+/dentures-cost-ghaziabad/ /dentures-cost-ghaziabad.html 200
+/teeth-whitening-cost-ghaziabad /teeth-whitening-cost-ghaziabad.html 200
+/teeth-whitening-cost-ghaziabad/ /teeth-whitening-cost-ghaziabad.html 200
+/privacy-policy /privacy-policy.html 200
+/privacy-policy/ /privacy-policy.html 200
+
+# Genuine 404 handler for nonexistent URLs (Prevents soft-404 indexing)
+/* /404.html 404

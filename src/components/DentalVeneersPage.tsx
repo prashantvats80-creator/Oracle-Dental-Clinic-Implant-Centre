@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ClinicalReviewBox from './ClinicalReviewBox';
 import { PhoneCall, MessageCircle, CheckCircle2, AlertTriangle, ChevronDown, ArrowRight, MapPin } from 'lucide-react';
 import { Breadcrumbs } from './Breadcrumbs';
 import { TreatmentAppointmentCTA } from './TreatmentAppointmentCTA';
@@ -92,6 +93,10 @@ export default function DentalVeneersPage({
       </section>
 
       <article className="max-w-5xl mx-auto px-4 py-12 space-y-10">
+        <ClinicalReviewBox
+          question="What are dental veneers and when are they recommended?"
+          directAnswer="Dental veneers are thin, custom-matched ceramic or composite shells bonded to the front surface of structurally healthy teeth to correct intrinsic stains, chipped edges, or small gaps. Unlike full-coverage crowns, veneers conserve most of the underlying tooth structure, though teeth with deep decay or heavy bite grinding may require crowns or orthodontic care instead."
+        />
         <section className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 space-y-4">
           <h2 className="text-2xl font-extrabold text-slate-900">What Are Dental Veneers?</h2>
           <p className="text-slate-600 text-sm sm:text-base">

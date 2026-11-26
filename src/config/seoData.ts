@@ -15,9 +15,9 @@ const SITE = GBP_CONFIG.SITE_URL;
 export const ROUTE_SEO_MAP: Record<string, RouteSEOConfig> = {
   '/': {
     path: '/',
-    title: 'Oracle Dental Clinic | Dentist in Chipiyana, Ghaziabad',
+    title: 'Best Dentist Near Me in Ghaziabad | Oracle Dental Clinic',
     description:
-      'Visit Dr. Prashant Kumar Vats (BDS, MIDA) at Oracle Dental Clinic, Jaat Chowk, Chipiyana Buzurg, Ghaziabad. Implants, RCT, crowns & daily 9 AM–9 PM care.',
+      'Searching for the best dentist near me or dental clinic in Ghaziabad? Dr. Prashant Kumar Vats offers dental implants, RCT & family care in Chipiyana Buzurg.',
     serviceName: 'Comprehensive Dental Care & Implant Dentistry',
     serviceType: 'General, Implant, Cosmetic & Emergency Dentistry',
     schemaType: 'Service',
@@ -33,18 +33,18 @@ export const ROUTE_SEO_MAP: Record<string, RouteSEOConfig> = {
   },
   '/dentist-chipiyana-buzurg-ghaziabad': {
     path: '/dentist-chipiyana-buzurg-ghaziabad',
-    title: 'Dentist & Dental Clinic in Chipiyana Buzurg, Ghaziabad',
+    title: 'Best Dentist & Dental Clinic in Chipiyana Buzurg, Ghaziabad',
     description:
-      'Looking for a dentist near Jaat Chowk, Chipiyana Buzurg, Crossings Republik or Noida Extension? Visit Dr. Prashant Kumar Vats (BDS, MIDA) daily 9 AM–9 PM.',
+      'Looking for the best dentist near me in Chipiyana Buzurg, Ghaziabad? Visit Dr. Prashant Kumar Vats near Jaat Chowk, Crossings Republik & Noida Extension.',
     serviceName: 'Dentist & Dental Clinic in Chipiyana Buzurg, Ghaziabad',
     serviceType: 'Dental Clinic',
     schemaType: 'Service',
   },
   '/dental-implants': {
     path: '/dental-implants',
-    title: 'Dental Implants in Ghaziabad | Oracle Dental Clinic',
+    title: 'Dental Implant Specialist in Ghaziabad | Oracle Dental Clinic',
     description:
-      'Single, multiple & implant-supported dental implants in Chipiyana Buzurg, Ghaziabad by Dr. Prashant Kumar Vats (BDS, MIDA). Call +91 7011961515 to book.',
+      'Looking for a dental implant specialist near me in Ghaziabad? Dr. Prashant Kumar Vats provides single tooth, multiple & full mouth dental implants at ₹200 fee.',
     serviceName: 'Dental Implants',
     serviceType: 'Implantology',
     schemaType: 'MedicalProcedure',

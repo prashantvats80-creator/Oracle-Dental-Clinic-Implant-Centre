@@ -207,7 +207,7 @@ export const FloatingAppointmentButtons: React.FC = () => {
             interaction_label: 'floating_call_icon',
           })
         }
-        className="relative fab-contact-btn fab-contact-call inline-flex items-center justify-center w-[54px] h-[54px] rounded-full bg-[#00A99D] hover:bg-[#087B57] text-white shadow-[0_6px_22px_rgba(0,169,157,0.48)] border-2 border-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFD36A] focus-visible:ring-offset-2"
+        className="relative fab-contact-btn fab-contact-call inline-flex items-center justify-center w-[54px] h-[54px] rounded-full bg-[#067067] hover:bg-[#087B57] text-white shadow-[0_6px_22px_rgba(6,112,103,0.48)] border-2 border-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFD36A] focus-visible:ring-offset-2"
       >
         <svg
           viewBox="0 0 24 24"
@@ -235,7 +235,7 @@ export const FloatingAppointmentButtons: React.FC = () => {
             interaction_label: 'floating_whatsapp_icon',
           })
         }
-        className="relative fab-contact-btn inline-flex items-center justify-center w-[54px] h-[54px] rounded-full bg-[#25D366] hover:bg-[#1DAA54] text-white shadow-[0_6px_22px_rgba(37,211,102,0.5)] border-2 border-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-300 focus-visible:ring-offset-2"
+        className="relative fab-contact-btn inline-flex items-center justify-center w-[54px] h-[54px] rounded-full bg-[#128C4A] hover:bg-[#0E743D] text-white shadow-[0_6px_22px_rgba(18,140,74,0.48)] border-2 border-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-300 focus-visible:ring-offset-2"
       >
         <svg
           viewBox="0 0 32 32"

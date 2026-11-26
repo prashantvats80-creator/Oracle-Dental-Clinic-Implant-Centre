@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ClinicalReviewBox from './ClinicalReviewBox';
 import { 
   PhoneCall, 
   MessageCircle, 
@@ -115,7 +116,7 @@ export default function SmileMakeoverGhaziabadPage({
             <InteractiveButton 
               id="makeover-wa-btn" 
               onClick={handleWhatsApp} 
-              className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-6 py-3.5 rounded-xl flex items-center gap-2 transition-all shadow-md active:scale-95"
+              className="bg-[#0F7A40] hover:bg-[#0B5E31] text-white font-bold px-6 py-3.5 rounded-xl flex items-center gap-2 transition-all shadow-md active:scale-95"
             >
               <MessageCircle className="w-4 h-4" /> <span>WhatsApp Appointment</span>
             </InteractiveButton>
@@ -134,6 +135,10 @@ export default function SmileMakeoverGhaziabadPage({
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+        <ClinicalReviewBox
+          question="What is a smile makeover and which dental treatments can it include?"
+          directAnswer="A smile makeover is a personalized combination of cosmetic and restorative procedures—such as porcelain or composite veneers, professional teeth whitening, zirconia crowns, composite bonding, or clear aligners—planned around your facial proportions, enamel health, and bite alignment. Healthy gums and decay-free teeth are established first during clinical evaluation before aesthetic work starts."
+        />
         
         {/* Clinic Transparency Banner */}
         <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-6">

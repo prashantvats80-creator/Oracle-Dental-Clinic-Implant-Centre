@@ -100,7 +100,7 @@ const ExploreTreatmentsSection: React.FC<ExploreTreatmentsSectionProps> = ({ nav
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div className="space-y-2 max-w-2xl">
-            <p className="text-xs font-extrabold uppercase tracking-wider text-[#FF8A24]">
+            <p className="text-xs font-extrabold uppercase tracking-wider text-[#B84D00]">
               Oracle Dental Clinic • Chipiyana Buzurg, Ghaziabad
             </p>
             <h2
@@ -110,8 +110,7 @@ const ExploreTreatmentsSection: React.FC<ExploreTreatmentsSectionProps> = ({ nav
               Explore Our Dental Treatments
             </h2>
             <p className="text-sm text-[#26352F]/80 leading-relaxed">
-              Browse our primary dental procedures, cost guides, and local clinic information led by
-              Dr. Prashant Kumar Vats (BDS, MIDA).
+              Recognized as a leading dental clinic in Ghaziabad and trusted dentist in Chipiyana Buzurg, welcoming patients from Crossings Republik and Noida Extension for implants, RCT, and family care under Dr. Prashant Kumar Vats (BDS, MIDA).
             </p>
           </div>
           <a
@@ -119,7 +118,7 @@ const ExploreTreatmentsSection: React.FC<ExploreTreatmentsSectionProps> = ({ nav
             onMouseEnter={() => preloadRoute('/dental-services')}
             onTouchStart={() => preloadRoute('/dental-services')}
             onClick={(e) => handleLinkClick(e, '/dental-services')}
-            className="self-start md:self-auto inline-flex items-center gap-1.5 text-sm font-bold text-[#087B57] hover:text-[#FF654F] underline underline-offset-4 transition-colors"
+            className="self-start md:self-auto inline-flex items-center gap-1.5 text-sm font-bold text-[#087B57] hover:text-[#C63621] underline underline-offset-4 transition-colors"
           >
             <span>View Full Dental Services Directory</span>
             <span aria-hidden="true">→</span>
@@ -135,10 +134,10 @@ const ExploreTreatmentsSection: React.FC<ExploreTreatmentsSectionProps> = ({ nav
                   onMouseEnter={() => preloadRoute(item.path)}
                   onTouchStart={() => preloadRoute(item.path)}
                   onClick={(e) => handleLinkClick(e, item.path)}
-                  className="group h-full flex flex-col justify-between p-4 rounded-2xl bg-white border border-[#087B57]/12 hover:border-[#00A99D] shadow-2xs hover:shadow-md transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#087B57]"
+                  className="group h-full flex flex-col justify-between p-4 rounded-2xl bg-white border border-[#087B57]/12 hover:border-[#067067] shadow-2xs hover:shadow-md transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#087B57]"
                 >
                   <div className="space-y-1">
-                    <span className="text-[11px] font-bold uppercase tracking-wide text-[#00A99D]">
+                    <span className="text-[11px] font-bold uppercase tracking-wide text-[#067067]">
                       {item.category}
                     </span>
                     <span className="block font-extrabold text-sm sm:text-base text-[#26352F] group-hover:text-[#087B57] leading-snug">
@@ -146,7 +145,7 @@ const ExploreTreatmentsSection: React.FC<ExploreTreatmentsSectionProps> = ({ nav
                     </span>
                     <p className="text-xs text-[#26352F]/75 leading-relaxed">{item.summary}</p>
                   </div>
-                  <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-[#087B57] group-hover:text-[#FF654F]">
+                  <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-[#087B57] group-hover:text-[#C63621]">
                     <span>Learn more</span>
                     <span aria-hidden="true">→</span>
                   </span>
@@ -154,6 +153,30 @@ const ExploreTreatmentsSection: React.FC<ExploreTreatmentsSectionProps> = ({ nav
               </li>
             ))}
           </ul>
+
+          {/* Compact High-Priority Links Row for Urgent Care, Gum Health & Cost Guides */}
+          <div className="mt-5 pt-4 border-t border-[#087B57]/12 flex flex-wrap items-center gap-2 text-xs">
+            <span className="font-bold text-[#26352F] mr-1">Also Popular:</span>
+            {[
+              { path: '/emergency-dentist-ghaziabad', label: 'Emergency Dentist (9 AM–9 PM)' },
+              { path: '/periodontal-gum-treatment-ghaziabad', label: 'Gum & Periodontal Care' },
+              { path: '/dental-treatment-cost-ghaziabad', label: 'Dental Treatment Cost Guide' },
+              { path: '/root-canal-cost-ghaziabad', label: 'Root Canal Cost' },
+              { path: '/loose-tooth-treatment', label: 'Loose Tooth Care' },
+              { path: '/bad-breath-treatment', label: 'Bad Breath Treatment' },
+            ].map((quick) => (
+              <a
+                key={quick.path}
+                href={quick.path}
+                onMouseEnter={() => preloadRoute(quick.path)}
+                onTouchStart={() => preloadRoute(quick.path)}
+                onClick={(e) => handleLinkClick(e, quick.path)}
+                className="inline-flex items-center px-3 py-1.5 rounded-full bg-white hover:bg-[#E5F5EC] text-[#087B57] font-semibold border border-[#087B57]/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#087B57]"
+              >
+                {quick.label}
+              </a>
+            ))}
+          </div>
         </nav>
       </div>
     </section>

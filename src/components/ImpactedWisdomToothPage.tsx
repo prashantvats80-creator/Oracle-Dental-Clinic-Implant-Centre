@@ -85,16 +85,22 @@ export default function ImpactedWisdomToothPage({
           </h1>
 
           <p className="text-base sm:text-lg text-slate-200 max-w-3xl leading-relaxed">
-            When third molars lack adequate space to emerge normally, they become impacted against neighboring teeth or dense jawbone. Learn about clinical diagnosis, surgical extraction, and recovery under <strong>Dr. Prashant Kumar Vats, BDS</strong> for <strong>₹200</strong>.
+            When third molars lack adequate space to emerge normally, they become impacted against neighboring teeth or dense jawbone. Learn about clinical diagnosis, surgical extraction, and recovery under <strong>Dr. Prashant Kumar Vats (BDS, PGD in Oral Surgery, 6+ years experience)</strong> at our Chipiyana Buzurg, Ghaziabad clinic for a <strong>₹200</strong> consultation.
           </p>
 
           <div className="flex flex-wrap items-center gap-3 pt-2">
-            <InteractiveButton id="impct-call" onClick={handleCall} className="bg-amber-500 text-slate-950 font-extrabold px-6 py-3.5 rounded-xl flex items-center gap-2">
+            <InteractiveButton id="impct-call" onClick={handleCall} className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold px-6 py-3.5 rounded-xl flex items-center gap-2">
               <PhoneCall className="w-4 h-4" /> <span>Consultation: Call +91 7011961515</span>
             </InteractiveButton>
-            <InteractiveButton id="impct-wa" onClick={handleWhatsApp} className="bg-emerald-600 text-white font-bold px-6 py-3.5 rounded-xl flex items-center gap-2">
+            <InteractiveButton id="impct-wa" onClick={handleWhatsApp} className="bg-[#0F7A40] hover:bg-[#0B5E31] text-white font-bold px-6 py-3.5 rounded-xl flex items-center gap-2">
               <MessageCircle className="w-4 h-4" /> <span>WhatsApp Desk</span>
             </InteractiveButton>
+            <a href="/#doctor-profile" className="text-xs font-semibold text-cyan-200 hover:text-white underline underline-offset-4 px-2 py-2">
+              Meet Dr. Prashant Kumar Vats
+            </a>
+            <a href="/#contact" className="text-xs font-semibold text-amber-200 hover:text-white underline underline-offset-4 px-2 py-2">
+              Clinic Address &amp; Map
+            </a>
           </div>
         </div>
       </header>

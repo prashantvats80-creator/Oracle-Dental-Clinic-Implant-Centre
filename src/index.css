@@ -1,14 +1,5 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: "Outfit";
-  font-style: normal;
-  font-weight: 600 800;
-  font-display: swap;
-  src: url("/assets/fonts/outfit-latin.woff2") format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
 @theme {
   --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-heading: "Outfit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -23,14 +14,14 @@
   --color-brand-mint: #E5F5EC;
   --color-brand-charcoal: #26352F;
 
-  /* Sitewide Harmonization: Shift legacy blue & indigo utilities across all 54 pages to Emerald & Teal */
+  /* Sitewide Harmonization: Shift legacy blue & indigo utilities across all pages to Emerald & Teal (WCAG AA compliant) */
   --color-blue-50: #E5F5EC;
   --color-blue-100: #C8ECDC;
   --color-blue-200: #99DEC3;
   --color-blue-300: #5EC9A8;
   --color-blue-400: #22B8A6;
   --color-blue-500: #00A99D;
-  --color-blue-600: #088E68;
+  --color-blue-600: #066D50;
   --color-blue-700: #087B57;
   --color-blue-800: #066647;
   --color-blue-900: #05523A;
@@ -42,11 +33,15 @@
   --color-indigo-300: #4ECFC3;
   --color-indigo-400: #1ABBAE;
   --color-indigo-500: #00A99D;
-  --color-indigo-600: #008F84;
+  --color-indigo-600: #067067;
   --color-indigo-700: #06746A;
   --color-indigo-800: #075E56;
   --color-indigo-900: #084D46;
   --color-indigo-950: #053530;
+
+  /* Accessible CTA greens (WCAG AA >= 5.3:1 on white) */
+  --color-emerald-600: #066D50;
+  --color-green-600: #0F7A40;
 
   /* Warm Sunset Orange / Sunshine Yellow accents */
   --color-amber-50: #FFF8EC;
@@ -55,7 +50,7 @@
   --color-amber-300: #FFD36A;
   --color-amber-400: #FFB347;
   --color-amber-500: #FF8A24;
-  --color-amber-600: #E87412;
+  --color-amber-600: #B84D00;
 }
 
 html {

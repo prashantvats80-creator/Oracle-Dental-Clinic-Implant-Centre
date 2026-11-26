@@ -54,8 +54,8 @@
       })(window, document);
     </script>
 
-    <title>Oracle Dental Clinic | Dentist in Chipiyana, Ghaziabad</title>
-    <meta name="description" content="Visit Dr. Prashant Kumar Vats (BDS, MIDA) at Oracle Dental Clinic, Jaat Chowk, Chipiyana Buzurg, Ghaziabad. Implants, RCT, crowns &amp; daily 9 AM–9 PM care." />
+    <title>Best Dentist Near Me in Ghaziabad | Oracle Dental Clinic</title>
+    <meta name="description" content="Searching for the best dentist near me or dental clinic in Ghaziabad? Dr. Prashant Kumar Vats offers dental implants, RCT &amp; family care in Chipiyana Buzurg." />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <link rel="canonical" href="https://oracledentals.netlify.app/" />
 
@@ -63,28 +63,31 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_IN" />
     <meta property="og:site_name" content="Oracle Dental Clinic &amp; Implant Center" />
-    <meta property="og:title" content="Oracle Dental Clinic | Dentist in Chipiyana, Ghaziabad" />
-    <meta property="og:description" content="Visit Dr. Prashant Kumar Vats (BDS, MIDA) at Oracle Dental Clinic, Jaat Chowk, Chipiyana Buzurg, Ghaziabad. Implants, RCT, crowns &amp; daily 9 AM–9 PM care." />
+    <meta property="og:title" content="Best Dentist Near Me in Ghaziabad | Oracle Dental Clinic" />
+    <meta property="og:description" content="Searching for the best dentist near me or dental clinic in Ghaziabad? Dr. Prashant Kumar Vats offers dental implants, RCT &amp; family care in Chipiyana Buzurg." />
     <meta property="og:url" content="https://oracledentals.netlify.app/" />
     <meta property="og:image" content="https://oracledentals.netlify.app/assets/images/hero-patient.jpg" />
 
     <!-- Twitter / X Card Metadata -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Oracle Dental Clinic | Dentist in Chipiyana, Ghaziabad" />
-    <meta name="twitter:description" content="Visit Dr. Prashant Kumar Vats (BDS, MIDA) at Oracle Dental Clinic, Jaat Chowk, Chipiyana Buzurg, Ghaziabad. Implants, RCT, crowns &amp; daily 9 AM–9 PM care." />
+    <meta name="twitter:title" content="Best Dentist Near Me in Ghaziabad | Oracle Dental Clinic" />
+    <meta name="twitter:description" content="Searching for the best dentist near me or dental clinic in Ghaziabad? Dr. Prashant Kumar Vats offers dental implants, RCT &amp; family care in Chipiyana Buzurg." />
     <meta name="twitter:image" content="https://oracledentals.netlify.app/assets/images/hero-patient.jpg" />
 
     <!-- Preload Critical LCP Hero Image ONLY on Homepage (Avoids Wasted Download on 46 Subpages) -->
     <script>
       (function(d, l) {
+        var base = '%BASE_URL%';
+        if (!base.endsWith('/')) base += '/';
         var p = l.pathname;
-        if (p === '/' || p === '' || p === '/index.html') {
+        var rel = p.replace(base, '/');
+        if (rel === '/' || rel === '' || rel === '/index.html' || p === '/' || p === base) {
           var link = d.createElement('link');
           link.rel = 'preload';
           link.as = 'image';
           link.type = 'image/avif';
-          link.href = '/assets/images/hero-patient-768.avif';
-          link.imageSrcset = '/assets/images/hero-patient-480.avif 480w, /assets/images/hero-patient-768.avif 768w, /assets/images/hero-patient-1000.avif 1000w';
+          link.href = base + 'assets/images/hero-patient-768.avif';
+          link.imageSrcset = base + 'assets/images/hero-patient-480.avif 480w, ' + base + 'assets/images/hero-patient-768.avif 768w, ' + base + 'assets/images/hero-patient-1000.avif 1000w';
           link.imageSizes = '(max-width: 640px) 92vw, 520px';
           link.setAttribute('fetchpriority', 'high');
           d.head.appendChild(link);
@@ -93,7 +96,7 @@
     </script>
 
     <!-- Self-Hosted Variable Display Font (Zero External DNS/TLS, font-display: swap) -->
-    <link rel="preload" href="/assets/fonts/outfit-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="%BASE_URL%assets/fonts/outfit-latin.woff2" as="font" type="font/woff2" crossorigin />
 
     <!-- Minimal Inline Critical Above-the-Fold CSS (Eliminates Render-Blocking Stylesheet with Zero FOUC & Zero CLS) -->
     <style id="critical-css">
@@ -180,8 +183,12 @@
             { "@type": "Place", "name": "Crossings Republik, Ghaziabad" },
             { "@type": "Place", "name": "ABES Engineering College area, Ghaziabad" },
             { "@type": "Place", "name": "Shahberi" },
+            { "@type": "Place", "name": "Chhapraula, Ghaziabad" },
             { "@type": "Place", "name": "Noida Extension" },
             { "@type": "Place", "name": "Greater Noida West" },
+            { "@type": "Place", "name": "Gaur City, Greater Noida West" },
+            { "@type": "Place", "name": "Techzone, Greater Noida West" },
+            { "@type": "Place", "name": "Bisrakh" },
             { "@type": "Place", "name": "Lal Kuan, Ghaziabad" }
           ],
           "hasOfferCatalog": {
@@ -214,11 +221,39 @@
           "name": "Dr. Prashant Kumar Vats",
           "honorificPrefix": "Dr.",
           "honorificSuffix": "BDS, MIDA",
-          "jobTitle": "Dental Surgeon & Implantologist",
+          "jobTitle": "Dental Surgeon & Certified Oral Implantologist",
+          "description": "Dr. Prashant Kumar Vats (BDS, MIDA · Certified Oral Implantologist · PGD in Clinical Endodontics · PGD in Oral Surgery) with 6+ years of clinical experience in Chipiyana Buzurg, Ghaziabad.",
+          "hasCredential": [
+            { "@type": "EducationalOccupationalCredential", "credentialCategory": "degree", "name": "BDS" },
+            { "@type": "EducationalOccupationalCredential", "credentialCategory": "certificate", "name": "Certified Oral Implantologist" },
+            { "@type": "EducationalOccupationalCredential", "credentialCategory": "certificate", "name": "PGD in Clinical Endodontics" },
+            { "@type": "EducationalOccupationalCredential", "credentialCategory": "certificate", "name": "PGD in Oral Surgery" }
+          ],
+          "knowsAbout": [
+            "Dental Implants",
+            "Clinical Endodontics",
+            "Root Canal Treatment",
+            "Oral Surgery",
+            "Wisdom Tooth Extraction",
+            "General & Restorative Dentistry"
+          ],
           "image": "https://oracledentals.netlify.app/assets/images/dr-prashant-vats.jpg",
           "worksFor": {
             "@id": "https://oracledentals.netlify.app/#dentist"
           }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://oracledentals.netlify.app/#webpage",
+          "url": "https://oracledentals.netlify.app/",
+          "name": "Dentist Near Me in Ghaziabad | Oracle Dental Clinic",
+          "description": "Visit Dr. Prashant Kumar Vats (BDS, MIDA) at Oracle Dental Clinic, Jaat Chowk, Chipiyana Buzurg, Ghaziabad. Implants, RCT, crowns & daily 9 AM–9 PM care.",
+          "isPartOf": { "@id": "https://oracledentals.netlify.app/#website" },
+          "about": { "@id": "https://oracledentals.netlify.app/#dentist" },
+          "author": { "@id": "https://oracledentals.netlify.app/#dr-prashant-kumar-vats" },
+          "reviewedBy": { "@id": "https://oracledentals.netlify.app/#dr-prashant-kumar-vats" },
+          "dateModified": "2026-11-26",
+          "inLanguage": "en-IN"
         }
       ]
     }
@@ -242,14 +277,14 @@
         <header class="bg-white/95 shadow-xs sticky top-0 z-40 border-b border-[#087B57]/12">
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="crit-hdr-in flex justify-between items-center h-16 md:h-20">
-              <a href="/" class="crit-brand flex-shrink-0 flex items-center gap-2.5" aria-label="Oracle Dental Clinic &amp; Implant Center Home">
-                <div class="crit-logo w-10 h-10 md:w-11 md:h-11 bg-gradient-to-br from-[#087B57] to-[#00A99D] rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-xs">O</div>
+              <a href="/" class="crit-brand flex-shrink-0 flex items-center gap-2.5">
+                <div aria-hidden="true" class="crit-logo w-10 h-10 md:w-11 md:h-11 bg-gradient-to-br from-[#087B57] to-[#00A99D] rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-xs">O</div>
                 <div class="flex flex-col">
                   <span class="font-bold text-lg md:text-xl leading-tight text-[#087B57] whitespace-nowrap">Oracle Dental</span>
-                  <span class="text-[11px] text-[#FF8A24] font-bold tracking-wide whitespace-nowrap">Clinic &amp; Implant Center</span>
+                  <span class="text-[11px] text-[#B84D00] font-bold tracking-wide whitespace-nowrap">Clinic &amp; Implant Center</span>
                 </div>
               </a>
-              <a href="tel:+917011961515" class="min-h-[42px] px-4 py-2 text-xs font-extrabold text-white bg-gradient-to-r from-[#FF654F] to-[#FF8A24] rounded-full inline-flex items-center">Call +91 7011961515</a>
+              <a href="tel:+917011961515" class="min-h-[42px] px-4 py-2 text-xs font-extrabold text-white bg-gradient-to-r from-[#C93B25] to-[#B84D00] rounded-full inline-flex items-center">Call +91 7011961515</a>
             </div>
           </div>
         </header>
@@ -260,19 +295,19 @@
                 <div class="crit-copy lg:col-span-6 text-center lg:text-left space-y-4 sm:space-y-5">
                   <div class="flex flex-wrap items-center justify-center lg:justify-start gap-x-2.5 gap-y-1 text-xs sm:text-sm font-semibold">
                     <span class="inline-flex items-center gap-1.5 text-[#087B57]">Oracle Dental Clinic &amp; Implant Center</span>
-                    <span aria-hidden="true" class="text-[#FF8A24]">·</span>
+                    <span aria-hidden="true" class="text-[#B84D00]">·</span>
                     <span class="text-[#26352F]/80">Chipiyana Buzurg, Ghaziabad</span>
                   </div>
                   <h1 class="text-[2.15rem] sm:text-5xl lg:text-[3.75rem] font-extrabold tracking-tight leading-[1.06] text-[#087B57]">
-                    Healthy Smile. <span class="crit-grad bg-gradient-to-r from-[#FF654F] to-[#FF8A24] bg-clip-text text-transparent">Happier You!</span>
+                    Healthy Smile. <span class="crit-grad bg-gradient-to-r from-[#C93B25] to-[#B84D00] bg-clip-text text-transparent">Happier You!</span>
                   </h1>
                   <p class="text-lg sm:text-2xl font-extrabold text-[#26352F] leading-snug">Expert Dental Care for the Whole Family</p>
-                  <p class="text-xs sm:text-base font-bold text-[#00A99D] tracking-wide">Modern Treatment • Advanced Technology • Gentle Care</p>
+                  <p class="text-xs sm:text-base font-bold text-[#067067] tracking-wide">Modern Treatment • Advanced Technology • Gentle Care</p>
                   <p class="text-sm sm:text-base text-[#26352F]/85 max-w-xl mx-auto lg:mx-0 leading-relaxed">
                     Trusted dentist in Chipiyana Buzurg near Jaat Chowk, Ghaziabad for dental implants, root canal treatment (RCT), zirconia crowns, smile makeovers, braces, clear aligners, and emergency dental care (Open Daily: 9:00 AM – 9:00 PM).
                   </p>
                   <div class="crit-btns flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-1">
-                    <a href="https://wa.me/917011961515?text=Hello%20Oracle%20Dental%20Clinic%2C%20I%20want%20to%20book%20a%20dental%20appointment." target="_blank" rel="noopener noreferrer" class="crit-cta-p w-full sm:w-auto min-h-[52px] bg-gradient-to-r from-[#FF654F] to-[#FF8A24] text-white font-extrabold text-base py-3.5 px-8 rounded-full flex items-center justify-center">Book Appointment</a>
+                    <a href="https://wa.me/917011961515?text=Hello%20Oracle%20Dental%20Clinic%2C%20I%20want%20to%20book%20a%20dental%20appointment." target="_blank" rel="noopener noreferrer" class="crit-cta-p w-full sm:w-auto min-h-[52px] bg-gradient-to-r from-[#C93B25] to-[#B84D00] text-white font-extrabold text-base py-3.5 px-8 rounded-full flex items-center justify-center">Book Appointment</a>
                     <a href="tel:+917011961515" class="crit-cta-s w-full sm:w-auto min-h-[52px] bg-white text-[#087B57] border-2 border-[#087B57]/30 font-extrabold text-base py-3.5 px-7 rounded-full flex items-center justify-center">Call +91 7011961515</a>
                   </div>
                 </div>

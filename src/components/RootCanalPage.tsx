@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ClinicalReviewBox from './ClinicalReviewBox';
 import { 
   PhoneCall, 
   MessageCircle, 
@@ -154,17 +155,18 @@ export default function RootCanalPage({
             </h1>
 
             <p className="text-base sm:text-lg text-slate-200 font-normal leading-relaxed max-w-2xl">
-              Root canal treatment is a clinical dental procedure used to treat infection or inflammation inside a tooth, helping relieve toothache and preserve your natural tooth structure when appropriate. Consult with Dr. Prashant Kumar Vats, BDS at Oracle Dental Clinic.
+              Root canal treatment (RCT) removes infection or inflammation inside a tooth to relieve toothache and help preserve your natural tooth structure when clinically appropriate. Consult with Dr. Prashant Kumar Vats (BDS, PGD in Clinical Endodontics, 6+ years experience) at Oracle Dental Clinic, Chipiyana Buzurg, Ghaziabad.
             </p>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 max-w-xl mx-auto md:mx-0 text-left text-xs sm:text-sm">
               <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex flex-col">
-                <span className="text-slate-400 text-xs">Consultation Fee</span>
+                <span className="text-slate-300 text-xs">Consultation Fee</span>
                 <span className="text-amber-300 font-bold text-base sm:text-lg">₹200</span>
               </div>
               <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex flex-col">
-                <span className="text-slate-400 text-xs">Attending Dentist</span>
+                <span className="text-slate-300 text-xs">Attending Dentist</span>
                 <span className="text-white font-bold text-xs sm:text-sm">Dr. Prashant Kumar Vats, BDS</span>
+                <span className="text-cyan-200 text-[11px]">PGD Clinical Endodontics · 6+ Yrs</span>
               </div>
               <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex flex-col col-span-2 sm:col-span-1">
                 <span className="text-slate-400 text-xs">Clinic Hours</span>
@@ -176,7 +178,7 @@ export default function RootCanalPage({
               <InteractiveButton
                 id="rct-hero-whatsapp-btn"
                 onClick={handleWhatsApp}
-                className="bg-[#25D366] hover:bg-[#20b858] text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2"
+                className="bg-[#0F7A40] hover:bg-[#0B5E31] text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2"
               >
                 <MessageCircle className="w-5 h-5" /> BOOK RCT CONSULTATION
               </InteractiveButton>
@@ -215,8 +217,12 @@ export default function RootCanalPage({
                 <div className="flex items-start gap-2.5">
                   <UserCheck className="w-4 h-4 text-cyan-400 mt-1 flex-shrink-0" />
                   <div>
-                    <p className="text-white font-semibold">Dr. Prashant Kumar Vats, BDS</p>
-                    <p className="text-xs text-slate-400">Dental Surgeon & Practitioner</p>
+                    <p className="text-white font-semibold">Dr. Prashant Kumar Vats, BDS, MIDA</p>
+                    <p className="text-xs text-slate-300">PGD in Clinical Endodontics · Certified Oral Implantologist · PGD in Oral Surgery · 6+ Years Experience</p>
+                    <div className="flex flex-wrap gap-3 pt-1.5 text-xs">
+                      <a href="/#doctor-profile" className="text-cyan-300 hover:text-white underline underline-offset-2">Doctor Profile</a>
+                      <a href="/#contact" className="text-amber-300 hover:text-white underline underline-offset-2">Clinic Contact &amp; Map</a>
+                    </div>
                   </div>
                 </div>
 
@@ -242,6 +248,14 @@ export default function RootCanalPage({
           </div>
         </div>
       </section>
+
+      {/* Answer-First Clinical Summary & Attribution */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+        <ClinicalReviewBox
+          question="How does root canal treatment (RCT) work and when is it needed?"
+          directAnswer="Root canal treatment removes inflamed or infected pulp tissue from inside a tooth under local anesthesia, disinfects and shapes the canals, and seals them with biocompatible filling material to preserve the natural tooth. It is typically recommended for deep cavities reaching the nerve, lingering hot/cold pain, tooth fractures, or root-tip infection confirmed on X-ray; a protective crown is often advised afterward for back molars."
+        />
+      </div>
 
       {/* What Is Root Canal Treatment? */}
       <section className="py-12 md:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -454,7 +468,7 @@ export default function RootCanalPage({
               }
             ].map((stepItem, idx) => (
               <div key={idx} className="bg-slate-50 rounded-2xl p-6 border border-slate-200 relative overflow-hidden">
-                <span className="text-3xl font-black text-slate-200 absolute top-4 right-4 select-none">
+                <span aria-hidden="true" className="text-3xl font-black text-slate-500 absolute top-4 right-4 select-none">
                   {stepItem.step}
                 </span>
                 <div className="relative z-10">
@@ -813,7 +827,7 @@ export default function RootCanalPage({
             <InteractiveButton
               id="rct-loc-whatsapp-btn"
               onClick={handleWhatsApp}
-              className="bg-[#25D366] hover:bg-[#20b858] text-white font-bold py-3 px-6 rounded-xl text-sm"
+              className="bg-[#0F7A40] hover:bg-[#0B5E31] text-white font-bold py-3 px-6 rounded-xl text-sm"
             >
               Book via WhatsApp
             </InteractiveButton>

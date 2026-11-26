@@ -194,7 +194,7 @@ const Services: React.FC<ServicesProps> = ({ navigateToPath }) => {
     <section id="services" className="cv-auto py-14 sm:py-16 bg-white border-t border-[#087B57]/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10 space-y-3">
-          <p className="text-xs font-extrabold uppercase tracking-wider text-[#FF8A24]">
+          <p className="text-xs font-extrabold uppercase tracking-wider text-[#B84D00]">
             Chipiyana Buzurg • Jaat Chowk • Ghaziabad
           </p>
           <h2 className="text-2xl sm:text-4xl font-extrabold text-[#087B57]">
@@ -203,7 +203,7 @@ const Services: React.FC<ServicesProps> = ({ navigateToPath }) => {
           <p className="text-[#26352F]/80 max-w-2xl mx-auto text-sm sm:text-base">
             From painless root canal treatment and dental implants to smile makeovers, zirconia crowns,
             and clear aligners—explore our 9-category services hub or{' '}
-            <a href="#contact" className="font-bold text-[#087B57] hover:text-[#FF654F] underline underline-offset-2">
+            <a href="#contact" className="font-bold text-[#087B57] hover:text-[#C63621] underline underline-offset-2">
               get directions &amp; contact our clinic
             </a>.
           </p>
@@ -212,7 +212,7 @@ const Services: React.FC<ServicesProps> = ({ navigateToPath }) => {
               id="services-open-hub-btn"
               href="/dental-services"
               onClick={(e) => handlePageClick(e, '/dental-services')}
-              className="min-h-[48px] inline-flex items-center gap-2 bg-gradient-to-r from-[#FF654F] to-[#FF8A24] hover:from-[#e8533d] hover:to-[#e67617] text-white font-extrabold text-sm px-7 py-3 rounded-full shadow-[0_8px_20px_rgba(255,101,79,0.28)] transition-all"
+              className="min-h-[48px] inline-flex items-center gap-2 bg-gradient-to-r from-[#C93B25] to-[#B84D00] hover:from-[#A92D1A] hover:to-[#963E00] text-white font-extrabold text-sm px-7 py-3 rounded-full shadow-[0_8px_20px_rgba(201,59,37,0.28)] transition-all"
             >
               <span>Open Interactive 9-Category Dental Services Page</span>
               <ArrowRight className="w-4 h-4 shrink-0" aria-hidden="true" />
@@ -255,7 +255,7 @@ const Services: React.FC<ServicesProps> = ({ navigateToPath }) => {
                     href={waUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`Inquire about ${service.title} on WhatsApp`}
+                    aria-label={`Book ${service.title} on WhatsApp — Oracle Dental Clinic`}
                     onClick={() =>
                       trackClinicEvent('appointment_cta_click', {
                         placement: 'home_service_card_whatsapp',
@@ -307,7 +307,7 @@ const Services: React.FC<ServicesProps> = ({ navigateToPath }) => {
                     key={item.path}
                     href={item.path}
                     onClick={(e) => handlePageClick(e, item.path)}
-                    className="p-2 rounded-lg bg-[#05523A]/70 hover:bg-[#FF8A24] hover:text-white font-medium transition-colors flex items-center justify-between group"
+                    className="p-2 rounded-lg bg-[#05523A]/70 hover:bg-[#B84D00] hover:text-white font-medium transition-colors flex items-center justify-between group"
                   >
                     <span>{item.title}</span>
                     <ArrowRight className="w-3 h-3 text-[#FFD36A] group-hover:text-white shrink-0" aria-hidden="true" />
@@ -327,7 +327,7 @@ const Services: React.FC<ServicesProps> = ({ navigateToPath }) => {
                     key={item.path}
                     href={item.path}
                     onClick={(e) => handlePageClick(e, item.path)}
-                    className="p-2 rounded-lg bg-[#05523A]/70 hover:bg-[#00A99D] hover:text-white font-medium transition-colors flex items-center justify-between group"
+                    className="p-2 rounded-lg bg-[#05523A]/70 hover:bg-[#067067] hover:text-white font-medium transition-colors flex items-center justify-between group"
                   >
                     <span>{item.title}</span>
                     <ArrowRight className="w-3 h-3 text-[#FFD36A] group-hover:text-white shrink-0" aria-hidden="true" />
@@ -347,7 +347,7 @@ const Services: React.FC<ServicesProps> = ({ navigateToPath }) => {
                     key={item.path}
                     href={item.path}
                     onClick={(e) => handlePageClick(e, item.path)}
-                    className="p-2 rounded-lg bg-[#05523A]/70 hover:bg-[#FF654F] hover:text-white font-medium transition-colors flex items-center justify-between group"
+                    className="p-2 rounded-lg bg-[#05523A]/70 hover:bg-[#C63621] hover:text-white font-medium transition-colors flex items-center justify-between group"
                   >
                     <span>{item.title}</span>
                     <ArrowRight className="w-3 h-3 text-[#FFD36A] group-hover:text-white shrink-0" aria-hidden="true" />

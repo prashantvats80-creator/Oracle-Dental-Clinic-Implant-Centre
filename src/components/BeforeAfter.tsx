@@ -75,13 +75,13 @@ const BeforeAfter: React.FC = () => {
     <section id="transformations" className="cv-auto py-14 sm:py-16 bg-[#FFF8EC] border-t border-[#087B57]/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10 sm:mb-12">
-          <p className="text-xs font-extrabold uppercase tracking-wider text-[#FF8A24] mb-2">
+          <p className="text-xs font-extrabold uppercase tracking-wider text-[#B84D00] mb-2">
             Real Clinical Focus
           </p>
           <div className="flex items-center justify-center gap-2 mb-3">
-            <Sparkles className="w-6 h-6 text-[#FF8A24] shrink-0" aria-hidden="true" />
+            <Sparkles className="w-6 h-6 text-[#B84D00] shrink-0" aria-hidden="true" />
             <h2 className="text-2xl sm:text-4xl font-extrabold text-[#087B57]">Smile Transformations</h2>
-            <Sparkles className="w-6 h-6 text-[#FF8A24] shrink-0" aria-hidden="true" />
+            <Sparkles className="w-6 h-6 text-[#B84D00] shrink-0" aria-hidden="true" />
           </div>
           <p className="text-[#26352F]/75 max-w-2xl mx-auto text-sm sm:text-base">
             Illustrative dental treatment outcomes. Individual clinical results vary based on oral health, bone volume, and treatment plan.
@@ -98,8 +98,10 @@ const BeforeAfter: React.FC = () => {
               <div className="p-4 bg-[#E5F5EC]/45">
                 <div className="w-full rounded-xl overflow-hidden border border-[#087B57]/10 bg-white">
                   <img
-                    src={item.singleImg}
-                    alt={`${item.title} – Oracle Dental Clinic Chipiyana Buzurg`}
+                    src={`${(import.meta.env.BASE_URL || '/').replace(/\/$/, '')}${item.singleImg}`}
+                    srcSet={`${(import.meta.env.BASE_URL || '/').replace(/\/$/, '')}${item.singleImg.replace('.webp', '-380.webp')} 380w, ${(import.meta.env.BASE_URL || '/').replace(/\/$/, '')}${item.singleImg} 640w`}
+                    sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 380px"
+                    alt={`${item.title} clinical case example`}
                     width="640"
                     height="427"
                     className="w-full h-auto object-cover aspect-[3/2] block"

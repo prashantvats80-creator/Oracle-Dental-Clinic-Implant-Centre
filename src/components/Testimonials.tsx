@@ -69,7 +69,7 @@ export const Testimonials: React.FC = () => {
                   <h2 className="text-xl font-extrabold text-[#087B57]">
                     Google Business Profile
                   </h2>
-                  <span className="text-xs font-bold text-[#00A99D] inline-flex items-center gap-1">
+                  <span className="text-xs font-bold text-[#067067] inline-flex items-center gap-1">
                     <CheckCircle2 className="w-3.5 h-3.5" aria-hidden="true" /> Verified Listing
                   </span>
                 </div>
@@ -78,14 +78,14 @@ export const Testimonials: React.FC = () => {
                 </p>
 
                 <div className="flex items-center gap-2 mt-2 justify-center sm:justify-start flex-wrap">
-                  <div className="flex text-[#FF8A24]" aria-label="4.9 out of 5 stars">
+                  <div className="flex text-[#B84D00]" aria-label="4.9 out of 5 stars">
                     {[1, 2, 3, 4, 5].map((_, i) => (
                       <Star key={i} className="w-4 h-4 fill-current" aria-hidden="true" />
                     ))}
                   </div>
                   <span className="text-lg font-black text-[#26352F]">{GBP_CONFIG.FALLBACK_RATING}</span>
-                  <span className="text-[#26352F]/50 text-sm">/ 5.0</span>
-                  <span className="text-[#26352F]/30">•</span>
+                  <span className="text-[#26352F]/70 text-sm">/ 5.0</span>
+                  <span className="text-[#26352F]/30" aria-hidden="true">•</span>
                   <span className="text-sm font-bold text-[#087B57]">View live reviews on Google Maps</span>
                 </div>
               </div>
@@ -97,7 +97,7 @@ export const Testimonials: React.FC = () => {
                 href={GBP_CONFIG.GOOGLE_WRITE_REVIEW_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="min-h-[44px] bg-gradient-to-r from-[#FF654F] to-[#FF8A24] hover:from-[#e8533d] hover:to-[#e67617] text-white font-extrabold py-3 px-6 rounded-full shadow-xs transition-all text-sm flex items-center justify-center gap-2"
+                className="min-h-[44px] bg-gradient-to-r from-[#C93B25] to-[#B84D00] hover:from-[#A92D1A] hover:to-[#963E00] text-white font-extrabold py-3 px-6 rounded-full shadow-xs transition-all text-sm flex items-center justify-center gap-2"
               >
                 <MessageSquareCode className="w-4 h-4" aria-hidden="true" />
                 <span>Write a Google Review</span>
@@ -118,21 +118,21 @@ export const Testimonials: React.FC = () => {
 
         {/* Section Heading & Category Filter Tabs */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-[#FF8A24] mb-2">
-            <Sparkles className="w-3.5 h-3.5 text-[#FF654F]" aria-hidden="true" />
+          <div className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-[#B84D00] mb-2">
+            <Sparkles className="w-3.5 h-3.5 text-[#C63621]" aria-hidden="true" />
             <span>Patient Feedback Highlights</span>
           </div>
           <h2 className="text-2xl sm:text-4xl font-extrabold text-[#087B57] mb-3">
             What Local Patients Say About Oracle Dental Clinic
           </h2>
           <p className="text-[#26352F]/75 max-w-2xl mx-auto leading-relaxed text-sm md:text-base">
-            Feedback from families across Chipiyana Buzurg, Jaat Chowk, Shahberi, Crossings Republik,
+            Feedback from families across Chipiyana Buzurg, Jaat Chowk, Shahberi, Chappraula, Crossings Republik,
             Noida Extension, and Lal Kuan. Read all verified, up-to-date reviews directly on our{' '}
             <a
               href={GBP_CONFIG.GOOGLE_BUSINESS_PROFILE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#087B57] hover:text-[#FF654F] font-bold underline"
+              className="text-[#087B57] hover:text-[#C63621] font-bold underline"
             >
               Google Business Profile
             </a>.
@@ -143,13 +143,14 @@ export const Testimonials: React.FC = () => {
               <button
                 type="button"
                 key={category}
+                aria-pressed={selectedCategory === category}
                 onClick={() => {
                   setSelectedCategory(category);
                   setVisibleCount(6);
                 }}
                 className={`min-h-[40px] text-xs font-bold px-4 py-2 rounded-full transition-colors cursor-pointer ${
                   selectedCategory === category
-                    ? 'bg-[#FF654F] text-white shadow-xs'
+                    ? 'bg-[#C63621] text-white shadow-xs'
                     : 'bg-white text-[#26352F] hover:bg-[#E5F5EC] border border-[#087B57]/15'
                 }`}
               >
@@ -165,10 +166,10 @@ export const Testimonials: React.FC = () => {
             <div
               key={idx}
               id={`testimonial-card-${idx}`}
-              className="bg-white p-6 rounded-2xl shadow-xs border border-[#087B57]/12 hover:shadow-md hover:border-[#00A99D]/50 transition-all flex flex-col justify-between relative overflow-hidden"
+              className="bg-white p-6 rounded-2xl shadow-xs border border-[#087B57]/12 hover:shadow-md hover:border-[#067067]/50 transition-all flex flex-col justify-between relative overflow-hidden"
             >
               {review.highlight && (
-                <div className="text-[11px] font-bold text-[#00A99D] mb-2">
+                <div className="text-[11px] font-bold text-[#067067] mb-2">
                   {review.highlight}
                 </div>
               )}
@@ -262,7 +263,7 @@ export const Testimonials: React.FC = () => {
             <a
               id="trust-card-book-btn"
               href="#contact"
-              className="min-h-[48px] bg-[#FF654F] hover:bg-[#E8523D] text-white font-extrabold py-3.5 px-6 rounded-xl shadow-md transition-colors text-sm flex items-center justify-center gap-2"
+              className="min-h-[48px] bg-[#C63621] hover:bg-[#A82B18] text-white font-extrabold py-3.5 px-6 rounded-xl shadow-md transition-colors text-sm flex items-center justify-center gap-2"
             >
               <CalendarRange className="w-4 h-4" aria-hidden="true" />
               <span>Book Consultation</span>

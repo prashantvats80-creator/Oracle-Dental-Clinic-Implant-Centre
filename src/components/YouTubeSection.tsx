@@ -33,7 +33,7 @@ const YouTubeSection: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
             {/* Left Column: Heading, Description & CTA */}
             <div className="lg:col-span-7 p-6 sm:p-10 lg:p-12 space-y-5">
-              <div className="inline-flex items-center gap-2.5 text-xs font-extrabold tracking-wider uppercase text-[#FF8A24]">
+              <div className="inline-flex items-center gap-2.5 text-xs font-extrabold tracking-wider uppercase text-[#B84D00]">
                 <YouTubeLogo className="w-6 h-4 shrink-0" />
                 <span>Official YouTube Channel</span>
               </div>
@@ -77,7 +77,7 @@ const YouTubeSection: React.FC = () => {
                       page_group: 'homepage',
                     })
                   }
-                  className="inline-flex items-center justify-center gap-2.5 min-h-[50px] bg-gradient-to-r from-[#FF654F] to-[#FF8A24] hover:from-[#e8533d] hover:to-[#e67617] text-white font-extrabold text-sm sm:text-base px-7 py-3 rounded-full shadow-[0_8px_20px_rgba(255,101,79,0.28)] transition-all focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFD36A]"
+                  className="inline-flex items-center justify-center gap-2.5 min-h-[50px] bg-gradient-to-r from-[#C93B25] to-[#B84D00] hover:from-[#A92D1A] hover:to-[#963E00] text-white font-extrabold text-sm sm:text-base px-7 py-3 rounded-full shadow-[0_8px_20px_rgba(201,59,37,0.28)] transition-all focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFD36A]"
                 >
                   <span className="bg-white rounded-md px-1.5 py-1 inline-flex items-center justify-center">
                     <YouTubeLogo className="w-5 h-3.5 shrink-0" />
@@ -95,7 +95,7 @@ const YouTubeSection: React.FC = () => {
                 href={YOUTUBE_CHANNEL_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Open Oracle Dental Clinic official YouTube channel preview"
+                aria-label="Oracle Dental Clinic @oracledentalclinic0 — Watch official YouTube channel"
                 onClick={() =>
                   trackClinicEvent('youtube_channel_click', {
                     placement: 'homepage_youtube_preview',
@@ -140,7 +140,10 @@ const YouTubeSection: React.FC = () => {
                 {/* Channel Identity Bar */}
                 <div className="bg-[#FFF8EC] px-5 py-4 flex items-center justify-between gap-3 border-t border-[#087B57]/10">
                   <div className="flex items-center gap-3 min-w-0">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#087B57] to-[#00A99D] text-white font-bold text-base flex items-center justify-center shrink-0">
+                    <div
+                      aria-hidden="true"
+                      className="w-10 h-10 rounded-full bg-gradient-to-br from-[#087B57] to-[#00A99D] text-white font-bold text-base flex items-center justify-center shrink-0"
+                    >
                       O
                     </div>
                     <div className="min-w-0">
@@ -152,7 +155,7 @@ const YouTubeSection: React.FC = () => {
                       </p>
                     </div>
                   </div>
-                  <span className="shrink-0 inline-flex items-center gap-1 text-xs font-bold text-[#FF654F] group-hover:underline">
+                  <span className="shrink-0 inline-flex items-center gap-1 text-xs font-bold text-[#C63621] group-hover:underline">
                     <span>Watch</span>
                     <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
                   </span>

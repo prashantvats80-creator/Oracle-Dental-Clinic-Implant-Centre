@@ -61,7 +61,7 @@ const WhyUs: React.FC<WhyUsProps> = () => {
     <section id="why-us" className="cv-auto py-14 sm:py-16 bg-[#E5F5EC] border-t border-[#087B57]/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="text-center max-w-3xl mx-auto">
-          <p className="text-xs font-extrabold uppercase tracking-wider text-[#FF8A24] mb-2">
+          <p className="text-xs font-extrabold uppercase tracking-wider text-[#B84D00] mb-2">
             Trusted Local Dental Care
           </p>
           <h2 className="text-2xl sm:text-4xl font-extrabold text-[#087B57] mb-4">
@@ -111,16 +111,16 @@ const WhyUs: React.FC<WhyUsProps> = () => {
 
           <div className="bg-white rounded-3xl border border-[#087B57]/12 p-6 sm:p-8 space-y-3 shadow-xs">
             <h3 className="text-xl font-extrabold text-[#087B57] flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-[#FF8A24]" aria-hidden="true" />
-              <span>Easily Accessible Within 5 km of Chipiyana Buzurg</span>
+              <MapPin className="w-5 h-5 text-[#B84D00]" aria-hidden="true" />
+              <span>Easily Accessible Within 6 km of Chipiyana Buzurg</span>
             </h3>
             <p className="text-sm text-[#26352F]/80 leading-relaxed">
               Located at <strong>{GBP_CONFIG.SHORT_ADDRESS}</strong>, our clinic serves families,
               students, and working professionals from <strong>Chipiyana Buzurg</strong>,{' '}
               <strong>Jaat Chowk</strong>, <strong>Crossings Republik</strong>,{' '}
-              <strong>ABES Engineering College surroundings</strong>, <strong>Shahberi</strong>,{' '}
-              <strong>Noida Extension</strong>, nearby <strong>Greater Noida West</strong> residential
-              societies, and <strong>Lal Kuan</strong>.
+              <strong>ABES Engineering College area</strong>, <strong>Shahberi</strong>,{' '}
+              <strong>Chappraula</strong>, <strong>Noida Extension</strong>, nearby{' '}
+              <strong>Greater Noida West</strong> residential societies, and <strong>Lal Kuan</strong>.
             </p>
           </div>
         </div>

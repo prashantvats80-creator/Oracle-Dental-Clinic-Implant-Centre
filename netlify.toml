@@ -7,8 +7,7 @@
 [build.environment]
   NODE_VERSION = "20"
 
-# Permanent 301 Redirects for Consolidated Pages (must precede SPA fallback)
-# Group A: Local Dentist / Dental Clinic
+# Permanent 301 Redirects for Consolidated Pages (must precede rewrites)
 [[redirects]]
   from = "/dentist-near-me"
   to = "/dentist-chipiyana-buzurg-ghaziabad"
@@ -27,7 +26,6 @@
   status = 301
   force = true
 
-# Group B: Gum & Periodontal Treatment
 [[redirects]]
   from = "/gum-disease-treatment"
   to = "/periodontal-gum-treatment-ghaziabad"
@@ -52,18 +50,248 @@
   status = 301
   force = true
 
-# Group C: Emergency Dentist
 [[redirects]]
   from = "/emergency-dentist"
   to = "/emergency-dentist-ghaziabad"
   status = 301
   force = true
 
-# SPA fallback rewrite so direct hits and refreshes on all active routes serve index.html
+# Clean Route Rewrites for 46 Active Canonical Routes (Serves dedicated pre-rendered HTML with HTTP 200)
+[[redirects]]
+  from = "/dental-services"
+  to = "/dental-services.html"
+  status = 200
+
+[[redirects]]
+  from = "/dentist-chipiyana-buzurg-ghaziabad"
+  to = "/dentist-chipiyana-buzurg-ghaziabad.html"
+  status = 200
+
+[[redirects]]
+  from = "/dental-implants"
+  to = "/dental-implants.html"
+  status = 200
+
+[[redirects]]
+  from = "/full-mouth-dental-implants"
+  to = "/full-mouth-dental-implants.html"
+  status = 200
+
+[[redirects]]
+  from = "/smile-makeover-ghaziabad"
+  to = "/smile-makeover-ghaziabad.html"
+  status = 200
+
+[[redirects]]
+  from = "/cosmetic-dentistry"
+  to = "/cosmetic-dentistry.html"
+  status = 200
+
+[[redirects]]
+  from = "/dental-veneers"
+  to = "/dental-veneers.html"
+  status = 200
+
+[[redirects]]
+  from = "/zirconia-crowns"
+  to = "/zirconia-crowns.html"
+  status = 200
+
+[[redirects]]
+  from = "/root-canal-treatment"
+  to = "/root-canal-treatment.html"
+  status = 200
+
+[[redirects]]
+  from = "/wisdom-tooth-extraction"
+  to = "/wisdom-tooth-extraction.html"
+  status = 200
+
+[[redirects]]
+  from = "/teeth-whitening"
+  to = "/teeth-whitening.html"
+  status = 200
+
+[[redirects]]
+  from = "/teeth-cleaning"
+  to = "/teeth-cleaning.html"
+  status = 200
+
+[[redirects]]
+  from = "/periodontal-gum-treatment-ghaziabad"
+  to = "/periodontal-gum-treatment-ghaziabad.html"
+  status = 200
+
+[[redirects]]
+  from = "/emergency-dentist-ghaziabad"
+  to = "/emergency-dentist-ghaziabad.html"
+  status = 200
+
+[[redirects]]
+  from = "/dental-braces"
+  to = "/dental-braces.html"
+  status = 200
+
+[[redirects]]
+  from = "/clear-aligners"
+  to = "/clear-aligners.html"
+  status = 200
+
+[[redirects]]
+  from = "/dental-fillings"
+  to = "/dental-fillings.html"
+  status = 200
+
+[[redirects]]
+  from = "/tooth-extraction"
+  to = "/tooth-extraction.html"
+  status = 200
+
+[[redirects]]
+  from = "/tooth-cap"
+  to = "/tooth-cap.html"
+  status = 200
+
+[[redirects]]
+  from = "/dental-bridges"
+  to = "/dental-bridges.html"
+  status = 200
+
+[[redirects]]
+  from = "/dentures"
+  to = "/dentures.html"
+  status = 200
+
+[[redirects]]
+  from = "/kids-dentist"
+  to = "/kids-dentist.html"
+  status = 200
+
+[[redirects]]
+  from = "/dental-implant-after-tooth-extraction"
+  to = "/dental-implant-after-tooth-extraction.html"
+  status = 200
+
+[[redirects]]
+  from = "/impacted-wisdom-tooth"
+  to = "/impacted-wisdom-tooth.html"
+  status = 200
+
+[[redirects]]
+  from = "/tooth-pain-treatment"
+  to = "/tooth-pain-treatment.html"
+  status = 200
+
+[[redirects]]
+  from = "/tooth-sensitivity"
+  to = "/tooth-sensitivity.html"
+  status = 200
+
+[[redirects]]
+  from = "/bad-breath-treatment"
+  to = "/bad-breath-treatment.html"
+  status = 200
+
+[[redirects]]
+  from = "/loose-tooth-treatment"
+  to = "/loose-tooth-treatment.html"
+  status = 200
+
+[[redirects]]
+  from = "/broken-tooth-treatment"
+  to = "/broken-tooth-treatment.html"
+  status = 200
+
+[[redirects]]
+  from = "/chipped-tooth"
+  to = "/chipped-tooth.html"
+  status = 200
+
+[[redirects]]
+  from = "/black-tooth"
+  to = "/black-tooth.html"
+  status = 200
+
+[[redirects]]
+  from = "/missing-teeth"
+  to = "/missing-teeth.html"
+  status = 200
+
+[[redirects]]
+  from = "/cavity-treatment"
+  to = "/cavity-treatment.html"
+  status = 200
+
+[[redirects]]
+  from = "/dental-abscess-treatment"
+  to = "/dental-abscess-treatment.html"
+  status = 200
+
+[[redirects]]
+  from = "/dental-treatment-cost-ghaziabad"
+  to = "/dental-treatment-cost-ghaziabad.html"
+  status = 200
+
+[[redirects]]
+  from = "/dental-implant-cost-ghaziabad"
+  to = "/dental-implant-cost-ghaziabad.html"
+  status = 200
+
+[[redirects]]
+  from = "/root-canal-cost-ghaziabad"
+  to = "/root-canal-cost-ghaziabad.html"
+  status = 200
+
+[[redirects]]
+  from = "/tooth-cap-cost-ghaziabad"
+  to = "/tooth-cap-cost-ghaziabad.html"
+  status = 200
+
+[[redirects]]
+  from = "/tooth-filling-cost-ghaziabad"
+  to = "/tooth-filling-cost-ghaziabad.html"
+  status = 200
+
+[[redirects]]
+  from = "/teeth-cleaning-cost-ghaziabad"
+  to = "/teeth-cleaning-cost-ghaziabad.html"
+  status = 200
+
+[[redirects]]
+  from = "/wisdom-tooth-extraction-cost-ghaziabad"
+  to = "/wisdom-tooth-extraction-cost-ghaziabad.html"
+  status = 200
+
+[[redirects]]
+  from = "/tooth-extraction-cost-ghaziabad"
+  to = "/tooth-extraction-cost-ghaziabad.html"
+  status = 200
+
+[[redirects]]
+  from = "/dental-bridge-cost-ghaziabad"
+  to = "/dental-bridge-cost-ghaziabad.html"
+  status = 200
+
+[[redirects]]
+  from = "/dentures-cost-ghaziabad"
+  to = "/dentures-cost-ghaziabad.html"
+  status = 200
+
+[[redirects]]
+  from = "/teeth-whitening-cost-ghaziabad"
+  to = "/teeth-whitening-cost-ghaziabad.html"
+  status = 200
+
+[[redirects]]
+  from = "/privacy-policy"
+  to = "/privacy-policy.html"
+  status = 200
+
+# Genuine 404 handler for nonexistent URLs (Prevents soft-404 indexing)
 [[redirects]]
   from = "/*"
-  to = "/index.html"
-  status = 200
+  to = "/404.html"
+  status = 404
 
 # Global security & non-immutable HTML caching headers
 [[headers]]
@@ -99,6 +327,12 @@
   for = "/robots.txt"
   [headers.values]
     Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/llms.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+    Content-Type = "text/plain; charset=utf-8"
 
 # Ensure Search Console verification file is served directly without caching issues
 [[headers]]

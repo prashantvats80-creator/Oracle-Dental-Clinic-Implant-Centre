@@ -142,10 +142,32 @@ const SEOHead: React.FC<SEOHeadProps> = ({ routePath, isNotFound = false }) => {
           { '@type': 'Place', name: 'Crossings Republik, Ghaziabad' },
           { '@type': 'Place', name: 'ABES Engineering College area, Ghaziabad' },
           { '@type': 'Place', name: 'Shahberi' },
+          { '@type': 'Place', name: 'Chhapraula, Ghaziabad' },
           { '@type': 'Place', name: 'Noida Extension' },
           { '@type': 'Place', name: 'Greater Noida West' },
+          { '@type': 'Place', name: 'Gaur City, Greater Noida West' },
+          { '@type': 'Place', name: 'Techzone, Greater Noida West' },
+          { '@type': 'Place', name: 'Bisrakh' },
           { '@type': 'Place', name: 'Lal Kuan, Ghaziabad' },
         ],
+        ...(seo.path === '/'
+          ? {
+              hasOfferCatalog: {
+                '@type': 'OfferCatalog',
+                name: 'Dental Treatments & Services',
+                itemListElement: [
+                  { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Dental Implants & Full Mouth Implants' } },
+                  { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Root Canal Treatment (RCT)' } },
+                  { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Smile Makeover, Veneers & Cosmetic Dentistry' } },
+                  { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Zirconia Crowns & Dental Bridges' } },
+                  { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Wisdom Tooth Extraction & Oral Surgery' } },
+                  { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Dental Braces & Clear Aligners' } },
+                  { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Teeth Cleaning, Whitening & Preventive Care' } },
+                  { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Emergency Dental Care (Daily 9 AM–9 PM)' } },
+                ],
+              },
+            }
+          : {}),
         founder: { '@id': GBP_CONFIG.PERSON_ID },
         sameAs: GBP_CONFIG.SOCIAL_URLS,
       },
@@ -156,6 +178,20 @@ const SEOHead: React.FC<SEOHeadProps> = ({ routePath, isNotFound = false }) => {
         honorificPrefix: 'Dr.',
         honorificSuffix: GBP_CONFIG.DOCTOR_QUALIFICATION,
         jobTitle: GBP_CONFIG.DOCTOR_ROLE,
+        description: `${GBP_CONFIG.DOCTOR_NAME} (${GBP_CONFIG.DOCTOR_CREDENTIALS_SUMMARY}) with ${GBP_CONFIG.DOCTOR_EXPERIENCE} in Chipiyana Buzurg, Ghaziabad.`,
+        hasCredential: GBP_CONFIG.DOCTOR_CREDENTIALS.map((cred) => ({
+          '@type': 'EducationalOccupationalCredential',
+          credentialCategory: cred === 'BDS' ? 'degree' : 'certificate',
+          name: cred,
+        })),
+        knowsAbout: [
+          'Dental Implants',
+          'Clinical Endodontics',
+          'Root Canal Treatment',
+          'Oral Surgery',
+          'Wisdom Tooth Extraction',
+          'General & Restorative Dentistry',
+        ],
         image: GBP_CONFIG.DOCTOR_IMAGE,
         worksFor: { '@id': GBP_CONFIG.ENTITY_ID },
       },
@@ -167,6 +203,9 @@ const SEOHead: React.FC<SEOHeadProps> = ({ routePath, isNotFound = false }) => {
         description: seo.description,
         isPartOf: { '@id': GBP_CONFIG.WEBSITE_ID },
         about: { '@id': GBP_CONFIG.ENTITY_ID },
+        author: { '@id': GBP_CONFIG.PERSON_ID },
+        reviewedBy: { '@id': GBP_CONFIG.PERSON_ID },
+        dateModified: '2026-11-26',
         inLanguage: 'en-IN',
       },
     ];
@@ -185,11 +224,19 @@ const SEOHead: React.FC<SEOHeadProps> = ({ routePath, isNotFound = false }) => {
           { '@type': 'Place', name: 'Chipiyana Buzurg, Ghaziabad' },
           { '@type': 'Place', name: 'Crossings Republik, Ghaziabad' },
           { '@type': 'Place', name: 'ABES Engineering College area, Ghaziabad' },
+          { '@type': 'Place', name: 'Shahberi' },
+          { '@type': 'Place', name: 'Chhapraula, Ghaziabad' },
           { '@type': 'Place', name: 'Noida Extension' },
           { '@type': 'Place', name: 'Greater Noida West' },
+          { '@type': 'Place', name: 'Gaur City, Greater Noida West' },
+          { '@type': 'Place', name: 'Techzone, Greater Noida West' },
+          { '@type': 'Place', name: 'Bisrakh' },
+          { '@type': 'Place', name: 'Lal Kuan, Ghaziabad' },
         ],
       });
     }
+
+    // Visible patient FAQs remain on-page for user utility without FAQ rich-result markup per SEO policy.
 
     if (!isNotFound && seo.path !== '/') {
       const breadcrumbItems = [

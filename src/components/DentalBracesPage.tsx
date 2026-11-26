@@ -43,7 +43,7 @@ export default function DentalBracesPage({
     <div className="bg-slate-50 min-h-screen text-slate-800 leading-relaxed">
       <Breadcrumbs
         items={[
-          { label: 'Dental Treatments', path: '/#services' },
+          { label: 'Dental Services', path: '/dental-services' },
           { label: 'Dental Braces', path: '/dental-braces' },
         ]}
         navigateToHome={navigateToHome}

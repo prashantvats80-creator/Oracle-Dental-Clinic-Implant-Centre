@@ -26,7 +26,7 @@ const Contact: React.FC<ContactProps> = () => {
             <div className="relative w-14 h-14 bg-gradient-to-br from-[#FF654F] to-[#FF8A24] text-white rounded-2xl flex items-center justify-center mb-5 shadow-md">
               <Calendar className="w-7 h-7" aria-hidden="true" />
             </div>
-            <p className="relative text-xs font-extrabold uppercase tracking-wider text-[#FF8A24] mb-1">
+            <p className="relative text-xs font-extrabold uppercase tracking-wider text-[#B84D00] mb-1">
               Open Daily: 9:00 AM – 9:00 PM • Quick Confirmation
             </p>
             <h2 className="relative text-2xl sm:text-3xl font-extrabold text-[#087B57] mb-3">
@@ -43,14 +43,14 @@ const Contact: React.FC<ContactProps> = () => {
                 href={GBP_CONFIG.WHATSAPP_BOOKING_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Book dental appointment on WhatsApp"
+                aria-label="Book on WhatsApp — Oracle Dental Clinic"
                 onClick={() =>
                   trackClinicEvent('appointment_cta_click', {
                     placement: 'contact_section_whatsapp',
                     interaction_label: 'book_whatsapp',
                   })
                 }
-                className="min-h-[48px] bg-gradient-to-r from-[#FF654F] to-[#FF8A24] hover:from-[#e8533d] hover:to-[#e67617] text-white font-extrabold py-3.5 px-7 rounded-full shadow-[0_8px_20px_rgba(255,101,79,0.28)] transition-all text-base flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFD36A]"
+                className="min-h-[48px] bg-gradient-to-r from-[#C93B25] to-[#B84D00] hover:from-[#A92D1A] hover:to-[#963E00] text-white font-extrabold py-3.5 px-7 rounded-full shadow-[0_8px_20px_rgba(201,59,37,0.28)] transition-all text-base flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFD36A]"
               >
                 <MessageCircle className="w-5 h-5 shrink-0" aria-hidden="true" />
                 <span>Book on WhatsApp</span>
@@ -58,7 +58,7 @@ const Contact: React.FC<ContactProps> = () => {
               <a
                 id="contact-call-btn"
                 href={GBP_CONFIG.CALL_URL}
-                aria-label={`Call Oracle Dental Clinic at ${GBP_CONFIG.PHONE_DISPLAY}`}
+                aria-label={`Call ${GBP_CONFIG.PHONE_DISPLAY} — Oracle Dental Clinic`}
                 onClick={() =>
                   trackClinicEvent('call_click', {
                     placement: 'contact_section_call',
@@ -75,7 +75,7 @@ const Contact: React.FC<ContactProps> = () => {
 
           {/* Verified NAP & 2G-Friendly Directions Map */}
           <div className="flex flex-col justify-center">
-            <p className="text-xs font-extrabold uppercase tracking-wider text-[#FF8A24] mb-1">
+            <p className="text-xs font-extrabold uppercase tracking-wider text-[#B84D00] mb-1">
               Chipiyana Buzurg, Ghaziabad
             </p>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#087B57] mb-5">
@@ -103,7 +103,7 @@ const Contact: React.FC<ContactProps> = () => {
                     {GBP_CONFIG.ADDRESS}
                   </a>
                   <p className="text-xs text-[#087B57] font-medium mt-1">
-                    Conveniently reachable for patients from Chipiyana Buzurg, Jaat Chowk, Crossings Republik, ABES Engineering College area, Shahberi, Noida Extension, Greater Noida West &amp; Lal Kuan.
+                    Conveniently reachable within 6 km for patients from Chipiyana Buzurg, Jaat Chowk, Crossings Republik, ABES Engineering College area, Shahberi, Chappraula, Noida Extension, Greater Noida West &amp; Lal Kuan.
                   </p>
                 </div>
               </div>
@@ -178,7 +178,7 @@ const Contact: React.FC<ContactProps> = () => {
                   href={GBP_CONFIG.GOOGLE_MAPS_DIRECTIONS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Open Google Maps directions to Oracle Dental Clinic"
+                  aria-label="Open in Google Maps — Oracle Dental Clinic Directions"
                   onClick={(e) => {
                     e.stopPropagation();
                     trackClinicEvent('directions_click', {

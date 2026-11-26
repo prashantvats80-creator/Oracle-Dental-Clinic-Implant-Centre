@@ -35,7 +35,7 @@ export default function DentalFillingsPage({ handleCall, handleWhatsApp, navigat
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed">
       <Breadcrumbs
         items={[
-          { label: 'Dental Treatments', path: '/#services' },
+          { label: 'Dental Services', path: '/dental-services' },
           { label: 'Dental Fillings', path: '/dental-fillings' },
         ]}
         navigateToHome={navigateToHome}

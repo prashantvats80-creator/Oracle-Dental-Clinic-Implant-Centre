@@ -22,7 +22,7 @@ export default function NotFoundPage({ navigateToPath }: NotFoundPageProps) {
   return (
     <section className="min-h-[70vh] bg-[#FFF8EC] py-16 px-4 flex items-center">
       <div className="max-w-3xl mx-auto w-full bg-white rounded-3xl border border-[#087B57]/12 p-8 sm:p-12 shadow-sm text-center space-y-6">
-        <p className="text-xs font-bold tracking-wider uppercase text-[#FF8A24]">
+        <p className="text-xs font-bold tracking-wider uppercase text-[#B84D00]">
           404 · Page Not Found
         </p>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-[#087B57]">
@@ -48,17 +48,17 @@ export default function NotFoundPage({ navigateToPath }: NotFoundPageProps) {
             href={GBP_CONFIG.WHATSAPP_BOOKING_URL}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Book dental appointment on WhatsApp"
+            aria-label="Book on WhatsApp — Oracle Dental Clinic"
             onClick={() => trackClinicEvent('appointment_cta_click', { placement: '404_whatsapp' })}
-            className="min-h-[44px] inline-flex items-center gap-2 bg-[#FF654F] hover:bg-[#e8533d] text-white font-bold text-sm px-6 py-3 rounded-full transition-colors"
+            className="min-h-[44px] inline-flex items-center gap-2 bg-[#C63621] hover:bg-[#A82B18] text-white font-bold text-sm px-6 py-3 rounded-full transition-colors"
           >
             <MessageCircle className="w-4 h-4" aria-hidden="true" /> Book on WhatsApp
           </a>
           <a
             href={GBP_CONFIG.CALL_URL}
-            aria-label={`Call Oracle Dental Clinic at ${GBP_CONFIG.PHONE_DISPLAY}`}
+            aria-label={`Call ${GBP_CONFIG.PHONE_DISPLAY} — Oracle Dental Clinic`}
             onClick={() => trackClinicEvent('call_click', { placement: '404_call' })}
-            className="min-h-[44px] inline-flex items-center gap-2 bg-[#E5F5EC] hover:bg-[#00A99D]/15 text-[#087B57] border border-[#087B57]/20 font-bold text-sm px-6 py-3 rounded-full transition-colors"
+            className="min-h-[44px] inline-flex items-center gap-2 bg-[#E5F5EC] hover:bg-[#067067]/15 text-[#087B57] border border-[#087B57]/20 font-bold text-sm px-6 py-3 rounded-full transition-colors"
           >
             <PhoneCall className="w-4 h-4" aria-hidden="true" /> Call {GBP_CONFIG.PHONE_DISPLAY}
           </a>

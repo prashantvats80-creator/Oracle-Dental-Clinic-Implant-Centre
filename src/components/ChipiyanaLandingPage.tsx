@@ -183,13 +183,13 @@ export default function ChipiyanaLandingPage({
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
-              Dentist &amp; Dental Clinic in Chipiyana Buzurg, Ghaziabad
+              Best Dentist &amp; Dental Clinic in Chipiyana Buzurg, Ghaziabad
             </h1>
 
             <p className="text-base sm:text-lg text-slate-200 font-normal leading-relaxed max-w-2xl">
-              Looking for a trusted <strong>dentist near me</strong> or a reliable <strong>dental clinic in Ghaziabad</strong>?{' '}
-              <strong>Oracle Dental Clinic &amp; Implant Center</strong> at Jaat Chowk, Chipiyana Buzurg provides ethical family, restorative, surgical, and implant dentistry under{' '}
-              <strong>Dr. Prashant Kumar Vats, BDS, MIDA</strong>—serving nearby families from Crossings Republik, Noida Extension, Greater Noida West, Shahberi, and Lal Kuan.
+              Searching for the <strong>best dentist near me</strong> or a trusted <strong>dental clinic near me</strong>?{' '}
+              <strong>Oracle Dental Clinic &amp; Implant Center</strong> is your dedicated <strong>dental clinic in Chipiyana Buzurg</strong> and top-rated <strong>dental clinic in Ghaziabad</strong>. Led by{' '}
+              <strong>Dr. Prashant Kumar Vats, BDS, MIDA</strong>, we are the preferred <strong>dentist near Crossings Republik</strong> and <strong>dentist near Noida Extension</strong>, providing ethical family dentistry, modern dental implants, rotary root canals, and gentle pain relief.
             </p>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 max-w-xl mx-auto md:mx-0 text-left text-xs sm:text-sm">
@@ -219,7 +219,7 @@ export default function ChipiyanaLandingPage({
               <InteractiveButton
                 id="chipiyana-hero-whatsapp-btn"
                 onClick={handleWhatsApp}
-                className="bg-[#25D366] hover:bg-[#20b858] text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2"
+                className="bg-[#0F7A40] hover:bg-[#0B5E31] text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2"
               >
                 <MessageCircle className="w-5 h-5" aria-hidden="true" /> Book on WhatsApp
               </InteractiveButton>
@@ -691,7 +691,7 @@ export default function ChipiyanaLandingPage({
                 <InteractiveButton
                   id="chipiyana-loc-whatsapp-btn"
                   onClick={handleWhatsApp}
-                  className="bg-[#25D366] hover:bg-[#20b858] text-white font-bold py-3 px-5 rounded-xl text-sm flex items-center gap-2"
+                  className="bg-[#0F7A40] hover:bg-[#0B5E31] text-white font-bold py-3 px-5 rounded-xl text-sm flex items-center gap-2"
                 >
                   <MessageCircle className="w-4 h-4" aria-hidden="true" /> Book Appointment
                 </InteractiveButton>
@@ -822,7 +822,7 @@ export default function ChipiyanaLandingPage({
             <InteractiveButton
               id="chipiyana-bottom-wa-btn"
               onClick={handleWhatsApp}
-              className="bg-[#25D366] hover:bg-[#20b858] text-white font-bold py-3 px-6 rounded-xl text-sm"
+              className="bg-[#0F7A40] hover:bg-[#0B5E31] text-white font-bold py-3 px-6 rounded-xl text-sm"
             >
               WhatsApp Booking
             </InteractiveButton>

@@ -32,12 +32,17 @@ const DoctorProfile: React.FC = () => {
               <div className="relative w-full max-w-xs sm:max-w-sm rounded-3xl overflow-hidden border-4 border-white shadow-xl bg-[#FFF8EC]">
                 <picture>
                   <source
+                    type="image/avif"
+                    srcSet={`${(import.meta.env.BASE_URL || '/').replace(/\/$/, '')}/assets/images/dr-prashant-vats-400.avif 400w, ${(import.meta.env.BASE_URL || '/').replace(/\/$/, '')}/assets/images/dr-prashant-vats-768.avif 456w`}
+                    sizes="(max-width: 640px) 85vw, 384px"
+                  />
+                  <source
                     type="image/webp"
-                    srcSet="/assets/images/dr-prashant-vats-400.webp 400w, /assets/images/dr-prashant-vats-768.webp 456w"
+                    srcSet={`${(import.meta.env.BASE_URL || '/').replace(/\/$/, '')}/assets/images/dr-prashant-vats-400.webp 400w, ${(import.meta.env.BASE_URL || '/').replace(/\/$/, '')}/assets/images/dr-prashant-vats-768.webp 456w`}
                     sizes="(max-width: 640px) 85vw, 384px"
                   />
                   <img
-                    src="/assets/images/dr-prashant-vats.jpg"
+                    src={`${(import.meta.env.BASE_URL || '/').replace(/\/$/, '')}/assets/images/dr-prashant-vats.jpg`}
                     alt="Dr. Prashant Kumar Vats, BDS, MIDA – Dental Surgeon & Implantologist at Oracle Dental Clinic & Implant Center"
                     width="400"
                     height="702"
@@ -50,7 +55,7 @@ const DoctorProfile: React.FC = () => {
                   <p className="font-extrabold text-base text-[#087B57] leading-tight">
                     {GBP_CONFIG.DOCTOR_NAME}
                   </p>
-                  <p className="text-xs font-bold text-[#FF654F] mt-0.5">
+                  <p className="text-xs font-bold text-[#C63621] mt-0.5">
                     {GBP_CONFIG.DOCTOR_ROLE} | {GBP_CONFIG.DOCTOR_QUALIFICATION}
                   </p>
                 </div>
@@ -59,8 +64,8 @@ const DoctorProfile: React.FC = () => {
 
             {/* Right Column: Verified Doctor Credentials & Clinic Details */}
             <div className="lg:col-span-7 p-6 sm:p-10 lg:p-12 space-y-5">
-              <div className="inline-flex items-center gap-2 text-xs font-extrabold tracking-wider uppercase text-[#FF8A24]">
-                <Stethoscope className="w-4 h-4 text-[#00A99D]" aria-hidden="true" />
+              <div className="inline-flex items-center gap-2 text-xs font-extrabold tracking-wider uppercase text-[#B84D00]">
+                <Stethoscope className="w-4 h-4 text-[#067067]" aria-hidden="true" />
                 <span>Meet Our Doctor</span>
               </div>
 
@@ -74,34 +79,46 @@ const DoctorProfile: React.FC = () => {
                 <p className="text-base sm:text-lg font-extrabold text-[#087B57] mt-1">
                   {GBP_CONFIG.DOCTOR_ROLE} | {GBP_CONFIG.DOCTOR_QUALIFICATION}
                 </p>
+                <p className="text-xs sm:text-sm font-bold text-[#B84D00] mt-1">
+                  PGD in Clinical Endodontics · PGD in Oral Surgery · 6+ Years Clinical Experience
+                </p>
               </div>
 
               <p className="text-sm sm:text-base text-[#26352F]/85 leading-relaxed">
                 At <strong>{GBP_CONFIG.BUSINESS_NAME}</strong> in Chipiyana Buzurg, Ghaziabad,{' '}
-                {GBP_CONFIG.DOCTOR_TITLE} provides patient-first diagnosis, honest treatment
-                explanations, and comfortable dental care for children, adults, and seniors. Every
-                consultation focuses on transparent options, strict sterilization hygiene, and
-                long-term oral health.
+                {GBP_CONFIG.DOCTOR_TITLE} brings over <strong>6+ years of clinical experience</strong>{' '}
+                with dedicated training as a <strong>Certified Oral Implantologist</strong>,{' '}
+                <strong>PGD in Clinical Endodontics</strong>, and{' '}
+                <strong>PGD in Oral Surgery</strong>. Consultations focus on accurate diagnosis,
+                transparent treatment options, strict sterilization protocols, and gentle care for
+                families across Chipiyana Buzurg, Jaat Chowk, Crossings Republik, Shahberi,
+                Chappraula, Lal Kuan, and the ABES Engineering College vicinity.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                 <div className="flex items-start gap-2.5 bg-[#FFF8EC] rounded-2xl p-3.5 border border-[#FF8A24]/25">
-                  <CheckCircle2 className="w-4 h-4 text-[#FF8A24] mt-0.5 shrink-0" aria-hidden="true" />
+                  <CheckCircle2 className="w-4 h-4 text-[#B84D00] mt-0.5 shrink-0" aria-hidden="true" />
                   <span className="text-xs sm:text-sm font-semibold text-[#26352F]">
-                    Dental Implants, Root Canal (RCT), Zirconia Crowns &amp; Wisdom Tooth Surgery
+                    <a href="/dental-implants" className="text-[#087B57] underline decoration-[#087B57]/40 hover:decoration-[#087B57]">Dental Implants</a>,{' '}
+                    <a href="/root-canal-treatment" className="text-[#087B57] underline decoration-[#087B57]/40 hover:decoration-[#087B57]">Root Canal (RCT)</a>,{' '}
+                    <a href="/zirconia-crowns" className="text-[#087B57] underline decoration-[#087B57]/40 hover:decoration-[#087B57]">Zirconia Crowns</a> &amp;{' '}
+                    <a href="/wisdom-tooth-extraction" className="text-[#087B57] underline decoration-[#087B57]/40 hover:decoration-[#087B57]">Wisdom Tooth Surgery</a>
                   </span>
                 </div>
                 <div className="flex items-start gap-2.5 bg-[#E5F5EC]/75 rounded-2xl p-3.5 border border-[#00A99D]/25">
                   <CheckCircle2 className="w-4 h-4 text-[#087B57] mt-0.5 shrink-0" aria-hidden="true" />
                   <span className="text-xs sm:text-sm font-semibold text-[#26352F]">
-                    Braces, Clear Aligners, Veneers, Smile Makeovers &amp; Kids Dentistry
+                    <a href="/impacted-wisdom-tooth" className="text-[#087B57] underline decoration-[#087B57]/40 hover:decoration-[#087B57]">Impacted Tooth Removal</a>,{' '}
+                    <a href="/teeth-cleaning" className="text-[#087B57] underline decoration-[#087B57]/40 hover:decoration-[#087B57]">Teeth Cleaning &amp; Scaling</a>,{' '}
+                    <a href="/dental-bridges" className="text-[#087B57] underline decoration-[#087B57]/40 hover:decoration-[#087B57]">Crowns &amp; Bridges</a> &amp;{' '}
+                    <a href="/dental-services" className="text-[#087B57] underline decoration-[#087B57]/40 hover:decoration-[#087B57]">General Dentistry</a>
                   </span>
                 </div>
               </div>
 
               <div className="space-y-2 text-xs sm:text-sm text-[#26352F]/85 pt-1 border-t border-[#E5F5EC]">
                 <p className="flex items-start gap-2 pt-3">
-                  <MapPin className="w-4 h-4 text-[#FF654F] mt-0.5 shrink-0" aria-hidden="true" />
+                  <MapPin className="w-4 h-4 text-[#C63621] mt-0.5 shrink-0" aria-hidden="true" />
                   <a
                     href={GBP_CONFIG.GOOGLE_MAPS_DIRECTIONS_URL}
                     target="_blank"
@@ -117,7 +134,7 @@ const DoctorProfile: React.FC = () => {
                   </a>
                 </p>
                 <p className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-[#00A99D] shrink-0" aria-hidden="true" />
+                  <Clock className="w-4 h-4 text-[#067067] shrink-0" aria-hidden="true" />
                   <span className="font-semibold text-[#087B57]">{GBP_CONFIG.HOURS}</span>
                 </p>
               </div>
@@ -128,14 +145,14 @@ const DoctorProfile: React.FC = () => {
                   href={GBP_CONFIG.WHATSAPP_BOOKING_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Book Consultation with Dr. Prashant Kumar Vats on WhatsApp"
+                  aria-label="Book Appointment with Dr. Prashant Kumar Vats on WhatsApp"
                   onClick={() =>
                     trackClinicEvent('appointment_cta_click', {
                       placement: 'doctor_profile_whatsapp',
                       interaction_label: 'book_doctor_consultation',
                     })
                   }
-                  className="min-h-[48px] bg-gradient-to-r from-[#FF654F] to-[#FF8A24] hover:from-[#e8533d] hover:to-[#e67617] text-white font-extrabold text-sm sm:text-base px-7 py-3 rounded-full shadow-[0_8px_20px_rgba(255,101,79,0.28)] transition-all inline-flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFD36A]"
+                  className="min-h-[48px] bg-gradient-to-r from-[#C93B25] to-[#B84D00] hover:from-[#B2321E] hover:to-[#9F4200] text-white font-extrabold text-sm sm:text-base px-7 py-3 rounded-full shadow-[0_8px_20px_rgba(201,59,37,0.28)] transition-all inline-flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFD36A]"
                 >
                   <CalendarCheck2 className="w-4 h-4 shrink-0" aria-hidden="true" />
                   <span>Book Appointment</span>
@@ -143,7 +160,7 @@ const DoctorProfile: React.FC = () => {
                 <a
                   id="doctor-profile-call-btn"
                   href={GBP_CONFIG.CALL_URL}
-                  aria-label={`Call Dr. Prashant Kumar Vats clinic at ${GBP_CONFIG.PHONE_DISPLAY}`}
+                  aria-label={`Call ${GBP_CONFIG.PHONE_DISPLAY} — Oracle Dental Clinic`}
                   onClick={() =>
                     trackClinicEvent('call_click', {
                       placement: 'doctor_profile_call',

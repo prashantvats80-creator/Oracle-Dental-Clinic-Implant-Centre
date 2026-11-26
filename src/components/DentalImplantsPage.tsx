@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ClinicalReviewBox from './ClinicalReviewBox';
 import { 
   PhoneCall, 
   MessageCircle, 
@@ -212,21 +213,25 @@ export default function DentalImplantsPage({
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
-              Dental Implants in Ghaziabad
+              Dental Implant Specialist in Ghaziabad
             </h1>
 
             <p className="text-base sm:text-lg text-slate-200 font-normal leading-relaxed max-w-2xl">
-              Single Tooth Implants, Implant Bridges & Full-Mouth Implant Solutions. Dental implants are fixed tooth-replacement options that replace missing roots and support permanent crowns, bridges, or full-arch restorations at Oracle Dental Clinic under Dr. Prashant Kumar Vats, BDS.
+              Searching for the <strong>best dental implant specialist</strong> or trusted <strong>dental implants near me</strong>?{' '}
+              <strong>Oracle Dental Clinic &amp; Implant Center</strong> is a specialized <strong>dental implant clinic in Ghaziabad</strong> led by{' '}
+              <strong>Dr. Prashant Kumar Vats (BDS, MIDA, Certified Oral Implantologist, PGD in Oral Surgery)</strong>. We provide precision{' '}
+              <strong>Single Tooth Dental Implant</strong> treatments, implant-supported bridges, <strong>immediate dental implants</strong>, and full mouth dental implants for patients seeking the <strong>best dental implants in Ghaziabad</strong>.
             </p>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 max-w-xl mx-auto md:mx-0 text-left text-xs sm:text-sm">
               <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex flex-col">
-                <span className="text-slate-400 text-xs">Consultation Fee</span>
+                <span className="text-slate-300 text-xs">Consultation Fee</span>
                 <span className="text-amber-300 font-bold text-base sm:text-lg">₹200</span>
               </div>
               <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex flex-col">
-                <span className="text-slate-400 text-xs">Attending Dentist</span>
+                <span className="text-slate-300 text-xs">Attending Dentist</span>
                 <span className="text-white font-bold text-xs sm:text-sm">Dr. Prashant Kumar Vats, BDS</span>
+                <span className="text-cyan-200 text-[11px]">Certified Oral Implantologist · 6+ Yrs</span>
               </div>
               <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex flex-col col-span-2 sm:col-span-1">
                 <span className="text-slate-400 text-xs">Clinic Hours</span>
@@ -238,7 +243,7 @@ export default function DentalImplantsPage({
               <InteractiveButton
                 id="implants-hero-whatsapp-btn"
                 onClick={handleWhatsApp}
-                className="bg-[#25D366] hover:bg-[#20b858] text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2"
+                className="bg-[#0F7A40] hover:bg-[#0B5E31] text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2"
               >
                 <MessageCircle className="w-5 h-5" /> BOOK IMPLANT CONSULTATION
               </InteractiveButton>
@@ -277,8 +282,12 @@ export default function DentalImplantsPage({
                 <div className="flex items-start gap-2.5">
                   <UserCheck className="w-4 h-4 text-cyan-400 mt-1 flex-shrink-0" />
                   <div>
-                    <p className="text-white font-semibold">Dr. Prashant Kumar Vats, BDS</p>
-                    <p className="text-xs text-slate-400">Dental Surgeon & Implantology Practitioner</p>
+                    <p className="text-white font-semibold">Dr. Prashant Kumar Vats, BDS, MIDA</p>
+                    <p className="text-xs text-slate-300">Certified Oral Implantologist · PGD in Clinical Endodontics · PGD in Oral Surgery · 6+ Years Experience</p>
+                    <div className="flex flex-wrap gap-3 pt-1.5 text-xs">
+                      <a href="/#doctor-profile" className="text-cyan-300 hover:text-white underline underline-offset-2">Doctor Profile</a>
+                      <a href="/#contact" className="text-amber-300 hover:text-white underline underline-offset-2">Clinic Contact &amp; Map</a>
+                    </div>
                   </div>
                 </div>
 
@@ -304,6 +313,14 @@ export default function DentalImplantsPage({
           </div>
         </div>
       </section>
+
+      {/* Answer-First Clinical Summary & Attribution */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+        <ClinicalReviewBox
+          question="What are dental implants and who may be suitable?"
+          directAnswer="A dental implant is a biocompatible titanium post placed into the jawbone to replace a missing tooth root and support a fixed crown, bridge, or full-arch prosthesis. Adults with completed jaw growth, healthy gums, and adequate jawbone volume are generally evaluated as candidates, though suitability and whether bone grafting is needed depend on an in-person clinical exam and 3D CBCT or X-ray assessment."
+        />
+      </div>
 
       {/* What Are Dental Implants? & Anatomy */}
       <section className="py-12 md:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -701,7 +718,7 @@ export default function DentalImplantsPage({
               { step: "05", title: "Crown Fitting & Care", desc: "Abutment and custom permanent crown attached; follow-up care instructions provided." }
             ].map((step, idx) => (
               <div key={idx} className="bg-slate-50 rounded-2xl p-5 border border-slate-200 relative overflow-hidden">
-                <span className="text-2xl font-black text-slate-200 absolute top-3 right-3 select-none">{step.step}</span>
+                <span aria-hidden="true" className="text-2xl font-black text-slate-500 absolute top-3 right-3 select-none">{step.step}</span>
                 <h3 className="font-bold text-slate-900 text-base mb-1.5">{step.title}</h3>
                 <p className="text-slate-600 text-xs leading-relaxed">{step.desc}</p>
               </div>
@@ -865,7 +882,7 @@ export default function DentalImplantsPage({
             <InteractiveButton
               id="implants-loc-whatsapp-btn"
               onClick={handleWhatsApp}
-              className="bg-[#25D366] hover:bg-[#20b858] text-white font-bold py-3 px-6 rounded-xl text-sm"
+              className="bg-[#0F7A40] hover:bg-[#0B5E31] text-white font-bold py-3 px-6 rounded-xl text-sm"
             >
               Book via WhatsApp
             </InteractiveButton>

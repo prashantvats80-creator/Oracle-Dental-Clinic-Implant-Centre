@@ -81,7 +81,7 @@ export default function ToothFillingCostPage({
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed selection:bg-blue-100 selection:text-blue-900">
       <Breadcrumbs
         items={[
-          { label: 'Dental Care in Ghaziabad', path: '/#services' },
+          { label: 'Dental Services', path: '/dental-services' },
           { label: 'Dental Fillings', path: '/dental-fillings' },
           { label: 'Tooth Filling Cost in Ghaziabad', path: '/tooth-filling-cost-ghaziabad' }
         ]}

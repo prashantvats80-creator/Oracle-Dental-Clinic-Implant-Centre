@@ -605,7 +605,7 @@ function AppContent() {
           <a
             id="topbar-call-link"
             href={GBP_CONFIG.CALL_URL}
-            aria-label={`Call Oracle Dental Clinic at ${phoneNumberFormatted}`}
+            aria-label={`${phoneNumberFormatted} — Call Oracle Dental Clinic`}
             onClick={() => trackClinicEvent('call_click', { placement: 'desktop_topbar' })}
             className="flex items-center gap-1.5 font-bold hover:text-[#FFD36A] transition-colors"
           >
@@ -616,9 +616,9 @@ function AppContent() {
       </div>
 
       {/* Header (Clean Warm White/Cream surface with Emerald/Teal brand & Orange active states) */}
-      <header className="bg-white/95 shadow-xs sticky top-0 z-40 border-b border-[#087B57]/12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16 md:h-20">
+      <header className="bg-white/95 shadow-xs sticky top-0 z-40 border-b border-[#087B57]/12 overflow-x-clip">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16 md:h-20 gap-2">
             {/* Logo */}
             <a
               href="/"
@@ -626,17 +626,20 @@ function AppContent() {
                 e.preventDefault();
                 scrollToTop();
               }}
-              className="flex-shrink-0 flex items-center gap-2.5 group cursor-pointer"
-              aria-label="Oracle Dental Clinic & Implant Center Home"
+              className="flex-shrink min-w-0 flex items-center gap-2 group cursor-pointer"
+              aria-label="Oracle Dental Clinic & Implant Center — Home"
             >
-              <div className="w-10 h-10 md:w-11 md:h-11 bg-gradient-to-br from-[#087B57] to-[#00A99D] rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-xs">
+              <div
+                aria-hidden="true"
+                className="w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 bg-gradient-to-br from-[#087B57] to-[#00A99D] rounded-xl flex items-center justify-center text-white font-bold text-lg sm:text-xl shadow-xs shrink-0"
+              >
                 O
               </div>
-              <div className="flex flex-col">
-                <span className="font-bold text-lg md:text-xl leading-tight text-[#087B57] whitespace-nowrap">
+              <div className="flex flex-col min-w-0">
+                <span className="font-bold text-base sm:text-lg md:text-xl leading-tight text-[#087B57] truncate">
                   Oracle Dental
                 </span>
-                <span className="text-[11px] text-[#FF8A24] font-bold tracking-wide whitespace-nowrap">
+                <span className="text-[10px] sm:text-[11px] text-[#B84D00] font-bold tracking-wide truncate">
                   Clinic &amp; Implant Center
                 </span>
               </div>
@@ -653,8 +656,8 @@ function AppContent() {
                 }}
                 className={`font-semibold transition-colors py-2 px-3 rounded-xl text-xs whitespace-nowrap shrink-0 border ${
                   activeRoute === '/dental-services'
-                    ? 'bg-[#FF8A24] text-white border-[#FF8A24]'
-                    : 'bg-[#E5F5EC] text-[#087B57] hover:bg-[#00A99D] hover:text-white border-[#087B57]/15'
+                    ? 'bg-[#B84D00] text-white border-[#B84D00]'
+                    : 'bg-[#E5F5EC] text-[#087B57] hover:bg-[#067067] hover:text-white border-[#087B57]/15'
                 }`}
               >
                 Dental Services
@@ -775,13 +778,13 @@ function AppContent() {
                   onClick={(e) => scrollToSection(e, item.id)}
                   className={`text-sm font-semibold transition-colors relative py-2 whitespace-nowrap shrink-0 ${
                     activeSection === item.id
-                      ? 'text-[#FF8A24]'
+                      ? 'text-[#B84D00]'
                       : 'text-[#26352F]/80 hover:text-[#087B57]'
                   }`}
                 >
                   {item.label}
                   {activeSection === item.id && (
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#FF8A24] rounded-full" />
+                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B84D00] rounded-full" />
                   )}
                 </a>
               ))}
@@ -791,13 +794,13 @@ function AppContent() {
                 href={GBP_CONFIG.WHATSAPP_BOOKING_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Book dental appointment via WhatsApp"
+                aria-label="Book Appointment via WhatsApp"
                 onClick={() =>
                   trackClinicEvent('appointment_cta_click', {
                     placement: 'desktop_header_book',
                   })
                 }
-                className="min-h-[42px] px-4.5 py-2 text-xs font-extrabold text-white bg-gradient-to-r from-[#FF654F] to-[#FF8A24] hover:from-[#e8533d] hover:to-[#e67617] rounded-full shadow-xs transition-all whitespace-nowrap shrink-0 inline-flex items-center"
+                className="min-h-[42px] px-4.5 py-2 text-xs font-extrabold text-white bg-gradient-to-r from-[#C93B25] to-[#B84D00] hover:from-[#A92D1A] hover:to-[#963E00] rounded-full shadow-xs transition-all whitespace-nowrap shrink-0 inline-flex items-center"
               >
                 Book Appointment
               </a>
@@ -808,29 +811,29 @@ function AppContent() {
                 className="text-[#26352F]/70 hover:text-[#087B57] p-2 rounded-full transition-colors"
                 aria-label={isMuted ? 'Unmute background audio' : 'Mute background audio'}
               >
-                {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+                {isMuted ? <VolumeX className="w-4 h-4" aria-hidden="true" /> : <Volume2 className="w-4 h-4" aria-hidden="true" />}
               </InteractiveButton>
             </nav>
 
             {/* Mobile menu button and volume toggle */}
-            <div className="flex items-center md:hidden gap-1.5">
-              <LanguageSwitcher variant="topbar" />
+            <div className="flex items-center md:hidden gap-1 shrink-0">
+              <LanguageSwitcher variant="mobile-header" />
               <InteractiveButton
                 id="mute-toggle-mobile"
                 onClick={toggleMute}
-                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-[#26352F]/75 hover:text-[#087B57] rounded-xl transition-colors"
+                className="w-9 h-9 sm:w-10 sm:h-10 min-w-[36px] min-h-[36px] flex items-center justify-center text-[#26352F]/75 hover:text-[#087B57] rounded-xl transition-colors shrink-0"
                 aria-label={isMuted ? 'Unmute background audio' : 'Mute background audio'}
               >
-                {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+                {isMuted ? <VolumeX className="w-4 h-4 sm:w-5 sm:h-5" /> : <Volume2 className="w-4 h-4 sm:w-5 sm:h-5" />}
               </InteractiveButton>
               <InteractiveButton
                 id="mobile-menu-toggle"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="min-w-[44px] min-h-[44px] flex items-center justify-center bg-[#E5F5EC] text-[#087B57] hover:bg-[#087B57] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#087B57] rounded-xl transition-colors"
+                className="w-10 h-10 min-w-[40px] min-h-[40px] flex items-center justify-center bg-[#E5F5EC] text-[#087B57] hover:bg-[#087B57] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#087B57] rounded-xl transition-colors shrink-0"
                 aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
                 aria-expanded={isMenuOpen}
               >
-                {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                {isMenuOpen ? <X className="h-5 w-5 sm:h-6 sm:w-6" /> : <Menu className="h-5 w-5 sm:h-6 sm:w-6" />}
               </InteractiveButton>
             </div>
           </div>
@@ -953,7 +956,7 @@ function AppContent() {
                 {isMobileTreatmentsOpen && (
                   <div className="bg-white p-3 space-y-3 text-xs border-t border-[#087B57]/10">
                     <div>
-                      <span className="font-bold text-[#FF8A24] block mb-1.5 text-xs">
+                      <span className="font-bold text-[#B84D00] block mb-1.5 text-xs">
                         Treatments &amp; Locations ({treatmentPagesList.length})
                       </span>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
@@ -977,7 +980,7 @@ function AppContent() {
                     </div>
 
                     <div className="pt-2 border-t border-[#087B57]/10">
-                      <span className="font-bold text-[#00A99D] block mb-1.5 text-xs">
+                      <span className="font-bold text-[#067067] block mb-1.5 text-xs">
                         Symptoms &amp; Urgent Care ({symptomPagesList.length})
                       </span>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
@@ -1060,7 +1063,7 @@ function AppContent() {
                   onClick={() =>
                     trackClinicEvent('appointment_cta_click', { placement: 'mobile_menu_whatsapp' })
                   }
-                  className="min-h-[44px] bg-[#FF654F] hover:bg-[#e8533d] text-white font-bold text-xs rounded-full flex items-center justify-center text-center px-3"
+                  className="min-h-[44px] bg-[#C63621] hover:bg-[#A82B18] text-white font-bold text-xs rounded-full flex items-center justify-center text-center px-3"
                 >
                   Book Appointment
                 </a>
@@ -1084,16 +1087,16 @@ function AppContent() {
                   aria-label="Oracle Dental Clinic Facebook"
                   className="text-[#26352F]/70 hover:text-[#087B57] transition-colors"
                 >
-                  <Facebook className="w-5 h-5" />
+                  <Facebook className="w-5 h-5" aria-hidden="true" />
                 </a>
                 <a
                   href="https://www.instagram.com/oracledentalclinic0/"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Oracle Dental Clinic Instagram"
-                  className="text-[#26352F]/70 hover:text-[#FF654F] transition-colors"
+                  className="text-[#26352F]/70 hover:text-[#C63621] transition-colors"
                 >
-                  <Instagram className="w-5 h-5" />
+                  <Instagram className="w-5 h-5" aria-hidden="true" />
                 </a>
                 <a
                   href="https://www.youtube.com/@oracledentalclinic0"
@@ -1107,7 +1110,7 @@ function AppContent() {
                   }
                   className="text-[#26352F]/70 hover:text-[#FF0000] transition-colors"
                 >
-                  <Youtube className="w-5 h-5" />
+                  <Youtube className="w-5 h-5" aria-hidden="true" />
                 </a>
               </div>
             </div>
@@ -1150,7 +1153,7 @@ function AppContent() {
             </DeferredSection>
 
             {/* Emergency Banner (Direct native tel: anchor) */}
-            <section className="bg-gradient-to-r from-[#FF654F] to-[#FF8A24] text-white py-5 px-4 relative z-20">
+            <section className="bg-gradient-to-r from-[#C93B25] to-[#B84D00] text-white py-5 px-4 relative z-20">
               <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="flex items-center gap-3.5">
                   <div className="bg-white/20 p-2.5 rounded-xl shrink-0">
@@ -1168,13 +1171,13 @@ function AppContent() {
                 <a
                   id="emergency-call-btn"
                   href={GBP_CONFIG.CALL_URL}
-                  aria-label={`Call emergency dental line at ${phoneNumberFormatted}`}
+                  aria-label={`Call ${phoneNumberFormatted} — Emergency Dental Helpline`}
                   onClick={() =>
                     trackClinicEvent('call_click', { placement: 'homepage_emergency_banner' })
                   }
                   className="w-full sm:w-auto min-h-[48px] bg-white text-[#087B57] font-bold py-3 px-7 rounded-xl shadow-md hover:bg-[#FFF8EC] transition-colors flex items-center justify-center gap-2 whitespace-nowrap shrink-0"
                 >
-                  <PhoneCall className="w-5 h-5 shrink-0 text-[#FF654F]" aria-hidden="true" />
+                  <PhoneCall className="w-5 h-5 shrink-0 text-[#C63621]" aria-hidden="true" />
                   <span>Call {phoneNumberFormatted}</span>
                 </a>
               </div>

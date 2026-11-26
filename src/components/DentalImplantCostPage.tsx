@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ClinicalReviewBox from './ClinicalReviewBox';
 import { 
   PhoneCall, 
   MessageCircle, 
@@ -92,7 +93,7 @@ export default function DentalImplantCostPage({
             <InteractiveButton id="imp-cost-call" onClick={handleCall} className="bg-amber-500 text-slate-950 font-extrabold px-6 py-3.5 rounded-xl flex items-center gap-2">
               <PhoneCall className="w-4 h-4" /> <span>Consultation: Call +91 7011961515</span>
             </InteractiveButton>
-            <InteractiveButton id="imp-cost-wa" onClick={handleWhatsApp} className="bg-emerald-600 text-white font-bold px-6 py-3.5 rounded-xl flex items-center gap-2">
+            <InteractiveButton id="imp-cost-wa" onClick={handleWhatsApp} className="bg-[#0F7A40] hover:bg-[#0B5E31] text-white font-bold px-6 py-3.5 rounded-xl flex items-center gap-2">
               <MessageCircle className="w-4 h-4" /> <span>WhatsApp Consultation</span>
             </InteractiveButton>
           </div>
@@ -100,6 +101,10 @@ export default function DentalImplantCostPage({
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+        <ClinicalReviewBox
+          question="What factors affect dental implant cost in Ghaziabad?"
+          directAnswer="Total dental implant cost depends on the implant system chosen, the type of final crown (such as zirconia or PFM), the number of teeth replaced, and whether preparatory procedures like bone grafting or a sinus lift are clinically necessary. A ₹200 consultation and diagnostic imaging allow Dr. Prashant Kumar Vats to share an individualized written treatment plan before any procedure begins."
+        />
         {/* Implant Structure Breakdown */}
         <section className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-xs space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">

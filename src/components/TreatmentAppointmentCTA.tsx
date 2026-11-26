@@ -54,14 +54,14 @@ export const TreatmentAppointmentCTA: React.FC<TreatmentAppointmentCTAProps> = (
               href={whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`Book ${treatmentName} appointment on WhatsApp`}
+              aria-label={`Book ${treatmentName} on WhatsApp — Oracle Dental Clinic`}
               onClick={() =>
                 trackClinicEvent('appointment_cta_click', {
                   placement: 'treatment_bottom_cta_whatsapp',
                   service_category: categorySlug,
                 })
               }
-              className="w-full min-h-[48px] bg-[#FF654F] hover:bg-[#E8523D] text-white font-bold text-sm sm:text-base py-3.5 px-5 rounded-2xl shadow-md transition-colors flex items-center justify-center gap-2 text-center focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFD36A]"
+              className="w-full min-h-[48px] bg-[#C63621] hover:bg-[#A82B18] text-white font-bold text-sm sm:text-base py-3.5 px-5 rounded-2xl shadow-md transition-colors flex items-center justify-center gap-2 text-center focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFD36A]"
             >
               <MessageCircle className="w-5 h-5 shrink-0" aria-hidden="true" />
               <span>Book {treatmentName} on WhatsApp</span>
@@ -77,14 +77,14 @@ export const TreatmentAppointmentCTA: React.FC<TreatmentAppointmentCTAProps> = (
               }
               className="w-full min-h-[48px] bg-white hover:bg-[#FFF8EC] text-[#087B57] font-bold text-sm sm:text-base py-3.5 px-5 rounded-2xl shadow-md transition-colors flex items-center justify-center gap-2 text-center focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFD36A]"
             >
-              <PhoneCall className="w-5 h-5 shrink-0 text-[#FF8A24]" aria-hidden="true" />
+              <PhoneCall className="w-5 h-5 shrink-0 text-[#B84D00]" aria-hidden="true" />
               <span>Call {GBP_CONFIG.PHONE_DISPLAY}</span>
             </a>
             <a
               href={GBP_CONFIG.GOOGLE_MAPS_DIRECTIONS_URL}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Open Oracle Dental Clinic directions on Google Maps"
+              aria-label="Get Google Maps Directions to Oracle Dental Clinic"
               onClick={() =>
                 trackClinicEvent('directions_click', {
                   placement: 'treatment_bottom_cta_maps',

@@ -74,14 +74,14 @@ export default function CavityTreatmentPage({
               </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-3 pt-4">
-              <InteractiveButton id="cav-call" onClick={handleCall} className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 text-sm">
-                <PhoneCall className="w-5 h-5" /> Call +91 7011961515
+              <InteractiveButton id="cav-call" onClick={handleCall} className="bg-amber-400 hover:bg-amber-300 text-slate-950 font-black py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 text-sm">
+                <PhoneCall className="w-5 h-5" aria-hidden="true" /> Call +91 7011961515
               </InteractiveButton>
-              <InteractiveButton id="cav-wa" onClick={handleWhatsApp} className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 text-sm">
-                <MessageCircle className="w-5 h-5" /> WhatsApp Booking
+              <InteractiveButton id="cav-wa" onClick={handleWhatsApp} className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 text-sm">
+                <MessageCircle className="w-5 h-5" aria-hidden="true" /> WhatsApp Booking
               </InteractiveButton>
               <InteractiveButton id="cav-dir" onClick={handleDirections} className="bg-white/10 hover:bg-white/20 text-white border border-white/20 font-semibold py-3.5 px-5 rounded-xl flex items-center justify-center gap-2 text-sm">
-                <Navigation className="w-4 h-4 text-amber-400" /> Get Directions
+                <Navigation className="w-4 h-4 text-amber-300" aria-hidden="true" /> Get Directions
               </InteractiveButton>
             </div>
           </div>
@@ -105,17 +105,27 @@ export default function CavityTreatmentPage({
 
       <section className="py-14 px-4 bg-white border-b border-slate-200">
         <div className="max-w-5xl mx-auto space-y-6">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">Treatment Options</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">Clinical Cavity Treatment Options</h2>
+          <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
+            Treating dental decay early preserves healthy natural enamel and avoids more complex endodontic procedures. After checking decay depth clinically and with digital X-rays, Dr. Prashant Kumar Vats (BDS, MIDA) recommends the most conservative option:
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200">
-              <h3 className="font-bold text-slate-900 text-sm">Dental Fillings</h3>
-              <p className="text-xs text-slate-600 mt-1">Cleans away decayed tooth structure and seals cavity with aesthetic composite resin (<a href="/dental-fillings" onClick={(e) => { e.preventDefault(); navigateToPath('/dental-fillings'); }} className="text-blue-600 underline">Dental Fillings</a>).</p>
+              <h3 className="font-bold text-slate-900 text-sm">1. Tooth-Colored Dental Fillings</h3>
+              <p className="text-xs sm:text-sm text-slate-600 mt-1.5">Gently clears decayed tooth structure and seals the cavity with shade-matched composite resin or GIC (<a href="/dental-fillings" onClick={(e) => { e.preventDefault(); navigateToPath('/dental-fillings'); }} className="text-blue-700 underline font-semibold">Dental Fillings</a>).</p>
             </div>
             <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200">
-              <h3 className="font-bold text-slate-900 text-sm">Dental Crown / Tooth Cap</h3>
-              <p className="text-xs text-slate-600 mt-1">Full coverage cap when a large cavity weakens the remaining tooth cusps (<a href="/tooth-cap" onClick={(e) => { e.preventDefault(); navigateToPath('/tooth-cap'); }} className="text-blue-600 underline">Tooth Cap</a>).</p>
+              <h3 className="font-bold text-slate-900 text-sm">2. Root Canal Treatment (Deep Decay)</h3>
+              <p className="text-xs sm:text-sm text-slate-600 mt-1.5">When decay reaches the inner pulp nerve causing spontaneous ache or hot/cold pain, modern <a href="/root-canal-treatment" onClick={(e) => { e.preventDefault(); navigateToPath('/root-canal-treatment'); }} className="text-blue-700 underline font-semibold">root canal therapy</a> cleans and saves the natural tooth.</p>
+            </div>
+            <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200">
+              <h3 className="font-bold text-slate-900 text-sm">3. Protective Dental Crown / Cap</h3>
+              <p className="text-xs sm:text-sm text-slate-600 mt-1.5">Full-coverage zirconia or ceramic cap when a large cavity weakens the remaining chewing walls (<a href="/tooth-cap" onClick={(e) => { e.preventDefault(); navigateToPath('/tooth-cap'); }} className="text-blue-700 underline font-semibold">Tooth Cap</a>).</p>
             </div>
           </div>
+          <p className="text-xs sm:text-sm text-slate-600 bg-slate-50 border border-slate-200 rounded-2xl p-4">
+            <strong>Prevention tip:</strong> Twice-daily fluoride brushing, limiting frequent sugary snacks, and 6-month dental checkups at our Chipiyana Buzurg clinic (serving families within 6 km including Crossings Republik, Shahberi, Chappraula, Noida Extension, and Lal Kuan) help detect early spots before pain starts.
+          </p>
         </div>
       </section>
 
@@ -125,15 +135,20 @@ export default function CavityTreatmentPage({
           <div className="space-y-3">
             {faqsList.map((faq, index) => (
               <div key={index} className="border border-slate-200 rounded-2xl bg-white overflow-hidden">
-                <button onClick={() => setOpenFaq(openFaq === index ? null : index)} className="w-full p-4 text-left font-bold text-slate-900 flex justify-between items-center text-sm sm:text-base">
+                <button
+                  type="button"
+                  aria-expanded={openFaq === index}
+                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                  className="w-full p-4 text-left font-bold text-slate-900 flex justify-between items-center text-sm sm:text-base cursor-pointer"
+                >
                   <span>Q{index + 1}: {faq.q}</span>
-                  {openFaq === index ? <ChevronUp className="w-5 h-5 text-blue-600" /> : <ChevronDown className="w-5 h-5 text-slate-400" />}
+                  {openFaq === index ? <ChevronUp className="w-5 h-5 text-blue-700 shrink-0" aria-hidden="true" /> : <ChevronDown className="w-5 h-5 text-slate-500 shrink-0" aria-hidden="true" />}
                 </button>
-                                  {openFaq === index && (
-                    <div className="border-t border-slate-200 p-4 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                      {faq.a}
-                    </div>
-                  )}
+                {openFaq === index && (
+                  <div className="border-t border-slate-200 p-4 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    {faq.a}
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -160,8 +175,8 @@ export default function CavityTreatmentPage({
           <h2 className="text-xl font-bold">Schedule Your Cavity Checkup</h2>
           <p className="text-xs text-slate-400">Jaat Chowk, Chipiyana Buzurg, Ghaziabad. Consultation fee ₹200.</p>
           <div className="flex justify-center gap-3">
-            <InteractiveButton id="cav-f-call" onClick={handleCall} className="bg-amber-500 text-slate-950 font-black py-3 px-6 rounded-xl text-sm">Call +91 7011961515</InteractiveButton>
-            <InteractiveButton id="cav-f-wa" onClick={handleWhatsApp} className="bg-emerald-600 text-white font-bold py-3 px-6 rounded-xl text-sm">WhatsApp Booking</InteractiveButton>
+            <InteractiveButton id="cav-f-call" onClick={handleCall} className="bg-amber-400 hover:bg-amber-300 text-slate-950 font-black py-3 px-6 rounded-xl text-sm">Call +91 7011961515</InteractiveButton>
+            <InteractiveButton id="cav-f-wa" onClick={handleWhatsApp} className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 px-6 rounded-xl text-sm">WhatsApp Booking</InteractiveButton>
           </div>
         </div>
       </section>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ClinicalReviewBox from './ClinicalReviewBox';
 import { PhoneCall, MessageCircle, CheckCircle2, AlertTriangle, ChevronDown, ArrowRight, ShieldCheck, MapPin } from 'lucide-react';
 import { Breadcrumbs } from './Breadcrumbs';
 import { TreatmentAppointmentCTA } from './TreatmentAppointmentCTA';
@@ -92,6 +93,10 @@ export default function ZirconiaCrownsPage({
       </section>
 
       <article className="max-w-5xl mx-auto px-4 py-12 space-y-10">
+        <ClinicalReviewBox
+          question="What is the difference between zirconia crowns and PFM crowns?"
+          directAnswer="Zirconia crowns are milled from solid, metal-free zirconium dioxide ceramic, offering high fracture resistance and natural tooth translucency without a dark metallic line at the gums. Porcelain-fused-to-metal (PFM) crowns use a metal alloy core covered by porcelain, which is budget-friendly but can show a grey gumline margin over time or chip under heavy biting force."
+        />
         <section className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 space-y-4">
           <h2 className="text-2xl font-extrabold text-slate-900">What Is a Zirconia Dental Crown?</h2>
           <p className="text-slate-600 text-sm sm:text-base">

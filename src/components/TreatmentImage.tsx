@@ -28,17 +28,24 @@ export const TreatmentImage: React.FC<TreatmentImageProps> = ({
 }) => {
   const [hasError, setHasError] = useState(false);
 
+  const baseUrl = import.meta.env.BASE_URL || '/';
+  const basePrefix = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+  const resolveAsset = (p: string) => (p.startsWith('/') ? `${basePrefix}${p}` : p);
+
   const dims = ASPECT_DIMENSIONS[aspectRatio];
   const isUnsplash = src.includes('images.unsplash.com');
   const isLocalResponsiveWebp = src.startsWith('/assets/images/treatments/') && src.endsWith('-800.webp');
+  const isLocalCaseWebp = /^\/assets\/images\/case-\d{2}\.webp$/.test(src);
   const cleanUrl = isUnsplash ? src.split('?')[0] : src;
 
   const optimizedSrc = isUnsplash
     ? `${cleanUrl}?auto=format&fit=crop&fm=webp&w=800&q=75`
-    : src;
+    : resolveAsset(src);
 
   const srcSet = isLocalResponsiveWebp
-    ? `${src.replace('-800.webp', '-400.webp')} 400w, ${src} 800w`
+    ? `${resolveAsset(src.replace('-800.webp', '-400.webp'))} 400w, ${resolveAsset(src)} 800w`
+    : isLocalCaseWebp
+    ? `${resolveAsset(src.replace('.webp', '-380.webp'))} 380w, ${resolveAsset(src)} 640w`
     : isUnsplash
     ? `${cleanUrl}?auto=format&fit=crop&fm=webp&w=400&q=70 400w, ${cleanUrl}?auto=format&fit=crop&fm=webp&w=800&q=75 800w`
     : undefined;

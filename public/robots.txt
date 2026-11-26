@@ -1,4 +1,32 @@
+# Oracle Dental Clinic & Implant Center — Crawler Access Policy
+# Search & retrieval crawlers (index pages and cite clinic information with links):
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# Default policy for standard web crawlers:
 User-agent: *
 Allow: /
+
+# Optional AI model training crawler controls (uncomment any below if clinic owner prefers to opt out of AI training while keeping AI search enabled):
+# User-agent: GPTBot
+# Disallow: /
+#
+# User-agent: Google-Extended
+# Disallow: /
+#
+# User-agent: CCBot
+# Disallow: /
+#
+# User-agent: ClaudeBot
+# Disallow: /
 
 Sitemap: https://oracledentals.netlify.app/sitemap.xml

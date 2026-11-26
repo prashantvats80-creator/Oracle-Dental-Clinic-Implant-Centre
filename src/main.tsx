@@ -15,7 +15,9 @@ createRoot(document.getElementById('root')!).render(
 if ('serviceWorker' in navigator) {
   if (import.meta.env.PROD) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js').catch(() => {
+      const base = import.meta.env.BASE_URL || '/';
+      const swPath = `${base.endsWith('/') ? base : `${base}/`}sw.js`;
+      navigator.serviceWorker.register(swPath).catch(() => {
         navigator.serviceWorker.register('./sw.js').catch(() => {
           // Graceful fallback if registration fails
         });

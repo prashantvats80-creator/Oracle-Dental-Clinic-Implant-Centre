@@ -52,6 +52,7 @@ export const RelatedGuidesSection: React.FC<RelatedGuidesSectionProps> = ({
             <li key={item.path}>
               <a
                 href={item.path}
+                aria-label={`${item.label} — ${item.description}`}
                 onMouseEnter={() => preloadRoute(item.path)}
                 onTouchStart={() => preloadRoute(item.path)}
                 onClick={(e) => handleLinkClick(e, item.path)}

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ClinicalReviewBox from './ClinicalReviewBox';
 import { 
   PhoneCall, 
   MessageCircle, 
@@ -204,17 +205,18 @@ export default function WisdomToothPage({
             </h1>
 
             <p className="text-base sm:text-lg text-slate-200 font-normal leading-relaxed max-w-2xl">
-              Experiencing wisdom tooth pain, jaw swelling, or difficulty chewing? Get your wisdom tooth evaluated at Oracle Dental Clinic, Chipiyana Buzurg, Ghaziabad. We provide careful clinical examination, diagnostic imaging, and gentle extraction procedures under Dr. Prashant Kumar Vats, BDS.
+              Experiencing wisdom tooth pain, jaw swelling, or difficulty chewing? Get your wisdom tooth evaluated at Oracle Dental Clinic, Chipiyana Buzurg, Ghaziabad. We provide clinical examination, diagnostic imaging, and gentle simple or surgical extraction under Dr. Prashant Kumar Vats (BDS, PGD in Oral Surgery, 6+ years experience).
             </p>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 max-w-xl mx-auto md:mx-0 text-left text-xs sm:text-sm">
               <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex flex-col">
-                <span className="text-slate-400 text-xs">Consultation Fee</span>
+                <span className="text-slate-300 text-xs">Consultation Fee</span>
                 <span className="text-amber-300 font-bold text-base sm:text-lg">₹200</span>
               </div>
               <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex flex-col">
-                <span className="text-slate-400 text-xs">Attending Dentist</span>
+                <span className="text-slate-300 text-xs">Attending Dentist</span>
                 <span className="text-white font-bold text-xs sm:text-sm">Dr. Prashant Kumar Vats, BDS</span>
+                <span className="text-cyan-200 text-[11px]">PGD Oral Surgery · 6+ Yrs</span>
               </div>
               <div className="bg-white/5 border border-white/10 rounded-xl p-3 flex flex-col col-span-2 sm:col-span-1">
                 <span className="text-slate-400 text-xs">Clinic Hours</span>
@@ -226,7 +228,7 @@ export default function WisdomToothPage({
               <InteractiveButton
                 id="wisdom-hero-whatsapp-btn"
                 onClick={handleWhatsApp}
-                className="bg-[#25D366] hover:bg-[#20b858] text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2"
+                className="bg-[#0F7A40] hover:bg-[#0B5E31] text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2"
               >
                 <MessageCircle className="w-5 h-5" /> BOOK CONSULTATION
               </InteractiveButton>
@@ -265,8 +267,12 @@ export default function WisdomToothPage({
                 <div className="flex items-start gap-2.5">
                   <UserCheck className="w-4 h-4 text-cyan-400 mt-1 flex-shrink-0" />
                   <div>
-                    <p className="text-white font-semibold">Dr. Prashant Kumar Vats, BDS</p>
-                    <p className="text-xs text-slate-400">Dental Surgeon & Practitioner</p>
+                    <p className="text-white font-semibold">Dr. Prashant Kumar Vats, BDS, MIDA</p>
+                    <p className="text-xs text-slate-300">PGD in Oral Surgery · Certified Oral Implantologist · PGD in Clinical Endodontics · 6+ Years Experience</p>
+                    <div className="flex flex-wrap gap-3 pt-1.5 text-xs">
+                      <a href="/#doctor-profile" className="text-cyan-300 hover:text-white underline underline-offset-2">Doctor Profile</a>
+                      <a href="/#contact" className="text-amber-300 hover:text-white underline underline-offset-2">Clinic Contact &amp; Map</a>
+                    </div>
                   </div>
                 </div>
 
@@ -292,6 +298,14 @@ export default function WisdomToothPage({
           </div>
         </div>
       </section>
+
+      {/* Answer-First Clinical Summary & Attribution */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+        <ClinicalReviewBox
+          question="When is wisdom tooth extraction recommended?"
+          directAnswer="Wisdom tooth removal is clinically considered when a third molar is impacted against bone or the neighboring tooth, causes repeated gum swelling (pericoronitis), traps food leading to decay, or triggers jaw discomfort. Healthy, fully erupted wisdom teeth that can be brushed cleanly may not require extraction; an in-person exam and dental X-ray determine whether monitoring or gentle removal is appropriate."
+        />
+      </div>
 
       {/* What Is a Wisdom Tooth? */}
       <section className="py-12 md:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -557,7 +571,7 @@ export default function WisdomToothPage({
               { step: "04", title: "Socket Cleaning & Suturing", desc: "Socket cleaned, disinfected, and dissolvable sutures placed if required to assist healing." }
             ].map((step, idx) => (
               <div key={idx} className="bg-white rounded-2xl p-6 border border-slate-200 shadow-2xs relative overflow-hidden">
-                <span className="text-3xl font-black text-slate-200 absolute top-4 right-4 select-none">{step.step}</span>
+                <span aria-hidden="true" className="text-3xl font-black text-slate-500 absolute top-4 right-4 select-none">{step.step}</span>
                 <h3 className="font-bold text-slate-900 text-base mb-2">{step.title}</h3>
                 <p className="text-slate-600 text-sm leading-relaxed">{step.desc}</p>
               </div>
@@ -742,7 +756,7 @@ export default function WisdomToothPage({
             <InteractiveButton
               id="wisdom-loc-whatsapp-btn"
               onClick={handleWhatsApp}
-              className="bg-[#25D366] hover:bg-[#20b858] text-white font-bold py-3 px-6 rounded-xl text-sm"
+              className="bg-[#0F7A40] hover:bg-[#0B5E31] text-white font-bold py-3 px-6 rounded-xl text-sm"
             >
               Book via WhatsApp
             </InteractiveButton>

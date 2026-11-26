@@ -238,7 +238,7 @@ export default function TeethWhiteningPage({
               <InteractiveButton
                 id="whitening-hero-whatsapp-btn"
                 onClick={handleWhatsApp}
-                className="bg-[#25D366] hover:bg-[#20b858] text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2"
+                className="bg-[#0F7A40] hover:bg-[#0B5E31] text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2"
               >
                 <MessageCircle className="w-5 h-5" /> BOOK CONSULTATION
               </InteractiveButton>
@@ -746,7 +746,7 @@ export default function TeethWhiteningPage({
             <InteractiveButton
               id="whitening-loc-whatsapp-btn"
               onClick={handleWhatsApp}
-              className="bg-[#25D366] hover:bg-[#20b858] text-white font-bold py-3 px-6 rounded-xl text-sm"
+              className="bg-[#0F7A40] hover:bg-[#0B5E31] text-white font-bold py-3 px-6 rounded-xl text-sm"
             >
               Book via WhatsApp
             </InteractiveButton>

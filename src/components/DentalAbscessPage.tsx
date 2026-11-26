@@ -65,7 +65,7 @@ export default function DentalAbscessPage({
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans leading-relaxed selection:bg-blue-100 selection:text-blue-900">
       <Breadcrumbs
         items={[
-          { label: 'Dental Care in Ghaziabad', path: '/#services' },
+          { label: 'Dental Services', path: '/dental-services' },
           { label: 'Emergency Dentist in Ghaziabad', path: '/emergency-dentist-ghaziabad' },
           { label: 'Dental Abscess Treatment', path: '/dental-abscess-treatment' }
         ]}

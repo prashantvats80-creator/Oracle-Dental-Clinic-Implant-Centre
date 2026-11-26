@@ -25,17 +25,20 @@ const Footer: React.FC<FooterProps> = ({ navigateToPath }) => {
           {/* Column 1: Clinic Overview */}
           <div className="space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 bg-gradient-to-br from-[#00A99D] to-[#FF8A24] rounded-xl flex items-center justify-center text-white font-bold text-lg shrink-0">
+              <div
+                aria-hidden="true"
+                className="w-9 h-9 bg-gradient-to-br from-[#00A99D] to-[#FF8A24] rounded-xl flex items-center justify-center text-white font-bold text-lg shrink-0"
+              >
                 O
               </div>
               <span className="font-bold text-base text-white leading-tight">
                 {GBP_CONFIG.BUSINESS_NAME}
               </span>
             </div>
-            <p className="text-xs text-[#E5F5EC]/80 leading-relaxed">
+            <p className="text-xs text-[#E5F5EC]/85 leading-relaxed">
               Led by {GBP_CONFIG.DOCTOR_TITLE}. Physically located in Chipiyana Buzurg, Ghaziabad—
-              serving patients from Jaat Chowk, Crossings Republik, ABES Engineering College area,
-              Shahberi, Noida Extension, Greater Noida West, and Lal Kuan.
+              serving patients within 6 km from Jaat Chowk, Crossings Republik, ABES Engineering College area,
+              Shahberi, Chappraula, Noida Extension, Greater Noida West, and Lal Kuan.
             </p>
             <div className="pt-1">
               <h2 className="text-[#FFD36A] font-semibold text-xs mb-2">Connect With Us</h2>
@@ -95,30 +98,30 @@ const Footer: React.FC<FooterProps> = ({ navigateToPath }) => {
             <h2 className="text-[#FFD36A] font-bold mb-3 text-xs tracking-wide border-b border-white/15 pb-2">
               Priority Treatments
             </h2>
-            <ul className="space-y-1.5 text-xs">
+            <ul className="space-y-0.5 text-xs">
               <li>
                 <a
                   href="/dental-services"
                   onClick={(e) => handleLinkClick(e, '/dental-services')}
-                  className="text-[#FFD36A] font-semibold hover:text-white transition-colors"
+                  className="inline-flex items-center min-h-[28px] py-0.5 text-[#FFD36A] font-semibold hover:text-white transition-colors"
                 >
                   All Dental Treatments &amp; Services Hub
                 </a>
               </li>
-              <li><a href="/dental-implants" onClick={(e) => handleLinkClick(e, '/dental-implants')} className="hover:text-[#FFD36A] transition-colors">Dental Implants</a></li>
-              <li><a href="/full-mouth-dental-implants" onClick={(e) => handleLinkClick(e, '/full-mouth-dental-implants')} className="hover:text-[#FFD36A] transition-colors">Full Mouth Dental Implants</a></li>
-              <li><a href="/smile-makeover-ghaziabad" onClick={(e) => handleLinkClick(e, '/smile-makeover-ghaziabad')} className="hover:text-[#FFD36A] transition-colors">Smile Makeover</a></li>
-              <li><a href="/cosmetic-dentistry" onClick={(e) => handleLinkClick(e, '/cosmetic-dentistry')} className="hover:text-[#FFD36A] transition-colors">Cosmetic Dentistry</a></li>
-              <li><a href="/dental-veneers" onClick={(e) => handleLinkClick(e, '/dental-veneers')} className="hover:text-[#FFD36A] transition-colors">Dental Veneers</a></li>
-              <li><a href="/zirconia-crowns" onClick={(e) => handleLinkClick(e, '/zirconia-crowns')} className="hover:text-[#FFD36A] transition-colors">Zirconia Crowns</a></li>
-              <li><a href="/root-canal-treatment" onClick={(e) => handleLinkClick(e, '/root-canal-treatment')} className="hover:text-[#FFD36A] transition-colors">Root Canal Treatment (RCT)</a></li>
-              <li><a href="/wisdom-tooth-extraction" onClick={(e) => handleLinkClick(e, '/wisdom-tooth-extraction')} className="hover:text-[#FFD36A] transition-colors">Wisdom Tooth Extraction</a></li>
-              <li><a href="/teeth-whitening" onClick={(e) => handleLinkClick(e, '/teeth-whitening')} className="hover:text-[#FFD36A] transition-colors">Teeth Whitening</a></li>
-              <li><a href="/teeth-cleaning" onClick={(e) => handleLinkClick(e, '/teeth-cleaning')} className="hover:text-[#FFD36A] transition-colors">Teeth Cleaning &amp; Scaling</a></li>
-              <li><a href="/dental-braces" onClick={(e) => handleLinkClick(e, '/dental-braces')} className="hover:text-[#FFD36A] transition-colors">Dental Braces</a></li>
-              <li><a href="/clear-aligners" onClick={(e) => handleLinkClick(e, '/clear-aligners')} className="hover:text-[#FFD36A] transition-colors">Clear Aligners</a></li>
-              <li><a href="/dental-fillings" onClick={(e) => handleLinkClick(e, '/dental-fillings')} className="hover:text-[#FFD36A] transition-colors">Dental Fillings</a></li>
-              <li><a href="/tooth-extraction" onClick={(e) => handleLinkClick(e, '/tooth-extraction')} className="hover:text-[#FFD36A] transition-colors">Tooth Extraction</a></li>
+              <li><a href="/dental-implants" onClick={(e) => handleLinkClick(e, '/dental-implants')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors">Dental Implants</a></li>
+              <li><a href="/full-mouth-dental-implants" onClick={(e) => handleLinkClick(e, '/full-mouth-dental-implants')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors">Full Mouth Dental Implants</a></li>
+              <li><a href="/smile-makeover-ghaziabad" onClick={(e) => handleLinkClick(e, '/smile-makeover-ghaziabad')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors">Smile Makeover</a></li>
+              <li><a href="/cosmetic-dentistry" onClick={(e) => handleLinkClick(e, '/cosmetic-dentistry')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors">Cosmetic Dentistry</a></li>
+              <li><a href="/dental-veneers" onClick={(e) => handleLinkClick(e, '/dental-veneers')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors">Dental Veneers</a></li>
+              <li><a href="/zirconia-crowns" onClick={(e) => handleLinkClick(e, '/zirconia-crowns')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors">Zirconia Crowns</a></li>
+              <li><a href="/root-canal-treatment" onClick={(e) => handleLinkClick(e, '/root-canal-treatment')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors">Root Canal Treatment (RCT)</a></li>
+              <li><a href="/wisdom-tooth-extraction" onClick={(e) => handleLinkClick(e, '/wisdom-tooth-extraction')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors">Wisdom Tooth Extraction</a></li>
+              <li><a href="/teeth-whitening" onClick={(e) => handleLinkClick(e, '/teeth-whitening')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors">Teeth Whitening</a></li>
+              <li><a href="/teeth-cleaning" onClick={(e) => handleLinkClick(e, '/teeth-cleaning')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors">Teeth Cleaning &amp; Scaling</a></li>
+              <li><a href="/dental-braces" onClick={(e) => handleLinkClick(e, '/dental-braces')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors">Dental Braces</a></li>
+              <li><a href="/clear-aligners" onClick={(e) => handleLinkClick(e, '/clear-aligners')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors">Clear Aligners</a></li>
+              <li><a href="/dental-fillings" onClick={(e) => handleLinkClick(e, '/dental-fillings')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors">Dental Fillings</a></li>
+              <li><a href="/tooth-extraction" onClick={(e) => handleLinkClick(e, '/tooth-extraction')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors">Tooth Extraction</a></li>
             </ul>
           </div>
 
@@ -127,19 +130,19 @@ const Footer: React.FC<FooterProps> = ({ navigateToPath }) => {
             <h2 className="text-[#FFD36A] font-bold mb-3 text-xs tracking-wide border-b border-white/15 pb-2">
               Symptoms, Costs &amp; Local Care
             </h2>
-            <ul className="space-y-1.5 text-xs">
-              <li><a href="/dentist-chipiyana-buzurg-ghaziabad" onClick={(e) => handleLinkClick(e, '/dentist-chipiyana-buzurg-ghaziabad')} className="hover:text-[#FFD36A] font-semibold transition-colors">Dentist in Chipiyana Buzurg, Ghaziabad</a></li>
-              <li><a href="/periodontal-gum-treatment-ghaziabad" onClick={(e) => handleLinkClick(e, '/periodontal-gum-treatment-ghaziabad')} className="hover:text-[#FFD36A] transition-colors">Gum &amp; Periodontal Treatment</a></li>
-              <li><a href="/emergency-dentist-ghaziabad" onClick={(e) => handleLinkClick(e, '/emergency-dentist-ghaziabad')} className="text-[#FFD36A] hover:text-white font-semibold transition-colors">Emergency Dentist in Ghaziabad</a></li>
-              <li><a href="/tooth-cap" onClick={(e) => handleLinkClick(e, '/tooth-cap')} className="hover:text-[#FFD36A] transition-colors">Tooth Cap &amp; Crowns</a></li>
-              <li><a href="/dental-bridges" onClick={(e) => handleLinkClick(e, '/dental-bridges')} className="hover:text-[#FFD36A] transition-colors">Fixed Dental Bridges</a></li>
-              <li><a href="/dentures" onClick={(e) => handleLinkClick(e, '/dentures')} className="hover:text-[#FFD36A] transition-colors">Complete &amp; Partial Dentures</a></li>
-              <li><a href="/kids-dentist" onClick={(e) => handleLinkClick(e, '/kids-dentist')} className="hover:text-[#FFD36A] transition-colors">Kids Dentist</a></li>
-              <li><a href="/missing-teeth" onClick={(e) => handleLinkClick(e, '/missing-teeth')} className="hover:text-[#FFD36A] transition-colors">Missing Teeth Replacement</a></li>
-              <li><a href="/tooth-pain-treatment" onClick={(e) => handleLinkClick(e, '/tooth-pain-treatment')} className="hover:text-[#FFD36A] transition-colors">Tooth Pain Treatment</a></li>
-              <li><a href="/dental-abscess-treatment" onClick={(e) => handleLinkClick(e, '/dental-abscess-treatment')} className="hover:text-[#FFD36A] transition-colors">Dental Abscess Treatment</a></li>
-              <li><a href="/dental-implant-cost-ghaziabad" onClick={(e) => handleLinkClick(e, '/dental-implant-cost-ghaziabad')} className="hover:text-[#FFD36A] transition-colors">Dental Implant Cost</a></li>
-              <li><a href="/dental-treatment-cost-ghaziabad" onClick={(e) => handleLinkClick(e, '/dental-treatment-cost-ghaziabad')} className="hover:text-[#FFD36A] transition-colors">Dental Treatment Cost Guide</a></li>
+            <ul className="space-y-0.5 text-xs">
+              <li><a href="/dentist-chipiyana-buzurg-ghaziabad" onClick={(e) => handleLinkClick(e, '/dentist-chipiyana-buzurg-ghaziabad')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] font-semibold transition-colors">Dentist in Chipiyana Buzurg, Ghaziabad</a></li>
+              <li><a href="/periodontal-gum-treatment-ghaziabad" onClick={(e) => handleLinkClick(e, '/periodontal-gum-treatment-ghaziabad')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors">Gum &amp; Periodontal Treatment</a></li>
+              <li><a href="/emergency-dentist-ghaziabad" onClick={(e) => handleLinkClick(e, '/emergency-dentist-ghaziabad')} className="inline-flex items-center min-h-[28px] py-0.5 text-[#FFD36A] hover:text-white font-semibold transition-colors">Emergency Dentist in Ghaziabad</a></li>
+              <li><a href="/tooth-cap" onClick={(e) => handleLinkClick(e, '/tooth-cap')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors">Tooth Cap &amp; Crowns</a></li>
+              <li><a href="/dental-bridges" onClick={(e) => handleLinkClick(e, '/dental-bridges')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors">Fixed Dental Bridges</a></li>
+              <li><a href="/dentures" onClick={(e) => handleLinkClick(e, '/dentures')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors">Complete &amp; Partial Dentures</a></li>
+              <li><a href="/kids-dentist" onClick={(e) => handleLinkClick(e, '/kids-dentist')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors">Kids Dentist</a></li>
+              <li><a href="/missing-teeth" onClick={(e) => handleLinkClick(e, '/missing-teeth')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors">Missing Teeth Replacement</a></li>
+              <li><a href="/tooth-pain-treatment" onClick={(e) => handleLinkClick(e, '/tooth-pain-treatment')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors">Tooth Pain Treatment</a></li>
+              <li><a href="/dental-abscess-treatment" onClick={(e) => handleLinkClick(e, '/dental-abscess-treatment')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors">Dental Abscess Treatment</a></li>
+              <li><a href="/dental-implant-cost-ghaziabad" onClick={(e) => handleLinkClick(e, '/dental-implant-cost-ghaziabad')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors">Dental Implant Cost</a></li>
+              <li><a href="/dental-treatment-cost-ghaziabad" onClick={(e) => handleLinkClick(e, '/dental-treatment-cost-ghaziabad')} className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors">Dental Treatment Cost Guide</a></li>
             </ul>
           </div>
 
@@ -170,7 +173,7 @@ const Footer: React.FC<FooterProps> = ({ navigateToPath }) => {
                 <a
                   id="footer-call-link"
                   href={GBP_CONFIG.CALL_URL}
-                  aria-label={`Call Oracle Dental Clinic at ${GBP_CONFIG.PHONE_DISPLAY}`}
+                  aria-label={`${GBP_CONFIG.PHONE_DISPLAY} — Call Oracle Dental Clinic`}
                   onClick={() =>
                     trackClinicEvent('call_click', {
                       placement: 'footer_phone_link',
@@ -192,14 +195,14 @@ const Footer: React.FC<FooterProps> = ({ navigateToPath }) => {
                 href={GBP_CONFIG.WHATSAPP_BOOKING_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Book dental visit via WhatsApp"
+                aria-label="Book Visit via WhatsApp — Oracle Dental Clinic"
                 onClick={() =>
                   trackClinicEvent('appointment_cta_click', {
                     placement: 'footer_whatsapp',
                     interaction_label: 'footer_book_whatsapp',
                   })
                 }
-                className="w-full min-h-[44px] bg-[#FF654F] hover:bg-[#E8523D] text-white font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 transition-colors shadow-sm"
+                className="w-full min-h-[44px] bg-[#C63621] hover:bg-[#A82B18] text-white font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 transition-colors shadow-sm"
               >
                 Book Visit via WhatsApp
               </a>
@@ -212,7 +215,7 @@ const Footer: React.FC<FooterProps> = ({ navigateToPath }) => {
                     placement: 'footer_call_cta',
                   })
                 }
-                className="w-full min-h-[44px] bg-[#00A99D] hover:bg-[#087B57] text-white font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 transition-colors shadow-sm"
+                className="w-full min-h-[44px] bg-[#067067] hover:bg-[#087B57] text-white font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 transition-colors shadow-sm"
               >
                 Call {GBP_CONFIG.PHONE_DISPLAY}
               </a>
@@ -221,7 +224,7 @@ const Footer: React.FC<FooterProps> = ({ navigateToPath }) => {
                 href={GBP_CONFIG.GOOGLE_BUSINESS_PROFILE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="View Oracle Dental Clinic on Google Business Profile"
+                aria-label="View Google Business Profile — Oracle Dental Clinic"
                 onClick={() =>
                   trackClinicEvent('directions_click', {
                     placement: 'footer_gbp_link',
@@ -243,7 +246,7 @@ const Footer: React.FC<FooterProps> = ({ navigateToPath }) => {
             <a
               href="/dental-services"
               onClick={(e) => handleLinkClick(e, '/dental-services')}
-              className="hover:text-[#FFD36A] transition-colors underline-offset-4 hover:underline"
+              className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors underline-offset-4 hover:underline"
             >
               All Dental Services
             </a>
@@ -251,7 +254,7 @@ const Footer: React.FC<FooterProps> = ({ navigateToPath }) => {
             <a
               href="/privacy-policy"
               onClick={(e) => handleLinkClick(e, '/privacy-policy')}
-              className="hover:text-[#FFD36A] transition-colors underline-offset-4 hover:underline"
+              className="inline-flex items-center min-h-[28px] py-0.5 hover:text-[#FFD36A] transition-colors underline-offset-4 hover:underline"
             >
               Privacy Policy
             </a>
